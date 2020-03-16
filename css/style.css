@@ -415,7 +415,7 @@ body {
   cursor: pointer;
 }
 .main-nav-link {
-  font-weight: 300;
+  font-weight: 500;
   letter-spacing: 1px;
 }
 @media screen and (max-width: 479px) {

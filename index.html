@@ -258,6 +258,278 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/20/Java%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="HHQ">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Qblog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/03/20/Java%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE/" itemprop="url">Java基础回顾</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-20T22:52:17+08:00">
+                2020-03-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/Java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index">
+                    <span itemprop="name">Java基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h1><h2 id="八种基本变量"><a href="#八种基本变量" class="headerlink" title="八种基本变量"></a>八种基本变量</h2><ul>
+<li>整型（4）<ul>
+<li>byte 8bit -128~127</li>
+<li>short 16bit -32768~32767</li>
+<li>int 32bit </li>
+<li>long 64bit</li>
+</ul>
+</li>
+<li>浮点型（2）<ul>
+<li>float 32bit</li>
+<li>double 64bit （小数默认double类型） d、D结尾（默认不写）</li>
+</ul>
+</li>
+<li>字符型 （1） 16bit</li>
+<li>布尔型（1） 1bit<blockquote>
+<p>常见的非基本类型</p>
+<ul>
+<li>String （<code>immutable</code> | adj.不可改变的）</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<h2 id="类型间的转换"><a href="#类型间的转换" class="headerlink" title="类型间的转换"></a>类型间的转换</h2><p>代码演练：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> ch = <span class="string">'P'</span>;</span><br><span class="line"><span class="keyword">short</span> s = <span class="number">80</span>;</span><br><span class="line">ch = (<span class="keyword">char</span>)s;</span><br><span class="line"><span class="comment">//IDEA中的sout &lt;-&gt; eclipse的syso</span></span><br><span class="line">System.out.println(<span class="string">"ch="</span> + ch); <span class="comment">//ch=P</span></span><br><span class="line">s = (<span class="keyword">short</span>)ch;</span><br><span class="line">System.out.println(<span class="string">"s="</span>+s); <span class="comment">//s=80</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="命名"><a href="#命名" class="headerlink" title="命名"></a>命名</h2><ul>
+<li>开头:字母、_、$</li>
+<li>命名要有含有，易理解</li>
+</ul>
+<h2 id="不同位置不同名称"><a href="#不同位置不同名称" class="headerlink" title="不同位置不同名称"></a>不同位置不同名称</h2><ul>
+<li>字段/属性/成员变量/Field</li>
+<li>参数</li>
+<li>局部变量</li>
+</ul>
+<h2 id="final"><a href="#final" class="headerlink" title="final"></a>final</h2><blockquote>
+<p>一次赋值机会<br>代码演练01：</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="keyword">int</span> number = <span class="number">2</span>;</span><br><span class="line">number = <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+<p>error:java:无法为最终变量number分配值</p>
+<p>代码演练02：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">setNumber</span><span class="params">(<span class="keyword">final</span> <span class="keyword">int</span> number)</span></span>&#123;</span><br><span class="line">number = <span class="number">3</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>error:java:不能分配最终参数number</p>
+<h1 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h1><h2 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h2><table>
+<thead>
+<tr>
+<th>操作符</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&amp;</td>
+<td>长路与，<strong>两侧都会被判断</strong></td>
+</tr>
+<tr>
+<td>&amp;&amp;</td>
+<td>短路与，<strong>左边不符合符合即短路，不判断后续</strong></td>
+</tr>
+<tr>
+<td>|</td>
+<td>长路或，<strong>两侧都会被判断</strong></td>
+</tr>
+<tr>
+<td>||</td>
+<td>短路或，<strong>只要第一个符合即结束，不判断后续</strong></td>
+</tr>
+<tr>
+<td>^</td>
+<td>异或，不同为真，相同为假</td>
+</tr>
+<tr>
+<td>代码演练：</td>
+<td></td>
+</tr>
+<tr>
+<td><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">2</span>;</span><br><span class="line">System.out.println(i==<span class="number">2</span> &amp; i++==<span class="number">2</span>);</span><br><span class="line">System.out.println(i);</span><br><span class="line"><span class="comment">//true</span></span><br><span class="line"><span class="comment">//3</span></span><br></pre></td></tr></table></figure></td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h2><table>
+<thead>
+<tr>
+<th>关键字</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>|</td>
+<td>或</td>
+</tr>
+<tr>
+<td>&amp;</td>
+<td>与</td>
+</tr>
+<tr>
+<td>^</td>
+<td>异或</td>
+</tr>
+<tr>
+<td>代码演练：</td>
+<td></td>
+</tr>
+<tr>
+<td><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> ten = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">int</span> nine = <span class="number">9</span>;</span><br><span class="line"><span class="keyword">int</span> or = ten | nine;</span><br><span class="line"><span class="keyword">int</span> and = ten &amp; nine;</span><br><span class="line"><span class="keyword">int</span> xor = ten ^ nine;</span><br><span class="line"><span class="keyword">int</span> notTen = ~ten;</span><br><span class="line">System.out.println(Integer.toBinaryString(ten) + <span class="string">" | "</span> + Integer.toBinaryString(nine) + <span class="string">" = "</span> + Integer.toBinaryString(or));</span><br><span class="line">System.out.println(Integer.toBinaryString(ten) + <span class="string">" &amp; "</span> + Integer.toBinaryString(nine) + <span class="string">" = "</span> + Integer.toBinaryString(and));</span><br><span class="line">System.out.println(Integer.toBinaryString(ten) + <span class="string">" ^ "</span> + Integer.toBinaryString(nine) + <span class="string">" = "</span> + Integer.toBinaryString(xor));</span><br><span class="line">System.out.print(<span class="string">"~"</span> + Integer.toBinaryString(ten) + <span class="string">" = "</span> + Integer.toBinaryString(notTen));</span><br><span class="line">System.out.println(<span class="string">"(ten为一个32位的int数值,所以实际上的二进制为:000000.....1010,因此notTem会将前面的0换为1)"</span>);</span><br><span class="line">System.out.println(Integer.toBinaryString(ten) + <span class="string">"左移1位:"</span> + Integer.toBinaryString(ten&lt;&lt;<span class="number">1</span>));</span><br><span class="line">System.out.println(Integer.toBinaryString(ten) + <span class="string">"右移1位:"</span> + Integer.toBinaryString(ten&gt;&gt;<span class="number">1</span>));</span><br><span class="line">System.out.println(Integer.toBinaryString(ten) + <span class="string">"左移30位:"</span> + Integer.toBinaryString(ten&lt;&lt;<span class="number">30</span>));</span><br><span class="line">System.out.println(Integer.toBinaryString(ten) + <span class="string">"左移31位:"</span> + Integer.toBinaryString(ten&lt;&lt;<span class="number">31</span>));</span><br></pre></td></tr></table></figure></td>
+<td></td>
+</tr>
+<tr>
+<td>结果：</td>
+<td></td>
+</tr>
+<tr>
+<td><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1010 | 1001 &#x3D; 1011</span><br><span class="line">1010 &amp; 1001 &#x3D; 1000</span><br><span class="line">1010 ^ 1001 &#x3D; 11</span><br><span class="line">~1010 &#x3D; 11111111111111111111111111110101(ten为一个32位的int数值,所以实际上的二进制为:000000.....1010,因此notTem会将前面的0换为1)</span><br><span class="line">1010左移1位:10100</span><br><span class="line">1010右移1位:101</span><br><span class="line">1010左移30位:10000000000000000000000000000000</span><br><span class="line">1010左移31位:0</span><br></pre></td></tr></table></figure></td>
+<td></td>
+</tr>
+</tbody></table>
+<h1 id="条件控制"><a href="#条件控制" class="headerlink" title="条件控制"></a>条件控制</h1><h2 id="switch"><a href="#switch" class="headerlink" title="switch"></a>switch</h2><ul>
+<li>可以使用byte、short、int、char、<strong>String</strong>、enum <blockquote>
+<p>编译后String转为hash值，所以实质上还是整数</p>
+</blockquote>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/19/hibernate%E5%88%9D%E6%AC%A1%E5%B0%9D%E8%AF%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -319,17 +591,6 @@
 
                 
                 
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hibernate/%E5%AE%9E%E6%93%8D/" itemprop="url" rel="index">
-                    <span itemprop="name">实操</span>
-                  </a>
-                </span>
-
-                
-                
               
             </span>
           
@@ -363,15 +624,13 @@
         
           
             <h1 id="认知"><a href="#认知" class="headerlink" title="认知"></a>认知</h1><ol>
-<li>百科定义</li>
-</ol>
-<ul>
+<li>百科定义<ul>
 <li>对象关系<strong>映射框架</strong>（pojo与数据库表的映射）</li>
 <li>开源</li>
 <li>对JDBC<strong>轻量的封装</strong></li>
 <li>自动生成SQL语句</li>
 </ul>
-<ol start="2">
+</li>
 <li>同类的技术有哪些？<br> MyBatis</li>
 <li>主要组成部分：数据持久化</li>
 <li>官方网站：<a href="http://hibernate.org/" target="_blank" rel="noopener">http://hibernate.org/</a></li>
@@ -1093,7 +1352,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1104,7 +1363,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1115,7 +1374,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/archives/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

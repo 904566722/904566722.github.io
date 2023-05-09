@@ -1,6 +1,7 @@
 # mermaid 语法-流程图
 
 <!--more-->
+#mermaid
 
 ## 流程图
 

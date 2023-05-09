@@ -3,9 +3,30 @@
         <title>学习记录</title>
         <link>http://www.honghuiqiang.com/</link>
         <description>这是我的网站描述</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 09 May 2023 22:00:23 &#43;0800</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 10 May 2023 03:05:00 &#43;0800</lastBuildDate>
             <atom:link href="http://www.honghuiqiang.com/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>mermaid 语法-用户旅程图</title>
+    <link>http://www.honghuiqiang.com/202305100347-mermaid-%E8%AF%AD%E6%B3%95-%E7%94%A8%E6%88%B7%E6%97%85%E7%A8%8B%E5%9B%BE/</link>
+    <pubDate>Wed, 10 May 2023 03:05:00 &#43;0800</pubDate><author>
+                    <name>索隆不喝酒</name>
+                </author><guid>http://www.honghuiqiang.com/202305100347-mermaid-%E8%AF%AD%E6%B3%95-%E7%94%A8%E6%88%B7%E6%97%85%E7%A8%8B%E5%9B%BE/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>mermaid 语法-时序图</title>
+    <link>http://www.honghuiqiang.com/202305100218-mermaid-%E8%AF%AD%E6%B3%95-%E6%97%B6%E5%BA%8F%E5%9B%BE/</link>
+    <pubDate>Wed, 10 May 2023 02:05:00 &#43;0800</pubDate><author>
+                    <name>索隆不喝酒</name>
+                </author><guid>http://www.honghuiqiang.com/202305100218-mermaid-%E8%AF%AD%E6%B3%95-%E6%97%B6%E5%BA%8F%E5%9B%BE/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>mermaid 语法-饼图</title>
+    <link>http://www.honghuiqiang.com/202305100200-mermaid-%E8%AF%AD%E6%B3%95-%E9%A5%BC%E5%9B%BE/</link>
+    <pubDate>Wed, 10 May 2023 02:05:00 &#43;0800</pubDate><author>
+                    <name>索隆不喝酒</name>
+                </author><guid>http://www.honghuiqiang.com/202305100200-mermaid-%E8%AF%AD%E6%B3%95-%E9%A5%BC%E5%9B%BE/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
     <title>mermaid 语法-流程图</title>
     <link>http://www.honghuiqiang.com/202305092142-mermaid-%E8%AF%AD%E6%B3%95-%E6%B5%81%E7%A8%8B%E5%9B%BE/</link>
     <pubDate>Tue, 09 May 2023 22:00:23 &#43;0800</pubDate><author>
@@ -53,27 +74,6 @@
     <pubDate>Tue, 09 May 2023 07:48:23 &#43;0800</pubDate><author>
                     <name>索隆不喝酒</name>
                 </author><guid>http://www.honghuiqiang.com/202305070711-openai-%E4%BD%BF%E7%94%A8%E5%AE%9E%E8%B7%B5/</guid>
-    <description><![CDATA[]]></description>
-</item><item>
-    <title>operator</title>
-    <link>http://www.honghuiqiang.com/202305080937-operator/</link>
-    <pubDate>Tue, 09 May 2023 07:48:23 &#43;0800</pubDate><author>
-                    <name>索隆不喝酒</name>
-                </author><guid>http://www.honghuiqiang.com/202305080937-operator/</guid>
-    <description><![CDATA[]]></description>
-</item><item>
-    <title>string 遍历</title>
-    <link>http://www.honghuiqiang.com/202304231751-string-%E9%81%8D%E5%8E%86/</link>
-    <pubDate>Tue, 09 May 2023 07:48:23 &#43;0800</pubDate><author>
-                    <name>索隆不喝酒</name>
-                </author><guid>http://www.honghuiqiang.com/202304231751-string-%E9%81%8D%E5%8E%86/</guid>
-    <description><![CDATA[]]></description>
-</item><item>
-    <title>struct</title>
-    <link>http://www.honghuiqiang.com/202304241633-struct/</link>
-    <pubDate>Tue, 09 May 2023 07:48:23 &#43;0800</pubDate><author>
-                    <name>索隆不喝酒</name>
-                </author><guid>http://www.honghuiqiang.com/202304241633-struct/</guid>
     <description><![CDATA[]]></description>
 </item></channel>
 </rss>

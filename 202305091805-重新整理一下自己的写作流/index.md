@@ -186,6 +186,8 @@ mermaid 能够画出什么图？
 
 #### 嵌入音频
 
+{{< music url="/music/finding_happiness/finding-happiness.mp3" name="행복을 찾아서 (寻找幸福)" artist="Leessang (리쌍)/赵贤雅 (조현아)" cover="/music/finding_happiness/lessang.png">}}
+
 #### 丰富的警告系统
 
 hugo 扩展了一些 shortcode 丰富了警告的类型，不过也不宜使用太多，看起来太花哨了，引入一个 Bug 的警告应该就差不多了

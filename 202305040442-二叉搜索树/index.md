@@ -5,6 +5,8 @@
 
 #算法 
 
+## 二叉搜索树树概述
+
 二叉搜索树：`左子树所有节点的值` < `根节点` < `右子树所有节点的值`
 
 二叉搜索树的相关操作：
@@ -13,7 +15,8 @@
 - 删除节点
 - 增加节点
 
-# 判断是否是二叉搜索树
+## 相关操作
+### 判断是否是二叉搜索树
 递归实现
 ```go
 // 递归实现
@@ -37,7 +40,7 @@ func jud(root *TreeNode, start, end int) bool {
 }
 ```
 
-# 插入节点
+### 插入节点
 递归实现
 ```go
 func insertIntoBST(root *TreeNode, val int) *TreeNode {  
@@ -86,7 +89,7 @@ func insertIntoBST2(root *TreeNode, val int) *TreeNode {
 }
 ```
 
-# 删除节点
+### 删除节点
 
 ```go
 // 如果找到该节点，有四种情况：  

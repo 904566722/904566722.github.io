@@ -5,8 +5,8 @@
 
 #算法 
 
-# 一些基本概念
-https://algo.itcharge.cn/07.Tree/01.Binary-Tree/01.Binary-Tree-Basic/
+## 一些基本概念
+
 树四度：
 - 度
 	- 节点的度：节点拥有的子节点数量
@@ -20,7 +20,7 @@ https://algo.itcharge.cn/07.Tree/01.Binary-Tree/01.Binary-Tree-Basic/
 - 排序
 - 路径查找
 
-# 几种常见的树
+## 几种常见的树
 - 二叉树
 	- 满二叉树
 	- 完全二叉树
@@ -31,12 +31,12 @@ https://algo.itcharge.cn/07.Tree/01.Binary-Tree/01.Binary-Tree-Basic/
 - B 树 
 - 红黑树
 
-# 树的遍历方式
+## 树的遍历方式
 
 深度：前序（DLR）、中序（LDR）、后序（LRD）
 广度：层序遍历
 
-## 前序遍历
+### 前序遍历
 
 用递归的思想可以将问题看作：
 1. 访问跟节点
@@ -90,7 +90,7 @@ func pOrderStack(root *treeNode)  {
 }
 ```
 
-## 中序遍历
+### 中序遍历
 
 递归实现：
 ```go
@@ -174,7 +174,7 @@ func ldrOrderStack2(root *treeNode) {
 }
 ```
 
-## 后续遍历
+### 后续遍历
 
 递归实现：
 ```go
@@ -225,7 +225,7 @@ func lrdOrderStack(root *treeNode)  {
 }
 ```
 
-## 层序遍历
+### 层序遍历
 
 层序遍历使用**队列**实现：
 ```go
@@ -251,7 +251,7 @@ func levelOrder(root *treeNode)  {
 }
 ```
 
-## 遍历的复杂度
+### 遍历的复杂度
 
 |遍历|时间复杂度|空间复杂度|
 |-|-|-|
@@ -260,8 +260,13 @@ func levelOrder(root *treeNode)  {
 |后序|O(n)|同上|
 |层序|O(n)|O(w)<br>w 为树的宽度|
 
-# 树的一些常见问题
-[[202305021918 树问题-路径求和]]
+## 树的一些常见问题
+
+[202305021918 树问题-路径求和](content/posts/algorithm/202305021918%20树问题-路径求和.md)
+
+[202305031652 树问题-判断子树](content/posts/algorithm/202305031652%20树问题-判断子树.md)
 
 ---
-《02.二叉树的遍历知识》. 见于 2023年4月30日. [https://algo.itcharge.cn/07.Tree/01.Binary-Tree/02.Binary-Tree-Traverse/](https://algo.itcharge.cn/07.Tree/01.Binary-Tree/02.Binary-Tree-Traverse/).
+1. 《02.二叉树的遍历知识》. 见于 2023年4月30日. [https://algo.itcharge.cn/07.Tree/01.Binary-Tree/02.Binary-Tree-Traverse/](https://algo.itcharge.cn/07.Tree/01.Binary-Tree/02.Binary-Tree-Traverse/).
+
+2. https://algo.itcharge.cn/07.Tree/01.Binary-Tree/01.Binary-Tree-Basic/

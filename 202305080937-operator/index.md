@@ -5,7 +5,7 @@
 #k8s 
 
 
-# 一、概述
+## 一、概述
 
 operator 对于 k8s 来说，是一种**扩展机制**，开发人员可以通过 CRD，来扩展 k8s API
 
@@ -13,10 +13,11 @@ operator 通过监视和管理 CRD，来执行一系列被预定的操作，这�
 
 对于运维人员来说，operator 也是相当有用的，operator 可以负责用来做一些更高级的操作，比如扩缩容、集群的备份、恢复等操作，可以减轻运维人员的压力
 
-# 二、名词解释、Operator 的工作流程
-## 2.1 名词解释
+## 二、名词解释、Operator 的工作流程
+### 2.1 名词解释
 1. **GroupVersionKind**
-![[Pasted image 20230508102917.png]]
+
+![](images/posts/Pasted%20image%2020230508102917.png)
 
 GVK 是用来描述一个 kubernetes api 对象的标准
 将 GroupVersionKind 拆分成三个部分来理解：
@@ -29,43 +30,44 @@ GVK 是用来描述一个 kubernetes api 对象的标准
 kubectl api-resources
 kubectl explain [kind]
 ```
-![[Pasted image 20230508103207.png]]
 
-![[Pasted image 20230508103226.png]]
+![](images/posts/Pasted%20image%2020230508103207.png)
+
+![](images/posts/Pasted%20image%2020230508103226.png)
 
 2. **GroupVersionResource**
 
-```
-`GroupVersionResource` 和 `GroupVersionKind` 都是 Kubernetes API 中用于标识资源的数据结构，它们之间有一定的关系。
+GroupVersionResource 和 GroupVersionKind 都是 Kubernetes API 中用于标识资源的数据结构，它们之间有一定的关系。
 
-`GroupVersionResource` 由三个部分组成：`group`、`version` 和 `resource`。它用于唯一地标识 Kubernetes API 中的一个资源，并指定客户端对该资源执行 CRUD 操作的方式。
+GroupVersionResource 由三个部分组成：group、version 和 resource。它用于唯一地标识 Kubernetes API 中的一个资源，并指定客户端对该资源执行 CRUD 操作的方式。
 
-`GroupVersionKind` 也由三个部分组成：`group`、`version` 和 `kind`。它用于描述 Kubernetes API 中的一个对象，其中 `kind` 表示对象的类型，例如 `Pod`、`Service` 或 `Deployment`。
+GroupVersionKind 也由三个部分组成：group、version 和 kind。它用于描述 Kubernetes API 中的一个对象，其中 kind 表示对象的类型，例如 Pod、Service 或 Deployment。
 
-可以看出，`GroupVersionResource` 和 `GroupVersionKind` 的区别在于最后一个部分。`GroupVersionResource` 的最后一个部分是资源的名称，而 `GroupVersionKind` 的最后一个部分是对象的类型。但是，它们都包含了相同的前两个部分：`group` 和 `version`。这意味着，通过 `GroupVersionKind` 可以推断出对应的 `GroupVersionResource`，反之亦然。
+可以看出，GroupVersionResource 和 GroupVersionKind 的区别在于最后一个部分。GroupVersionResource 的最后一个部分是资源的名称，而 GroupVersionKind 的最后一个部分是对象的类型。但是，它们都包含了相同的前两个部分：group 和 version。这意味着，通过 GroupVersionKind 可以推断出对应的 GroupVersionResource，反之亦然。
 
-因此，`GroupVersionResource` 和 `GroupVersionKind` 是紧密相关的概念，它们都是 Kubernetes API 中用于标识资源和对象的重要数据结构。
-```
+因此，GroupVersionResource 和 GroupVersionKind 是紧密相关的概念，它们都是 Kubernetes API 中用于标识资源和对象的重要数据结构。
 
 3. **scheme**
 
-scheme 提供了 kubernetes api 对象的**序列化、反序列化**的功能
-在 operator 中，scheme 提供了向 kubernetes api **注册自定义对象**的功能
+scheme 提供了 kubernetes api 对象的`序列化`、`反序列化`的功能
+
+在 operator 中，scheme 提供了向 kubernetes api `注册自定义对象`的功能
 
 所以每个 operator 都需要 scheme，提供了 go type 与 Kind 的映射，operator 才能与kubernetes api 更好的交互
 
 4. **Manager**
 
-![[Pasted image 20230508105710.png]]
+![](images/posts/Pasted%20image%2020230508105710.png)
 
 5. **Cache**、**informer**
 
-![[Pasted image 20230508110457.png]]
+![](images/posts/Pasted%20image%2020230508110457.png)
 
 cache负责：
 - 缓存 kubernetes api 对象
 - 版本控制
 - 索引
+
 informer负责：
 - 监听 kubernetes api 中的事件
 
@@ -77,21 +79,20 @@ cache 还提供了**对象的索引**，提高查找效率。由于api 资源对
 
 
 informer 是基于 cache 完成的一个高级组件，两者相互协作，都是为了让客户端更好的访问api 对象资源，cache主要用来做缓存、版本控制、索引的功能，informer 主要监听 kuberntes api 中的事件，更新缓存中的资源
-[aa](#^crd)
 
 这边顺便了解一下 **ListAndWatch** 机制：
 与 Informer 类似，ListAndWatch 的作用也是为了让客户端或者控制器更好的获取 k8s 资源，它的大致工作流程如下：
 1. 使用 List 操作，从 Kubernetes API 获取全部的资源对象并保存
 2. 然后监听 kuberntes api 中的事件，如果对象发生更新，则对自己保存的对象也做相应更新
 
-## 2.2 operator 工作流程
+### 2.2 operator 工作流程
 
 例如当一个 CRD 创建，会经过什么样的流程
 
 一个 crd 资源创建，首先 kubernetes api 会监听到这个资源的创建，informer 会从 kuberntes api 收到这个事件，并获取对应的 crd 资源，将这个资源反序列化成对应的 go type，然后触发控制器中的 reconcile 逻辑，完成预定的操作
 
-![[Pasted image 20230508120012.png]]
- > 动画演示见文尾
+![](images/posts/Pasted%20image%2020230508120012.png)
+动画演示[^1]
 
 1. crd 创建请求发送到 API Server
 		API Server 校验请求是否合法，是否有创建这个资源的权限
@@ -100,7 +101,7 @@ informer 是基于 cache 完成的一个高级组件，两者相互协作，都�
 4. Controller Manager 启动对应的 Controller 
 5. Controller 执行相应的 reconcile 逻辑，会监听 crd 的变化，并执行相应的逻辑
 
-# 三、实践
+## 三、实践
 
 > 创建 operator 项目的两个脚手架：
 > - kubebuilder
@@ -136,7 +137,8 @@ make manifests
        ├── bases
            └── demo.example.com_demoes.yaml
 ```
-![[image-20220531151549217.png]]
+
+![](images/posts/image-20220531151549217.png)
 
 3. 构建 operator 镜像
 ```sh
@@ -175,7 +177,9 @@ kubectl apply -f  config/samples/demo_v1_demo.yaml
 ```
 
 operator 监听到 Demo kind 资源的创建，出发 reconcile：
-![[image-20220531165746637.png]]
+
+![](images/posts/image-20220531165746637.png)
+
 
 
 ---
@@ -184,4 +188,5 @@ operator 监听到 Demo kind 资源的创建，出发 reconcile：
 2. [kustomization管理k8s对象](https://kubernetes.io/zh/docs/tasks/manage-kubernetes-objects/kustomization/)
 
 ---
-![[GIF 2023-5-8 12-12-36.gif]]
+
+![](images/posts/GIF%202023-5-8%2012-12-36%201.gif)

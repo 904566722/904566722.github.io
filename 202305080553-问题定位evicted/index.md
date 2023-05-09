@@ -4,31 +4,30 @@
 
 #k8s #问题定位
 
-# 问题现场
+## 问题现场
 
-![[Untitled-16527874479231.png]]
+![](images/posts/Untitled-16527874479231.png)
 
 ```
 kubectl -n product-ebs get pod -o wide | grep vtype-xxx
 ```
 扎到了一个状态为 `Evicted` 的 pod
 
-# 问题分析
+## 问题分析
 
 通过现场可以看到 pod 原先的节点，所以可以查看一下节点的日志
-![[Untitled 1-16527874479242.png]]
+
+![](images/posts/Untitled%201-16527874479242.png)
 
 接着就发现了节点有磁盘压力，kubelet 主动终止 pod 以回收节点上的资源，以此来保证节点的稳定
 
-# 学习
-## 可能导致节点压力的因素有什么
+## 学习
+### 可能导致节点压力的因素有什么
 
 cpu、内存、磁盘空间...
 
-## kubelet 是如何做出驱逐的决定的
+### kubelet 是如何做出驱逐的决定的
 
-`openai`:
-```
 1.  分析这个问题的步骤： 回答这个问题需要了解 Kubernetes 中 kubelet 组件以及 Eviction API，再结合节点资源使用情况等因素来判断是否要驱逐 Pod。具体的分析步骤如下：
 
 -   了解 Kubernetes 中 kubelet 组件和 Eviction API 的作用和原理。
@@ -51,7 +50,6 @@ cpu、内存、磁盘空间...
     
 
 需要注意的是，kubelet 是被动的进行驱逐操作的，即只有在当前节点资源使用情况达到或超过了预设的阈值时才会进行驱逐，而这些阈值可以通过修改 Kubernetes 集群中的参数来调整。
-```
 
 **容器的 QoS**：
 

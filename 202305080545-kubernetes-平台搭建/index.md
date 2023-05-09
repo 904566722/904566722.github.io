@@ -5,7 +5,7 @@
 
 #k8s
 
-# 一、环境准备
+## 一、环境准备
 1. 关闭防火墙
 ```sh
 systemctl stop firewalld
@@ -41,7 +41,7 @@ yum install ntpdate -y # 没有的 ntpdate 则安装
 ntpdate time.windows.com # 同步时间
 ```
 
-# 二、安装
+## 二、安装
 
 > 安装 Docker、kubeadm、kubelet、kubectl
 

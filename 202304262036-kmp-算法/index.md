@@ -5,36 +5,50 @@
 
 #算法 
 
-# KMP 算法用途
+## 一、KMP 算法用途
 - 在主串 S 中查找模式串 pattern
 
-# 算法流程
-## 举例说明1：S="aabaabaac", pattern="aabaac"
+## 二、算法流程
+### 2.1 举例说明1
+
+**S="aabaabaac", pattern="aabaac"**
+
 主串中存在模式串，应该返回起始下标 -3
-![[Pasted image 20230426211149.png]]
-### step1 首先定义两个下标 i 和 j，分别指向 S 和 pattern 中待比较的字符
+
+![](images/posts/Pasted%20image%2020230426211149.png)
+
+#### step1 首先定义两个下标 i 和 j，分别指向 S 和 pattern 中待比较的字符
 > 注意点：（后续解释）
 > 1. i 不会回头（时间复杂度O(N)）
 > 2. j 左侧的字符一定是已经经过比较的（j 是会回头的）
 
 
-![[Pasted image 20230426211316.png]]
+![](images/posts/Pasted%20image%2020230426211316.png)
 
-### step2 当 S[i] == pattern[j]，i、j 均右移，继续往下比较
-![[Pasted image 20230426211447.png]]
+#### step2 当 S[i] == pattern[j]，i、j 均右移，继续往下比较
 
-### step3 当 S[i] != pattern[j]，i 不动，**j 以一定的模式进行转移**（[[202304262152 KMP 算法之-获取 next 数组]]），具体见下面的场景：
-![[Pasted image 20230426211653.png]]
+![](images/posts/Pasted%20image%2020230426211447.png)
+
+#### step3 当 S[i] != pattern[j]，i 不动，**j 以一定的模式进行转移**，具体见下面的场景：
+（[202304262152 KMP 算法之-获取 next 数组](content/posts/algorithm/202304262152%20KMP%20算法之-获取%20next%20数组.md)）
+
+
+![](images/posts/Pasted%20image%2020230426211653.png)
+
 （假设截取模式串 [0, j-1] 为 pattern‘）
 
 当发现当前比较的字符不同时：
+
 - 模式串找到 pattern’ 中**最长的相同前后缀**（假设为 comFix），如上图中的 B 和 C
 - 那么主串在下标 i 之前也必定有一个 comFix（由于 j 前面的字符一定的经过比较的），也就是上图中的 A
-所以 A = B = C，那么就可以把 j 的位置移动到 C 的下一个位置，这样就能够保证在 i 不回头的情况下，j 左边的字符都是已经经过比较的
-![[Pasted image 20230426213140.png]]
 
-### step4 进而继续往下比较
-![[Pasted image 20230426213209.png]]
+所以 A = B = C，那么就可以把 j 的位置移动到 C 的下一个位置，这样就能够保证在 i 不回头的情况下，j 左边的字符都是已经经过比较的
+
+![](images/posts/Pasted%20image%2020230426213140.png)
+
+#### step4 进而继续往下比较
+
+![](images/posts/Pasted%20image%2020230426213209.png)
 
 那么 KMP 的伪代码就很容易能够写出来：
 ```
@@ -56,7 +70,7 @@ for i < N && j < M {
 	return -1
 ```
 
-# 具体实现
+## 三、具体实现
 ```go
 func getNext(pat string) []int {  
    n := len(pat)  
@@ -96,7 +110,8 @@ func KMP(s, pat string) int {
 }
 ```
 
-# 一些习题
+## 四、一些习题
+
 1. https://leetcode.cn/problems/repeated-substring-pattern/
 
 --- 

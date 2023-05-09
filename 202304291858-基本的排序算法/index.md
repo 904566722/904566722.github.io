@@ -20,11 +20,11 @@
 9. 基数排序
 
 
-## 冒泡
+## 一、冒泡
 步骤：
 - 一直往前走，比较相邻两个数，大数往后放
 
-![[bubbleSort.gif]]
+![](images/posts/bubbleSort.gif)
 
 ```go
 func bubbleSort(nums []int)  {  
@@ -51,11 +51,11 @@ func bubbleSort(nums []int)  {
 > 1 + 2 + ... + (n-1) = n (n-1 + 1) / 2
 
 
-## 选择排序 
+## 二、选择排序 
 步骤：
 - 每次从**未排序找最小**
 
-![[selectionSort.gif]]
+![](images/posts/selectionSort.gif)
 
 ```go
 func selectSort(nums []int)  {  
@@ -72,11 +72,11 @@ func selectSort(nums []int)  {
 ```
 时间复杂度也是 O(n^2)
 
-## 插入排序
+## 三、插入排序
 步骤：
 - 从**已排序找合适的位置**
 
-![[insertionSort.gif]]
+![](images/posts/insertionSort.gif)
 
 ```go
 func insertSort(nums []int)  {  
@@ -95,7 +95,11 @@ func insertSort(nums []int)  {
    }  
 }
 ```
-## 归并排序
-[[202304300231 归并排序]]
-## 快速排序
-[[202304300312 快速排序]]
+
+## 四、归并排序
+
+[202304300231 归并排序](content/posts/algorithm/202304300231%20归并排序.md)
+
+## 五、快速排序
+
+[202304300312 快速排序](content/posts/algorithm/202304300312%20快速排序.md)

@@ -2,7 +2,7 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>http://www.honghuiqiang.com/authors/</loc><lastmod>2023-05-09T07:48:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+            <loc>http://www.honghuiqiang.com/authors/</loc><lastmod>2023-05-09T22:00:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
                         href="http://www.honghuiqiang.com/en/authors/"
@@ -11,7 +11,7 @@
                     hreflang="zh-cn"
                     href="http://www.honghuiqiang.com/authors/"
                     /></url><url>
-            <loc>http://www.honghuiqiang.com/categories/</loc><lastmod>2023-05-09T07:48:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+            <loc>http://www.honghuiqiang.com/categories/</loc><lastmod>2023-05-09T22:00:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
                         rel="alternate"
                         hreflang="en"
                         href="http://www.honghuiqiang.com/en/categories/"
@@ -20,6 +20,41 @@
                     hreflang="zh-cn"
                     href="http://www.honghuiqiang.com/categories/"
                     /></url><url>
+            <loc>http://www.honghuiqiang.com/202305092142-mermaid-%E8%AF%AD%E6%B3%95-%E6%B5%81%E7%A8%8B%E5%9B%BE/</loc><lastmod>2023-05-09T22:00:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://www.honghuiqiang.com/series/mermaid%E8%AF%AD%E6%B3%95/</loc><lastmod>2023-05-09T22:00:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://www.honghuiqiang.com/posts/</loc><lastmod>2023-05-09T22:00:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://www.honghuiqiang.com/series/</loc><lastmod>2023-05-09T22:00:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+                        rel="alternate"
+                        hreflang="en"
+                        href="http://www.honghuiqiang.com/en/series/"
+                        /><xhtml:link
+                    rel="alternate"
+                    hreflang="zh-cn"
+                    href="http://www.honghuiqiang.com/series/"
+                    /></url><url>
+            <loc>http://www.honghuiqiang.com/tags/</loc><lastmod>2023-05-09T22:00:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+                        rel="alternate"
+                        hreflang="en"
+                        href="http://www.honghuiqiang.com/en/tags/"
+                        /><xhtml:link
+                    rel="alternate"
+                    hreflang="zh-cn"
+                    href="http://www.honghuiqiang.com/tags/"
+                    /></url><url>
+            <loc>http://www.honghuiqiang.com/categories/tools/</loc><lastmod>2023-05-09T22:00:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://www.honghuiqiang.com/</loc><lastmod>2023-05-09T22:00:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
+                        rel="alternate"
+                        hreflang="en"
+                        href="http://www.honghuiqiang.com/en/"
+                        /><xhtml:link
+                    rel="alternate"
+                    hreflang="zh-cn"
+                    href="http://www.honghuiqiang.com/"
+                    /></url><url>
+            <loc>http://www.honghuiqiang.com/tags/%E7%94%BB%E5%9B%BE/</loc><lastmod>2023-05-09T22:00:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://www.honghuiqiang.com/authors/%E7%B4%A2%E9%9A%86%E4%B8%8D%E5%96%9D%E9%85%92/</loc><lastmod>2023-05-09T22:00:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://www.honghuiqiang.com/tags/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/</loc><lastmod>2023-05-09T18:50:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+            <loc>http://www.honghuiqiang.com/202305091805-%E9%87%8D%E6%96%B0%E6%95%B4%E7%90%86%E4%B8%80%E4%B8%8B%E8%87%AA%E5%B7%B1%E7%9A%84%E5%86%99%E4%BD%9C%E6%B5%81/</loc><lastmod>2023-05-09T18:50:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>http://www.honghuiqiang.com/series/chatgpt/</loc><lastmod>2023-05-09T07:48:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>http://www.honghuiqiang.com/tags/for-range/</loc><lastmod>2023-05-09T07:48:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>http://www.honghuiqiang.com/categories/golang/</loc><lastmod>2023-05-09T07:48:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
@@ -38,33 +73,13 @@
             <loc>http://www.honghuiqiang.com/202305070711-openai-%E4%BD%BF%E7%94%A8%E5%AE%9E%E8%B7%B5/</loc><lastmod>2023-05-09T07:48:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>http://www.honghuiqiang.com/tags/operator/</loc><lastmod>2023-05-09T07:48:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>http://www.honghuiqiang.com/202305080937-operator/</loc><lastmod>2023-05-09T07:48:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>http://www.honghuiqiang.com/posts/</loc><lastmod>2023-05-09T07:48:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>http://www.honghuiqiang.com/series/</loc><lastmod>2023-05-09T07:48:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
-                        rel="alternate"
-                        hreflang="en"
-                        href="http://www.honghuiqiang.com/en/series/"
-                        /><xhtml:link
-                    rel="alternate"
-                    hreflang="zh-cn"
-                    href="http://www.honghuiqiang.com/series/"
-                    /></url><url>
             <loc>http://www.honghuiqiang.com/tags/string/</loc><lastmod>2023-05-09T07:48:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>http://www.honghuiqiang.com/202304231751-string-%E9%81%8D%E5%8E%86/</loc><lastmod>2023-05-09T07:48:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>http://www.honghuiqiang.com/tags/struct/</loc><lastmod>2023-05-09T07:48:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>http://www.honghuiqiang.com/202304241633-struct/</loc><lastmod>2023-05-09T07:48:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>http://www.honghuiqiang.com/202304241738-struct-%E6%96%B9%E6%B3%95%E9%9B%86/</loc><lastmod>2023-05-09T07:48:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>http://www.honghuiqiang.com/tags/</loc><lastmod>2023-05-09T07:48:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
-                        rel="alternate"
-                        hreflang="en"
-                        href="http://www.honghuiqiang.com/en/tags/"
-                        /><xhtml:link
-                    rel="alternate"
-                    hreflang="zh-cn"
-                    href="http://www.honghuiqiang.com/tags/"
-                    /></url><url>
             <loc>http://www.honghuiqiang.com/202304241708-unsafe.pointer-%E7%9A%84%E5%85%AD%E7%A7%8D%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/</loc><lastmod>2023-05-09T07:48:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>http://www.honghuiqiang.com/tags/unsafe%E5%8C%85/</loc><lastmod>2023-05-09T07:48:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>http://www.honghuiqiang.com/tags/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/</loc><lastmod>2023-05-09T07:48:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>http://www.honghuiqiang.com/202305040442-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</loc><lastmod>2023-05-09T07:48:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>http://www.honghuiqiang.com/tags/%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/</loc><lastmod>2023-05-09T07:48:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>http://www.honghuiqiang.com/202304242150-%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/</loc><lastmod>2023-05-09T07:48:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
@@ -74,15 +89,6 @@
             <loc>http://www.honghuiqiang.com/202305080545-kubernetes-%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/</loc><lastmod>2023-05-09T07:48:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>http://www.honghuiqiang.com/202304291858-%E5%9F%BA%E6%9C%AC%E7%9A%84%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/</loc><lastmod>2023-05-09T07:48:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>http://www.honghuiqiang.com/202304290644-%E5%AD%97%E5%85%B8%E5%BA%8F%E7%AE%97%E6%B3%95/</loc><lastmod>2023-05-09T07:48:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>http://www.honghuiqiang.com/</loc><lastmod>2023-05-09T07:48:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority><xhtml:link
-                        rel="alternate"
-                        hreflang="en"
-                        href="http://www.honghuiqiang.com/en/"
-                        /><xhtml:link
-                    rel="alternate"
-                    hreflang="zh-cn"
-                    href="http://www.honghuiqiang.com/"
-                    /></url><url>
             <loc>http://www.honghuiqiang.com/tags/%E5%AE%9E%E6%93%8D/</loc><lastmod>2023-05-09T07:48:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>http://www.honghuiqiang.com/categories/%E5%AE%B9%E5%99%A8/</loc><lastmod>2023-05-09T07:48:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>http://www.honghuiqiang.com/202304300231-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/</loc><lastmod>2023-05-09T07:48:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
@@ -97,7 +103,6 @@
             <loc>http://www.honghuiqiang.com/202305021918-%E6%A0%91%E9%97%AE%E9%A2%98-%E8%B7%AF%E5%BE%84%E6%B1%82%E5%92%8C/</loc><lastmod>2023-05-09T07:48:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>http://www.honghuiqiang.com/202304201947-%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D/</loc><lastmod>2023-05-09T07:48:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>http://www.honghuiqiang.com/series/%E7%AE%97%E6%B3%95/</loc><lastmod>2023-05-09T07:48:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-            <loc>http://www.honghuiqiang.com/authors/%E7%B4%A2%E9%9A%86%E4%B8%8D%E5%96%9D%E9%85%92/</loc><lastmod>2023-05-09T07:48:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>http://www.honghuiqiang.com/202304300007-%E9%80%92%E5%BD%92/</loc><lastmod>2023-05-09T07:48:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>http://www.honghuiqiang.com/tags/%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8D/</loc><lastmod>2023-05-09T07:48:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
             <loc>http://www.honghuiqiang.com/202305080553-%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8Devicted/</loc><lastmod>2023-05-09T07:48:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>

@@ -3,50 +3,71 @@
         <title>学习记录</title>
         <link>http://www.honghuiqiang.com/</link>
         <description>这是我的网站描述</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 10 May 2023 14:05:00 &#43;0800</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 10 May 2023 15:05:00 &#43;0800</lastBuildDate>
             <atom:link href="http://www.honghuiqiang.com/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>博客音乐嵌入样例</title>
+    <link>http://www.honghuiqiang.com/202305101553-%E5%8D%9A%E5%AE%A2%E9%9F%B3%E4%B9%90%E5%B5%8C%E5%85%A5%E6%A0%B7%E4%BE%8B/</link>
+    <pubDate>Wed, 10 May 2023 15:05:00 &#43;0800</pubDate><author>
+                    <name>索隆不喝酒</name>
+                </author><guid>http://www.honghuiqiang.com/202305101553-%E5%8D%9A%E5%AE%A2%E9%9F%B3%E4%B9%90%E5%B5%8C%E5%85%A5%E6%A0%B7%E4%BE%8B/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="images/posts/yinyueqianru.png" referrerpolicy="no-referrer">
+            </div>]]></description>
+</item><item>
     <title>22年的国庆广州游玩映像</title>
     <link>http://www.honghuiqiang.com/202305101458-22%E5%B9%B4%E7%9A%84%E5%9B%BD%E5%BA%86%E5%B9%BF%E5%B7%9E%E6%B8%B8%E7%8E%A9%E6%98%A0%E5%83%8F/</link>
     <pubDate>Wed, 10 May 2023 14:05:00 &#43;0800</pubDate><author>
                     <name>索隆不喝酒</name>
                 </author><guid>http://www.honghuiqiang.com/202305101458-22%E5%B9%B4%E7%9A%84%E5%9B%BD%E5%BA%86%E5%B9%BF%E5%B7%9E%E6%B8%B8%E7%8E%A9%E6%98%A0%E5%83%8F/</guid>
-    <description><![CDATA[]]></description>
+    <description><![CDATA[<div class="featured-image">
+                <img src="/images/posts/DSC_8970.jpg" referrerpolicy="no-referrer">
+            </div>]]></description>
 </item><item>
     <title>在我的大学生涯短暂陪伴过我的一只玄凤</title>
     <link>http://www.honghuiqiang.com/202305101443-%E5%9C%A8%E6%88%91%E7%9A%84%E5%A4%A7%E5%AD%A6%E7%94%9F%E6%B6%AF%E7%9F%AD%E6%9A%82%E9%99%AA%E4%BC%B4%E8%BF%87%E6%88%91%E7%9A%84%E4%B8%80%E5%8F%AA%E7%8E%84%E5%87%A4/</link>
     <pubDate>Wed, 10 May 2023 14:05:00 &#43;0800</pubDate><author>
                     <name>索隆不喝酒</name>
                 </author><guid>http://www.honghuiqiang.com/202305101443-%E5%9C%A8%E6%88%91%E7%9A%84%E5%A4%A7%E5%AD%A6%E7%94%9F%E6%B6%AF%E7%9F%AD%E6%9A%82%E9%99%AA%E4%BC%B4%E8%BF%87%E6%88%91%E7%9A%84%E4%B8%80%E5%8F%AA%E7%8E%84%E5%87%A4/</guid>
-    <description><![CDATA[]]></description>
+    <description><![CDATA[<div class="featured-image">
+                <img src="images/posts/0B7773D0-2AF8-496E-A1E3-FEA560B33BF9.jpg" referrerpolicy="no-referrer">
+            </div>]]></description>
 </item><item>
     <title>废了很久的爱好-彩铅</title>
     <link>http://www.honghuiqiang.com/202305101439-%E5%BA%9F%E4%BA%86%E5%BE%88%E4%B9%85%E7%9A%84%E7%88%B1%E5%A5%BD-%E5%BD%A9%E9%93%85/</link>
     <pubDate>Wed, 10 May 2023 14:05:00 &#43;0800</pubDate><author>
                     <name>索隆不喝酒</name>
                 </author><guid>http://www.honghuiqiang.com/202305101439-%E5%BA%9F%E4%BA%86%E5%BE%88%E4%B9%85%E7%9A%84%E7%88%B1%E5%A5%BD-%E5%BD%A9%E9%93%85/</guid>
-    <description><![CDATA[]]></description>
+    <description><![CDATA[<div class="featured-image">
+                <img src="images/posts/IMG_0191%2820230510-143239%29.jpg" referrerpolicy="no-referrer">
+            </div>]]></description>
 </item><item>
     <title>废了很久的爱好-树脂画</title>
     <link>http://www.honghuiqiang.com/202305101440-%E5%BA%9F%E4%BA%86%E5%BE%88%E4%B9%85%E7%9A%84%E7%88%B1%E5%A5%BD-%E6%A0%91%E8%84%82%E7%94%BB/</link>
     <pubDate>Wed, 10 May 2023 14:05:00 &#43;0800</pubDate><author>
                     <name>索隆不喝酒</name>
                 </author><guid>http://www.honghuiqiang.com/202305101440-%E5%BA%9F%E4%BA%86%E5%BE%88%E4%B9%85%E7%9A%84%E7%88%B1%E5%A5%BD-%E6%A0%91%E8%84%82%E7%94%BB/</guid>
-    <description><![CDATA[]]></description>
+    <description><![CDATA[<div class="featured-image">
+                <img src="images/posts/2D9A8071-A1CB-438E-82E0-39300108FED7.jpg" referrerpolicy="no-referrer">
+            </div>]]></description>
 </item><item>
     <title>废了很久的爱好-素描</title>
     <link>http://www.honghuiqiang.com/202305101436-%E5%BA%9F%E4%BA%86%E5%BE%88%E4%B9%85%E7%9A%84%E7%88%B1%E5%A5%BD-%E7%B4%A0%E6%8F%8F/</link>
     <pubDate>Wed, 10 May 2023 14:05:00 &#43;0800</pubDate><author>
                     <name>索隆不喝酒</name>
                 </author><guid>http://www.honghuiqiang.com/202305101436-%E5%BA%9F%E4%BA%86%E5%BE%88%E4%B9%85%E7%9A%84%E7%88%B1%E5%A5%BD-%E7%B4%A0%E6%8F%8F/</guid>
-    <description><![CDATA[]]></description>
+    <description><![CDATA[<div class="featured-image">
+                <img src="images/posts/IMG_0189.jpg" referrerpolicy="no-referrer">
+            </div>]]></description>
 </item><item>
     <title>听歌月记录</title>
     <link>http://www.honghuiqiang.com/202305101357-%E5%90%AC%E6%AD%8C%E6%9C%88%E8%AE%B0%E5%BD%95/</link>
     <pubDate>Wed, 10 May 2023 13:05:00 &#43;0800</pubDate><author>
                     <name>索隆不喝酒</name>
                 </author><guid>http://www.honghuiqiang.com/202305101357-%E5%90%AC%E6%AD%8C%E6%9C%88%E8%AE%B0%E5%BD%95/</guid>
-    <description><![CDATA[]]></description>
+    <description><![CDATA[<div class="featured-image">
+                <img src="images/posts/2022%e5%b9%b46%e6%9c%88%201.png" referrerpolicy="no-referrer">
+            </div>]]></description>
 </item><item>
     <title>mermaid 语法-思维导图</title>
     <link>http://www.honghuiqiang.com/202305101117-mermaid-%E8%AF%AD%E6%B3%95-%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/</link>
@@ -67,13 +88,6 @@
     <pubDate>Wed, 10 May 2023 09:05:00 &#43;0800</pubDate><author>
                     <name>索隆不喝酒</name>
                 </author><guid>http://www.honghuiqiang.com/202305100916-mermaid-%E8%AF%AD%E6%B3%95-%E7%94%98%E7%89%B9%E5%9B%BE/</guid>
-    <description><![CDATA[]]></description>
-</item><item>
-    <title>mermaid 语法-用户旅程图</title>
-    <link>http://www.honghuiqiang.com/202305100347-mermaid-%E8%AF%AD%E6%B3%95-%E7%94%A8%E6%88%B7%E6%97%85%E7%A8%8B%E5%9B%BE/</link>
-    <pubDate>Wed, 10 May 2023 03:05:00 &#43;0800</pubDate><author>
-                    <name>索隆不喝酒</name>
-                </author><guid>http://www.honghuiqiang.com/202305100347-mermaid-%E8%AF%AD%E6%B3%95-%E7%94%A8%E6%88%B7%E6%97%85%E7%A8%8B%E5%9B%BE/</guid>
     <description><![CDATA[]]></description>
 </item></channel>
 </rss>

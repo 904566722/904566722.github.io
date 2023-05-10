@@ -1,6 +1,6 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>Learning Records</title>
+        <title>HHQ Learning Records</title>
         <link>http://www.honghuiqiang.com/en/</link>
         <description>这是我的网站描述</description>
         <generator>Hugo -- gohugo.io</generator><language>en</language>

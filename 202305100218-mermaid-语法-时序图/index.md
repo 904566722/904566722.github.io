@@ -360,3 +360,6 @@ sequenceDiagram
 ```
 
 
+
+---
+1. https://mermaid.js.org/syntax/sequenceDiagram.html

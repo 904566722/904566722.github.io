@@ -158,3 +158,6 @@ end
 {{< mermaid >}}graph LR
 a---b[fa:fa-spinner]
 {{< /mermaid >}}
+
+---
+1. https://mermaid.js.org/syntax/flowchart.html

@@ -28,3 +28,5 @@ journey
       Sit down: 5: Me
 ```
 
+---
+https://mermaid.js.org/syntax/userJourney.html

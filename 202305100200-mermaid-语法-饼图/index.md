@@ -20,3 +20,7 @@ title 被收养的宠物
 "Cats": 85
 "Rats": 15
 ```
+
+
+---
+1. https://mermaid.js.org/syntax/pie.html

@@ -20,10 +20,10 @@
 
 <meta name="twitter:title" content="内存布局"/>
 <meta name="twitter:description" content=""/>
-<meta name="application-name" content="HHQ Learning Records">
-<meta name="apple-mobile-web-app-title" content="HHQ Learning Records">
+<meta name="application-name" content="HHQ Records">
+<meta name="apple-mobile-web-app-title" content="HHQ Records">
 
-<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/zoro.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="http://www.honghuiqiang.com/202304242150-%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/" /><link rel="prev" href="http://www.honghuiqiang.com/202305070218-%E5%8F%AF%E4%BB%A5%E5%9C%A8%E4%BB%80%E4%B9%88%E5%B9%B3%E5%8F%B0%E4%B8%8A%E4%BD%BF%E7%94%A8-openai/" /><link rel="next" href="http://www.honghuiqiang.com/202305040442-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/zoro.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="http://www.honghuiqiang.com/202304242150-%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/" /><link rel="prev" href="http://www.honghuiqiang.com/202304201947-%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D/" /><link rel="next" href="http://www.honghuiqiang.com/202305062133-%E9%9D%A2%E5%90%91%E5%BC%80%E5%8F%91%E8%80%85%E7%9A%84-chatgpt-%E6%8F%90%E7%A4%BA%E5%B7%A5%E7%A8%8B/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
         <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
         <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
     {
@@ -203,23 +203,23 @@
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">X</span> <span class="kd">struct</span> <span class="p">{</span>  
-   <span class="nx">c</span> <span class="kt">int32</span>  
-   <span class="nx">d</span> <span class="kt">int64</span>  
-<span class="p">}</span>  
-  
-<span class="kd">func</span> <span class="nf">getAlignmentGuarantee</span><span class="p">()</span> <span class="p">{</span>  
-   <span class="kd">var</span> <span class="nx">a</span> <span class="kt">int32</span>  
-   <span class="c1">// 使用 unsafe.Alignof()   fmt.Println(unsafe.Alignof(a))     // 4    （获取 int32 的一般对齐保证）  
-</span><span class="c1"></span>   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Alignof</span><span class="p">(</span><span class="nx">X</span><span class="p">{}.</span><span class="nx">c</span><span class="p">))</span> <span class="c1">// 4    （获取 int32 的字段对齐保证）  
-</span><span class="c1"></span>   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Alignof</span><span class="p">(</span><span class="nx">X</span><span class="p">{}.</span><span class="nx">d</span><span class="p">))</span> <span class="c1">// 8  
-</span><span class="c1"></span>   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Alignof</span><span class="p">(</span><span class="nx">X</span><span class="p">{}))</span>   <span class="c1">// 8  
-</span><span class="c1"></span>  
-   <span class="c1">// 使用  reflect.TypeOf(a).Align() 以及 reflect.TypeOf(a).FieldAlign()
-</span><span class="c1"></span>   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">reflect</span><span class="p">.</span><span class="nf">TypeOf</span><span class="p">(</span><span class="nx">a</span><span class="p">).</span><span class="nf">Align</span><span class="p">())</span>    <span class="c1">// 4  
-</span><span class="c1"></span>   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">reflect</span><span class="p">.</span><span class="nf">TypeOf</span><span class="p">(</span><span class="nx">a</span><span class="p">).</span><span class="nf">FieldAlign</span><span class="p">())</span>    <span class="c1">// 4  
-</span><span class="c1"></span><span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">X</span> <span class="kd">struct</span> <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">   <span class="nx">c</span> <span class="kt">int32</span>  
+</span></span><span class="line"><span class="cl">   <span class="nx">d</span> <span class="kt">int64</span>  
+</span></span><span class="line"><span class="cl"><span class="p">}</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">getAlignmentGuarantee</span><span class="p">()</span> <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">   <span class="kd">var</span> <span class="nx">a</span> <span class="kt">int32</span>  
+</span></span><span class="line"><span class="cl">   <span class="c1">// 使用 unsafe.Alignof()   fmt.Println(unsafe.Alignof(a))     // 4    （获取 int32 的一般对齐保证）  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Alignof</span><span class="p">(</span><span class="nx">X</span><span class="p">{}.</span><span class="nx">c</span><span class="p">))</span> <span class="c1">// 4    （获取 int32 的字段对齐保证）  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Alignof</span><span class="p">(</span><span class="nx">X</span><span class="p">{}.</span><span class="nx">d</span><span class="p">))</span> <span class="c1">// 8  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Alignof</span><span class="p">(</span><span class="nx">X</span><span class="p">{}))</span>   <span class="c1">// 8  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  
+</span></span><span class="line"><span class="cl">   <span class="c1">// 使用  reflect.TypeOf(a).Align() 以及 reflect.TypeOf(a).FieldAlign()
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">reflect</span><span class="p">.</span><span class="nf">TypeOf</span><span class="p">(</span><span class="nx">a</span><span class="p">).</span><span class="nf">Align</span><span class="p">())</span>    <span class="c1">// 4  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">reflect</span><span class="p">.</span><span class="nf">TypeOf</span><span class="p">(</span><span class="nx">a</span><span class="p">).</span><span class="nf">FieldAlign</span><span class="p">())</span>    <span class="c1">// 4  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>注意上面程序的输出并不是固定的，相同的编译器在不同的架构上、不同的编译器在相同的架构上，都有可能产生不同的输出
@@ -260,27 +260,27 @@ Go 编译器中，对类型对齐保证要求：</p>
 </span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="c1">// 假设在 64 位机器上的情况  
-</span><span class="c1"></span><span class="kd">type</span> <span class="nx">T1</span> <span class="kd">struct</span> <span class="p">{</span>  
-   <span class="nx">a</span> <span class="kt">int8</span>  
-   <span class="c1">// 为了让 b 能够8字节对齐，这里要填充 7 个字节  
-</span><span class="c1"></span>   <span class="nx">b</span> <span class="kt">int64</span>  
-   <span class="nx">c</span> <span class="kt">int16</span>  
-   <span class="c1">// 前面一共的尺寸为 1 + 7 + 8 + 2 = 18 个字节  
-</span><span class="c1"></span>   <span class="c1">// 为了让 T1 的尺寸为 8 的倍数，这里需要填充 24 - 18 = 6 个字节  
-</span><span class="c1"></span><span class="p">}</span>  
-<span class="c1">// 因此 T1 类型的尺寸为 24 个字节  
-</span><span class="c1"></span>  
-<span class="kd">type</span> <span class="nx">T2</span> <span class="kd">struct</span> <span class="p">{</span>  
-   <span class="nx">a</span> <span class="kt">int8</span>  
-   <span class="c1">// 为了让 b 能够 2 字节对齐，这里填充 1 字节  
-</span><span class="c1"></span>   <span class="nx">b</span> <span class="kt">int16</span>  
-   <span class="c1">// 为了让 c 能够 8 字节对齐，这里填充 4 字节  
-</span><span class="c1"></span>   <span class="nx">c</span> <span class="kt">int64</span>  
-   <span class="c1">// 前面一共 1 + 1 + 2 + 4 + 8 = 16 字节，因此这里不需要再填充  
-</span><span class="c1"></span><span class="p">}</span>  
-<span class="c1">// 因此 T2 类型的尺寸为 16 个字节
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// 假设在 64 位机器上的情况  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">T1</span> <span class="kd">struct</span> <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">   <span class="nx">a</span> <span class="kt">int8</span>  
+</span></span><span class="line"><span class="cl">   <span class="c1">// 为了让 b 能够8字节对齐，这里要填充 7 个字节  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="nx">b</span> <span class="kt">int64</span>  
+</span></span><span class="line"><span class="cl">   <span class="nx">c</span> <span class="kt">int16</span>  
+</span></span><span class="line"><span class="cl">   <span class="c1">// 前面一共的尺寸为 1 + 7 + 8 + 2 = 18 个字节  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="c1">// 为了让 T1 的尺寸为 8 的倍数，这里需要填充 24 - 18 = 6 个字节  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>  
+</span></span><span class="line"><span class="cl"><span class="c1">// 因此 T1 类型的尺寸为 24 个字节  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">T2</span> <span class="kd">struct</span> <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">   <span class="nx">a</span> <span class="kt">int8</span>  
+</span></span><span class="line"><span class="cl">   <span class="c1">// 为了让 b 能够 2 字节对齐，这里填充 1 字节  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="nx">b</span> <span class="kt">int16</span>  
+</span></span><span class="line"><span class="cl">   <span class="c1">// 为了让 c 能够 8 字节对齐，这里填充 4 字节  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="nx">c</span> <span class="kt">int64</span>  
+</span></span><span class="line"><span class="cl">   <span class="c1">// 前面一共 1 + 1 + 2 + 4 + 8 = 16 字节，因此这里不需要再填充  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>  
+</span></span><span class="line"><span class="cl"><span class="c1">// 因此 T2 类型的尺寸为 16 个字节
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>从上面这个例子可以看到，尽管 T1 跟 T2 拥有一样的字段类型，但因为排列的不同，导致字节填充的数量不同，因此其尺寸也不同。
 问题：[[202304242320 一个零尺寸的类型有没有可能影响到结构体的尺寸]]</p>
@@ -317,13 +317,13 @@ Go 编译器中，对类型对齐保证要求：</p>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/202305070218-%E5%8F%AF%E4%BB%A5%E5%9C%A8%E4%BB%80%E4%B9%88%E5%B9%B3%E5%8F%B0%E4%B8%8A%E4%BD%BF%E7%94%A8-openai/" class="prev" rel="prev" title="可以在什么平台上使用 openai"><i class="fas fa-angle-left fa-fw"></i>可以在什么平台上使用 openai</a>
-            <a href="/202305040442-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/" class="next" rel="next" title="二叉搜索树">二叉搜索树<i class="fas fa-angle-right fa-fw"></i></a></div>
+    <div class="post-nav"><a href="/202304201947-%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D/" class="prev" rel="prev" title="深浅拷贝"><i class="fas fa-angle-left fa-fw"></i>深浅拷贝</a>
+            <a href="/202305062133-%E9%9D%A2%E5%90%91%E5%BC%80%E5%8F%91%E8%80%85%E7%9A%84-chatgpt-%E6%8F%90%E7%A4%BA%E5%B7%A5%E7%A8%8B/" class="next" rel="next" title="面向开发者的 ChatGPT 提示工程">面向开发者的 ChatGPT 提示工程<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"></div></article></div>
         </main><footer class="footer">
         <div class="footer-container"><div class="footer-line">
-                    由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.91.2">Hugo</a> 强力驱动&nbsp;|&nbsp;托管在 <a title="Github Pages" href="https://docs.github.com/en/pages/" target="_blank" rel="noopener noreffer">GitHub Pages</a> 上&nbsp;|&nbsp;主题 - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.3.0"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                    由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.105.0">Hugo</a> 强力驱动&nbsp;|&nbsp;托管在 <a title="Github Pages" href="https://docs.github.com/en/pages/" target="_blank" rel="noopener noreffer">GitHub Pages</a> 上&nbsp;|&nbsp;主题 - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.3.0"><i class="far fa-edit fa-fw"></i> DoIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">索隆不喝酒</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
             <div class="footer-line"></div>
             <div class="footer-line">
@@ -336,7 +336,7 @@ Go 编译器中，对类型对齐保证要求：</p>
             <i class="fas fa-comment fa-fw"></i>
         </a>
     </div><div class="assets"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/katex/copy-tex.min.css">
-        <noscript><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"></noscript><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"data":{"desktop-header-typeit":"HHQ Learning Records","mobile-header-typeit":"HHQ Learning Records"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":50,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"sharerjs":true,"table":{"sort":true},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/lib/tablesort/tablesort.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js" defer></script><script type="text/javascript" src="/lib/katex/auto-render.min.js" defer></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js" defer></script><script type="text/javascript" src="/lib/katex/mhchem.min.js" defer></script><script type="text/javascript" src="/js/katex.min.js" defer></script><script type="text/javascript" src="/js/theme.min.js" defer></script></div>
+        <noscript><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"></noscript><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"data":{"desktop-header-typeit":"HHQ Records","mobile-header-typeit":"HHQ Records"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":50,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"sharerjs":true,"table":{"sort":true},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/lib/tablesort/tablesort.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js" defer></script><script type="text/javascript" src="/lib/katex/auto-render.min.js" defer></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js" defer></script><script type="text/javascript" src="/lib/katex/mhchem.min.js" defer></script><script type="text/javascript" src="/js/katex.min.js" defer></script><script type="text/javascript" src="/js/theme.min.js" defer></script></div>
 </body>
 
 </html>

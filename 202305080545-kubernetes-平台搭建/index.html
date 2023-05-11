@@ -20,10 +20,10 @@
 
 <meta name="twitter:title" content="在 vmware 上本地搭建 kubernetes 集群"/>
 <meta name="twitter:description" content=""/>
-<meta name="application-name" content="HHQ Learning Records">
-<meta name="apple-mobile-web-app-title" content="HHQ Learning Records">
+<meta name="application-name" content="HHQ Records">
+<meta name="apple-mobile-web-app-title" content="HHQ Records">
 
-<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/zoro.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="http://www.honghuiqiang.com/202305080545-kubernetes-%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/" /><link rel="prev" href="http://www.honghuiqiang.com/202304291858-%E5%9F%BA%E6%9C%AC%E7%9A%84%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" /><link rel="next" href="http://www.honghuiqiang.com/202305040737-%E5%9B%BE/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/zoro.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="http://www.honghuiqiang.com/202305080545-kubernetes-%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/" /><link rel="prev" href="http://www.honghuiqiang.com/202304201957-%E6%A0%88/" /><link rel="next" href="http://www.honghuiqiang.com/202305080553-%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8Devicted/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
         <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
         <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
     {
@@ -152,8 +152,8 @@
                                 </div>
                                 <div class="details-content series-content">
                                     <nav>
-                                        <ul><li><span class="active">在 vmware 上本地搭建 kubernetes 集群</span></li>
-                                                    <li><a href="/202305080553-%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8Devicted/">问题定位：Evicted</a></li></ul>
+                                        <ul>
+                                                    <li><a href="/202305080553-%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8Devicted/">问题定位：Evicted</a></li><li><span class="active">在 vmware 上本地搭建 kubernetes 集群</span></li></ul>
                                     </nav>
                                 </div>
                             </div><div class="details toc" id="toc-static"  kept="">
@@ -178,9 +178,9 @@
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">systemctl stop firewalld
-systemctl disable firewalld
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">systemctl stop firewalld
+</span></span><span class="line"><span class="cl">systemctl disable firewalld
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ol start="2">
 <li>关闭 selinux</li>
@@ -190,8 +190,8 @@ systemctl disable firewalld
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">sed -i <span class="s1">&#39;s/enforcing/disabled/&#39;</span> /etc/selinux/config
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">sed -i <span class="s1">&#39;s/enforcing/disabled/&#39;</span> /etc/selinux/config
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ol start="3">
 <li>关闭 swap</li>
@@ -201,8 +201,8 @@ systemctl disable firewalld
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">sed -ri <span class="s1">&#39;s/.*swap.*/#&amp;/&#39;</span> /etc/fstab
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">sed -ri <span class="s1">&#39;s/.*swap.*/#&amp;/&#39;</span> /etc/fstab
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ol start="4">
 <li>添加 hosts</li>
@@ -215,11 +215,11 @@ systemctl disable firewalld
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">cat &gt;&gt; /etc/hosts <span class="s">&lt;&lt; EOF
-</span><span class="s">192.168.108.132 centos7-master
-</span><span class="s">192.168.108.130 centos7-node1
-</span><span class="s">EOF</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">cat &gt;&gt; /etc/hosts <span class="s">&lt;&lt; EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">192.168.108.132 centos7-master
+</span></span></span><span class="line"><span class="cl"><span class="s">192.168.108.130 centos7-node1
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ol start="5">
 <li>设置网桥参数</li>
@@ -234,13 +234,13 @@ systemctl disable firewalld
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">cat &gt; /etc/sysctl.d/k8s.conf <span class="s">&lt;&lt; EOF
-</span><span class="s">net.bridge.bridge-nf-call-ip6tables = 1
-</span><span class="s">net.bridge.bridge-nf-call-iptables = 1
-</span><span class="s">EOF</span>
-
-sysctl --system <span class="c1"># 生效</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">cat &gt; /etc/sysctl.d/k8s.conf <span class="s">&lt;&lt; EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">net.bridge.bridge-nf-call-ip6tables = 1
+</span></span></span><span class="line"><span class="cl"><span class="s">net.bridge.bridge-nf-call-iptables = 1
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sysctl --system <span class="c1"># 生效</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ol start="6">
 <li>时间同步</li>
@@ -251,9 +251,9 @@ sysctl --system <span class="c1"># 生效</span>
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">yum install ntpdate -y <span class="c1"># 没有的 ntpdate 则安装</span>
-ntpdate time.windows.com <span class="c1"># 同步时间</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">yum install ntpdate -y <span class="c1"># 没有的 ntpdate 则安装</span>
+</span></span><span class="line"><span class="cl">ntpdate time.windows.com <span class="c1"># 同步时间</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="二安装" class="headerLink">
     <a href="#%e4%ba%8c%e5%ae%89%e8%a3%85" class="header-mark"></a>二、安装</h2><blockquote>
@@ -269,10 +269,10 @@ ntpdate time.windows.com <span class="c1"># 同步时间</span>
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">wget https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo -O /etc/yum.repos.d/docker-ce.repo <span class="c1"># 更新 docker 的 yum 源</span>
-
-yum install docker-ce-19.03.13 -y
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">wget https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo -O /etc/yum.repos.d/docker-ce.repo <span class="c1"># 更新 docker 的 yum 源</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">yum install docker-ce-19.03.13 -y
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>配置镜像</p>
 <div class="highlight"><div class="chroma">
@@ -287,15 +287,15 @@ yum install docker-ce-19.03.13 -y
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">mkdir /etc/docker
-cat <span class="s">&lt;&lt; EOF &gt; /etc/docker/daemon.json
-</span><span class="s">{
-</span><span class="s">&#34;registry-mirrors&#34;: [&#34;https://kfwkfulq.mirror.aliyuncs.com&#34;]
-</span><span class="s">}
-</span><span class="s">EOF</span>
-
-systemctl <span class="nb">enable</span> docker.service
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">mkdir /etc/docker
+</span></span><span class="line"><span class="cl">cat <span class="s">&lt;&lt; EOF &gt; /etc/docker/daemon.json
+</span></span></span><span class="line"><span class="cl"><span class="s">{
+</span></span></span><span class="line"><span class="cl"><span class="s">&#34;registry-mirrors&#34;: [&#34;https://kfwkfulq.mirror.aliyuncs.com&#34;]
+</span></span></span><span class="line"><span class="cl"><span class="s">}
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">systemctl <span class="nb">enable</span> docker.service
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ol start="2">
 <li>添加 k8s 的yum源</li>
@@ -313,16 +313,16 @@ systemctl <span class="nb">enable</span> docker.service
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">cat &gt; /etc/yum.repos.d/kubernetes.repo <span class="s">&lt;&lt; EOF
-</span><span class="s">[kubernetes]
-</span><span class="s">name=Kubernetes
-</span><span class="s">baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64
-</span><span class="s">enabled=1
-</span><span class="s">gpgcheck=0
-</span><span class="s">repo_gpgcheck=0
-</span><span class="s">gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
-</span><span class="s">EOF</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">cat &gt; /etc/yum.repos.d/kubernetes.repo <span class="s">&lt;&lt; EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">[kubernetes]
+</span></span></span><span class="line"><span class="cl"><span class="s">name=Kubernetes
+</span></span></span><span class="line"><span class="cl"><span class="s">baseurl=https://mirrors.aliyun.com/kubernetes/yum/repos/kubernetes-el7-x86_64
+</span></span></span><span class="line"><span class="cl"><span class="s">enabled=1
+</span></span></span><span class="line"><span class="cl"><span class="s">gpgcheck=0
+</span></span></span><span class="line"><span class="cl"><span class="s">repo_gpgcheck=0
+</span></span></span><span class="line"><span class="cl"><span class="s">gpgkey=https://mirrors.aliyun.com/kubernetes/yum/doc/yum-key.gpg https://mirrors.aliyun.com/kubernetes/yum/doc/rpm-package-key.gpg
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ol start="3">
 <li>安装 kubeadm、kubelet、kubectl</li>
@@ -334,10 +334,10 @@ systemctl <span class="nb">enable</span> docker.service
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">yum install kubelet-1.19.4 kubeadm-1.19.4 kubectl-1.19.4 -y
-
-systemctl <span class="nb">enable</span> kubelet.service <span class="c1"># 开启服务</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">yum install kubelet-1.19.4 kubeadm-1.19.4 kubectl-1.19.4 -y
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">systemctl <span class="nb">enable</span> kubelet.service <span class="c1"># 开启服务</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>重启 centos</p>
 <ol start="4">
@@ -348,8 +348,8 @@ systemctl <span class="nb">enable</span> kubelet.service <span class="c1"># 开�
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">kubeadm init --apiserver-advertise-address<span class="o">=</span>【master服务器ip地址】 --image-repository registry.aliyuncs.com/google_containers --kubernetes-version v1.19.4 --service-cidr<span class="o">=</span>10.96.0.0/12 --pod-network-cidr<span class="o">=</span>10.244.0.0/16
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">kubeadm init --apiserver-advertise-address<span class="o">=</span>【master服务器ip地址】 --image-repository registry.aliyuncs.com/google_containers --kubernetes-version v1.19.4 --service-cidr<span class="o">=</span>10.96.0.0/12 --pod-network-cidr<span class="o">=</span>10.244.0.0/16
+</span></span></code></pre></td></tr></table>
 </div>
 </div><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -358,10 +358,10 @@ systemctl <span class="nb">enable</span> kubelet.service <span class="c1"># 开�
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">mkdir -p <span class="nv">$HOME</span>/.kube
-sudo cp -i /etc/kubernetes/admin.conf <span class="nv">$HOME</span>/.kube/config
-sudo chown <span class="k">$(</span>id -u<span class="k">)</span>:<span class="k">$(</span>id -g<span class="k">)</span> <span class="nv">$HOME</span>/.kube/config
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">mkdir -p <span class="nv">$HOME</span>/.kube
+</span></span><span class="line"><span class="cl">sudo cp -i /etc/kubernetes/admin.conf <span class="nv">$HOME</span>/.kube/config
+</span></span><span class="line"><span class="cl">sudo chown <span class="k">$(</span>id -u<span class="k">)</span>:<span class="k">$(</span>id -g<span class="k">)</span> <span class="nv">$HOME</span>/.kube/config
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ol start="5">
 <li>添加 node 节点</li>
@@ -372,9 +372,9 @@ sudo chown <span class="k">$(</span>id -u<span class="k">)</span>:<span class="k
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">kubeadm join 192.168.108.132:6443 --token d99d8g.3wr8skktnv3m9e46 <span class="se">\
-</span><span class="se"></span>    --discovery-token-ca-cert-hash sha256:0ba36403007aa7ef77b174a65a8e3de27bcbcac9fbb5b2bb31c337a565d4e16
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">kubeadm join 192.168.108.132:6443 --token d99d8g.3wr8skktnv3m9e46 <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>    --discovery-token-ca-cert-hash sha256:0ba36403007aa7ef77b174a65a8e3de27bcbcac9fbb5b2bb31c337a565d4e16
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ol start="6">
 <li>部署网络插件</li>
@@ -386,10 +386,10 @@ sudo chown <span class="k">$(</span>id -u<span class="k">)</span>:<span class="k
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh">wget https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
-
-kubectl apply -f kube-flannel.yml
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">wget https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">kubectl apply -f kube-flannel.yml
+</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
 
@@ -419,13 +419,13 @@ kubectl apply -f kube-flannel.yml
         </section>
     </div>
 
-    <div class="post-nav"><a href="/202304291858-%E5%9F%BA%E6%9C%AC%E7%9A%84%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" class="prev" rel="prev" title="基本的排序算法"><i class="fas fa-angle-left fa-fw"></i>基本的排序算法</a>
-            <a href="/202305040737-%E5%9B%BE/" class="next" rel="next" title="图">图<i class="fas fa-angle-right fa-fw"></i></a></div>
+    <div class="post-nav"><a href="/202304201957-%E6%A0%88/" class="prev" rel="prev" title="栈"><i class="fas fa-angle-left fa-fw"></i>栈</a>
+            <a href="/202305080553-%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8Devicted/" class="next" rel="next" title="问题定位：Evicted">问题定位：Evicted<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"></div></article></div>
         </main><footer class="footer">
         <div class="footer-container"><div class="footer-line">
-                    由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.91.2">Hugo</a> 强力驱动&nbsp;|&nbsp;托管在 <a title="Github Pages" href="https://docs.github.com/en/pages/" target="_blank" rel="noopener noreffer">GitHub Pages</a> 上&nbsp;|&nbsp;主题 - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.3.0"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                    由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.105.0">Hugo</a> 强力驱动&nbsp;|&nbsp;托管在 <a title="Github Pages" href="https://docs.github.com/en/pages/" target="_blank" rel="noopener noreffer">GitHub Pages</a> 上&nbsp;|&nbsp;主题 - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.3.0"><i class="far fa-edit fa-fw"></i> DoIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">索隆不喝酒</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
             <div class="footer-line"></div>
             <div class="footer-line">
@@ -438,7 +438,7 @@ kubectl apply -f kube-flannel.yml
             <i class="fas fa-comment fa-fw"></i>
         </a>
     </div><div class="assets"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/katex/copy-tex.min.css">
-        <noscript><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"></noscript><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"data":{"desktop-header-typeit":"HHQ Learning Records","mobile-header-typeit":"HHQ Learning Records"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":50,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"sharerjs":true,"table":{"sort":true},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/lib/tablesort/tablesort.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js" defer></script><script type="text/javascript" src="/lib/katex/auto-render.min.js" defer></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js" defer></script><script type="text/javascript" src="/lib/katex/mhchem.min.js" defer></script><script type="text/javascript" src="/js/katex.min.js" defer></script><script type="text/javascript" src="/js/theme.min.js" defer></script></div>
+        <noscript><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"></noscript><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"data":{"desktop-header-typeit":"HHQ Records","mobile-header-typeit":"HHQ Records"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":50,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"sharerjs":true,"table":{"sort":true},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/lib/tablesort/tablesort.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js" defer></script><script type="text/javascript" src="/lib/katex/auto-render.min.js" defer></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js" defer></script><script type="text/javascript" src="/lib/katex/mhchem.min.js" defer></script><script type="text/javascript" src="/js/katex.min.js" defer></script><script type="text/javascript" src="/js/theme.min.js" defer></script></div>
 </body>
 
 </html>

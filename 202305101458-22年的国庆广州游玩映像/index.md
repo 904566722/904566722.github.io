@@ -7,8 +7,6 @@
 
 ## Day1. 陈家祠堂、沙面、叉烧...
 ![](images/posts/DSC_7404.jpg)
-![](images/posts/DSC_7405.jpg)
-![](images/posts/DSC_7426.jpg)
 ![](images/posts/DSC_7474.jpg)
 ![](images/posts/DSC_7489.jpg)
 ![](images/posts/DSC_7503.jpg)
@@ -19,17 +17,7 @@
 
 ![](images/posts/DSC_7609.jpg)
 
-![](images/posts/DSC_7614.jpg)
-
-![](images/posts/DSC_7628.jpg)
-
-![](images/posts/DSC_7629.jpg)
-
 ![](images/posts/DSC_7722.jpg)
-
-![](images/posts/DSC_7749.jpg)
-
-![](images/posts/DSC_7755.jpg)
 
 ![](images/posts/DSC_7759.jpg)
 ![](images/posts/DSC_7844.jpg)
@@ -42,8 +30,6 @@
 
 ![](images/posts/DSC_7878.jpg)
 
-![](images/posts/DSC_7902.jpg)
-
 ![](images/posts/DSC_7907.jpg)
 
 ![](images/posts/DSC_7913.jpg)
@@ -52,9 +38,6 @@
 
 ![](images/posts/DSC_7918.jpg)
 
-![](images/posts/DSC_7922.jpg)
-
-![](images/posts/DSC_7927.jpg)
 ![](images/posts/DSC_7930.jpg)
 
 ![](images/posts/DSC_8213.jpg)
@@ -80,11 +63,8 @@
 ![](images/posts/DSC_8645.jpg)
 ![](images/posts/DSC_8675.jpg)
 ![](images/posts/DSC_8709.jpg)
-![](images/posts/DSC_8744%201.jpg)
 ![](images/posts/DSC_8761.jpg)
-![](images/posts/DSC_8773.jpg)
 ![](images/posts/DSC_8821.jpg)
-![](images/posts/DSC_8845.jpg)
 ![](images/posts/DSC_8854.jpg)
 ![](images/posts/DSC_8960.jpg)
 ![](images/posts/DSC_8970.jpg)
@@ -104,7 +84,7 @@
 ![](images/posts/DSC_9573.jpg)
 ![](images/posts/DSC_9579.jpg)
 ![](images/posts/DSC_9583.jpg)
-![](images/posts/DSC_9586.jpg)
+
 ![](images/posts/DSC_9588.jpg)
 ![](images/posts/DSC_9634.jpg)
 ![](images/posts/DSC_9713.jpg)
@@ -115,13 +95,11 @@
 ![](images/posts/DSC_0007.jpg)
 ![](images/posts/DSC_0008.jpg)
 ![](images/posts/DSC_0043.jpg)
-![](images/posts/DSC_0046.jpg)
-![](images/posts/DSC_0116.jpg)
-![](images/posts/DSC_0175.jpg)
+
 ![](images/posts/DSC_0359.jpg)
-![](images/posts/DSC_0366.jpg)
+
 ![](images/posts/DSC_0386.jpg)
-![](images/posts/DSC_0399.jpg)
+
 ![](images/posts/DSC_0408.jpg)
 ![](images/posts/DSC_0431.jpg)
 ![](images/posts/DSC_0435.jpg)
@@ -135,8 +113,6 @@
 ![](images/posts/DSC_0655.jpg)
 ![](images/posts/DSC_0657.jpg)
 ![](images/posts/DSC_0658.jpg)
-![](images/posts/DSC_0672.jpg)
 ![](images/posts/DSC_0689.jpg)
 ![](images/posts/DSC_9942.jpg)
 ![](images/posts/DSC_9957.jpg)
-![](images/posts/DSC_9998.jpg)

@@ -154,10 +154,61 @@ end
 
 ### 润色
 
-图标：
+- 图标：
 {{< mermaid >}}graph LR
 a---b[fa:fa-spinner]
 {{< /mermaid >}}
+
+- 类定义
+```
+%% 1. 类定义
+classDef classname fill:yellow, stroke:yellow, stroke-width: 4px, storoke-dasharray: 5, 5
+
+a---b---c  
+
+%% 2. 把样式给方块
+class a classname
+```
+
+`fill` 用颜色填满元素
+`stroke` 边框颜色
+`stroke-width` 边框宽度
+`stroke-dasharray` 虚线边框
+
+例子：
+{{< mermaid >}}
+flowchart TD
+classDef important stroke:red, stroke-width:2px
+classDef pass stroke:grey, stroke-dasharray: 5,5
+
+%% 流程的分类
+classDef success stroke:green
+
+a[重要]---b[一般]---c[可忽略]
+b---d[重要]
+d---e[成功]
+
+class a,d important
+class c pass
+class e success
+{{< /mermaid >}}
+```mermaid
+flowchart TD
+classDef important stroke:red, stroke-width:2px
+classDef pass stroke:grey, stroke-dasharray: 5,5
+
+%% 流程的分类
+classDef success stroke:green
+
+a[重要]---b[一般]---c[可忽略]
+b---d[重要]
+d---e[成功]
+
+class a,d important
+class c pass
+class e success
+```
+
 
 ---
 1. https://mermaid.js.org/syntax/flowchart.html

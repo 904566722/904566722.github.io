@@ -14,7 +14,7 @@ title 今天大概要做
 
 section 博客相关内容
 1.梳理规划一天的方法、完成日记模板的创建:done,riji,06:00, 2h
-2.完成博客的自动发布系统:fabu, after riji, 1h
+2.完成博客的自动发布系统:done,fabu, after riji, 1h
 3.总结文档《使用huog+github pages搭建博客流程》:after fabu, 90m
 4.golang: 1h
 
@@ -32,7 +32,7 @@ title 今天大概要做
 
 section 博客相关内容
 1.梳理规划一天的方法、完成日记模板的创建:done,riji,06:00, 2h
-2.完成博客的自动发布系统:fabu, after riji, 1h
+2.完成博客的自动发布系统:done,fabu, after riji, 1h
 3.总结文档《使用huog+github pages搭建博客流程》:after fabu, 90m
 
 section 习惯

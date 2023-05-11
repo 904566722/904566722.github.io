@@ -5,7 +5,7 @@
 ## 规划区
 
 
-```mermaid
+```
 gantt
 dateFormat HH:mm
 axisFormat %H:%M
@@ -19,7 +19,7 @@ section 博客相关内容
 4.golang: 1h
 
 section 习惯
-算法每日一题: 1h
+算法每日一题:done, 1h
 ```
 
 gantt（最后要与上面的代码同步）：

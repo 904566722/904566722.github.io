@@ -97,7 +97,7 @@ gantt
         系统测试:g, 2022-03-21, 10d
 {{< /mermaid >}}
 
-```mermaid
+```
 gantt
     title 项目计划表
 

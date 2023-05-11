@@ -39,11 +39,6 @@ music url="/music/aurora/queendom.m4a" name="Queendom" artist="AURORA" cover="/m
 
 ## 我的大叔
 
-- 마음이 쉬고 싶을 때 (心想休息的时候)
-```
-music url="/music/myuncle/心想休息的时候.mp3" name="마음이 쉬고 싶을 때 (心想休息的时候)" artist="정세린 (郑世林)" cover="/music/myuncle/我的大叔.png"
-```
-
 {{< music url="/music/myuncle/心想休息的时候.mp3" name="마음이 쉬고 싶을 때 (心想休息的时候)" artist="정세린 (郑世林)" cover="/music/myuncle/我的大叔.png" >}}
 
 - 무지개는 있다 (有彩虹) (Band Ver.)

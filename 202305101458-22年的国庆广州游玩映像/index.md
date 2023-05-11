@@ -7,7 +7,6 @@
 
 ## Day1. 陈家祠堂、沙面、叉烧...
 ![](images/posts/DSC_7404.jpg)
-![](images/posts/DSC_7426.jpg)
 ![](images/posts/DSC_7474.jpg)
 ![](images/posts/DSC_7489.jpg)
 ![](images/posts/DSC_7503.jpg)
@@ -39,7 +38,6 @@
 
 ![](images/posts/DSC_7918.jpg)
 
-![](images/posts/DSC_7927.jpg)
 ![](images/posts/DSC_7930.jpg)
 
 ![](images/posts/DSC_8213.jpg)

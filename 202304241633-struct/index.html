@@ -183,28 +183,28 @@
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="c1">// ** struct practice  
-</span><span class="c1"></span><span class="kd">type</span> <span class="nx">person</span> <span class="kd">struct</span> <span class="p">{</span>  
-   <span class="nx">name</span> <span class="kt">string</span>  
-   <span class="nx">age</span>  <span class="kt">int32</span>  
-<span class="p">}</span>  
-  
-<span class="kd">func</span> <span class="nf">structPractice</span><span class="p">()</span> <span class="p">{</span>  
-   <span class="nx">people</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">person</span><span class="p">{</span>  
-      <span class="nx">name</span><span class="p">:</span> <span class="s">&#34;索隆不喝酒&#34;</span><span class="p">,</span>  
-      <span class="nx">age</span><span class="p">:</span>  <span class="mi">20</span><span class="p">,</span>  
-   <span class="p">}</span>  
-  
-   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">people</span><span class="p">)</span>  <span class="c1">// &amp;{索隆不喝酒 20}   fmt.Println(*people) // {索隆不喝酒 20}   fmt.Println(&amp;people) // 0x1400000e038  
-</span><span class="c1"></span>  
-   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;[value]\tname:%s\tage:%d\n&#34;</span><span class="p">,</span> <span class="nx">people</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="nx">people</span><span class="p">.</span><span class="nx">age</span><span class="p">)</span>  
-   <span class="c1">// [value] name:索隆不喝酒 age:20   
-</span><span class="c1"></span>   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;[value]\tname:%s\tage:%d\n&#34;</span><span class="p">,</span> <span class="p">(</span><span class="o">*</span><span class="nx">people</span><span class="p">).</span><span class="nx">name</span><span class="p">,</span> <span class="p">(</span><span class="o">*</span><span class="nx">people</span><span class="p">).</span><span class="nx">age</span><span class="p">)</span>  
-   <span class="c1">// [value] name:索隆不喝酒 age:20   
-</span><span class="c1"></span>   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;[addr]\tname:%d\tage:%d\n&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">people</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">people</span><span class="p">.</span><span class="nx">age</span><span class="p">)</span>  
-   <span class="c1">// [addr]  name:1374389584016 age:1374389584032  
-</span><span class="c1"></span><span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// ** struct practice  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">person</span> <span class="kd">struct</span> <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">   <span class="nx">name</span> <span class="kt">string</span>  
+</span></span><span class="line"><span class="cl">   <span class="nx">age</span>  <span class="kt">int32</span>  
+</span></span><span class="line"><span class="cl"><span class="p">}</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">structPractice</span><span class="p">()</span> <span class="p">{</span>  
+</span></span><span class="line"><span class="cl">   <span class="nx">people</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">person</span><span class="p">{</span>  
+</span></span><span class="line"><span class="cl">      <span class="nx">name</span><span class="p">:</span> <span class="s">&#34;索隆不喝酒&#34;</span><span class="p">,</span>  
+</span></span><span class="line"><span class="cl">      <span class="nx">age</span><span class="p">:</span>  <span class="mi">20</span><span class="p">,</span>  
+</span></span><span class="line"><span class="cl">   <span class="p">}</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">people</span><span class="p">)</span>  <span class="c1">// &amp;{索隆不喝酒 20}   fmt.Println(*people) // {索隆不喝酒 20}   fmt.Println(&amp;people) // 0x1400000e038  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  
+</span></span><span class="line"><span class="cl">   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;[value]\tname:%s\tage:%d\n&#34;</span><span class="p">,</span> <span class="nx">people</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="nx">people</span><span class="p">.</span><span class="nx">age</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">   <span class="c1">// [value] name:索隆不喝酒 age:20   
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;[value]\tname:%s\tage:%d\n&#34;</span><span class="p">,</span> <span class="p">(</span><span class="o">*</span><span class="nx">people</span><span class="p">).</span><span class="nx">name</span><span class="p">,</span> <span class="p">(</span><span class="o">*</span><span class="nx">people</span><span class="p">).</span><span class="nx">age</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">   <span class="c1">// [value] name:索隆不喝酒 age:20   
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;[addr]\tname:%d\tage:%d\n&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">people</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">people</span><span class="p">.</span><span class="nx">age</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">   <span class="c1">// [addr]  name:1374389584016 age:1374389584032  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>
@@ -257,7 +257,7 @@
 <div id="comments"></div></article></div>
         </main><footer class="footer">
         <div class="footer-container"><div class="footer-line">
-                    由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.91.2">Hugo</a> 强力驱动&nbsp;|&nbsp;托管在 <a title="Github Pages" href="https://docs.github.com/en/pages/" target="_blank" rel="noopener noreffer">GitHub Pages</a> 上&nbsp;|&nbsp;主题 - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.3.0"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                    由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.105.0">Hugo</a> 强力驱动&nbsp;|&nbsp;托管在 <a title="Github Pages" href="https://docs.github.com/en/pages/" target="_blank" rel="noopener noreffer">GitHub Pages</a> 上&nbsp;|&nbsp;主题 - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.3.0"><i class="far fa-edit fa-fw"></i> DoIt</a>
                 </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">索隆不喝酒</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
             <div class="footer-line"></div>
             <div class="footer-line">

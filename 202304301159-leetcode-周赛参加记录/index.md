@@ -1,9 +1,7 @@
 # Leetcode 周赛记录
 
 <!--more-->
-
-
-#算法 
+#leetcode 
 
 希望能有成长，在此记录
 

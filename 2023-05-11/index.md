@@ -15,7 +15,7 @@ title 今天大概要做
 section 博客相关内容
 1.梳理规划一天的方法、完成日记模板的创建:done,riji,06:00, 2h
 2.完成博客的自动发布系统:done,fabu, after riji, 1h
-3.总结文档《使用huog+github pages搭建博客流程》:after fabu, 90m
+3.总结文档《使用huog+github pages搭建博客流程》:done,after fabu, 90m
 4.golang: 1h
 
 section 习惯
@@ -49,14 +49,14 @@ section 习惯
 {{< admonition type=abstract title="习惯打卡表" open=false >}}
 |日期|算法|阅读|
 |-|-|-|
-|1|||
-|2|||
-|3|||
-|4|||
-|5|||
-|6|||
+|1|✅||
+|2|✅||
+|3|✅||
+|4|✅||
+|5|✅||
+|6|✅||
 |7|||
-|8|||
+|8|✅||
 |9|||
 |10|||
 |11|||

@@ -175,39 +175,55 @@ class a classname
 `stroke-width` 边框宽度
 `stroke-dasharray` 虚线边框
 
-例子：
+## 例子
+
 {{< mermaid >}}
 flowchart TD
+%% 重要性的分类
 classDef important stroke:red, stroke-width:2px
 classDef pass stroke:grey, stroke-dasharray: 5,5
-
 %% 流程的分类
 classDef success stroke:green
-
+%% 解释
+classDef stick fill:yellow, stroke:yellow
+classDef stickImp fill:pink, stroke:pink, color:black
+  
 a[重要]---b[一般]---c[可忽略]
 b---d[重要]
 d---e[成功]
-
+  
+f[实现类似便签的效果<br>对一个元素或者流程节点加以解释]
+f-.-d
+  
 class a,d important
 class c pass
+  
 class e success
+class f stickImp
 {{< /mermaid >}}
 
 ```
-flowchart TD
+%% 重要性的分类
 classDef important stroke:red, stroke-width:2px
 classDef pass stroke:grey, stroke-dasharray: 5,5
-
 %% 流程的分类
 classDef success stroke:green
-
+%% 解释
+classDef stick fill:yellow, stroke:yellow
+classDef stickImp fill:pink, stroke:pink, color:black
+  
 a[重要]---b[一般]---c[可忽略]
 b---d[重要]
 d---e[成功]
-
+  
+f[实现类似便签的效果<br>对一个元素或者流程节点加以解释]
+f-.-d
+  
 class a,d important
 class c pass
+  
 class e success
+class f stickImp
 ```
 
 

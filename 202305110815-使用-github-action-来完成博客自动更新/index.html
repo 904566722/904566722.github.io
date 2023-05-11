@@ -34,7 +34,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/www.honghuiqiang.com\/202305110815-%E4%BD%BF%E7%94%A8-github-action-%E6%9D%A5%E5%AE%8C%E6%88%90%E5%8D%9A%E5%AE%A2%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0\/"
-        },"genre": "posts","keywords": "个人记录","wordcount":  1725 ,
+        },"genre": "posts","keywords": "个人记录","wordcount":  1852 ,
         "url": "http:\/\/www.honghuiqiang.com\/202305110815-%E4%BD%BF%E7%94%A8-github-action-%E6%9D%A5%E5%AE%8C%E6%88%90%E5%8D%9A%E5%AE%A2%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0\/","datePublished": "2023-05-11T08:05:00+08:00","dateModified": "2023-05-11T08:05:00+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"authors": [{
@@ -144,7 +144,7 @@
             <div class="post-meta-line">
                 <span class="post-author"><span class='author'><i class="author fas fa-user-circle fa-fw"></i><span class='screen-reader-text'>  </span><a href='http://www.honghuiqiang.com/authors/%E7%B4%A2%E9%9A%86%E4%B8%8D%E5%96%9D%E9%85%92'>索隆不喝酒</a></span>
                 </span>&nbsp;<span class="post-category">收录于 </span>&nbsp;<span class="post-category">类别 <a href="/categories/tools-method/"><i class="far fa-folder fa-fw"></i>Tools-Method</a></span>&nbsp;<span class="post-category">和</span>&nbsp;<span class="post-series">系列 <a href="/series/tools-method-box/"><i class="far fa-list-alt fa-fw"></i>Tools-Method-box</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-05-11">2023-05-11</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-05-11">2023-05-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1725 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-05-11">2023-05-11</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-05-11">2023-05-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1852 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
         </div><div class="details series-nav open">
                                 <div class="details-summary series-title">
@@ -230,47 +230,93 @@
 <li>定时执行脚本</li>
 <li>支持手动执行</li>
 </ul>
-<pre class="mermaid">flowchart TD
-%% 重要性的分类
-classDef important stroke:red, stroke-width:2px
-classDef pass stroke:grey, stroke-dasharray: 5,5
-%% 流程的分类
-classDef success stroke:green
-%% 解释
-classDef stick fill:yellow, stroke:yellow
-classDef stickImp fill:pink, stroke:pink
-
-
-%% ----主要流程 begin ----
-act1(手动推送代码)-->repoA[源仓库]
-repoA-->|触发GitHub Action|ga[执行源仓库中编写好的<br>.github/workflow/xxx.yaml 脚本]
-
-subgraph sub1["GitHub Action 执行机自动完成的操作"]
-ga-->autoAct1[拉取源仓库到本地]
-autoAct1-->autoAct2[执行 hugo 生成 public 目录]
-autoAct2-->autoAct3[拉取 xxx.github.io 仓库<br>并执行 git rm -r --ignore-unmatch * 删除所有文件和目录<br>删除完成之后把生成的 public 目录放到 xxx.github.io]
-autoAct3-->auto4[commit 并且 push 到 xxx.github.io 仓库]
-end
-
-
-auto4-->page[GitHub Pages 生成站点]
-
-%% ---- 主要流程 end ----
-
-    %% 注意一个问题
-	note1["这里的操作会把 xxx.github.io 仓库的域名配置清空(如果有配置的话)"]
-	note1-.-autoAct3
-	
-	subgraph sub2
-	fix1[生成一个 CNAME 文件到 public]-->a[把 public 拷贝到 xxx.github.io]
-	end
-    
-    note1-.->|如何解决|sub2
-    sub2-.-auto4
-
-
-class note1 stickImp
-</pre><pre class="mermaid">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">flowchart TD
+</span></span><span class="line"><span class="cl">%% 重要性的分类
+</span></span><span class="line"><span class="cl">classDef important stroke:red, stroke-width:2px
+</span></span><span class="line"><span class="cl">classDef pass stroke:grey, stroke-dasharray: 5,5
+</span></span><span class="line"><span class="cl">%% 流程的分类
+</span></span><span class="line"><span class="cl">classDef success stroke:green
+</span></span><span class="line"><span class="cl">%% 解释
+</span></span><span class="line"><span class="cl">classDef stick fill:yellow, stroke:yellow
+</span></span><span class="line"><span class="cl">classDef stickImp fill:pink, stroke:pink
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">%% ----主要流程 begin ----
+</span></span><span class="line"><span class="cl">act1(手动推送代码)--&gt;repoA[源仓库]
+</span></span><span class="line"><span class="cl">repoA--&gt;|触发GitHub Action|ga[执行源仓库中编写好的&lt;br&gt;.github/workflow/xxx.yaml 脚本]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">subgraph sub1[&#34;GitHub Action 执行机自动完成的操作&#34;]
+</span></span><span class="line"><span class="cl">ga--&gt;autoAct1[拉取源仓库到本地]
+</span></span><span class="line"><span class="cl">autoAct1--&gt;autoAct2[执行 hugo 生成 public 目录]
+</span></span><span class="line"><span class="cl">autoAct2--&gt;autoAct3[拉取 xxx.github.io 仓库&lt;br&gt;并执行 git rm -r --ignore-unmatch * 删除所有文件和目录&lt;br&gt;删除完成之后把生成的 public 目录放到 xxx.github.io]
+</span></span><span class="line"><span class="cl">autoAct3--&gt;auto4[commit 并且 push 到 xxx.github.io 仓库]
+</span></span><span class="line"><span class="cl">end
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">auto4--&gt;page[GitHub Pages 生成站点]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">%% ---- 主要流程 end ----
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    %% 注意一个问题
+</span></span><span class="line"><span class="cl">	note1[&#34;这里的操作会把 xxx.github.io 仓库的域名配置清空(如果有配置的话)&#34;]
+</span></span><span class="line"><span class="cl">	note1-.-autoAct3
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	subgraph sub2
+</span></span><span class="line"><span class="cl">	fix1[生成一个 CNAME 文件到 public]--&gt;a[把 public 拷贝到 xxx.github.io]
+</span></span><span class="line"><span class="cl">	end
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    note1-.-&gt;|如何解决|sub2
+</span></span><span class="line"><span class="cl">    sub2-.-auto4
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">class note1 stickImp
+</span></span></code></pre></td></tr></table>
+</div>
+</div><pre class="mermaid">
 flowchart TD
 %% 重要性的分类
 classDef important stroke:red, stroke-width:2px

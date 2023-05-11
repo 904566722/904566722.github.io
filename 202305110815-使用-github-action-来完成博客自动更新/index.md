@@ -46,7 +46,7 @@ git push
 - 定时执行脚本
 - 支持手动执行
 
-```mermaid
+```
 flowchart TD
 %% 重要性的分类
 classDef important stroke:red, stroke-width:2px

@@ -1,0 +1,785 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>面向开发者的 ChatGPT 提示工程 - 学习记录</title><meta name="Description" content="这是我的网站描述"><meta property="og:title" content="面向开发者的 ChatGPT 提示工程" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.honghuiqiang.com/202305062133-%E9%9D%A2%E5%90%91%E5%BC%80%E5%8F%91%E8%80%85%E7%9A%84-chatgpt-%E6%8F%90%E7%A4%BA%E5%B7%A5%E7%A8%8B/" /><meta property="og:image" content="http://www.honghuiqiang.com/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-05-09T07:48:23+08:00" />
+<meta property="article:modified_time" content="2023-05-09T07:48:23+08:00" /><meta property="og:site_name" content="学习记录" />
+<meta property="og:see_also" content="http://www.honghuiqiang.com/202305070711-openai-%E4%BD%BF%E7%94%A8%E5%AE%9E%E8%B7%B5/" /><meta property="og:see_also" content="http://www.honghuiqiang.com/202305070218-%E5%8F%AF%E4%BB%A5%E5%9C%A8%E4%BB%80%E4%B9%88%E5%B9%B3%E5%8F%B0%E4%B8%8A%E4%BD%BF%E7%94%A8-openai/" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://www.honghuiqiang.com/logo.png"/>
+
+<meta name="twitter:title" content="面向开发者的 ChatGPT 提示工程"/>
+<meta name="twitter:description" content=""/>
+<meta name="application-name" content="HHQ Records">
+<meta name="apple-mobile-web-app-title" content="HHQ Records">
+
+<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/zoro.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="http://www.honghuiqiang.com/202305062133-%E9%9D%A2%E5%90%91%E5%BC%80%E5%8F%91%E8%80%85%E7%9A%84-chatgpt-%E6%8F%90%E7%A4%BA%E5%B7%A5%E7%A8%8B/" /><link rel="next" href="http://www.honghuiqiang.com/202305080553-%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8Devicted/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "面向开发者的 ChatGPT 提示工程",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/www.honghuiqiang.com\/202305062133-%E9%9D%A2%E5%90%91%E5%BC%80%E5%8F%91%E8%80%85%E7%9A%84-chatgpt-%E6%8F%90%E7%A4%BA%E5%B7%A5%E7%A8%8B\/"
+        },"genre": "posts","keywords": "提示词","wordcount":  4084 ,
+        "url": "http:\/\/www.honghuiqiang.com\/202305062133-%E9%9D%A2%E5%90%91%E5%BC%80%E5%8F%91%E8%80%85%E7%9A%84-chatgpt-%E6%8F%90%E7%A4%BA%E5%B7%A5%E7%A8%8B\/","datePublished": "2023-05-09T07:48:23+08:00","dateModified": "2023-05-09T07:48:23+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"authors": [{
+                        "@type": "Person",
+                        "name": "索隆不喝酒"                    
+                    }],"description": ""
+    }
+    </script><script src="//instant.page/5.1.1" defer type="module" integrity="sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq"></script>
+</head>
+
+<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme); document.documentElement.style.setProperty('color-scheme', theme === 'light' ? 'light' : 'dark'); window.theme = theme;   window.isDark = window.theme !== 'light' }
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('dark' === 'light' || 'dark' === 'dark' || 'dark' === 'black') setTheme('dark'), saveTheme('dark'); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+        window.switchThemeEventSet = new Set()
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="学习记录"><span id="desktop-header-typeit" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/series/"> 系列 </a><a class="menu-item" href="/tags/"> 标签 </a><span class="menu-item delimiter"></span><a href="#" class="menu-item language" title="选择语言">简体中文<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" title="Select Language" id="language-select-desktop" onchange="location = this.value;"><option value="/202305062133-%E9%9D%A2%E5%90%91%E5%BC%80%E5%8F%91%E8%80%85%E7%9A%84-chatgpt-%E6%8F%90%E7%A4%BA%E5%B7%A5%E7%A8%8B/" selected>简体中文</option></select>
+                    </a><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="#" class="menu-item theme-select" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                    <select class="color-theme-select" id="theme-select-desktop" title="切换主题">
+                        <option value="light">浅色</option>
+                        <option value="dark">深色</option>
+                        <option value="black">黑色</option>
+                        <option value="auto">跟随系统</option>
+                    </select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="学习记录"><span id="mobile-header-typeit" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/series/" title="">系列</a><a class="menu-item" href="/tags/" title="">标签</a><a href="#" class="menu-item theme-select" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+                <select class="color-theme-select" id="theme-select-mobile" title="切换主题">
+                    <option value="light">浅色</option>
+                    <option value="dark">深色</option>
+                    <option value="black">黑色</option>
+                    <option value="auto">跟随系统</option>
+                </select>
+            </a><a href="#" class="menu-item" title="选择语言">简体中文<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" title="Select Language" onchange="location = this.value;"><option value="/202305062133-%E9%9D%A2%E5%90%91%E5%BC%80%E5%8F%91%E8%80%85%E7%9A%84-chatgpt-%E6%8F%90%E7%A4%BA%E5%B7%A5%E7%A8%8B/" selected>简体中文</option></select>
+                </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">目录</h2>
+        <div class="toc-content" id="toc-content-auto"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一包含什么内容">一、包含什么内容？</a></li>
+    <li><a href="#二提示词准则">二、提示词准则</a>
+      <ul>
+        <li><a href="#21-指令要清晰">2.1 指令要清晰</a></li>
+        <li><a href="#22-给模型思考的时间">2.2 给模型思考的时间</a></li>
+        <li><a href="#-模型的限制">* 模型的限制</a></li>
+      </ul>
+    </li>
+    <li><a href="#三提示词的迭代">三、提示词的迭代</a></li>
+    <li><a href="#四总结摘要">四、总结摘要</a></li>
+    <li><a href="#五ai-推理">五、AI 推理</a></li>
+    <li><a href="#六ai-转译">六、AI 转译</a></li>
+    <li><a href="#七扩写文案生成">七、扩写（文案生成）</a>
+      <ul>
+        <li><a href="#temperature">temperature</a></li>
+      </ul>
+    </li>
+    <li><a href="#八聊天机器人">八、聊天机器人</a></li>
+  </ul>
+</nav></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">面向开发者的 ChatGPT 提示工程</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><span class='author'><i class="author fas fa-user-circle fa-fw"></i><span class='screen-reader-text'>  </span><a href='http://www.honghuiqiang.com/authors/%E7%B4%A2%E9%9A%86%E4%B8%8D%E5%96%9D%E9%85%92'>索隆不喝酒</a></span>
+                </span>&nbsp;<span class="post-category">收录于 </span>&nbsp;<span class="post-category">类别 <a href="/categories/%E6%89%A9%E5%B1%95%E5%AD%A6%E4%B9%A0/"><i class="far fa-folder fa-fw"></i>扩展学习</a></span>&nbsp;<span class="post-category">和</span>&nbsp;<span class="post-series">系列 <a href="/series/chatgpt/"><i class="far fa-list-alt fa-fw"></i>ChatGPT</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-05-09">2023-05-09</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-05-09">2023-05-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4084 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 9 分钟&nbsp;</div>
+        </div><div class="details series-nav open">
+                                <div class="details-summary series-title">
+                                    <span>系列 - ChatGPT</span>
+                                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                                </div>
+                                <div class="details-content series-content">
+                                    <nav>
+                                        <ul>
+                                                    <li><a href="/202305070711-openai-%E4%BD%BF%E7%94%A8%E5%AE%9E%E8%B7%B5/">openai 使用实践</a></li>
+                                                    <li><a href="/202305070218-%E5%8F%AF%E4%BB%A5%E5%9C%A8%E4%BB%80%E4%B9%88%E5%B9%B3%E5%8F%B0%E4%B8%8A%E4%BD%BF%E7%94%A8-openai/">可以在什么平台上使用 openai</a></li><li><span class="active">面向开发者的 ChatGPT 提示工程</span></li></ul>
+                                    </nav>
+                                </div>
+                            </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#一包含什么内容">一、包含什么内容？</a></li>
+    <li><a href="#二提示词准则">二、提示词准则</a>
+      <ul>
+        <li><a href="#21-指令要清晰">2.1 指令要清晰</a></li>
+        <li><a href="#22-给模型思考的时间">2.2 给模型思考的时间</a></li>
+        <li><a href="#-模型的限制">* 模型的限制</a></li>
+      </ul>
+    </li>
+    <li><a href="#三提示词的迭代">三、提示词的迭代</a></li>
+    <li><a href="#四总结摘要">四、总结摘要</a></li>
+    <li><a href="#五ai-推理">五、AI 推理</a></li>
+    <li><a href="#六ai-转译">六、AI 转译</a></li>
+    <li><a href="#七扩写文案生成">七、扩写（文案生成）</a>
+      <ul>
+        <li><a href="#temperature">temperature</a></li>
+      </ul>
+    </li>
+    <li><a href="#八聊天机器人">八、聊天机器人</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>#ChatGPT</p>
+<blockquote>
+<p>该篇笔记源于课程：<a href="https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/" target="_blank" rel="noopener noreferrer">https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/</a></p>
+</blockquote>
+<h2 id="一包含什么内容" class="headerLink">
+    <a href="#%e4%b8%80%e5%8c%85%e5%90%ab%e4%bb%80%e4%b9%88%e5%86%85%e5%ae%b9" class="header-mark"></a>一、包含什么内容？</h2><p>两个产出：</p>
+<ol>
+<li>使用大型语言模型（Large Language Model，LLM）快速构建功能强大的应用程序</li>
+<li>构建两项能力：
+<ul>
+<li>学习创新</li>
+<li>创造价值</li>
+</ul>
+</li>
+</ol>
+<p>了解 LLM 的工作原理
+提示工程的最佳实践
+如何编写有效的提示（两个原则）
+如何设计好的提示
+如何构建自己的聊天机器人</p>
+<h2 id="二提示词准则" class="headerLink">
+    <a href="#%e4%ba%8c%e6%8f%90%e7%a4%ba%e8%af%8d%e5%87%86%e5%88%99" class="header-mark"></a>二、提示词准则</h2><h3 id="21-指令要清晰" class="headerLink">
+    <a href="#21-%e6%8c%87%e4%bb%a4%e8%a6%81%e6%b8%85%e6%99%b0" class="header-mark"></a>2.1 指令要清晰</h3><blockquote>
+<ol>
+<li>输入清晰</li>
+<li>输出清晰</li>
+<li>过程清晰</li>
+</ol>
+</blockquote>
+<ol>
+<li>输入要清晰</li>
+</ol>
+<p>清楚表明我想要的是什么？以此引导模型产出更符合我们期待的结果，避免跑题。注意清晰 != 简短，如果较长的描述更能准确表达我们的意图，那么这是必要的。</p>
+<p>一些帮助符号：</p>
+<ul>
+<li>“”</li>
+<li>```</li>
+<li>---</li>
+<li>&lt;&gt;</li>
+<li>&hellip;</li>
+</ul>
+<p>有时候为了能够更清晰的表明意图，我们可以使用一些符号来辅佐说明。</p>
+<p>例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt">你现在作为一名学生，需要对我的提问做出回答，ChatGPT Prompt Engineering for Developers 这门课讲述了什么
+
+“您应该清晰且尽可能具体地表达您希望模型执行的操作，这将引导模型达到所预期的输出，并减少不相关的输出，或者不正确的输出。不要把写一个清晰的提示和写一个简短的提示混为一谈，许多情况下，较长的提示为模型提供了更清晰的背景，这可能会导致更加详细和相关的产出”
+
+将由双引号限定的文字概括成一句话
+</code></pre></td></tr></table>
+</div>
+</div><p><figure><a class="lightgallery" href="/images/posts/Pasted%20image%2020230507084900.png" title="/images/posts/Pasted%20image%2020230507084900.png" data-thumbnail="/images/posts/Pasted%20image%2020230507084900.png">
+        <img
+            
+            loading="lazy"
+            src="/images/posts/Pasted%20image%2020230507084900.png"
+            srcset="/images/posts/Pasted%20image%2020230507084900.png, /images/posts/Pasted%20image%2020230507084900.png 1.5x, /images/posts/Pasted%20image%2020230507084900.png 2x"
+            sizes="auto"
+            alt="/images/posts/Pasted%20image%2020230507084900.png">
+    </a></figure></p>
+<p>上面的例子中，我们使用到了双引号来界定应该要总结的内容，引导模型产生我们想要的输出，当然这只是一个简单的例子，实际中可以更灵活地来使用</p>
+<ol start="2">
+<li>输出要清晰</li>
+</ol>
+<p>上面的提到了如何更清晰地告诉模型应该输入的内容，下面我们应该告诉模型我们想要什么样的结果，我们可以结构化我们的输出，有时候我们可以将输出格式化为 html、json、markdown 等格式</p>
+<p>看这样的一个例子</p>
+<p><figure><a class="lightgallery" href="/images/posts/Pasted%20image%2020230507085703.png" title="/images/posts/Pasted%20image%2020230507085703.png" data-thumbnail="/images/posts/Pasted%20image%2020230507085703.png">
+        <img
+            
+            loading="lazy"
+            src="/images/posts/Pasted%20image%2020230507085703.png"
+            srcset="/images/posts/Pasted%20image%2020230507085703.png, /images/posts/Pasted%20image%2020230507085703.png 1.5x, /images/posts/Pasted%20image%2020230507085703.png 2x"
+            sizes="auto"
+            alt="/images/posts/Pasted%20image%2020230507085703.png">
+    </a></figure></p>
+<p>当然，更多时候 json 的 key 应该是英文，我们可以接着告诉 gpt：</p>
+<p><figure><a class="lightgallery" href="/images/posts/Pasted%20image%2020230507085756.png" title="/images/posts/Pasted%20image%2020230507085756.png" data-thumbnail="/images/posts/Pasted%20image%2020230507085756.png">
+        <img
+            
+            loading="lazy"
+            src="/images/posts/Pasted%20image%2020230507085756.png"
+            srcset="/images/posts/Pasted%20image%2020230507085756.png, /images/posts/Pasted%20image%2020230507085756.png 1.5x, /images/posts/Pasted%20image%2020230507085756.png 2x"
+            sizes="auto"
+            alt="/images/posts/Pasted%20image%2020230507085756.png">
+    </a></figure></p>
+<p>有时候我们可能没有办法一次就描述清楚我们想要的，那么我们就可以继续补充，这是一个迭代的过程</p>
+<ol start="3">
+<li>过程要清晰</li>
+</ol>
+<p>在处理的过程中，我们可以指定模型一些判断条件</p>
+<p>看下面的例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt">“泡一杯茶很简单！ 首先，你需要让水沸腾。 发生这种情况时，
+拿一个杯子，在里面放一个茶包。 一旦水足够热，只需将其倒在茶包上即可。
+让它静置一会儿。 再过几分钟，取出茶包。 如果你喜欢，可以加点糖或者牛奶调味。
+就是这样！ 你有了自己的美味的一杯茶来享受。”
+
+将上面由双引号限定的文本以下面的格式来重写：
+
+第一步 - ...
+第二步 - ...
+第三步 - ...
+第N步 - ...
+
+如果文本不包含顺序指示，那么只需要写上“没有提供步骤”
+</code></pre></td></tr></table>
+</div>
+</div><p><figure><a class="lightgallery" href="/images/posts/Pasted%20image%2020230507091632.png" title="/images/posts/Pasted%20image%2020230507091632.png" data-thumbnail="/images/posts/Pasted%20image%2020230507091632.png">
+        <img
+            
+            loading="lazy"
+            src="/images/posts/Pasted%20image%2020230507091632.png"
+            srcset="/images/posts/Pasted%20image%2020230507091632.png, /images/posts/Pasted%20image%2020230507091632.png 1.5x, /images/posts/Pasted%20image%2020230507091632.png 2x"
+            sizes="auto"
+            alt="/images/posts/Pasted%20image%2020230507091632.png">
+    </a></figure></p>
+<p>上面的文本识别到了顺序指示，因此将文本以分步的形式重新组织了，同样的处理方式，我们来看另外一段文本：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt">今天阳光明媚，鸟儿们在唱歌。这是一个美丽的日子，可以去公园里散步。树木在微风中轻轻摇曳。 一些人正在野餐，而另一些人正在玩游戏或只是在草地上放松。这是一个 这是一个完美的日子，可以花时间在户外，欣赏自然之美。 
+
+将上面由双引号限定的文本以下面的格式来重写：
+
+第一步 - ...
+第二步 - ...
+第三步 - ...
+第N步 - ...
+
+如果文本不包含指令序列，那么只需要写上“没有提供步骤”
+</code></pre></td></tr></table>
+</div>
+</div><p><figure><a class="lightgallery" href="/images/posts/Pasted%20image%2020230507091708.png" title="/images/posts/Pasted%20image%2020230507091708.png" data-thumbnail="/images/posts/Pasted%20image%2020230507091708.png">
+        <img
+            
+            loading="lazy"
+            src="/images/posts/Pasted%20image%2020230507091708.png"
+            srcset="/images/posts/Pasted%20image%2020230507091708.png, /images/posts/Pasted%20image%2020230507091708.png 1.5x, /images/posts/Pasted%20image%2020230507091708.png 2x"
+            sizes="auto"
+            alt="/images/posts/Pasted%20image%2020230507091708.png">
+    </a></figure></p>
+<p>可以看到通过判断，达到了我们想要的结果</p>
+<h3 id="22-给模型思考的时间" class="headerLink">
+    <a href="#22-%e7%bb%99%e6%a8%a1%e5%9e%8b%e6%80%9d%e8%80%83%e7%9a%84%e6%97%b6%e9%97%b4" class="header-mark"></a>2.2 给模型思考的时间</h3><ol>
+<li>指定步骤来完成任务</li>
+</ol>
+<p>看这样一个例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt">“在一个迷人的村庄里，兄妹杰克和吉尔出发去山顶的井里取水。他们一边唱着欢快的歌，一边爬山，但不幸的是，杰克绊倒在石头上，从山上滚了下来，吉尔也跟着摔倒。虽然有些受伤，但他们还是回家受到安慰的拥抱。尽管遭遇了不幸，但他们的冒险精神仍然没有消失，他们继续愉快地探索。”
+
+执行下面的动作：
+1 - 用一句话总结上面引号括起来的文本
+2 - 将第一步得到的总结翻译成韩语
+3 - 在韩语总结中列出每个名字
+
+用换行把每一步的答案分开
+</code></pre></td></tr></table>
+</div>
+</div><p><figure><a class="lightgallery" href="/images/posts/Pasted%20image%2020230507092942.png" title="/images/posts/Pasted%20image%2020230507092942.png" data-thumbnail="/images/posts/Pasted%20image%2020230507092942.png">
+        <img
+            
+            loading="lazy"
+            src="/images/posts/Pasted%20image%2020230507092942.png"
+            srcset="/images/posts/Pasted%20image%2020230507092942.png, /images/posts/Pasted%20image%2020230507092942.png 1.5x, /images/posts/Pasted%20image%2020230507092942.png 2x"
+            sizes="auto"
+            alt="/images/posts/Pasted%20image%2020230507092942.png">
+    </a></figure></p>
+<p>在这个例子中，我们想要完成的并不只是一种操作，我们对于一段文本可能想做好几件事，那么就可以分成几个步骤，告诉模型分别要做什么</p>
+<h3 id="-模型的限制" class="headerLink">
+    <a href="#-%e6%a8%a1%e5%9e%8b%e7%9a%84%e9%99%90%e5%88%b6" class="header-mark"></a>* 模型的限制</h3><p>在模型训练的过程中，并不会完美的记住自己接触的每个信息，因此它对自己的知识边界并不是十分了解，这意味着它可能会尝试回答一些晦涩难懂的问题，并且可以编造一些听起来很有道理，但实际上并不真实的事情，如下面的例子</p>
+<p><figure><a class="lightgallery" href="/images/posts/Pasted%20image%2020230507094055.png" title="/images/posts/Pasted%20image%2020230507094055.png" data-thumbnail="/images/posts/Pasted%20image%2020230507094055.png">
+        <img
+            
+            loading="lazy"
+            src="/images/posts/Pasted%20image%2020230507094055.png"
+            srcset="/images/posts/Pasted%20image%2020230507094055.png, /images/posts/Pasted%20image%2020230507094055.png 1.5x, /images/posts/Pasted%20image%2020230507094055.png 2x"
+            sizes="auto"
+            alt="/images/posts/Pasted%20image%2020230507094055.png">
+    </a></figure></p>
+<p>这并不是真实的，但看起来非常真实，这是非常危险的，也是模型已知的一个问题</p>
+<h2 id="三提示词的迭代" class="headerLink">
+    <a href="#%e4%b8%89%e6%8f%90%e7%a4%ba%e8%af%8d%e7%9a%84%e8%bf%ad%e4%bb%a3" class="header-mark"></a>三、提示词的迭代</h2><p>由于某些原因，我们第一次获得的结果可能对于我们来说并不是有效、有用的，但是我们可以通过获得的结果，反复完善我们的提示词，一步步走向我们的想要的结果。</p>
+<p>因此迭代的过程可以分为以下几步：</p>
+<ul>
+<li>先试试</li>
+<li>分析结果，是否符合我们预期</li>
+<li>给出清楚的说明（指示），给模型更多时间思考</li>
+<li>完善提示语</li>
+</ul>
+<h2 id="四总结摘要" class="headerLink">
+    <a href="#%e5%9b%9b%e6%80%bb%e7%bb%93%e6%91%98%e8%a6%81" class="header-mark"></a>四、总结摘要</h2><p>例子1：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt">把以下产品评论进行总结，总结的字数不超过30个字。
+
+产品评论：&#34;我为女儿的生日买了这只熊猫毛绒玩具，她非常喜欢，并且随身携带。它摸起来很软，非常可爱，脸上还有友好的表情。但是，相对于价格来说，它有点小了。我认为可能会有其他同样价位但更大的选择。它比预期提前一天到达，所以在把它送给女儿之前，我自己先玩了一下。&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p><figure><a class="lightgallery" href="/images/posts/Pasted%20image%2020230507095726.png" title="/images/posts/Pasted%20image%2020230507095726.png" data-thumbnail="/images/posts/Pasted%20image%2020230507095726.png">
+        <img
+            
+            loading="lazy"
+            src="/images/posts/Pasted%20image%2020230507095726.png"
+            srcset="/images/posts/Pasted%20image%2020230507095726.png, /images/posts/Pasted%20image%2020230507095726.png 1.5x, /images/posts/Pasted%20image%2020230507095726.png 2x"
+            sizes="auto"
+            alt="/images/posts/Pasted%20image%2020230507095726.png">
+    </a></figure></p>
+<p>如果把上面的任务稍微修改一下，</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt">你的任务是对一个电子商务网站的产品评论生成一个简短的摘要，以反馈给航运部门。
+把以下产品评论进行总结，总结的字数不超过30个字, 重点放在提到产品运输和交付的任何方面。
+
+产品评论：&#34;我为女儿的生日买了这只熊猫毛绒玩具，她非常喜欢，并且随身携带。它摸起来很软，非常可爱，脸上还有友好的表情。但是，相对于价格来说，它有点小了。我认为可能会有其他同样价位但更大的选择。它比预期提前一天到达，所以在把它送给女儿之前，我自己先玩了一下。&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p><figure><a class="lightgallery" href="/images/posts/Pasted%20image%2020230507100059.png" title="/images/posts/Pasted%20image%2020230507100059.png" data-thumbnail="/images/posts/Pasted%20image%2020230507100059.png">
+        <img
+            
+            loading="lazy"
+            src="/images/posts/Pasted%20image%2020230507100059.png"
+            srcset="/images/posts/Pasted%20image%2020230507100059.png, /images/posts/Pasted%20image%2020230507100059.png 1.5x, /images/posts/Pasted%20image%2020230507100059.png 2x"
+            sizes="auto"
+            alt="/images/posts/Pasted%20image%2020230507100059.png">
+    </a></figure></p>
+<p>我们可以根据想要总结的方式，要求它提取不同的信息</p>
+<p>再来看一个可能实际中更能碰倒的例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"># review for a standing lamp
+review_1 = &#34;&#34;&#34;
+Needed a nice lamp for my bedroom, and this one \
+had additional storage and not too high of a price \
+point. Got it fast - arrived in 2 days. The string \
+to the lamp broke during the transit and the company \
+happily sent over a new one. Came within a few days \
+as well. It was easy to put together. Then I had a \
+missing part, so I contacted their support and they \
+very quickly got me the missing piece! Seems to me \
+to be a great company that cares about their customers \
+and products. 
+&#34;&#34;&#34;
+
+# review for an electric toothbrush
+review_2 = &#34;&#34;&#34;
+My dental hygienist recommended an electric toothbrush, \
+which is why I got this. The battery life seems to be \
+pretty impressive so far. After initial charging and \
+leaving the charger plugged in for the first week to \
+condition the battery, I&#39;ve unplugged the charger and \
+been using it for twice daily brushing for the last \
+3 weeks all on the same charge. But the toothbrush head \
+is too small. I’ve seen baby toothbrushes bigger than \
+this one. I wish the head was bigger with different \
+length bristles to get between teeth better because \
+this one doesn’t.  Overall if you can get this one \
+around the $50 mark, it&#39;s a good deal. The manufactuer&#39;s \
+replacements heads are pretty expensive, but you can \
+get generic ones that&#39;re more reasonably priced. This \
+toothbrush makes me feel like I&#39;ve been to the dentist \
+every day. My teeth feel sparkly clean! 
+&#34;&#34;&#34;
+
+# review for a blender
+review_3 = &#34;&#34;&#34;
+So, they still had the 17 piece system on seasonal \
+sale for around $49 in the month of November, about \
+half off, but for some reason (call it price gouging) \
+around the second week of December the prices all went \
+up to about anywhere from between $70-$89 for the same \
+system. And the 11 piece system went up around $10 or \
+so in price also from the earlier sale price of $29. \
+So it looks okay, but if you look at the base, the part \
+where the blade locks into place doesn’t look as good \
+as in previous editions from a few years ago, but I \
+plan to be very gentle with it (example, I crush \
+very hard items like beans, ice, rice, etc. in the \ 
+blender first then pulverize them in the serving size \
+I want in the blender then switch to the whipping \
+blade for a finer flour, and use the cross cutting blade \
+first when making smoothies, then use the flat blade \
+if I need them finer/less pulpy). Special tip when making \
+smoothies, finely cut and freeze the fruits and \
+vegetables (if using spinach-lightly stew soften the \ 
+spinach then freeze until ready for use-and if making \
+sorbet, use a small to medium sized food processor) \ 
+that you plan to use that way you can avoid adding so \
+much ice if at all-when making your smoothie. \
+After about a year, the motor was making a funny noise. \
+I called customer service but the warranty expired \
+already, so I had to buy another one. FYI: The overall \
+quality has gone done in these types of products, so \
+they are kind of counting on brand recognition and \
+consumer loyalty to maintain sales. Got it in about \
+two days.
+&#34;&#34;&#34;
+
+reviews = [review_1, review_2, review_3, review_4]
+
+你的任务是将上面的每个review分别做总结，总结以下面的格式输出：
+
+1.
+2.
+
+将总结翻译成中文
+</code></pre></td></tr></table>
+</div>
+</div><p><figure><a class="lightgallery" href="/images/posts/Pasted%20image%2020230507100813.png" title="/images/posts/Pasted%20image%2020230507100813.png" data-thumbnail="/images/posts/Pasted%20image%2020230507100813.png">
+        <img
+            
+            loading="lazy"
+            src="/images/posts/Pasted%20image%2020230507100813.png"
+            srcset="/images/posts/Pasted%20image%2020230507100813.png, /images/posts/Pasted%20image%2020230507100813.png 1.5x, /images/posts/Pasted%20image%2020230507100813.png 2x"
+            sizes="auto"
+            alt="/images/posts/Pasted%20image%2020230507100813.png">
+    </a></figure></p>
+<h2 id="五ai-推理" class="headerLink">
+    <a href="#%e4%ba%94ai-%e6%8e%a8%e7%90%86" class="header-mark"></a>五、AI 推理</h2><p>提取情绪信息</p>
+<h2 id="六ai-转译" class="headerLink">
+    <a href="#%e5%85%adai-%e8%bd%ac%e8%af%91" class="header-mark"></a>六、AI 转译</h2><ul>
+<li>翻译</li>
+<li>语法纠正、校对</li>
+<li>格式转换（json、html、markdown&hellip;）</li>
+<li>语气转换</li>
+</ul>
+<p>（语气转换）不同的邮件对象可能需要不同的语气或者书面语，看下面的例子</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">将下面的内容从俚语转换成一封商务信函：
+“伙计，我是乔，看看这个立灯的规格。”
+</code></pre></td></tr></table>
+</div>
+</div><p><figure><a class="lightgallery" href="/images/posts/Pasted%20image%2020230507102600.png" title="/images/posts/Pasted%20image%2020230507102600.png" data-thumbnail="/images/posts/Pasted%20image%2020230507102600.png">
+        <img
+            
+            loading="lazy"
+            src="/images/posts/Pasted%20image%2020230507102600.png"
+            srcset="/images/posts/Pasted%20image%2020230507102600.png, /images/posts/Pasted%20image%2020230507102600.png 1.5x, /images/posts/Pasted%20image%2020230507102600.png 2x"
+            sizes="auto"
+            alt="/images/posts/Pasted%20image%2020230507102600.png">
+    </a></figure></p>
+<h2 id="七扩写文案生成" class="headerLink">
+    <a href="#%e4%b8%83%e6%89%a9%e5%86%99%e6%96%87%e6%a1%88%e7%94%9f%e6%88%90" class="header-mark"></a>七、扩写（文案生成）</h2><p>扩写是指将一篇较短的文本进行扩写的工作，比如一套指示或者一个主题列表，生成一个较长的文本，如电子邮件或者文章。</p>
+<p>例子：通过一名客户对于产品的评论生成一封回复邮件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback">你是一个客户服务的AI助理，你的任务是给一个有价值的客户发送电子邮件回复。
+邮件的内容需要基于用户的评价，如果用户的情绪是积极的或者中性的，感谢他们的评论，如果情绪是负面的，则表示歉意，并建议他们可以联系客服。
+确保使用用户评论中的具体细节。
+用简明和专业的语气来写。
+在邮件中署名：“AI 客户代理”
+
+
+客户的评论：&#34;他们在11月份仍在季节性销售中以约49美元的价格销售17件套装，折扣约为一半，但出于某些原因（称其为价格抬高），到了12月的第二周，同样的系统的价格都涨到了约70-89美元左右。 11件套装的价格也比之前的29美元涨了大约10美元左右。 看起来还不错，但如果您看底座，锁定刀片的部分看起来与几年前的先前版本不太一样，但我打算非常小心（例如，我将像豆子，冰，米饭等非常硬的物品先放入搅拌机中压碎，然后把它们粉碎成我想要的食用量，然后切换到搅拌餐的鞭打刀，以获得更细的面粉，并在制作冰沙时先使用交叉切割刀，然后如果需要更细/较少纤维的话，再使用平刀）。制作冰沙的特殊提示：将要使用的水果和蔬菜切碎并冷冻（如果使用菠菜-轻轻煮软菠菜然后冷冻直到使用-如果制作雪泥，请使用小到中型食品处理器），以此来避免添加掉太多冰块。大约一年后，马达发出奇怪的噪音。我打电话给客服，但保修已经过期了，所以我不得不再买一个。 FYI：这些产品的整体质量已经下降，所以他们在品牌认知和消费者忠诚度上进行营销。大约两天后收到了产品。&#34;
+</code></pre></td></tr></table>
+</div>
+</div><p><figure><a class="lightgallery" href="/images/posts/Pasted%20image%2020230507104526.png" title="/images/posts/Pasted%20image%2020230507104526.png" data-thumbnail="/images/posts/Pasted%20image%2020230507104526.png">
+        <img
+            
+            loading="lazy"
+            src="/images/posts/Pasted%20image%2020230507104526.png"
+            srcset="/images/posts/Pasted%20image%2020230507104526.png, /images/posts/Pasted%20image%2020230507104526.png 1.5x, /images/posts/Pasted%20image%2020230507104526.png 2x"
+            sizes="auto"
+            alt="/images/posts/Pasted%20image%2020230507104526.png">
+    </a></figure></p>
+<h3 id="temperature" class="headerLink">
+    <a href="#temperature" class="header-mark"></a>temperature</h3><p>temperature 作为模型的一个参数，将影响模型输出的随机性</p>
+<p><figure><a class="lightgallery" href="/images/posts/Pasted%20image%2020230507104808.png" title="/images/posts/Pasted%20image%2020230507104808.png" data-thumbnail="/images/posts/Pasted%20image%2020230507104808.png">
+        <img
+            
+            loading="lazy"
+            src="/images/posts/Pasted%20image%2020230507104808.png"
+            srcset="/images/posts/Pasted%20image%2020230507104808.png, /images/posts/Pasted%20image%2020230507104808.png 1.5x, /images/posts/Pasted%20image%2020230507104808.png 2x"
+            sizes="auto"
+            alt="/images/posts/Pasted%20image%2020230507104808.png">
+    </a></figure></p>
+<p>显然：越低 temperature 意味着越高可靠性，越高 temperature 意味着越高创意性</p>
+<h2 id="八聊天机器人" class="headerLink">
+    <a href="#%e5%85%ab%e8%81%8a%e5%a4%a9%e6%9c%ba%e5%99%a8%e4%ba%ba" class="header-mark"></a>八、聊天机器人</h2><p>待补充&hellip;</p>
+<hr>
+<ol>
+<li>《ChatGPT Prompt Engineering for Developers》. 见于 2023年5月7日. <a href="https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/" target="_blank" rel="noopener noreferrer">https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/</a>.</li>
+<li>二次元的Datawhale. 《【专业翻译，配套代码笔记】01.课程介绍_哔哩哔哩_bilibili》. 见于 2023年5月7日. <a href="https://www.bilibili.com/video/BV1Bo4y1A7FU/" target="_blank" rel="noopener noreferrer">https://www.bilibili.com/video/BV1Bo4y1A7FU/</a>.</li>
+</ol></div>
+
+        
+
+<div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-05-09</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span><a class="link-to-mardown" href=/202305062133-%E9%9D%A2%E5%90%91%E5%BC%80%E5%8F%91%E8%80%85%E7%9A%84-chatgpt-%E6%8F%90%E7%A4%BA%E5%B7%A5%E7%A8%8B/index.md target="_blank" rel="noopener noreferrer">阅读原始文档</a>
+                    </span></div>
+            <div class="post-info-share">
+                <span><a href="#" title="分享到 Twitter" data-sharer="twitter" data-url="http://www.honghuiqiang.com/202305062133-%E9%9D%A2%E5%90%91%E5%BC%80%E5%8F%91%E8%80%85%E7%9A%84-chatgpt-%E6%8F%90%E7%A4%BA%E5%B7%A5%E7%A8%8B/" data-title="面向开发者的 ChatGPT 提示工程" data-via="xxxx" data-hashtags="提示词"><i class="fab fa-twitter fa-fw"></i></a><a href="#" title="分享到 Facebook" data-sharer="facebook" data-url="http://www.honghuiqiang.com/202305062133-%E9%9D%A2%E5%90%91%E5%BC%80%E5%8F%91%E8%80%85%E7%9A%84-chatgpt-%E6%8F%90%E7%A4%BA%E5%B7%A5%E7%A8%8B/" data-hashtag="提示词"><i class="fab fa-facebook-square fa-fw"></i></a><a href="#" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="http://www.honghuiqiang.com/202305062133-%E9%9D%A2%E5%90%91%E5%BC%80%E5%8F%91%E8%80%85%E7%9A%84-chatgpt-%E6%8F%90%E7%A4%BA%E5%B7%A5%E7%A8%8B/" data-title="面向开发者的 ChatGPT 提示工程" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="#" title="分享到 Line" data-sharer="line" data-url="http://www.honghuiqiang.com/202305062133-%E9%9D%A2%E5%90%91%E5%BC%80%E5%8F%91%E8%80%85%E7%9A%84-chatgpt-%E6%8F%90%E7%A4%BA%E5%B7%A5%E7%A8%8B/" data-title="面向开发者的 ChatGPT 提示工程"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="#" title="分享到 微博" data-sharer="weibo" data-url="http://www.honghuiqiang.com/202305062133-%E9%9D%A2%E5%90%91%E5%BC%80%E5%8F%91%E8%80%85%E7%9A%84-chatgpt-%E6%8F%90%E7%A4%BA%E5%B7%A5%E7%A8%8B/" data-title="面向开发者的 ChatGPT 提示工程"><i class="fab fa-weibo fa-fw"></i></a><a href="#" title="分享到 Myspace" data-sharer="myspace" data-url="http://www.honghuiqiang.com/202305062133-%E9%9D%A2%E5%90%91%E5%BC%80%E5%8F%91%E8%80%85%E7%9A%84-chatgpt-%E6%8F%90%E7%A4%BA%E5%B7%A5%E7%A8%8B/" data-title="面向开发者的 ChatGPT 提示工程" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="#" title="分享到 Blogger" data-sharer="blogger" data-url="http://www.honghuiqiang.com/202305062133-%E9%9D%A2%E5%90%91%E5%BC%80%E5%8F%91%E8%80%85%E7%9A%84-chatgpt-%E6%8F%90%E7%A4%BA%E5%B7%A5%E7%A8%8B/" data-title="面向开发者的 ChatGPT 提示工程" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="#" title="分享到 Evernote" data-sharer="evernote" data-url="http://www.honghuiqiang.com/202305062133-%E9%9D%A2%E5%90%91%E5%BC%80%E5%8F%91%E8%80%85%E7%9A%84-chatgpt-%E6%8F%90%E7%A4%BA%E5%B7%A5%E7%A8%8B/" data-title="面向开发者的 ChatGPT 提示工程"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E6%8F%90%E7%A4%BA%E8%AF%8D/">提示词</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+            <a href="/202305080553-%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8Devicted/" class="next" rel="next" title="问题定位：Evicted">问题定位：Evicted<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                    由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.91.2">Hugo</a> 强力驱动&nbsp;|&nbsp;托管在 <a title="Github Pages" href="https://docs.github.com/en/pages/" target="_blank" rel="noopener noreffer">GitHub Pages</a> 上&nbsp;|&nbsp;主题 - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.3.0"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">索隆不喝酒</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+            <div class="footer-line"></div>
+            <div class="footer-line">
+            </div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="回到顶部">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div class="assets"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/katex/copy-tex.min.css">
+        <noscript><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"></noscript><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"data":{"desktop-header-typeit":"HHQ Records","mobile-header-typeit":"HHQ Records"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":50,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"sharerjs":true,"table":{"sort":true},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/lib/tablesort/tablesort.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js" defer></script><script type="text/javascript" src="/lib/katex/auto-render.min.js" defer></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js" defer></script><script type="text/javascript" src="/lib/katex/mhchem.min.js" defer></script><script type="text/javascript" src="/js/katex.min.js" defer></script><script type="text/javascript" src="/js/theme.min.js" defer></script></div>
+</body>
+
+</html>

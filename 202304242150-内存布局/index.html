@@ -1,0 +1,342 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>内存布局 - 学习记录</title><meta name="Description" content="这是我的网站描述"><meta property="og:title" content="内存布局" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.honghuiqiang.com/202304242150-%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/" /><meta property="og:image" content="http://www.honghuiqiang.com/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-05-09T07:48:23+08:00" />
+<meta property="article:modified_time" content="2023-05-09T07:48:23+08:00" /><meta property="og:site_name" content="学习记录" />
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://www.honghuiqiang.com/logo.png"/>
+
+<meta name="twitter:title" content="内存布局"/>
+<meta name="twitter:description" content=""/>
+<meta name="application-name" content="HHQ Records">
+<meta name="apple-mobile-web-app-title" content="HHQ Records">
+
+<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/zoro.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="http://www.honghuiqiang.com/202304242150-%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/" /><link rel="prev" href="http://www.honghuiqiang.com/202305070218-%E5%8F%AF%E4%BB%A5%E5%9C%A8%E4%BB%80%E4%B9%88%E5%B9%B3%E5%8F%B0%E4%B8%8A%E4%BD%BF%E7%94%A8-openai/" /><link rel="next" href="http://www.honghuiqiang.com/202305040442-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "内存布局",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/www.honghuiqiang.com\/202304242150-%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80\/"
+        },"genre": "posts","keywords": "内存布局","wordcount":  912 ,
+        "url": "http:\/\/www.honghuiqiang.com\/202304242150-%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80\/","datePublished": "2023-05-09T07:48:23+08:00","dateModified": "2023-05-09T07:48:23+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"authors": [{
+                        "@type": "Person",
+                        "name": "索隆不喝酒"                    
+                    }],"description": ""
+    }
+    </script><script src="//instant.page/5.1.1" defer type="module" integrity="sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq"></script>
+</head>
+
+<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme); document.documentElement.style.setProperty('color-scheme', theme === 'light' ? 'light' : 'dark'); window.theme = theme;   window.isDark = window.theme !== 'light' }
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('dark' === 'light' || 'dark' === 'dark' || 'dark' === 'black') setTheme('dark'), saveTheme('dark'); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+        window.switchThemeEventSet = new Set()
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="学习记录"><span id="desktop-header-typeit" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/series/"> 系列 </a><a class="menu-item" href="/tags/"> 标签 </a><span class="menu-item delimiter"></span><a href="#" class="menu-item language" title="选择语言">简体中文<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" title="Select Language" id="language-select-desktop" onchange="location = this.value;"><option value="/202304242150-%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/" selected>简体中文</option></select>
+                    </a><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="#" class="menu-item theme-select" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                    <select class="color-theme-select" id="theme-select-desktop" title="切换主题">
+                        <option value="light">浅色</option>
+                        <option value="dark">深色</option>
+                        <option value="black">黑色</option>
+                        <option value="auto">跟随系统</option>
+                    </select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="学习记录"><span id="mobile-header-typeit" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/series/" title="">系列</a><a class="menu-item" href="/tags/" title="">标签</a><a href="#" class="menu-item theme-select" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+                <select class="color-theme-select" id="theme-select-mobile" title="切换主题">
+                    <option value="light">浅色</option>
+                    <option value="dark">深色</option>
+                    <option value="black">黑色</option>
+                    <option value="auto">跟随系统</option>
+                </select>
+            </a><a href="#" class="menu-item" title="选择语言">简体中文<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" title="Select Language" onchange="location = this.value;"><option value="/202304242150-%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/" selected>简体中文</option></select>
+                </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">目录</h2>
+        <div class="toc-content" id="toc-content-auto"><nav id="TableOfContents"></nav></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">内存布局</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><span class='author'><i class="author fas fa-user-circle fa-fw"></i><span class='screen-reader-text'>  </span><a href='http://www.honghuiqiang.com/authors/%E7%B4%A2%E9%9A%86%E4%B8%8D%E5%96%9D%E9%85%92'>索隆不喝酒</a></span>
+                </span>&nbsp;<span class="post-category">收录于 </span>&nbsp;<span class="post-category">类别 <a href="/categories/golang/"><i class="far fa-folder fa-fw"></i>Golang</a></span>&nbsp;<span class="post-category">和</span>&nbsp;<span class="post-series">系列 <a href="/series/golang%E5%BA%95%E5%B1%82%E8%AE%A4%E7%9F%A5/"><i class="far fa-list-alt fa-fw"></i>Golang底层认知</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-05-09">2023-05-09</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-05-09">2023-05-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 912 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+        </div><div class="details series-nav open">
+                                <div class="details-summary series-title">
+                                    <span>系列 - Golang底层认知</span>
+                                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                                </div>
+                                <div class="details-content series-content">
+                                    <nav>
+                                        <ul><li><span class="active">内存布局</span></li>
+                                                    <li><a href="/202304201947-%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D/">深浅拷贝</a></li></ul>
+                                    </nav>
+                                </div>
+                            </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><p>#Golang</p>
+<p><figure><a class="lightgallery" href="/images/posts/Pasted%20image%2020230424234822.png" title="/images/posts/Pasted%20image%2020230424234822.png" data-thumbnail="/images/posts/Pasted%20image%2020230424234822.png">
+        <img
+            
+            loading="lazy"
+            src="/images/posts/Pasted%20image%2020230424234822.png"
+            srcset="/images/posts/Pasted%20image%2020230424234822.png, /images/posts/Pasted%20image%2020230424234822.png 1.5x, /images/posts/Pasted%20image%2020230424234822.png 2x"
+            sizes="auto"
+            alt="/images/posts/Pasted%20image%2020230424234822.png">
+    </a></figure>
+问题：两个数据有相同的内存布局，应该满足什么条件？</p>
+<h1 id="类型对齐保证" class="headerLink">
+    <a href="#%e7%b1%bb%e5%9e%8b%e5%af%b9%e9%bd%90%e4%bf%9d%e8%af%81" class="header-mark"></a>类型对齐保证</h1><p>出于对程序性能的考虑，每个类型都会有对应的对齐保证，根据该类型是否被作为结构字段，对齐保证分为两类：</p>
+<ul>
+<li>字段对齐保证</li>
+<li>一般对齐保证</li>
+</ul>
+<blockquote>
+<p>说法：如果一个类型的对齐保证为N，那么就说这个类型是 <strong>N 字节对齐</strong>的</p>
+</blockquote>
+<p>这两类对齐保证对应的获取方式：</p>
+<ul>
+<li><code>unsafe.Alignof(t)</code>   （编译的时候估值）</li>
+<li><code>reflect.TypeOf(t).Align()</code></li>
+<li><code>reflect.TypeOf(t).FieldAlign()</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">X</span> <span class="kd">struct</span> <span class="p">{</span>  
+   <span class="nx">c</span> <span class="kt">int32</span>  
+   <span class="nx">d</span> <span class="kt">int64</span>  
+<span class="p">}</span>  
+  
+<span class="kd">func</span> <span class="nf">getAlignmentGuarantee</span><span class="p">()</span> <span class="p">{</span>  
+   <span class="kd">var</span> <span class="nx">a</span> <span class="kt">int32</span>  
+   <span class="c1">// 使用 unsafe.Alignof()   fmt.Println(unsafe.Alignof(a))     // 4    （获取 int32 的一般对齐保证）  
+</span><span class="c1"></span>   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Alignof</span><span class="p">(</span><span class="nx">X</span><span class="p">{}.</span><span class="nx">c</span><span class="p">))</span> <span class="c1">// 4    （获取 int32 的字段对齐保证）  
+</span><span class="c1"></span>   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Alignof</span><span class="p">(</span><span class="nx">X</span><span class="p">{}.</span><span class="nx">d</span><span class="p">))</span> <span class="c1">// 8  
+</span><span class="c1"></span>   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Alignof</span><span class="p">(</span><span class="nx">X</span><span class="p">{}))</span>   <span class="c1">// 8  
+</span><span class="c1"></span>  
+   <span class="c1">// 使用  reflect.TypeOf(a).Align() 以及 reflect.TypeOf(a).FieldAlign()
+</span><span class="c1"></span>   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">reflect</span><span class="p">.</span><span class="nf">TypeOf</span><span class="p">(</span><span class="nx">a</span><span class="p">).</span><span class="nf">Align</span><span class="p">())</span>    <span class="c1">// 4  
+</span><span class="c1"></span>   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">reflect</span><span class="p">.</span><span class="nf">TypeOf</span><span class="p">(</span><span class="nx">a</span><span class="p">).</span><span class="nf">FieldAlign</span><span class="p">())</span>    <span class="c1">// 4  
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>注意上面程序的输出并不是固定的，相同的编译器在不同的架构上、不同的编译器在相同的架构上，都有可能产生不同的输出
+Go 编译器中，对类型对齐保证要求：</p>
+<ol>
+<li>unsafe.Alignof(t) &gt;= 1</li>
+<li>unsafe.Alignof(结构) = 结构体字段的字段对齐保证的<strong>最大值</strong></li>
+<li>unsafe.Alignof(数组) = unsafe.Alignof(元素类型)</li>
+</ol>
+</blockquote>
+<h1 id="结构体的字节填充" class="headerLink">
+    <a href="#%e7%bb%93%e6%9e%84%e4%bd%93%e7%9a%84%e5%ad%97%e8%8a%82%e5%a1%ab%e5%85%85" class="header-mark"></a>结构体的字节填充</h1><p>为了能够让结构体的尺寸为类型对齐保证的 N 倍，有时候需要对结构进行字节补齐，看下面的一个例子，展示了两个内容：</p>
+<ul>
+<li>结构体尺寸的计算</li>
+<li>结构体的字节填充</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="c1">// 假设在 64 位机器上的情况  
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">T1</span> <span class="kd">struct</span> <span class="p">{</span>  
+   <span class="nx">a</span> <span class="kt">int8</span>  
+   <span class="c1">// 为了让 b 能够8字节对齐，这里要填充 7 个字节  
+</span><span class="c1"></span>   <span class="nx">b</span> <span class="kt">int64</span>  
+   <span class="nx">c</span> <span class="kt">int16</span>  
+   <span class="c1">// 前面一共的尺寸为 1 + 7 + 8 + 2 = 18 个字节  
+</span><span class="c1"></span>   <span class="c1">// 为了让 T1 的尺寸为 8 的倍数，这里需要填充 24 - 18 = 6 个字节  
+</span><span class="c1"></span><span class="p">}</span>  
+<span class="c1">// 因此 T1 类型的尺寸为 24 个字节  
+</span><span class="c1"></span>  
+<span class="kd">type</span> <span class="nx">T2</span> <span class="kd">struct</span> <span class="p">{</span>  
+   <span class="nx">a</span> <span class="kt">int8</span>  
+   <span class="c1">// 为了让 b 能够 2 字节对齐，这里填充 1 字节  
+</span><span class="c1"></span>   <span class="nx">b</span> <span class="kt">int16</span>  
+   <span class="c1">// 为了让 c 能够 8 字节对齐，这里填充 4 字节  
+</span><span class="c1"></span>   <span class="nx">c</span> <span class="kt">int64</span>  
+   <span class="c1">// 前面一共 1 + 1 + 2 + 4 + 8 = 16 字节，因此这里不需要再填充  
+</span><span class="c1"></span><span class="p">}</span>  
+<span class="c1">// 因此 T2 类型的尺寸为 16 个字节
+</span></code></pre></td></tr></table>
+</div>
+</div><p>从上面这个例子可以看到，尽管 T1 跟 T2 拥有一样的字段类型，但因为排列的不同，导致字节填充的数量不同，因此其尺寸也不同。
+问题：[[202304242320 一个零尺寸的类型有没有可能影响到结构体的尺寸]]</p>
+<hr>
+<ol>
+<li>《内存布局 -Go语言101》. 见于 2023年4月24日. <a href="https://gfw.go101.org/article/memory-layout.html" target="_blank" rel="noopener noreferrer">https://gfw.go101.org/article/memory-layout.html</a>.</li>
+<li>《The Go Programming Language Specification - The Go Programming Language》. 见于 2023年4月24日. <a href="https://go.dev/ref/spec" target="_blank" rel="noopener noreferrer">https://go.dev/ref/spec</a>.</li>
+<li>The Go Programming Language Specification 中文：<a href="https://github.com/saberuster/Go-Language-Specification" target="_blank" rel="noopener noreferrer">https://github.com/saberuster/Go-Language-Specification</a></li>
+</ol></div>
+
+        
+
+<div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-05-09</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span><a class="link-to-mardown" href=/202304242150-%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/index.md target="_blank" rel="noopener noreferrer">阅读原始文档</a>
+                    </span></div>
+            <div class="post-info-share">
+                <span><a href="#" title="分享到 Twitter" data-sharer="twitter" data-url="http://www.honghuiqiang.com/202304242150-%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/" data-title="内存布局" data-via="xxxx" data-hashtags="内存布局"><i class="fab fa-twitter fa-fw"></i></a><a href="#" title="分享到 Facebook" data-sharer="facebook" data-url="http://www.honghuiqiang.com/202304242150-%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/" data-hashtag="内存布局"><i class="fab fa-facebook-square fa-fw"></i></a><a href="#" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="http://www.honghuiqiang.com/202304242150-%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/" data-title="内存布局" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="#" title="分享到 Line" data-sharer="line" data-url="http://www.honghuiqiang.com/202304242150-%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/" data-title="内存布局"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="#" title="分享到 微博" data-sharer="weibo" data-url="http://www.honghuiqiang.com/202304242150-%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/" data-title="内存布局"><i class="fab fa-weibo fa-fw"></i></a><a href="#" title="分享到 Myspace" data-sharer="myspace" data-url="http://www.honghuiqiang.com/202304242150-%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/" data-title="内存布局" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="#" title="分享到 Blogger" data-sharer="blogger" data-url="http://www.honghuiqiang.com/202304242150-%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/" data-title="内存布局" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="#" title="分享到 Evernote" data-sharer="evernote" data-url="http://www.honghuiqiang.com/202304242150-%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/" data-title="内存布局"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/">内存布局</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/202305070218-%E5%8F%AF%E4%BB%A5%E5%9C%A8%E4%BB%80%E4%B9%88%E5%B9%B3%E5%8F%B0%E4%B8%8A%E4%BD%BF%E7%94%A8-openai/" class="prev" rel="prev" title="可以在什么平台上使用 openai"><i class="fas fa-angle-left fa-fw"></i>可以在什么平台上使用 openai</a>
+            <a href="/202305040442-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/" class="next" rel="next" title="二叉搜索树">二叉搜索树<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                    由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.91.2">Hugo</a> 强力驱动&nbsp;|&nbsp;托管在 <a title="Github Pages" href="https://docs.github.com/en/pages/" target="_blank" rel="noopener noreffer">GitHub Pages</a> 上&nbsp;|&nbsp;主题 - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.3.0"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">索隆不喝酒</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+            <div class="footer-line"></div>
+            <div class="footer-line">
+            </div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="回到顶部">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div class="assets"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/katex/copy-tex.min.css">
+        <noscript><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"></noscript><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"data":{"desktop-header-typeit":"HHQ Records","mobile-header-typeit":"HHQ Records"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":50,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"sharerjs":true,"table":{"sort":true},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/lib/tablesort/tablesort.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js" defer></script><script type="text/javascript" src="/lib/katex/auto-render.min.js" defer></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js" defer></script><script type="text/javascript" src="/lib/katex/mhchem.min.js" defer></script><script type="text/javascript" src="/js/katex.min.js" defer></script><script type="text/javascript" src="/js/theme.min.js" defer></script></div>
+</body>
+
+</html>

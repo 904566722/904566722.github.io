@@ -1,0 +1,540 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>unsafe.Pointer 的六种使用场景 - 学习记录</title><meta name="Description" content="这是我的网站描述"><meta property="og:title" content="unsafe.Pointer 的六种使用场景" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.honghuiqiang.com/202304241708-unsafe.pointer-%E7%9A%84%E5%85%AD%E7%A7%8D%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/" /><meta property="og:image" content="http://www.honghuiqiang.com/logo.png"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-05-09T07:48:23+08:00" />
+<meta property="article:modified_time" content="2023-05-09T07:48:23+08:00" /><meta property="og:site_name" content="学习记录" />
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://www.honghuiqiang.com/logo.png"/>
+
+<meta name="twitter:title" content="unsafe.Pointer 的六种使用场景"/>
+<meta name="twitter:description" content=""/>
+<meta name="application-name" content="HHQ Records">
+<meta name="apple-mobile-web-app-title" content="HHQ Records">
+
+<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/zoro.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="http://www.honghuiqiang.com/202304241708-unsafe.pointer-%E7%9A%84%E5%85%AD%E7%A7%8D%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/" /><link rel="prev" href="http://www.honghuiqiang.com/202305040442-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/" /><link rel="next" href="http://www.honghuiqiang.com/202304241738-struct-%E6%96%B9%E6%B3%95%E9%9B%86/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "unsafe.Pointer 的六种使用场景",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/www.honghuiqiang.com\/202304241708-unsafe.pointer-%E7%9A%84%E5%85%AD%E7%A7%8D%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF\/"
+        },"genre": "posts","keywords": "unsafe包","wordcount":  1707 ,
+        "url": "http:\/\/www.honghuiqiang.com\/202304241708-unsafe.pointer-%E7%9A%84%E5%85%AD%E7%A7%8D%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF\/","datePublished": "2023-05-09T07:48:23+08:00","dateModified": "2023-05-09T07:48:23+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"authors": [{
+                        "@type": "Person",
+                        "name": "索隆不喝酒"                    
+                    }],"description": ""
+    }
+    </script><script src="//instant.page/5.1.1" defer type="module" integrity="sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq"></script>
+</head>
+
+<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme); document.documentElement.style.setProperty('color-scheme', theme === 'light' ? 'light' : 'dark'); window.theme = theme;   window.isDark = window.theme !== 'light' }
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('dark' === 'light' || 'dark' === 'dark' || 'dark' === 'black') setTheme('dark'), saveTheme('dark'); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+        window.switchThemeEventSet = new Set()
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="学习记录"><span id="desktop-header-typeit" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/series/"> 系列 </a><a class="menu-item" href="/tags/"> 标签 </a><span class="menu-item delimiter"></span><a href="#" class="menu-item language" title="选择语言">简体中文<i class="fas fa-chevron-right fa-fw"></i>
+                        <select class="language-select" title="Select Language" id="language-select-desktop" onchange="location = this.value;"><option value="/202304241708-unsafe.pointer-%E7%9A%84%E5%85%AD%E7%A7%8D%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/" selected>简体中文</option></select>
+                    </a><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="#" class="menu-item theme-select" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                    <select class="color-theme-select" id="theme-select-desktop" title="切换主题">
+                        <option value="light">浅色</option>
+                        <option value="dark">深色</option>
+                        <option value="black">黑色</option>
+                        <option value="auto">跟随系统</option>
+                    </select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="学习记录"><span id="mobile-header-typeit" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="#" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/series/" title="">系列</a><a class="menu-item" href="/tags/" title="">标签</a><a href="#" class="menu-item theme-select" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+                <select class="color-theme-select" id="theme-select-mobile" title="切换主题">
+                    <option value="light">浅色</option>
+                    <option value="dark">深色</option>
+                    <option value="black">黑色</option>
+                    <option value="auto">跟随系统</option>
+                </select>
+            </a><a href="#" class="menu-item" title="选择语言">简体中文<i class="fas fa-chevron-right fa-fw"></i>
+                    <select class="language-select" title="Select Language" onchange="location = this.value;"><option value="/202304241708-unsafe.pointer-%E7%9A%84%E5%85%AD%E7%A7%8D%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/" selected>简体中文</option></select>
+                </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">目录</h2>
+        <div class="toc-content" id="toc-content-auto"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#下面列举-unsafe-包中列举的-unsafepointer-使用的六种场景">下面列举 unsafe 包中列举的 unsafe.Pointer 使用的六种场景</a>
+      <ul>
+        <li><a href="#1t1----pointer----t2">（1）*T1 &ndash;&gt; Pointer &ndash;&gt; *T2</a></li>
+        <li><a href="#2pointer----uintptr-用途少">（2）Pointer &ndash;&gt; uintptr （用途少）</a></li>
+        <li><a href="#3算数运算-pointer----uintptr----运算----pointer">（3）算数运算 （Pointer &ndash;&gt; uintptr &ndash;&gt; 运算 &ndash;&gt; Pointer）</a></li>
+        <li><a href="#4pointer----uintptr----syscall">（4）Pointer &ndash;&gt; uintptr &ndash;&gt; syscall</a></li>
+        <li><a href="#5将-reflectvaluepointer-或者-reflectvalueunsafeaddr-的结果从-uintptr-转到-pointer">（5）将 <code>reflect.Value.Pointer</code> 或者 <code>reflect.Value.UnsafeAddr</code> 的结果从 uintptr 转到 Pointer</a></li>
+        <li><a href="#6将一个reflectsliceheader或者reflectstringheader值的data字段转换为非类型安全指针以及其逆转换">（6）将一个<code>reflect.SliceHeader</code>或者<code>reflect.StringHeader</code>值的<code>Data</code>字段转换为非类型安全指针，以及其逆转换</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">unsafe.Pointer 的六种使用场景</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><span class='author'><i class="author fas fa-user-circle fa-fw"></i><span class='screen-reader-text'>  </span><a href='http://www.honghuiqiang.com/authors/%E7%B4%A2%E9%9A%86%E4%B8%8D%E5%96%9D%E9%85%92'>索隆不喝酒</a></span>
+                </span>&nbsp;<span class="post-category">收录于 </span>&nbsp;<span class="post-category">类别 <a href="/categories/golang/"><i class="far fa-folder fa-fw"></i>Golang</a></span>&nbsp;<span class="post-category">和</span>&nbsp;<span class="post-series">系列 <a href="/series/golang%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/"><i class="far fa-list-alt fa-fw"></i>Golang源码学习</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-05-09">2023-05-09</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-05-09">2023-05-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1707 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
+        </div><div class="details series-nav open">
+                                <div class="details-summary series-title">
+                                    <span>系列 - Golang源码学习</span>
+                                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                                </div>
+                                <div class="details-content series-content">
+                                    <nav>
+                                        <ul><li><span class="active">unsafe.Pointer 的六种使用场景</span></li></ul>
+                                    </nav>
+                                </div>
+                            </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#下面列举-unsafe-包中列举的-unsafepointer-使用的六种场景">下面列举 unsafe 包中列举的 unsafe.Pointer 使用的六种场景</a>
+      <ul>
+        <li><a href="#1t1----pointer----t2">（1）*T1 &ndash;&gt; Pointer &ndash;&gt; *T2</a></li>
+        <li><a href="#2pointer----uintptr-用途少">（2）Pointer &ndash;&gt; uintptr （用途少）</a></li>
+        <li><a href="#3算数运算-pointer----uintptr----运算----pointer">（3）算数运算 （Pointer &ndash;&gt; uintptr &ndash;&gt; 运算 &ndash;&gt; Pointer）</a></li>
+        <li><a href="#4pointer----uintptr----syscall">（4）Pointer &ndash;&gt; uintptr &ndash;&gt; syscall</a></li>
+        <li><a href="#5将-reflectvaluepointer-或者-reflectvalueunsafeaddr-的结果从-uintptr-转到-pointer">（5）将 <code>reflect.Value.Pointer</code> 或者 <code>reflect.Value.UnsafeAddr</code> 的结果从 uintptr 转到 Pointer</a></li>
+        <li><a href="#6将一个reflectsliceheader或者reflectstringheader值的data字段转换为非类型安全指针以及其逆转换">（6）将一个<code>reflect.SliceHeader</code>或者<code>reflect.StringHeader</code>值的<code>Data</code>字段转换为非类型安全指针，以及其逆转换</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>#Golang #unsafe</p>
+<p>概念：Pointer 表示一个指针，可以指向<strong>任何类型</strong></p>
+<p>四个特殊操作：</p>
+<ol>
+<li>任何类型的指针值 可转化为 Pointer</li>
+<li>Pointer 可转化为 任何类型的指针值</li>
+<li>uintptr 可转化为 Pointer</li>
+<li>Pointer 可转化为 uinptr</li>
+</ol>
+<p>由于以上四个特性，Pointer 能够实现让程序绕过类型系统，读写任意内存（使用时需格外小心）</p>
+<h2 id="下面列举-unsafe-包中列举的-unsafepointer-使用的六种场景" class="headerLink">
+    <a href="#%e4%b8%8b%e9%9d%a2%e5%88%97%e4%b8%be-unsafe-%e5%8c%85%e4%b8%ad%e5%88%97%e4%b8%be%e7%9a%84-unsafepointer-%e4%bd%bf%e7%94%a8%e7%9a%84%e5%85%ad%e7%a7%8d%e5%9c%ba%e6%99%af" class="header-mark"></a>下面列举 unsafe 包中列举的 unsafe.Pointer 使用的六种场景</h2><h3 id="1t1----pointer----t2" class="headerLink">
+    <a href="#1t1----pointer----t2" class="header-mark"></a>（1）*T1 &ndash;&gt; Pointer &ndash;&gt; *T2</h3><p>需要满足要求：</p>
+<ul>
+<li>T2 不大于 T1</li>
+<li>T1、T2 共享相同的内存布局 (<a href="content/posts/go/202304242150%20%e5%86%85%e5%ad%98%e5%b8%83%e5%b1%80.md" rel="">202304242150 内存布局</a>)</li>
+</ul>
+<p>则这种转换是允许的</p>
+<p>例子1. 一个 float64 值转为 uint64 的值</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">float64bits</span><span class="p">(</span><span class="nx">f</span> <span class="kt">float64</span><span class="p">)</span> <span class="kt">uint64</span> <span class="p">{</span>  
+   <span class="k">return</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="kt">uint64</span><span class="p">)(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">f</span><span class="p">))</span>  
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>另外一个例子，将字符串转换为字节切片，首先我们看一下在 64 位系统中两者的尺寸</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">var</span> <span class="nx">s</span> <span class="kt">string</span>  
+<span class="kd">var</span> <span class="nx">bs</span> <span class="p">[]</span><span class="kt">byte</span>  
+<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Sizeof</span><span class="p">(</span><span class="nx">s</span><span class="p">))</span>  <span class="c1">// 16  
+</span><span class="c1"></span><span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Sizeof</span><span class="p">(</span><span class="nx">bs</span><span class="p">))</span> <span class="c1">// 24
+</span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>字符串 16 字节</li>
+<li>字节切片 24 字节</li>
+</ul>
+<p>字符串与字节切片的内存布局类似，且字节切片的尺寸不小于字符串的尺寸，因此将字节切片转到字符串是安全的，让我们来看实现：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">byteSlice2String</span><span class="p">(</span><span class="nx">bs</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>  
+   <span class="k">return</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="kt">string</span><span class="p">)(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">bs</span><span class="p">))</span>  
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>这种实现的<strong>优点</strong>是避免了底层对字节序列的一次开辟和复制</p>
+<p>而如果要用此方式来实现从 string 到 []byte 则是<strong>不安全</strong>的：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="c1">// 这种转换是不安全的  
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">string2Bytes</span><span class="p">(</span><span class="nx">s</span> <span class="kt">string</span><span class="p">)</span> <span class="p">[]</span><span class="kt">byte</span> <span class="p">{</span>  
+   <span class="k">return</span> <span class="o">*</span><span class="p">(</span><span class="o">*</span><span class="p">[]</span><span class="kt">byte</span><span class="p">)(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">s</span><span class="p">))</span>  
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="2pointer----uintptr-用途少" class="headerLink">
+    <a href="#2pointer----uintptr-%e7%94%a8%e9%80%94%e5%b0%91" class="header-mark"></a>（2）Pointer &ndash;&gt; uintptr （用途少）</h3><p>从指针转到 uintptr 类型实际上产生了一个<strong>没有指针语义的整数</strong>（代表指针指向值的内存地址，只是一个整数，不是引用），所以这种情况下，再将 uintptr 转回指针是无效的，通常的用法是将这个 uintptr 打印出来</p>
+<blockquote>
+<p>即使uintptr保存了某个对象的地址，如果对象移动，垃圾收集器也不会更新该uintptr的值，也不会阻止该对象被回收</p>
+</blockquote>
+<p>下面的情况说明了从 uintptr 转到 Pointer 的可能场景</p>
+<h3 id="3算数运算-pointer----uintptr----运算----pointer" class="headerLink">
+    <a href="#3%e7%ae%97%e6%95%b0%e8%bf%90%e7%ae%97-pointer----uintptr----%e8%bf%90%e7%ae%97----pointer" class="header-mark"></a>（3）算数运算 （Pointer &ndash;&gt; uintptr &ndash;&gt; 运算 &ndash;&gt; Pointer）</h3><p>这种操作通常是用来访问：</p>
+<ul>
+<li>结构的字段</li>
+<li>数组的元素</li>
+</ul>
+<p>一个例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="c1">// ** 通过 uintptr 来访问结构中的字段、数组的元素 **  
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">T</span> <span class="kd">struct</span> <span class="p">{</span>  
+   <span class="nx">a</span>    <span class="kt">int16</span>  
+   <span class="nx">arr</span>  <span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="kt">int32</span>  
+<span class="p">}</span>  
+  
+<span class="kd">func</span> <span class="nf">uintptr2PointerPractice</span><span class="p">()</span> <span class="p">{</span>  
+   <span class="c1">// unsafe.Sizeof(T{}.a)    // 2  
+</span><span class="c1"></span>   <span class="nx">M</span> <span class="o">:=</span> <span class="nx">unsafe</span><span class="p">.</span><span class="nf">Offsetof</span><span class="p">(</span><span class="nx">T</span><span class="p">{}.</span><span class="nx">arr</span><span class="p">)</span>        <span class="c1">// 4  
+</span><span class="c1"></span>   <span class="nx">N</span> <span class="o">:=</span> <span class="nx">unsafe</span><span class="p">.</span><span class="nf">Sizeof</span><span class="p">(</span><span class="nx">T</span><span class="p">{}.</span><span class="nx">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>       <span class="c1">// 4  
+</span><span class="c1"></span>   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Sizeof</span><span class="p">(</span><span class="nx">T</span><span class="p">{}.</span><span class="nx">a</span><span class="p">))</span>    <span class="c1">// 2  
+</span><span class="c1"></span>   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Sizeof</span><span class="p">(</span><span class="nx">T</span><span class="p">{}.</span><span class="nx">arr</span><span class="p">))</span>  <span class="c1">// 3 * 4 = 12  
+</span><span class="c1"></span>   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Sizeof</span><span class="p">(</span><span class="nx">T</span><span class="p">{}))</span>      <span class="c1">// 16  
+</span><span class="c1"></span>  
+   <span class="nx">t</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">T</span><span class="p">{</span>  
+      <span class="nx">arr</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="kt">int32</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">},</span>  
+   <span class="p">}</span>  
+   <span class="c1">// 直接访问 t.arr 的最后一个元素  
+</span><span class="c1"></span>   <span class="nx">tp</span> <span class="o">:=</span> <span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="nx">t</span><span class="p">)</span> <span class="c1">// 先将 t 转为非安全指针  
+</span><span class="c1"></span>   <span class="c1">// 将 uintptr 进行算数运算后再转为非安全指针  
+</span><span class="c1"></span>   <span class="nx">arrp</span> <span class="o">:=</span> <span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="nb">uintptr</span><span class="p">(</span><span class="nx">tp</span><span class="p">)</span> <span class="o">+</span> <span class="nx">M</span> <span class="o">+</span> <span class="nx">N</span> <span class="o">+</span> <span class="nx">N</span><span class="p">)</span>  
+   <span class="c1">// 将非安全指针转为数组元素类型指针  
+</span><span class="c1"></span>   <span class="nx">ans</span> <span class="o">:=</span> <span class="p">(</span><span class="o">*</span><span class="kt">int32</span><span class="p">)(</span><span class="nx">arrp</span><span class="p">)</span>  
+   <span class="c1">// ans := (*int32)(unsafe.Pointer(uintptr(tp) + M + N + N))
+</span><span class="c1"></span>  
+   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="o">*</span><span class="nx">ans</span><span class="p">)</span>  <span class="c1">// output: 3  
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>特别注意在这种场景下，可能会发生的很隐秘的 bug：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">uintptr2PointerPractice2</span><span class="p">()</span> <span class="p">{</span>  
+   <span class="c1">// unsafe.Sizeof(T{}.a)    // 2  
+</span><span class="c1"></span>   <span class="nx">M</span> <span class="o">:=</span> <span class="nx">unsafe</span><span class="p">.</span><span class="nf">Offsetof</span><span class="p">(</span><span class="nx">T</span><span class="p">{}.</span><span class="nx">arr</span><span class="p">)</span>       <span class="c1">// 4  
+</span><span class="c1"></span>   <span class="nx">N</span> <span class="o">:=</span> <span class="nx">unsafe</span><span class="p">.</span><span class="nf">Sizeof</span><span class="p">(</span><span class="nx">T</span><span class="p">{}.</span><span class="nx">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>      <span class="c1">// 4  
+</span><span class="c1"></span>  
+   <span class="nx">t</span> <span class="o">:=</span> <span class="nx">T</span><span class="p">{</span>  
+      <span class="nx">arr</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="kt">int32</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">},</span>  
+   <span class="p">}</span>  
+   <span class="nx">uptr</span> <span class="o">:=</span> <span class="nb">uintptr</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">t</span><span class="p">))</span> <span class="o">+</span> <span class="nx">M</span> <span class="o">+</span> <span class="nx">N</span> <span class="o">+</span> <span class="nx">N</span>  
+     
+   <span class="c1">// 中间其他操作  
+</span><span class="c1"></span>   
+   <span class="nx">elemP</span> <span class="o">:=</span> <span class="p">(</span><span class="o">*</span><span class="kt">int32</span><span class="p">)(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="nx">uptr</span><span class="p">))</span>  
+  
+   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="o">*</span><span class="nx">elemP</span><span class="p">)</span> <span class="c1">// output: 3  
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p><code>前面提到了，虽然 uintptr 保存了 t 的地址的值，但是并不会阻止垃圾回收机制将 t 回收，所以在中间其他操作的时候，一旦 t 被回收，后面的地址将指向不可预测的内容。</code></p>
+<blockquote>
+<p>实际上，像 Goland 编码工具在编码的时候就会给出提示：
+<figure><a class="lightgallery" href="/images/posts/Pasted%20image%2020230425021503.png" title="/images/posts/Pasted%20image%2020230425021503.png" data-thumbnail="/images/posts/Pasted%20image%2020230425021503.png">
+        <img
+            
+            loading="lazy"
+            src="/images/posts/Pasted%20image%2020230425021503.png"
+            srcset="/images/posts/Pasted%20image%2020230425021503.png, /images/posts/Pasted%20image%2020230425021503.png 1.5x, /images/posts/Pasted%20image%2020230425021503.png 2x"
+            sizes="auto"
+            alt="/images/posts/Pasted%20image%2020230425021503.png">
+    </a></figure></p>
+</blockquote>
+<h3 id="4pointer----uintptr----syscall" class="headerLink">
+    <a href="#4pointer----uintptr----syscall" class="header-mark"></a>（4）Pointer &ndash;&gt; uintptr &ndash;&gt; syscall</h3><p>在 syscall 系统调用中，可能会根据调用的具体实现将 uintptr 重新转为指针</p>
+<p>注意：转换必须在调用的表达式中出现，在系统调用期间隐式转换为指针之前，uintptr 不能保存在变量中
+正确：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">syscall</span><span class="p">.</span><span class="nf">Syscall</span><span class="p">(</span><span class="nx">SYS_READ</span><span class="p">,</span> <span class="nb">uintptr</span><span class="p">(</span><span class="nx">fd</span><span class="p">),</span> <span class="nb">uintptr</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="nx">p</span><span class="p">)),</span> <span class="nb">uintptr</span><span class="p">(</span><span class="nx">n</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>错误</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="nx">u</span> <span class="o">:=</span> <span class="nb">uintptr</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="nx">p</span><span class="p">))</span>  
+<span class="c1">// p 所引用的对象可能在这个时候被垃圾回收，或者 p 的地址发生改变
+</span><span class="c1"></span><span class="nx">syscall</span><span class="p">.</span><span class="nf">Syscall</span><span class="p">(</span><span class="nx">SYS_READ</span><span class="p">,</span> <span class="nb">uintptr</span><span class="p">(</span><span class="nx">fd</span><span class="p">),</span> <span class="nx">u</span><span class="p">,</span> <span class="nb">uintptr</span><span class="p">(</span><span class="nx">n</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="5将-reflectvaluepointer-或者-reflectvalueunsafeaddr-的结果从-uintptr-转到-pointer" class="headerLink">
+    <a href="#5%e5%b0%86-reflectvaluepointer-%e6%88%96%e8%80%85-reflectvalueunsafeaddr-%e7%9a%84%e7%bb%93%e6%9e%9c%e4%bb%8e-uintptr-%e8%bd%ac%e5%88%b0-pointer" class="header-mark"></a>（5）将 <code>reflect.Value.Pointer</code> 或者 <code>reflect.Value.UnsafeAddr</code> 的结果从 uintptr 转到 Pointer</h3><h3 id="6将一个reflectsliceheader或者reflectstringheader值的data字段转换为非类型安全指针以及其逆转换" class="headerLink">
+    <a href="#6%e5%b0%86%e4%b8%80%e4%b8%aareflectsliceheader%e6%88%96%e8%80%85reflectstringheader%e5%80%bc%e7%9a%84data%e5%ad%97%e6%ae%b5%e8%bd%ac%e6%8d%a2%e4%b8%ba%e9%9d%9e%e7%b1%bb%e5%9e%8b%e5%ae%89%e5%85%a8%e6%8c%87%e9%92%88%e4%bb%a5%e5%8f%8a%e5%85%b6%e9%80%86%e8%bd%ac%e6%8d%a2" class="header-mark"></a>（6）将一个<code>reflect.SliceHeader</code>或者<code>reflect.StringHeader</code>值的<code>Data</code>字段转换为非类型安全指针，以及其逆转换</h3><p>首先我们来看<code>reflect.SliceHeader</code> 和 <code>reflect.StringHeader</code> 的定义：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="c1">// StringHeader是字符串的运行时表示形式。
+</span><span class="c1">// 它不能安全或可移植地使用，并且它的表示可能在以后的版本中更改。
+</span><span class="c1">// 此外，Data字段不足以保证它引用的数据不会被垃圾收集，
+</span><span class="c1">// 因此程序必须保留一个单独的、类型正确的指向底层数据的指针。
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">StringHeader</span> <span class="kd">struct</span> <span class="p">{</span>  
+ <span class="nx">Data</span> <span class="kt">uintptr</span>  
+ <span class="nx">Len</span>  <span class="kt">int</span>  
+<span class="p">}</span>
+
+<span class="c1">// SliceHeader是切片的运行时表示。
+</span><span class="c1">// 它不能安全或可移植地使用，并且它的表示可能在以后的版本中更改。
+</span><span class="c1">// 此外，Data字段不足以保证它引用的数据不会被垃圾收集，
+</span><span class="c1">// 因此程序必须保留一个单独的、类型正确的指向底层数据的指针。
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">SliceHeader</span> <span class="kd">struct</span> <span class="p">{</span>  
+ <span class="nx">Data</span> <span class="kt">uintptr</span>  
+ <span class="nx">Len</span>  <span class="kt">int</span>  
+ <span class="nx">Cap</span>  <span class="kt">int</span>  
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>一个使用 StringHeader 的例子：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">uintptrPractice4</span><span class="p">()</span> <span class="p">{</span>  
+   <span class="nx">a</span> <span class="o">:=</span> <span class="p">[</span><span class="o">...</span><span class="p">]</span><span class="kt">byte</span><span class="p">{</span><span class="sc">&#39;a&#39;</span><span class="p">,</span> <span class="sc">&#39;b&#39;</span><span class="p">,</span> <span class="sc">&#39;c&#39;</span><span class="p">,</span> <span class="sc">&#39;d&#39;</span><span class="p">,</span> <span class="sc">&#39;e&#39;</span><span class="p">}</span>  
+   <span class="nx">b</span> <span class="o">:=</span> <span class="s">&#34;java&#34;</span>  
+   <span class="nx">hdr</span> <span class="o">:=</span> <span class="p">(</span><span class="o">*</span><span class="nx">reflect</span><span class="p">.</span><span class="nx">StringHeader</span><span class="p">)(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">b</span><span class="p">))</span>  
+   <span class="nx">hdr</span><span class="p">.</span><span class="nx">Data</span> <span class="p">=</span> <span class="nb">uintptr</span><span class="p">(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">a</span><span class="p">))</span>  
+   <span class="nx">hdr</span><span class="p">.</span><span class="nx">Len</span> <span class="p">=</span> <span class="nb">len</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span>  
+   <span class="c1">// 至此，a 和 b 共享底层的字节序列  
+</span><span class="c1"></span>   <span class="nx">a</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="nx">a</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="nx">a</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="nx">a</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="p">=</span> <span class="sc">&#39;a&#39;</span><span class="p">,</span> <span class="sc">&#39;a&#39;</span><span class="p">,</span> <span class="sc">&#39;a&#39;</span><span class="p">,</span> <span class="sc">&#39;a&#39;</span>  
+   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">b</span><span class="p">)</span> <span class="c1">// out: aaaaa  
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>将字符串指针转为*StringHeader，从而可以对字符串的内部进行修改</p>
+<hr>
+<ol>
+<li>《非类型安全指针 -Go语言101》. 见于 2023年4月25日. <a href="https://gfw.go101.org/article/unsafe.html" target="_blank" rel="noopener noreferrer">https://gfw.go101.org/article/unsafe.html</a>.</li>
+</ol></div>
+
+        
+
+<div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-05-09</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span><a class="link-to-mardown" href=/202304241708-unsafe.pointer-%E7%9A%84%E5%85%AD%E7%A7%8D%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/index.md target="_blank" rel="noopener noreferrer">阅读原始文档</a>
+                    </span></div>
+            <div class="post-info-share">
+                <span><a href="#" title="分享到 Twitter" data-sharer="twitter" data-url="http://www.honghuiqiang.com/202304241708-unsafe.pointer-%E7%9A%84%E5%85%AD%E7%A7%8D%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/" data-title="unsafe.Pointer 的六种使用场景" data-via="xxxx" data-hashtags="unsafe包"><i class="fab fa-twitter fa-fw"></i></a><a href="#" title="分享到 Facebook" data-sharer="facebook" data-url="http://www.honghuiqiang.com/202304241708-unsafe.pointer-%E7%9A%84%E5%85%AD%E7%A7%8D%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/" data-hashtag="unsafe包"><i class="fab fa-facebook-square fa-fw"></i></a><a href="#" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="http://www.honghuiqiang.com/202304241708-unsafe.pointer-%E7%9A%84%E5%85%AD%E7%A7%8D%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/" data-title="unsafe.Pointer 的六种使用场景" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="#" title="分享到 Line" data-sharer="line" data-url="http://www.honghuiqiang.com/202304241708-unsafe.pointer-%E7%9A%84%E5%85%AD%E7%A7%8D%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/" data-title="unsafe.Pointer 的六种使用场景"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="#" title="分享到 微博" data-sharer="weibo" data-url="http://www.honghuiqiang.com/202304241708-unsafe.pointer-%E7%9A%84%E5%85%AD%E7%A7%8D%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/" data-title="unsafe.Pointer 的六种使用场景"><i class="fab fa-weibo fa-fw"></i></a><a href="#" title="分享到 Myspace" data-sharer="myspace" data-url="http://www.honghuiqiang.com/202304241708-unsafe.pointer-%E7%9A%84%E5%85%AD%E7%A7%8D%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/" data-title="unsafe.Pointer 的六种使用场景" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="#" title="分享到 Blogger" data-sharer="blogger" data-url="http://www.honghuiqiang.com/202304241708-unsafe.pointer-%E7%9A%84%E5%85%AD%E7%A7%8D%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/" data-title="unsafe.Pointer 的六种使用场景" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="#" title="分享到 Evernote" data-sharer="evernote" data-url="http://www.honghuiqiang.com/202304241708-unsafe.pointer-%E7%9A%84%E5%85%AD%E7%A7%8D%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/" data-title="unsafe.Pointer 的六种使用场景"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/unsafe%E5%8C%85/">unsafe包</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/202305040442-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/" class="prev" rel="prev" title="二叉搜索树"><i class="fas fa-angle-left fa-fw"></i>二叉搜索树</a>
+            <a href="/202304241738-struct-%E6%96%B9%E6%B3%95%E9%9B%86/" class="next" rel="next" title="struct 方法集概念">struct 方法集概念<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">
+                    由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.91.2">Hugo</a> 强力驱动&nbsp;|&nbsp;托管在 <a title="Github Pages" href="https://docs.github.com/en/pages/" target="_blank" rel="noopener noreffer">GitHub Pages</a> 上&nbsp;|&nbsp;主题 - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.3.0"><i class="far fa-edit fa-fw"></i> DoIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">索隆不喝酒</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+            <div class="footer-line"></div>
+            <div class="footer-line">
+            </div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="回到顶部">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div class="assets"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/katex/copy-tex.min.css">
+        <noscript><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"></noscript><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"data":{"desktop-header-typeit":"HHQ Records","mobile-header-typeit":"HHQ Records"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":50,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"sharerjs":true,"table":{"sort":true},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/lib/tablesort/tablesort.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js" defer></script><script type="text/javascript" src="/lib/katex/auto-render.min.js" defer></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js" defer></script><script type="text/javascript" src="/lib/katex/mhchem.min.js" defer></script><script type="text/javascript" src="/js/katex.min.js" defer></script><script type="text/javascript" src="/js/theme.min.js" defer></script></div>
+</body>
+
+</html>

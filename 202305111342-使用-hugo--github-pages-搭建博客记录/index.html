@@ -1,473 +1,94 @@
-
-
-<!DOCTYPE html>
-<html lang="zh-CN">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="noodp" />
-    <title>使用 Hugo &#43; GitHub Pages 搭建博客记录 - 学习记录</title><meta name="Description" content="这是我的网站描述"><meta property="og:title" content="使用 Hugo &#43; GitHub Pages 搭建博客记录" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="http://www.honghuiqiang.com/202305111342-%E4%BD%BF%E7%94%A8-hugo--github-pages-%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/" /><meta property="og:image" content="http://www.honghuiqiang.com/logo.png"/><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2023-05-11T13:05:00+08:00" />
-<meta property="article:modified_time" content="2023-05-11T13:05:00+08:00" /><meta property="og:site_name" content="学习记录" />
-<meta property="og:see_also" content="http://www.honghuiqiang.com/202305110815-%E4%BD%BF%E7%94%A8-github-action-%E6%9D%A5%E5%AE%8C%E6%88%90%E5%8D%9A%E5%AE%A2%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0/" /><meta property="og:see_also" content="http://www.honghuiqiang.com/202305110405-%E6%80%8E%E4%B9%88%E6%9D%A5%E8%A7%84%E5%88%92%E4%B8%80%E5%A4%A9%E5%81%9A%E6%97%A5%E8%AE%B0%E5%BD%95/" /><meta property="og:see_also" content="http://www.honghuiqiang.com/202305091805-%E9%87%8D%E6%96%B0%E6%95%B4%E7%90%86%E4%B8%80%E4%B8%8B%E8%87%AA%E5%B7%B1%E7%9A%84%E5%86%99%E4%BD%9C%E6%B5%81/" />
-
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="http://www.honghuiqiang.com/logo.png"/>
-
-<meta name="twitter:title" content="使用 Hugo &#43; GitHub Pages 搭建博客记录"/>
-<meta name="twitter:description" content=""/>
-<meta name="application-name" content="HHQ Records">
-<meta name="apple-mobile-web-app-title" content="HHQ Records">
-
-<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/zoro.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="http://www.honghuiqiang.com/202305111342-%E4%BD%BF%E7%94%A8-hugo--github-pages-%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/" /><link rel="prev" href="http://www.honghuiqiang.com/202305110815-%E4%BD%BF%E7%94%A8-github-action-%E6%9D%A5%E5%AE%8C%E6%88%90%E5%8D%9A%E5%AE%A2%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0/" /><link rel="next" href="http://www.honghuiqiang.com/202305111537-t1016-%E5%AD%90%E4%B8%B2%E8%83%BD%E8%A1%A8%E7%A4%BA%E4%BB%8E-1-%E5%88%B0-n-%E6%95%B0%E5%AD%97%E7%9A%84%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%B2/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
-        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
-        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@type": "BlogPosting",
-        "headline": "使用 Hugo + GitHub Pages 搭建博客记录",
-        "inLanguage": "zh-CN",
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "http:\/\/www.honghuiqiang.com\/202305111342-%E4%BD%BF%E7%94%A8-hugo--github-pages-%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95\/"
-        },"genre": "posts","keywords": "个人记录","wordcount":  660 ,
-        "url": "http:\/\/www.honghuiqiang.com\/202305111342-%E4%BD%BF%E7%94%A8-hugo--github-pages-%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95\/","datePublished": "2023-05-11T13:05:00+08:00","dateModified": "2023-05-11T13:05:00+08:00","publisher": {
-            "@type": "Organization",
-            "name": ""},"authors": [{
-                        "@type": "Person",
-                        "name": "索隆不喝酒"                    
-                    }],"description": ""
-    }
-    </script><script src="//instant.page/5.1.1" defer type="module" integrity="sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq"></script>
-</head>
-
-<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">
-        function setTheme(theme) {document.body.setAttribute('theme', theme); document.documentElement.style.setProperty('color-scheme', theme === 'light' ? 'light' : 'dark'); window.theme = theme;   window.isDark = window.theme !== 'light' }
-        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
-        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
-        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('dark' === 'light' || 'dark' === 'dark' || 'dark' === 'black') setTheme('dark'), saveTheme('dark'); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
-        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
-        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
-        window.switchThemeEventSet = new Set()
-    </script>
-    <div id="back-to-top"></div>
-    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
-    <div class="header-wrapper">
-        <div class="header-title">
-            <a href="/" title="学习记录"><span id="desktop-header-typeit" class="typeit"></span></a>
-        </div>
-        <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/series/"> 系列 </a><a class="menu-item" href="/tags/"> 标签 </a><span class="menu-item delimiter"></span><a href="#" class="menu-item language" title="选择语言">简体中文<i class="fas fa-chevron-right fa-fw"></i>
-                        <select class="language-select" title="Select Language" id="language-select-desktop" onchange="location = this.value;"><option value="/202305111342-%E4%BD%BF%E7%94%A8-hugo--github-pages-%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/" selected>简体中文</option></select>
-                    </a><span class="menu-item search" id="search-desktop">
-                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
-                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
-                            <i class="fas fa-search fa-fw"></i>
-                        </a>
-                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="清空">
-                            <i class="fas fa-times-circle fa-fw"></i>
-                        </a>
-                        <span class="search-button search-loading" id="search-loading-desktop">
-                            <i class="fas fa-spinner fa-fw fa-spin"></i>
-                        </span>
-                    </span><a href="#" class="menu-item theme-select" title="切换主题">
-                    <i class="fas fa-adjust fa-fw"></i>
-                    <select class="color-theme-select" id="theme-select-desktop" title="切换主题">
-                        <option value="light">浅色</option>
-                        <option value="dark">深色</option>
-                        <option value="black">黑色</option>
-                        <option value="auto">跟随系统</option>
-                    </select>
-                </a></div>
-        </div>
-    </div>
-</header><header class="mobile" id="header-mobile">
-    <div class="header-container">
-        <div class="header-wrapper">
-            <div class="header-title">
-                <a href="/" title="学习记录"><span id="mobile-header-typeit" class="typeit"></span></a>
-            </div>
-            <div class="menu-toggle" id="menu-toggle-mobile">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-        <div class="menu" id="menu-mobile"><div class="search-wrapper">
-                    <div class="search mobile" id="search-mobile">
-                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
-                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
-                            <i class="fas fa-search fa-fw"></i>
-                        </a>
-                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="清空">
-                            <i class="fas fa-times-circle fa-fw"></i>
-                        </a>
-                        <span class="search-button search-loading" id="search-loading-mobile">
-                            <i class="fas fa-spinner fa-fw fa-spin"></i>
-                        </span>
-                    </div>
-                    <a href="#" class="search-cancel" id="search-cancel-mobile">
-                        取消
-                    </a>
-                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/series/" title="">系列</a><a class="menu-item" href="/tags/" title="">标签</a><a href="#" class="menu-item theme-select" title="切换主题">
-                <i class="fas fa-adjust fa-fw"></i>
-                <select class="color-theme-select" id="theme-select-mobile" title="切换主题">
-                    <option value="light">浅色</option>
-                    <option value="dark">深色</option>
-                    <option value="black">黑色</option>
-                    <option value="auto">跟随系统</option>
-                </select>
-            </a><a href="#" class="menu-item" title="选择语言">简体中文<i class="fas fa-chevron-right fa-fw"></i>
-                    <select class="language-select" title="Select Language" onchange="location = this.value;"><option value="/202305111342-%E4%BD%BF%E7%94%A8-hugo--github-pages-%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/" selected>简体中文</option></select>
-                </a></div>
-    </div>
-</header>
-<div class="search-dropdown desktop">
-    <div id="search-dropdown-desktop"></div>
-</div>
-<div class="search-dropdown mobile">
-    <div id="search-dropdown-mobile"></div>
-</div>
-<main class="main">
-            <div class="container"><div class="toc" id="toc-auto">
-        <h2 class="toc-title">目录</h2>
-        <div class="toc-content" id="toc-content-auto"><nav id="TableOfContents">
-  <ul>
-    <li><a href="#hugo-安装">Hugo 安装</a></li>
-    <li><a href="#生成项目">生成项目</a></li>
-    <li><a href="#选择主题">选择主题</a></li>
-    <li><a href="#使用-github-pages-部署站点">使用 GitHub Pages 部署站点</a></li>
-    <li><a href="#注册域名">注册域名</a></li>
-  </ul>
-</nav></div>
-    </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">使用 Hugo &#43; GitHub Pages 搭建博客记录</h1><div class="post-meta">
-            <div class="post-meta-line">
-                <span class="post-author"><span class='author'><i class="author fas fa-user-circle fa-fw"></i><span class='screen-reader-text'>  </span><a href='http://www.honghuiqiang.com/authors/%E7%B4%A2%E9%9A%86%E4%B8%8D%E5%96%9D%E9%85%92'>索隆不喝酒</a></span>
-                </span>&nbsp;<span class="post-category">收录于 </span>&nbsp;<span class="post-category">类别 <a href="/categories/tools-method/"><i class="far fa-folder fa-fw"></i>Tools-Method</a></span>&nbsp;<span class="post-category">和</span>&nbsp;<span class="post-series">系列 <a href="/series/tools-method-box/"><i class="far fa-list-alt fa-fw"></i>Tools-Method-box</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-05-11">2023-05-11</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-05-11">2023-05-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 660 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
-        </div><div class="details series-nav open">
-                                <div class="details-summary series-title">
-                                    <span>系列 - Tools-Method-box</span>
-                                    <span><i class="details-icon fas fa-angle-right"></i></span>
-                                </div>
-                                <div class="details-content series-content">
-                                    <nav>
-                                        <ul><li><span class="active">使用 Hugo &#43; GitHub Pages 搭建博客记录</span></li>
-                                                    <li><a href="/202305110815-%E4%BD%BF%E7%94%A8-github-action-%E6%9D%A5%E5%AE%8C%E6%88%90%E5%8D%9A%E5%AE%A2%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0/">使用 GitHub Action 来完成博客自动更新</a></li>
-                                                    <li><a href="/202305110405-%E6%80%8E%E4%B9%88%E6%9D%A5%E8%A7%84%E5%88%92%E4%B8%80%E5%A4%A9%E5%81%9A%E6%97%A5%E8%AE%B0%E5%BD%95/">怎么来规划一天、做日记录</a></li>
-                                                    <li><a href="/202305091805-%E9%87%8D%E6%96%B0%E6%95%B4%E7%90%86%E4%B8%80%E4%B8%8B%E8%87%AA%E5%B7%B1%E7%9A%84%E5%86%99%E4%BD%9C%E6%B5%81/">重新整理一下自己的写作流</a></li></ul>
-                                    </nav>
-                                </div>
-                            </div><div class="details toc" id="toc-static"  kept="">
-                <div class="details-summary toc-title">
-                    <span>目录</span>
-                    <span><i class="details-icon fas fa-angle-right"></i></span>
-                </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
-  <ul>
-    <li><a href="#hugo-安装">Hugo 安装</a></li>
-    <li><a href="#生成项目">生成项目</a></li>
-    <li><a href="#选择主题">选择主题</a></li>
-    <li><a href="#使用-github-pages-部署站点">使用 GitHub Pages 部署站点</a></li>
-    <li><a href="#注册域名">注册域名</a></li>
-  </ul>
-</nav></div>
-            </div><div class="content" id="content"><p>#个人记录</p>
-<blockquote>
-<p>windows 环境</p>
-</blockquote>
-<h2 id="hugo-安装" class="headerLink">
-    <a href="#hugo-%e5%ae%89%e8%a3%85" class="header-mark"></a>Hugo 安装</h2><p>依赖/版本：</p>
-<ul>
-<li>Go 1.20.4（不同的 hugo 依赖的 go 版本可能不同，注意分辨）</li>
-<li>Hugo v0.91.2-1798BD3F+extended</li>
-<li>Git</li>
-</ul>
-<p>可以直接在 Hugo 已发布的<a href="https://github.com/gohugoio/hugo/releases" target="_blank" rel="noopener noreferrer">版本</a> 中直接下载二进制文件来运行</p>
-<p>可以在环境变量中添加一个专门放自己二进制文件的目录：
-<figure><a class="lightgallery" href="/images/posts/Pasted%20image%2020230511134846.png" title="/images/posts/Pasted%20image%2020230511134846.png" data-thumbnail="/images/posts/Pasted%20image%2020230511134846.png">
-        <img
-            
-            loading="lazy"
-            src="/images/posts/Pasted%20image%2020230511134846.png"
-            srcset="/images/posts/Pasted%20image%2020230511134846.png, /images/posts/Pasted%20image%2020230511134846.png 1.5x, /images/posts/Pasted%20image%2020230511134846.png 2x"
-            sizes="auto"
-            alt="/images/posts/Pasted%20image%2020230511134846.png">
-    </a></figure></p>
-<p>将上面下载的 hugo 二进制文件放到上面定义的目录下，就能够直接运行这个命令了
-<figure><a class="lightgallery" href="/images/posts/Pasted%20image%2020230511135242.png" title="/images/posts/Pasted%20image%2020230511135242.png" data-thumbnail="/images/posts/Pasted%20image%2020230511135242.png">
-        <img
-            
-            loading="lazy"
-            src="/images/posts/Pasted%20image%2020230511135242.png"
-            srcset="/images/posts/Pasted%20image%2020230511135242.png, /images/posts/Pasted%20image%2020230511135242.png 1.5x, /images/posts/Pasted%20image%2020230511135242.png 2x"
-            sizes="auto"
-            alt="/images/posts/Pasted%20image%2020230511135242.png">
-    </a></figure>
-<figure><a class="lightgallery" href="/images/posts/Pasted%20image%2020230511135031.png" title="/images/posts/Pasted%20image%2020230511135031.png" data-thumbnail="/images/posts/Pasted%20image%2020230511135031.png">
-        <img
-            
-            loading="lazy"
-            src="/images/posts/Pasted%20image%2020230511135031.png"
-            srcset="/images/posts/Pasted%20image%2020230511135031.png, /images/posts/Pasted%20image%2020230511135031.png 1.5x, /images/posts/Pasted%20image%2020230511135031.png 2x"
-            sizes="auto"
-            alt="/images/posts/Pasted%20image%2020230511135031.png">
-    </a></figure></p>
-<h2 id="生成项目" class="headerLink">
-    <a href="#%e7%94%9f%e6%88%90%e9%a1%b9%e7%9b%ae" class="header-mark"></a>生成项目</h2><p>具体可以参考文档：<a href="https://gohugo.io/getting-started/quick-start/" target="_blank" rel="noopener noreferrer">https://gohugo.io/getting-started/quick-start/</a></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-v" data-lang="v"><span class="line"><span class="cl"><span class="nv">hugo</span> <span class="nv">new</span> <span class="nv">site</span> <span class="nv">demo1</span>         <span class="o">#</span> <span class="nv">生成项目结构</span>
-</span></span><span class="line"><span class="cl"><span class="nv">cd</span> <span class="nv">demo1</span>
-</span></span><span class="line"><span class="cl"><span class="nv">git</span> <span class="nv">init</span>                    <span class="o">#</span> <span class="nv">将项目初始化成</span> <span class="nv">git</span> <span class="nv">项目</span>
-</span></span><span class="line"><span class="cl"><span class="o">#</span> <span class="nv">克隆一个主题</span>
-</span></span><span class="line"><span class="cl"><span class="nv">git</span> <span class="nv">submodule</span> <span class="nv">add</span> <span class="nv">git</span><span class="o">@</span><span class="nv">github</span><span class="p">.</span><span class="nv">com</span><span class="p">:</span><span class="nv">theNewDynamic</span><span class="o">/</span><span class="nv">gohugo</span><span class="o">-</span><span class="nv">theme</span><span class="o">-</span><span class="nv">ananke</span><span class="p">.</span><span class="nv">git</span> <span class="nv">themes</span><span class="o">/</span><span class="nv">ananke</span>
-</span></span><span class="line"><span class="cl"><span class="nv">echo</span> <span class="s2">&#34;theme = &#39;ananke&#39;&#34;</span> <span class="o">&gt;&gt;</span> <span class="nv">config</span><span class="p">.</span><span class="nv">toml</span> <span class="o">#</span> <span class="nv">把主题选择写入配置文件</span><span class="err">，</span><span class="nv">选择上面克隆的主题</span>
-</span></span><span class="line"><span class="cl">  
-</span></span><span class="line"><span class="cl"><span class="nv">hugo</span> <span class="nv">new</span> <span class="nv">posts</span><span class="o">/</span><span class="nv">test_post</span><span class="p">.</span><span class="nv">md</span> <span class="o">#</span> <span class="nv">写一个测试文档</span>
-</span></span><span class="line"><span class="cl"><span class="nv">hugo</span> <span class="nv">server</span> <span class="o">--</span><span class="nv">buildDrafts</span>                 <span class="o">#</span> <span class="nv">本地运行</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>运行之后本地访问 <code>localhost:1313</code>：
-<figure><a class="lightgallery" href="/images/posts/Pasted%20image%2020230511140507.png" title="/images/posts/Pasted%20image%2020230511140507.png" data-thumbnail="/images/posts/Pasted%20image%2020230511140507.png">
-        <img
-            
-            loading="lazy"
-            src="/images/posts/Pasted%20image%2020230511140507.png"
-            srcset="/images/posts/Pasted%20image%2020230511140507.png, /images/posts/Pasted%20image%2020230511140507.png 1.5x, /images/posts/Pasted%20image%2020230511140507.png 2x"
-            sizes="auto"
-            alt="/images/posts/Pasted%20image%2020230511140507.png">
-    </a></figure></p>
-<p>项目结构：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ tree -d -L 2
-</span></span><span class="line"><span class="cl">.
-</span></span><span class="line"><span class="cl">|-- archetypes
-</span></span><span class="line"><span class="cl">|-- content
-</span></span><span class="line"><span class="cl">|   `-- posts
-</span></span><span class="line"><span class="cl">|-- data
-</span></span><span class="line"><span class="cl">|-- gohugo-theme-ananke
-</span></span><span class="line"><span class="cl">|   |-- archetypes
-</span></span><span class="line"><span class="cl">|   |-- assets
-</span></span><span class="line"><span class="cl">|   |-- exampleSite
-</span></span><span class="line"><span class="cl">|   |-- i18n
-</span></span><span class="line"><span class="cl">|   |-- images
-</span></span><span class="line"><span class="cl">|   |-- layouts
-</span></span><span class="line"><span class="cl">|   |-- resources
-</span></span><span class="line"><span class="cl">|   `-- static
-</span></span><span class="line"><span class="cl">|-- layouts
-</span></span><span class="line"><span class="cl">|-- public
-</span></span><span class="line"><span class="cl">|-- resources
-</span></span><span class="line"><span class="cl">|   `-- _gen
-</span></span><span class="line"><span class="cl">|-- static
-</span></span><span class="line"><span class="cl">`-- themes
-</span></span><span class="line"><span class="cl">    `-- ananke
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="选择主题" class="headerLink">
-    <a href="#%e9%80%89%e6%8b%a9%e4%b8%bb%e9%a2%98" class="header-mark"></a>选择主题</h2><ol>
-<li>
-<p>挑选喜欢的主题仓库，克隆到 themes 目录下
-<a href="https://themes.gohugo.io/" target="_blank" rel="noopener noreferrer">https://themes.gohugo.io/</a></p>
-</li>
-<li>
-<p>编辑 config.toml 配置文件</p>
-</li>
-</ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">...
-</span></span><span class="line"><span class="cl">theme = &#39;主题&#39;
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>或者比较成熟的主题一般都会有自己的完善的配置文档，直接参照即可，本博客使用 <a href="https://hugodoit.pages.dev/zh-cn/" target="_blank" rel="noopener noreferrer">Doit </a>主题</p>
-<h2 id="使用-github-pages-部署站点" class="headerLink">
-    <a href="#%e4%bd%bf%e7%94%a8-github-pages-%e9%83%a8%e7%bd%b2%e7%ab%99%e7%82%b9" class="header-mark"></a>使用 GitHub Pages 部署站点</h2><p>使用 <code>hugo</code> 命令在自己的博客根目录生成博客站点文件夹 <code>public</code></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">hugo
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">cd public
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p><figure><a class="lightgallery" href="/images/posts/Pasted%20image%2020230511141545.png" title="/images/posts/Pasted%20image%2020230511141545.png" data-thumbnail="/images/posts/Pasted%20image%2020230511141545.png">
-        <img
-            
-            loading="lazy"
-            src="/images/posts/Pasted%20image%2020230511141545.png"
-            srcset="/images/posts/Pasted%20image%2020230511141545.png, /images/posts/Pasted%20image%2020230511141545.png 1.5x, /images/posts/Pasted%20image%2020230511141545.png 2x"
-            sizes="auto"
-            alt="/images/posts/Pasted%20image%2020230511141545.png">
-    </a></figure></p>
-<p>新建一个 <code>username.github.io</code> 的仓库，比如我的仓库名为 904566722.github.io ，然后将上面生成的 public 文件夹的内容推送到该仓库</p>
-<p>然后就可以使用 username.github.io 来访问该网站了</p>
-<h2 id="注册域名" class="headerLink">
-    <a href="#%e6%b3%a8%e5%86%8c%e5%9f%9f%e5%90%8d" class="header-mark"></a>注册域名</h2><p>为了能够使用自己的域名来访问博客，可以注册一个域名，我这边使用腾讯云的域名，购买完成后配置解析：
-<figure><a class="lightgallery" href="/images/posts/Pasted%20image%2020230511141845.png" title="/images/posts/Pasted%20image%2020230511141845.png" data-thumbnail="/images/posts/Pasted%20image%2020230511141845.png">
-        <img
-            
-            loading="lazy"
-            src="/images/posts/Pasted%20image%2020230511141845.png"
-            srcset="/images/posts/Pasted%20image%2020230511141845.png, /images/posts/Pasted%20image%2020230511141845.png 1.5x, /images/posts/Pasted%20image%2020230511141845.png 2x"
-            sizes="auto"
-            alt="/images/posts/Pasted%20image%2020230511141845.png">
-    </a></figure></p>
-<p>下一步是在 username.github.io 中配置自己的域名：
-<figure><a class="lightgallery" href="/images/posts/Pasted%20image%2020230511142007.png" title="/images/posts/Pasted%20image%2020230511142007.png" data-thumbnail="/images/posts/Pasted%20image%2020230511142007.png">
-        <img
-            
-            loading="lazy"
-            src="/images/posts/Pasted%20image%2020230511142007.png"
-            srcset="/images/posts/Pasted%20image%2020230511142007.png, /images/posts/Pasted%20image%2020230511142007.png 1.5x, /images/posts/Pasted%20image%2020230511142007.png 2x"
-            sizes="auto"
-            alt="/images/posts/Pasted%20image%2020230511142007.png">
-    </a></figure></p>
-<p>配置完成后就可以使用自己的域名来访问网站啦</p>
-<p><figure><a class="lightgallery" href="/images/posts/Pasted%20image%2020230511142154.png" title="/images/posts/Pasted%20image%2020230511142154.png" data-thumbnail="/images/posts/Pasted%20image%2020230511142154.png">
-        <img
-            
-            loading="lazy"
-            src="/images/posts/Pasted%20image%2020230511142154.png"
-            srcset="/images/posts/Pasted%20image%2020230511142154.png, /images/posts/Pasted%20image%2020230511142154.png 1.5x, /images/posts/Pasted%20image%2020230511142154.png 2x"
-            sizes="auto"
-            alt="/images/posts/Pasted%20image%2020230511142154.png">
-    </a></figure></p></div>
-
-        
-
-
-<h2>相关内容</h2>
-<div class="related-container">
-    <div class="related-item-container">
-            <div class="related-image">
-                <a href="/202305110815-%E4%BD%BF%E7%94%A8-github-action-%E6%9D%A5%E5%AE%8C%E6%88%90%E5%8D%9A%E5%AE%A2%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0/"><img
-        
-        loading="lazy"
-        src="/images/product/gh-action.png"
-        srcset="/images/product/gh-action.png, /images/product/gh-action.png 1.5x, /images/product/gh-action.png 2x"
-        sizes="auto"
-        alt="/images/product/gh-action.png"
-        title="/images/product/gh-action.png" height="200"   width="400" ></a>
-            </div><h2 class="related-title">
-                <a href="/202305110815-%E4%BD%BF%E7%94%A8-github-action-%E6%9D%A5%E5%AE%8C%E6%88%90%E5%8D%9A%E5%AE%A2%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0/">使用 GitHub Action 来完成博客自动更新</a>
-            </h2>
-        </div>
-    <div class="related-item-container">
-            <h2 class="related-title">
-                <a href="/202305110405-%E6%80%8E%E4%B9%88%E6%9D%A5%E8%A7%84%E5%88%92%E4%B8%80%E5%A4%A9%E5%81%9A%E6%97%A5%E8%AE%B0%E5%BD%95/">怎么来规划一天、做日记录</a>
-            </h2>
-        </div>
-    <div class="related-item-container">
-            <h2 class="related-title">
-                <a href="/202305101151-%E5%BC%80%E5%A7%8B%E8%AE%B0%E5%BD%95%E4%B8%80%E4%BA%9B%E6%88%91%E7%9A%84%E5%B7%A5%E5%85%B7%E4%BE%BF%E6%8D%B7%E6%93%8D%E4%BD%9C/">开始记录一些我的工具、便捷操作[持续记录...]</a>
-            </h2>
-        </div>
-    <div class="related-item-container">
-            <h2 class="related-title">
-                <a href="/202305091805-%E9%87%8D%E6%96%B0%E6%95%B4%E7%90%86%E4%B8%80%E4%B8%8B%E8%87%AA%E5%B7%B1%E7%9A%84%E5%86%99%E4%BD%9C%E6%B5%81/">重新整理一下自己的写作流</a>
-            </h2>
-        </div>
-    <div class="related-item-container">
-            <h2 class="related-title">
-                <a href="/202304301159-leetcode-%E5%91%A8%E8%B5%9B%E5%8F%82%E5%8A%A0%E8%AE%B0%E5%BD%95/">Leetcode 周赛记录</a>
-            </h2>
-        </div>
-    
-
-</div>
-
-<div class="post-footer" id="post-footer">
-    <div class="post-info">
-        <div class="post-info-line">
-            <div class="post-info-mod">
-                <span>更新于 2023-05-11</span>
-            </div>
-            <div class="post-info-license"></div>
-        </div>
-        <div class="post-info-line">
-            <div class="post-info-md"><span><a class="link-to-mardown" href=/202305111342-%E4%BD%BF%E7%94%A8-hugo--github-pages-%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/index.md target="_blank" rel="noopener noreferrer">阅读原始文档</a>
-                    </span></div>
-            <div class="post-info-share">
-                <span><a href="#" title="分享到 Twitter" data-sharer="twitter" data-url="http://www.honghuiqiang.com/202305111342-%E4%BD%BF%E7%94%A8-hugo--github-pages-%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/" data-title="使用 Hugo &#43; GitHub Pages 搭建博客记录" data-via="xxxx" data-hashtags="个人记录"><i class="fab fa-twitter fa-fw"></i></a><a href="#" title="分享到 Facebook" data-sharer="facebook" data-url="http://www.honghuiqiang.com/202305111342-%E4%BD%BF%E7%94%A8-hugo--github-pages-%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/" data-hashtag="个人记录"><i class="fab fa-facebook-square fa-fw"></i></a><a href="#" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="http://www.honghuiqiang.com/202305111342-%E4%BD%BF%E7%94%A8-hugo--github-pages-%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/" data-title="使用 Hugo &#43; GitHub Pages 搭建博客记录" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="#" title="分享到 Line" data-sharer="line" data-url="http://www.honghuiqiang.com/202305111342-%E4%BD%BF%E7%94%A8-hugo--github-pages-%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/" data-title="使用 Hugo &#43; GitHub Pages 搭建博客记录"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="#" title="分享到 微博" data-sharer="weibo" data-url="http://www.honghuiqiang.com/202305111342-%E4%BD%BF%E7%94%A8-hugo--github-pages-%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/" data-title="使用 Hugo &#43; GitHub Pages 搭建博客记录"><i class="fab fa-weibo fa-fw"></i></a><a href="#" title="分享到 Myspace" data-sharer="myspace" data-url="http://www.honghuiqiang.com/202305111342-%E4%BD%BF%E7%94%A8-hugo--github-pages-%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/" data-title="使用 Hugo &#43; GitHub Pages 搭建博客记录" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="#" title="分享到 Blogger" data-sharer="blogger" data-url="http://www.honghuiqiang.com/202305111342-%E4%BD%BF%E7%94%A8-hugo--github-pages-%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/" data-title="使用 Hugo &#43; GitHub Pages 搭建博客记录" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="#" title="分享到 Evernote" data-sharer="evernote" data-url="http://www.honghuiqiang.com/202305111342-%E4%BD%BF%E7%94%A8-hugo--github-pages-%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/" data-title="使用 Hugo &#43; GitHub Pages 搭建博客记录"><i class="fab fa-evernote fa-fw"></i></a></span>
-            </div>
-        </div>
-    </div>
-
-    <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/">个人记录</a></section>
-        <section>
-            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
-        </section>
-    </div>
-
-    <div class="post-nav"><a href="/202305110815-%E4%BD%BF%E7%94%A8-github-action-%E6%9D%A5%E5%AE%8C%E6%88%90%E5%8D%9A%E5%AE%A2%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0/" class="prev" rel="prev" title="使用 GitHub Action 来完成博客自动更新"><i class="fas fa-angle-left fa-fw"></i>使用 GitHub Action 来完成博客自动更新</a>
-            <a href="/202305111537-t1016-%E5%AD%90%E4%B8%B2%E8%83%BD%E8%A1%A8%E7%A4%BA%E4%BB%8E-1-%E5%88%B0-n-%E6%95%B0%E5%AD%97%E7%9A%84%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%B2/" class="next" rel="next" title="子串能表示从 1 到 N 数字的二进制串">子串能表示从 1 到 N 数字的二进制串<i class="fas fa-angle-right fa-fw"></i></a></div>
-</div>
-<div id="comments"></div></article></div>
-        </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">
-                    由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.105.0">Hugo</a> 强力驱动&nbsp;|&nbsp;托管在 <a title="Github Pages" href="https://docs.github.com/en/pages/" target="_blank" rel="noopener noreffer">GitHub Pages</a> 上&nbsp;|&nbsp;主题 - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.3.0"><i class="far fa-edit fa-fw"></i> DoIt</a>
-                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">索隆不喝酒</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
-            <div class="footer-line"></div>
-            <div class="footer-line">
-            </div>
-        </div></footer></div>
-
-    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="回到顶部">
-            <i class="fas fa-arrow-up fa-fw"></i>
-        </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
-            <i class="fas fa-comment fa-fw"></i>
-        </a>
-    </div><div class="assets"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/katex/copy-tex.min.css">
-        <noscript><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"></noscript><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"data":{"desktop-header-typeit":"HHQ Records","mobile-header-typeit":"HHQ Records"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":50,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"sharerjs":true,"table":{"sort":true},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/lib/tablesort/tablesort.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js" defer></script><script type="text/javascript" src="/lib/katex/auto-render.min.js" defer></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js" defer></script><script type="text/javascript" src="/lib/katex/mhchem.min.js" defer></script><script type="text/javascript" src="/js/katex.min.js" defer></script><script type="text/javascript" src="/js/theme.min.js" defer></script></div>
-</body>
-
-</html>
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>使用 Hugo + GitHub Pages 搭建博客记录 - 学习记录</title><meta name=Description content="这是我的网站描述"><meta property="og:title" content="使用 Hugo + GitHub Pages 搭建博客记录"><meta property="og:description" content><meta property="og:type" content="article"><meta property="og:url" content="http://www.honghuiqiang.com/202305111342-%E4%BD%BF%E7%94%A8-hugo--github-pages-%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/"><meta property="og:image" content="http://www.honghuiqiang.com/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-05-11T13:05:00+08:00"><meta property="article:modified_time" content="2023-05-11T13:05:00+08:00"><meta property="og:site_name" content="学习记录"><meta property="og:see_also" content="http://www.honghuiqiang.com/202305110815-%E4%BD%BF%E7%94%A8-github-action-%E6%9D%A5%E5%AE%8C%E6%88%90%E5%8D%9A%E5%AE%A2%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0/"><meta property="og:see_also" content="http://www.honghuiqiang.com/202305110405-%E6%80%8E%E4%B9%88%E6%9D%A5%E8%A7%84%E5%88%92%E4%B8%80%E5%A4%A9%E5%81%9A%E6%97%A5%E8%AE%B0%E5%BD%95/"><meta property="og:see_also" content="http://www.honghuiqiang.com/202305091805-%E9%87%8D%E6%96%B0%E6%95%B4%E7%90%86%E4%B8%80%E4%B8%8B%E8%87%AA%E5%B7%B1%E7%9A%84%E5%86%99%E4%BD%9C%E6%B5%81/"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="http://www.honghuiqiang.com/logo.png"><meta name=twitter:title content="使用 Hugo + GitHub Pages 搭建博客记录"><meta name=twitter:description content><meta name=application-name content="HHQ Records"><meta name=apple-mobile-web-app-title content="HHQ Records"><meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel=icon href=/images/zoro.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=canonical href=http://www.honghuiqiang.com/202305111342-%E4%BD%BF%E7%94%A8-hugo--github-pages-%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/><link rel=prev href=http://www.honghuiqiang.com/202305110815-%E4%BD%BF%E7%94%A8-github-action-%E6%9D%A5%E5%AE%8C%E6%88%90%E5%8D%9A%E5%AE%A2%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0/><link rel=next href=http://www.honghuiqiang.com/202305111537-t1016-%E5%AD%90%E4%B8%B2%E8%83%BD%E8%A1%A8%E7%A4%BA%E4%BB%8E-1-%E5%88%B0-n-%E6%95%B0%E5%AD%97%E7%9A%84%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%B2/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/color.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/fontawesome-free/all.min.css><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/animate/animate.min.css><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"使用 Hugo + GitHub Pages 搭建博客记录","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http:\/\/www.honghuiqiang.com\/202305111342-%E4%BD%BF%E7%94%A8-hugo--github-pages-%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95\/"},"genre":"posts","keywords":"个人记录","wordcount":660,"url":"http:\/\/www.honghuiqiang.com\/202305111342-%E4%BD%BF%E7%94%A8-hugo--github-pages-%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95\/","datePublished":"2023-05-11T13:05:00+08:00","dateModified":"2023-05-11T13:05:00+08:00","publisher":{"@type":"Organization","name":""},"authors":[{"@type":"Person","name":"索隆不喝酒"}],"description":""}</script><script src=//instant.page/5.1.1 defer type=module integrity=sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq></script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(e){document.body.setAttribute("theme",e),document.documentElement.style.setProperty("color-scheme",e==="light"?"light":"dark"),window.theme=e,window.isDark=window.theme!=="light"}function saveTheme(e){window.localStorage&&localStorage.setItem("theme",e)}function getMeta(e){const t=document.getElementsByTagName("meta");for(let n=0;n<t.length;n++)if(t[n].getAttribute("name")===e)return t[n];return""}if(window.localStorage&&localStorage.getItem("theme")){let e=localStorage.getItem("theme");e==="light"||e==="dark"||e==="black"?setTheme(e):setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}else"dark"==="light"||"dark"==="dark"||"dark"==="black"?(setTheme("dark"),saveTheme("dark")):(saveTheme("auto"),setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));let metaColors={light:"#f8f8f8",dark:"#252627",black:"#000000"};getMeta("theme-color").content=metaColors[document.body.getAttribute("theme")],window.switchThemeEventSet=new Set</script><div id=back-to-top></div><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=学习记录><span id=desktop-header-typeit class=typeit></span></a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>文章 </a><a class=menu-item href=/categories/>分类 </a><a class=menu-item href=/series/>系列 </a><a class=menu-item href=/tags/>标签 </a><span class="menu-item delimiter"></span><a href=# class="menu-item language" title=选择语言>简体中文<i class="fas fa-chevron-right fa-fw"></i>
+<select class=language-select title="Select Language" id=language-select-desktop onchange="location=this.value"><option value=/202305111342-%E4%BD%BF%E7%94%A8-hugo--github-pages-%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/ selected>简体中文</option></select>
+</a><span class="menu-item search" id=search-desktop><input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=# class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=# class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span>
+</span><a href=# class="menu-item theme-select" title=切换主题><i class="fas fa-adjust fa-fw"></i>
+<select class=color-theme-select id=theme-select-desktop title=切换主题><option value=light>浅色</option><option value=dark>深色</option><option value=black>黑色</option><option value=auto>跟随系统</option></select></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=学习记录><span id=mobile-header-typeit class=typeit></span></a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=# class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=# class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=# class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/ title>文章</a><a class=menu-item href=/categories/ title>分类</a><a class=menu-item href=/series/ title>系列</a><a class=menu-item href=/tags/ title>标签</a><a href=# class="menu-item theme-select" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+<select class=color-theme-select id=theme-select-mobile title=切换主题><option value=light>浅色</option><option value=dark>深色</option><option value=black>黑色</option><option value=auto>跟随系统</option></select>
+</a><a href=# class=menu-item title=选择语言>简体中文<i class="fas fa-chevron-right fa-fw"></i>
+<select class=language-select title="Select Language" onchange="location=this.value"><option value=/202305111342-%E4%BD%BF%E7%94%A8-hugo--github-pages-%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/ selected>简体中文</option></select></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto><nav id=TableOfContents><ul><li><a href=#hugo-安装>Hugo 安装</a></li><li><a href=#生成项目>生成项目</a></li><li><a href=#选择主题>选择主题</a></li><li><a href=#使用-github-pages-部署站点>使用 GitHub Pages 部署站点</a></li><li><a href=#注册域名>注册域名</a></li></ul></nav></div></div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">使用 Hugo + GitHub Pages 搭建博客记录</h1><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=http://www.honghuiqiang.com/authors/%E7%B4%A2%E9%9A%86%E4%B8%8D%E5%96%9D%E9%85%92>索隆不喝酒</a></span>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/tools-method/><i class="far fa-folder fa-fw"></i>Tools-Method</a></span>&nbsp;<span class=post-category>和</span>&nbsp;<span class=post-series>系列 <a href=/series/tools-method-box/><i class="far fa-list-alt fa-fw"></i>Tools-Method-box</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2023-05-11>2023-05-11</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2023-05-11>2023-05-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 660 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div></div><div class="details series-nav open"><div class="details-summary series-title"><span>系列 - Tools-Method-box</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content series-content"><nav><ul><li><span class=active>使用 Hugo + GitHub Pages 搭建博客记录</span></li><li><a href=/202305110815-%E4%BD%BF%E7%94%A8-github-action-%E6%9D%A5%E5%AE%8C%E6%88%90%E5%8D%9A%E5%AE%A2%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0/>使用 GitHub Action 来完成博客自动更新</a></li><li><a href=/202305110405-%E6%80%8E%E4%B9%88%E6%9D%A5%E8%A7%84%E5%88%92%E4%B8%80%E5%A4%A9%E5%81%9A%E6%97%A5%E8%AE%B0%E5%BD%95/>怎么来规划一天、做日记录</a></li><li><a href=/202305091805-%E9%87%8D%E6%96%B0%E6%95%B4%E7%90%86%E4%B8%80%E4%B8%8B%E8%87%AA%E5%B7%B1%E7%9A%84%E5%86%99%E4%BD%9C%E6%B5%81/>重新整理一下自己的写作流</a></li></ul></nav></div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#hugo-安装>Hugo 安装</a></li><li><a href=#生成项目>生成项目</a></li><li><a href=#选择主题>选择主题</a></li><li><a href=#使用-github-pages-部署站点>使用 GitHub Pages 部署站点</a></li><li><a href=#注册域名>注册域名</a></li></ul></nav></div></div><div class=content id=content><p>#个人记录</p><blockquote><p>windows 环境</p></blockquote><h2 id=hugo-安装 class=headerLink><a href=#hugo-%e5%ae%89%e8%a3%85 class=header-mark></a>Hugo 安装</h2><p>依赖/版本：</p><ul><li>Go 1.20.4（不同的 hugo 依赖的 go 版本可能不同，注意分辨）</li><li>Hugo v0.91.2-1798BD3F+extended</li><li>Git</li></ul><p>可以直接在 Hugo 已发布的<a href=https://github.com/gohugoio/hugo/releases target=_blank rel="noopener noreferrer">版本</a> 中直接下载二进制文件来运行</p><p>可以在环境变量中添加一个专门放自己二进制文件的目录：<figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230511134846.png title=/images/posts/Pasted%20image%2020230511134846.png data-thumbnail=/images/posts/Pasted%20image%2020230511134846.png><img loading=lazy src=/images/posts/Pasted%20image%2020230511134846.png srcset="/images/posts/Pasted%20image%2020230511134846.png, /images/posts/Pasted%20image%2020230511134846.png 1.5x, /images/posts/Pasted%20image%2020230511134846.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230511134846.png></a></figure></p><p>将上面下载的 hugo 二进制文件放到上面定义的目录下，就能够直接运行这个命令了<figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230511135242.png title=/images/posts/Pasted%20image%2020230511135242.png data-thumbnail=/images/posts/Pasted%20image%2020230511135242.png><img loading=lazy src=/images/posts/Pasted%20image%2020230511135242.png srcset="/images/posts/Pasted%20image%2020230511135242.png, /images/posts/Pasted%20image%2020230511135242.png 1.5x, /images/posts/Pasted%20image%2020230511135242.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230511135242.png></a></figure><figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230511135031.png title=/images/posts/Pasted%20image%2020230511135031.png data-thumbnail=/images/posts/Pasted%20image%2020230511135031.png><img loading=lazy src=/images/posts/Pasted%20image%2020230511135031.png srcset="/images/posts/Pasted%20image%2020230511135031.png, /images/posts/Pasted%20image%2020230511135031.png 1.5x, /images/posts/Pasted%20image%2020230511135031.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230511135031.png></a></figure></p><h2 id=生成项目 class=headerLink><a href=#%e7%94%9f%e6%88%90%e9%a1%b9%e7%9b%ae class=header-mark></a>生成项目</h2><p>具体可以参考文档：<a href=https://gohugo.io/getting-started/quick-start/ target=_blank rel="noopener noreferrer">https://gohugo.io/getting-started/quick-start/</a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-v data-lang=v><span class=line><span class=cl><span class=nv>hugo</span> <span class=nv>new</span> <span class=nv>site</span> <span class=nv>demo1</span>         <span class=o>#</span> <span class=nv>生成项目结构</span>
+</span></span><span class=line><span class=cl><span class=nv>cd</span> <span class=nv>demo1</span>
+</span></span><span class=line><span class=cl><span class=nv>git</span> <span class=nv>init</span>                    <span class=o>#</span> <span class=nv>将项目初始化成</span> <span class=nv>git</span> <span class=nv>项目</span>
+</span></span><span class=line><span class=cl><span class=o>#</span> <span class=nv>克隆一个主题</span>
+</span></span><span class=line><span class=cl><span class=nv>git</span> <span class=nv>submodule</span> <span class=nv>add</span> <span class=nv>git</span><span class=o>@</span><span class=nv>github</span><span class=p>.</span><span class=nv>com</span><span class=p>:</span><span class=nv>theNewDynamic</span><span class=o>/</span><span class=nv>gohugo</span><span class=o>-</span><span class=nv>theme</span><span class=o>-</span><span class=nv>ananke</span><span class=p>.</span><span class=nv>git</span> <span class=nv>themes</span><span class=o>/</span><span class=nv>ananke</span>
+</span></span><span class=line><span class=cl><span class=nv>echo</span> <span class=s2>&#34;theme = &#39;ananke&#39;&#34;</span> <span class=o>&gt;&gt;</span> <span class=nv>config</span><span class=p>.</span><span class=nv>toml</span> <span class=o>#</span> <span class=nv>把主题选择写入配置文件</span><span class=err>，</span><span class=nv>选择上面克隆的主题</span>
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=nv>hugo</span> <span class=nv>new</span> <span class=nv>posts</span><span class=o>/</span><span class=nv>test_post</span><span class=p>.</span><span class=nv>md</span> <span class=o>#</span> <span class=nv>写一个测试文档</span>
+</span></span><span class=line><span class=cl><span class=nv>hugo</span> <span class=nv>server</span> <span class=o>--</span><span class=nv>buildDrafts</span>                 <span class=o>#</span> <span class=nv>本地运行</span>
+</span></span></code></pre></td></tr></table></div></div><p>运行之后本地访问 <code>localhost:1313</code>：<figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230511140507.png title=/images/posts/Pasted%20image%2020230511140507.png data-thumbnail=/images/posts/Pasted%20image%2020230511140507.png><img loading=lazy src=/images/posts/Pasted%20image%2020230511140507.png srcset="/images/posts/Pasted%20image%2020230511140507.png, /images/posts/Pasted%20image%2020230511140507.png 1.5x, /images/posts/Pasted%20image%2020230511140507.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230511140507.png></a></figure></p><p>项目结构：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>$ tree -d -L 2
+</span></span><span class=line><span class=cl>.
+</span></span><span class=line><span class=cl>|-- archetypes
+</span></span><span class=line><span class=cl>|-- content
+</span></span><span class=line><span class=cl>|   `-- posts
+</span></span><span class=line><span class=cl>|-- data
+</span></span><span class=line><span class=cl>|-- gohugo-theme-ananke
+</span></span><span class=line><span class=cl>|   |-- archetypes
+</span></span><span class=line><span class=cl>|   |-- assets
+</span></span><span class=line><span class=cl>|   |-- exampleSite
+</span></span><span class=line><span class=cl>|   |-- i18n
+</span></span><span class=line><span class=cl>|   |-- images
+</span></span><span class=line><span class=cl>|   |-- layouts
+</span></span><span class=line><span class=cl>|   |-- resources
+</span></span><span class=line><span class=cl>|   `-- static
+</span></span><span class=line><span class=cl>|-- layouts
+</span></span><span class=line><span class=cl>|-- public
+</span></span><span class=line><span class=cl>|-- resources
+</span></span><span class=line><span class=cl>|   `-- _gen
+</span></span><span class=line><span class=cl>|-- static
+</span></span><span class=line><span class=cl>`-- themes
+</span></span><span class=line><span class=cl>    `-- ananke
+</span></span></code></pre></td></tr></table></div></div><h2 id=选择主题 class=headerLink><a href=#%e9%80%89%e6%8b%a9%e4%b8%bb%e9%a2%98 class=header-mark></a>选择主题</h2><ol><li><p>挑选喜欢的主题仓库，克隆到 themes 目录下
+<a href=https://themes.gohugo.io/ target=_blank rel="noopener noreferrer">https://themes.gohugo.io/</a></p></li><li><p>编辑 config.toml 配置文件</p></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>...
+</span></span><span class=line><span class=cl>theme = &#39;主题&#39;
+</span></span></code></pre></td></tr></table></div></div><p>或者比较成熟的主题一般都会有自己的完善的配置文档，直接参照即可，本博客使用 <a href=https://hugodoit.pages.dev/zh-cn/ target=_blank rel="noopener noreferrer">Doit </a>主题</p><h2 id=使用-github-pages-部署站点 class=headerLink><a href=#%e4%bd%bf%e7%94%a8-github-pages-%e9%83%a8%e7%bd%b2%e7%ab%99%e7%82%b9 class=header-mark></a>使用 GitHub Pages 部署站点</h2><p>使用 <code>hugo</code> 命令在自己的博客根目录生成博客站点文件夹 <code>public</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>hugo
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>cd public
+</span></span></code></pre></td></tr></table></div></div><p><figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230511141545.png title=/images/posts/Pasted%20image%2020230511141545.png data-thumbnail=/images/posts/Pasted%20image%2020230511141545.png><img loading=lazy src=/images/posts/Pasted%20image%2020230511141545.png srcset="/images/posts/Pasted%20image%2020230511141545.png, /images/posts/Pasted%20image%2020230511141545.png 1.5x, /images/posts/Pasted%20image%2020230511141545.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230511141545.png></a></figure></p><p>新建一个 <code>username.github.io</code> 的仓库，比如我的仓库名为 904566722.github.io ，然后将上面生成的 public 文件夹的内容推送到该仓库</p><p>然后就可以使用 username.github.io 来访问该网站了</p><h2 id=注册域名 class=headerLink><a href=#%e6%b3%a8%e5%86%8c%e5%9f%9f%e5%90%8d class=header-mark></a>注册域名</h2><p>为了能够使用自己的域名来访问博客，可以注册一个域名，我这边使用腾讯云的域名，购买完成后配置解析：<figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230511141845.png title=/images/posts/Pasted%20image%2020230511141845.png data-thumbnail=/images/posts/Pasted%20image%2020230511141845.png><img loading=lazy src=/images/posts/Pasted%20image%2020230511141845.png srcset="/images/posts/Pasted%20image%2020230511141845.png, /images/posts/Pasted%20image%2020230511141845.png 1.5x, /images/posts/Pasted%20image%2020230511141845.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230511141845.png></a></figure></p><p>下一步是在 username.github.io 中配置自己的域名：<figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230511142007.png title=/images/posts/Pasted%20image%2020230511142007.png data-thumbnail=/images/posts/Pasted%20image%2020230511142007.png><img loading=lazy src=/images/posts/Pasted%20image%2020230511142007.png srcset="/images/posts/Pasted%20image%2020230511142007.png, /images/posts/Pasted%20image%2020230511142007.png 1.5x, /images/posts/Pasted%20image%2020230511142007.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230511142007.png></a></figure></p><p>配置完成后就可以使用自己的域名来访问网站啦</p><p><figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230511142154.png title=/images/posts/Pasted%20image%2020230511142154.png data-thumbnail=/images/posts/Pasted%20image%2020230511142154.png><img loading=lazy src=/images/posts/Pasted%20image%2020230511142154.png srcset="/images/posts/Pasted%20image%2020230511142154.png, /images/posts/Pasted%20image%2020230511142154.png 1.5x, /images/posts/Pasted%20image%2020230511142154.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230511142154.png></a></figure></p></div><h2>相关内容</h2><div class=related-container><div class=related-item-container><div class=related-image><a href=/202305110815-%E4%BD%BF%E7%94%A8-github-action-%E6%9D%A5%E5%AE%8C%E6%88%90%E5%8D%9A%E5%AE%A2%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0/><img loading=lazy src=/images/product/gh-action.png srcset="/images/product/gh-action.png, /images/product/gh-action.png 1.5x, /images/product/gh-action.png 2x" sizes=auto alt=/images/product/gh-action.png title=/images/product/gh-action.png height=200 width=400></a></div><h2 class=related-title><a href=/202305110815-%E4%BD%BF%E7%94%A8-github-action-%E6%9D%A5%E5%AE%8C%E6%88%90%E5%8D%9A%E5%AE%A2%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0/>使用 GitHub Action 来完成博客自动更新</a></h2></div><div class=related-item-container><h2 class=related-title><a href=/202305110405-%E6%80%8E%E4%B9%88%E6%9D%A5%E8%A7%84%E5%88%92%E4%B8%80%E5%A4%A9%E5%81%9A%E6%97%A5%E8%AE%B0%E5%BD%95/>怎么来规划一天、做日记录</a></h2></div><div class=related-item-container><h2 class=related-title><a href=/202305101151-%E5%BC%80%E5%A7%8B%E8%AE%B0%E5%BD%95%E4%B8%80%E4%BA%9B%E6%88%91%E7%9A%84%E5%B7%A5%E5%85%B7%E4%BE%BF%E6%8D%B7%E6%93%8D%E4%BD%9C/>开始记录一些我的工具、便捷操作[持续记录...]</a></h2></div><div class=related-item-container><h2 class=related-title><a href=/202305091805-%E9%87%8D%E6%96%B0%E6%95%B4%E7%90%86%E4%B8%80%E4%B8%8B%E8%87%AA%E5%B7%B1%E7%9A%84%E5%86%99%E4%BD%9C%E6%B5%81/>重新整理一下自己的写作流</a></h2></div><div class=related-item-container><h2 class=related-title><a href=/202304301159-leetcode-%E5%91%A8%E8%B5%9B%E5%8F%82%E5%8A%A0%E8%AE%B0%E5%BD%95/>Leetcode 周赛记录</a></h2></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2023-05-11</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md><span><a class=link-to-mardown href=/202305111342-%E4%BD%BF%E7%94%A8-hugo--github-pages-%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/index.md target=_blank rel="noopener noreferrer">阅读原始文档</a></span></div><div class=post-info-share><span><a href=# title="分享到 Twitter" data-sharer=twitter data-url=http://www.honghuiqiang.com/202305111342-%E4%BD%BF%E7%94%A8-hugo--github-pages-%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/ data-title="使用 Hugo + GitHub Pages 搭建博客记录" data-via=xxxx data-hashtags=个人记录><i class="fab fa-twitter fa-fw"></i></a><a href=# title="分享到 Facebook" data-sharer=facebook data-url=http://www.honghuiqiang.com/202305111342-%E4%BD%BF%E7%94%A8-hugo--github-pages-%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/ data-hashtag=个人记录><i class="fab fa-facebook-square fa-fw"></i></a><a href=# title="分享到 WhatsApp" data-sharer=whatsapp data-url=http://www.honghuiqiang.com/202305111342-%E4%BD%BF%E7%94%A8-hugo--github-pages-%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/ data-title="使用 Hugo + GitHub Pages 搭建博客记录" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href=# title="分享到 Line" data-sharer=line data-url=http://www.honghuiqiang.com/202305111342-%E4%BD%BF%E7%94%A8-hugo--github-pages-%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/ data-title="使用 Hugo + GitHub Pages 搭建博客记录"><i data-svg-src=/lib/simple-icons/icons/line.min.svg></i></a><a href=# title="分享到 微博" data-sharer=weibo data-url=http://www.honghuiqiang.com/202305111342-%E4%BD%BF%E7%94%A8-hugo--github-pages-%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/ data-title="使用 Hugo + GitHub Pages 搭建博客记录"><i class="fab fa-weibo fa-fw"></i></a><a href=# title="分享到 Myspace" data-sharer=myspace data-url=http://www.honghuiqiang.com/202305111342-%E4%BD%BF%E7%94%A8-hugo--github-pages-%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/ data-title="使用 Hugo + GitHub Pages 搭建博客记录" data-description><i data-svg-src=/lib/simple-icons/icons/myspace.min.svg></i></a><a href=# title="分享到 Blogger" data-sharer=blogger data-url=http://www.honghuiqiang.com/202305111342-%E4%BD%BF%E7%94%A8-hugo--github-pages-%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/ data-title="使用 Hugo + GitHub Pages 搭建博客记录" data-description><i class="fab fa-blogger fa-fw"></i></a><a href=# title="分享到 Evernote" data-sharer=evernote data-url=http://www.honghuiqiang.com/202305111342-%E4%BD%BF%E7%94%A8-hugo--github-pages-%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95/ data-title="使用 Hugo + GitHub Pages 搭建博客记录"><i class="fab fa-evernote fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/%E4%B8%AA%E4%BA%BA%E8%AE%B0%E5%BD%95/>个人记录</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/202305110815-%E4%BD%BF%E7%94%A8-github-action-%E6%9D%A5%E5%AE%8C%E6%88%90%E5%8D%9A%E5%AE%A2%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0/ class=prev rel=prev title="使用 GitHub Action 来完成博客自动更新"><i class="fas fa-angle-left fa-fw"></i>使用 GitHub Action 来完成博客自动更新</a>
+<a href=/202305111537-t1016-%E5%AD%90%E4%B8%B2%E8%83%BD%E8%A1%A8%E7%A4%BA%E4%BB%8E-1-%E5%88%B0-n-%E6%95%B0%E5%AD%97%E7%9A%84%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%B2/ class=next rel=next title="子串能表示从 1 到 N 数字的二进制串">子串能表示从 1 到 N 数字的二进制串<i class="fas fa-angle-right fa-fw"></i></a></div></div><div id=comments></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>由 <a href=https://gohugo.io/ target=_blank rel="noopener noreferrer" title="Hugo 0.105.0">Hugo</a> 强力驱动&nbsp;|&nbsp;托管在 <a title="Github Pages" href=https://docs.github.com/en/pages/ target=_blank rel="noopener noreffer">GitHub Pages</a> 上&nbsp;|&nbsp;主题 - <a href=https://github.com/HEIGE-PCloud/DoIt target=_blank rel="noopener noreferrer" title="DoIt 0.3.0"><i class="far fa-edit fa-fw"></i> DoIt</a></div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2023</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank rel="noopener noreferrer">索隆不喝酒</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class=footer-line></div><div class=footer-line></div></div></footer></div><div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><div class=assets><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/katex/copy-tex.min.css><noscript><link rel=stylesheet href=/lib/katex/copy-tex.min.css></noscript><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:10},comment:{},data:{"desktop-header-typeit":"HHQ Records","mobile-header-typeit":"HHQ Records"},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,fuseIndexURL:"/index.json",highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,type:"fuse",useExtendedSearch:!1},sharerjs:!0,table:{sort:!0},typeit:{cursorChar:"|",cursorSpeed:1e3,data:{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},duration:-1,speed:100}}</script><script type=text/javascript src=/lib/tablesort/tablesort.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/typeit/typeit.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><script type=text/javascript src=/js/theme.min.js defer></script></div></body></html>

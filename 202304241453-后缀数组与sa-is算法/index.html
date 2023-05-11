@@ -1,306 +1,43 @@
-
-
-<!DOCTYPE html>
-<html lang="zh-CN">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="noodp" />
-    <title>后缀数组与SA-IS算法 - 学习记录</title><meta name="Description" content="这是我的网站描述"><meta property="og:title" content="后缀数组与SA-IS算法" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="http://www.honghuiqiang.com/202304241453-%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E4%B8%8Esa-is%E7%AE%97%E6%B3%95/" /><meta property="og:image" content="http://www.honghuiqiang.com/logo.png"/><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2023-05-09T07:48:23+08:00" />
-<meta property="article:modified_time" content="2023-05-09T07:48:23+08:00" /><meta property="og:site_name" content="学习记录" />
-
-
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="http://www.honghuiqiang.com/logo.png"/>
-
-<meta name="twitter:title" content="后缀数组与SA-IS算法"/>
-<meta name="twitter:description" content=""/>
-<meta name="application-name" content="HHQ Records">
-<meta name="apple-mobile-web-app-title" content="HHQ Records">
-
-<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="icon" href="/images/zoro.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="http://www.honghuiqiang.com/202304241453-%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E4%B8%8Esa-is%E7%AE%97%E6%B3%95/" /><link rel="prev" href="http://www.honghuiqiang.com/202304291858-%E5%9F%BA%E6%9C%AC%E7%9A%84%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" /><link rel="next" href="http://www.honghuiqiang.com/202304300231-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
-        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
-        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
-    {
-        "@context": "http://schema.org",
-        "@type": "BlogPosting",
-        "headline": "后缀数组与SA-IS算法",
-        "inLanguage": "zh-CN",
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "http:\/\/www.honghuiqiang.com\/202304241453-%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E4%B8%8Esa-is%E7%AE%97%E6%B3%95\/"
-        },"genre": "posts","wordcount":  279 ,
-        "url": "http:\/\/www.honghuiqiang.com\/202304241453-%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E4%B8%8Esa-is%E7%AE%97%E6%B3%95\/","datePublished": "2023-05-09T07:48:23+08:00","dateModified": "2023-05-09T07:48:23+08:00","publisher": {
-            "@type": "Organization",
-            "name": ""},"authors": [{
-                        "@type": "Person",
-                        "name": "索隆不喝酒"                    
-                    }],"description": ""
-    }
-    </script><script src="//instant.page/5.1.1" defer type="module" integrity="sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq"></script>
-</head>
-
-<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">
-        function setTheme(theme) {document.body.setAttribute('theme', theme); document.documentElement.style.setProperty('color-scheme', theme === 'light' ? 'light' : 'dark'); window.theme = theme;   window.isDark = window.theme !== 'light' }
-        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
-        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
-        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('dark' === 'light' || 'dark' === 'dark' || 'dark' === 'black') setTheme('dark'), saveTheme('dark'); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
-        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
-        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
-        window.switchThemeEventSet = new Set()
-    </script>
-    <div id="back-to-top"></div>
-    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
-    <div class="header-wrapper">
-        <div class="header-title">
-            <a href="/" title="学习记录"><span id="desktop-header-typeit" class="typeit"></span></a>
-        </div>
-        <div class="menu">
-            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/series/"> 系列 </a><a class="menu-item" href="/tags/"> 标签 </a><span class="menu-item delimiter"></span><a href="#" class="menu-item language" title="选择语言">简体中文<i class="fas fa-chevron-right fa-fw"></i>
-                        <select class="language-select" title="Select Language" id="language-select-desktop" onchange="location = this.value;"><option value="/202304241453-%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E4%B8%8Esa-is%E7%AE%97%E6%B3%95/" selected>简体中文</option></select>
-                    </a><span class="menu-item search" id="search-desktop">
-                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
-                        <a href="#" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
-                            <i class="fas fa-search fa-fw"></i>
-                        </a>
-                        <a href="#" class="search-button search-clear" id="search-clear-desktop" title="清空">
-                            <i class="fas fa-times-circle fa-fw"></i>
-                        </a>
-                        <span class="search-button search-loading" id="search-loading-desktop">
-                            <i class="fas fa-spinner fa-fw fa-spin"></i>
-                        </span>
-                    </span><a href="#" class="menu-item theme-select" title="切换主题">
-                    <i class="fas fa-adjust fa-fw"></i>
-                    <select class="color-theme-select" id="theme-select-desktop" title="切换主题">
-                        <option value="light">浅色</option>
-                        <option value="dark">深色</option>
-                        <option value="black">黑色</option>
-                        <option value="auto">跟随系统</option>
-                    </select>
-                </a></div>
-        </div>
-    </div>
-</header><header class="mobile" id="header-mobile">
-    <div class="header-container">
-        <div class="header-wrapper">
-            <div class="header-title">
-                <a href="/" title="学习记录"><span id="mobile-header-typeit" class="typeit"></span></a>
-            </div>
-            <div class="menu-toggle" id="menu-toggle-mobile">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-        <div class="menu" id="menu-mobile"><div class="search-wrapper">
-                    <div class="search mobile" id="search-mobile">
-                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
-                        <a href="#" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
-                            <i class="fas fa-search fa-fw"></i>
-                        </a>
-                        <a href="#" class="search-button search-clear" id="search-clear-mobile" title="清空">
-                            <i class="fas fa-times-circle fa-fw"></i>
-                        </a>
-                        <span class="search-button search-loading" id="search-loading-mobile">
-                            <i class="fas fa-spinner fa-fw fa-spin"></i>
-                        </span>
-                    </div>
-                    <a href="#" class="search-cancel" id="search-cancel-mobile">
-                        取消
-                    </a>
-                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/series/" title="">系列</a><a class="menu-item" href="/tags/" title="">标签</a><a href="#" class="menu-item theme-select" title="切换主题">
-                <i class="fas fa-adjust fa-fw"></i>
-                <select class="color-theme-select" id="theme-select-mobile" title="切换主题">
-                    <option value="light">浅色</option>
-                    <option value="dark">深色</option>
-                    <option value="black">黑色</option>
-                    <option value="auto">跟随系统</option>
-                </select>
-            </a><a href="#" class="menu-item" title="选择语言">简体中文<i class="fas fa-chevron-right fa-fw"></i>
-                    <select class="language-select" title="Select Language" onchange="location = this.value;"><option value="/202304241453-%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E4%B8%8Esa-is%E7%AE%97%E6%B3%95/" selected>简体中文</option></select>
-                </a></div>
-    </div>
-</header>
-<div class="search-dropdown desktop">
-    <div id="search-dropdown-desktop"></div>
-</div>
-<div class="search-dropdown mobile">
-    <div id="search-dropdown-mobile"></div>
-</div>
-<main class="main">
-            <div class="container"><div class="toc" id="toc-auto">
-        <h2 class="toc-title">目录</h2>
-        <div class="toc-content" id="toc-content-auto"><nav id="TableOfContents">
-  <ul>
-    <li><a href="#一后缀数组">一、后缀数组</a>
-      <ul>
-        <li><a href="#在-go-中获得后缀数组的方法">在 Go 中获得后缀数组的方法</a></li>
-      </ul>
-    </li>
-    <li><a href="#二sa-is-算法">二、SA-IS 算法</a></li>
-  </ul>
-</nav></div>
-    </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">后缀数组与SA-IS算法</h1><div class="post-meta">
-            <div class="post-meta-line">
-                <span class="post-author"><span class='author'><i class="author fas fa-user-circle fa-fw"></i><span class='screen-reader-text'>  </span><a href='http://www.honghuiqiang.com/authors/%E7%B4%A2%E9%9A%86%E4%B8%8D%E5%96%9D%E9%85%92'>索隆不喝酒</a></span>
-                </span>&nbsp;<span class="post-category">收录于 </span>&nbsp;<span class="post-category">类别 <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"><i class="far fa-folder fa-fw"></i>数据结构与算法</a></span>&nbsp;<span class="post-category">和</span>&nbsp;<span class="post-series">系列 <a href="/series/%E7%AE%97%E6%B3%95/"><i class="far fa-list-alt fa-fw"></i>算法</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-05-09">2023-05-09</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-05-09">2023-05-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 279 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
-        </div><div class="details series-nav open">
-                                <div class="details-summary series-title">
-                                    <span>系列 - 算法</span>
-                                    <span><i class="details-icon fas fa-angle-right"></i></span>
-                                </div>
-                                <div class="details-content series-content">
-                                    <nav>
-                                        <ul>
-                                                    <li><a href="/202304262036-kmp-%E7%AE%97%E6%B3%95/">KMP算法</a></li>
-                                                    <li><a href="/202304262152-kmp-%E7%AE%97%E6%B3%95%E4%B9%8B-%E8%8E%B7%E5%8F%96-next-%E6%95%B0%E7%BB%84/">KMP算法之-获取next数组</a></li>
-                                                    <li><a href="/202304300007-%E9%80%92%E5%BD%92/">递归</a></li>
-                                                    <li><a href="/202304300231-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">归并排序</a></li><li><span class="active">后缀数组与SA-IS算法</span></li>
-                                                    <li><a href="/202304291858-%E5%9F%BA%E6%9C%AC%E7%9A%84%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">基本的排序算法</a></li>
-                                                    <li><a href="/202304300312-%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">快速排序</a></li>
-                                                    <li><a href="/202305021918-%E6%A0%91%E9%97%AE%E9%A2%98-%E8%B7%AF%E5%BE%84%E6%B1%82%E5%92%8C/">树问题-路径求和</a></li>
-                                                    <li><a href="/202305031652-%E6%A0%91%E9%97%AE%E9%A2%98-%E5%88%A4%E6%96%AD%E5%AD%90%E6%A0%91/">树问题-判断子树</a></li>
-                                                    <li><a href="/202304290644-%E5%AD%97%E5%85%B8%E5%BA%8F%E7%AE%97%E6%B3%95/">字典序算法</a></li></ul>
-                                    </nav>
-                                </div>
-                            </div><div class="details toc" id="toc-static"  kept="">
-                <div class="details-summary toc-title">
-                    <span>目录</span>
-                    <span><i class="details-icon fas fa-angle-right"></i></span>
-                </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
-  <ul>
-    <li><a href="#一后缀数组">一、后缀数组</a>
-      <ul>
-        <li><a href="#在-go-中获得后缀数组的方法">在 Go 中获得后缀数组的方法</a></li>
-      </ul>
-    </li>
-    <li><a href="#二sa-is-算法">二、SA-IS 算法</a></li>
-  </ul>
-</nav></div>
-            </div><div class="content" id="content"><p>#算法</p>
-<h2 id="一后缀数组" class="headerLink">
-    <a href="#%e4%b8%80%e5%90%8e%e7%bc%80%e6%95%b0%e7%bb%84" class="header-mark"></a>一、后缀数组</h2><p>概念：将 s 的所有后缀排序后的数组</p>
-<p>见下面的一个例子：</p>
-<p><figure><a class="lightgallery" href="/images/posts/Pasted%20image%2020230424145648.png" title="/images/posts/Pasted%20image%2020230424145648.png" data-thumbnail="/images/posts/Pasted%20image%2020230424145648.png">
-        <img
-            
-            loading="lazy"
-            src="/images/posts/Pasted%20image%2020230424145648.png"
-            srcset="/images/posts/Pasted%20image%2020230424145648.png, /images/posts/Pasted%20image%2020230424145648.png 1.5x, /images/posts/Pasted%20image%2020230424145648.png 2x"
-            sizes="auto"
-            alt="/images/posts/Pasted%20image%2020230424145648.png">
-    </a></figure></p>
-<h3 id="在-go-中获得后缀数组的方法" class="headerLink">
-    <a href="#%e5%9c%a8-go-%e4%b8%ad%e8%8e%b7%e5%be%97%e5%90%8e%e7%bc%80%e6%95%b0%e7%bb%84%e7%9a%84%e6%96%b9%e6%b3%95" class="header-mark"></a>在 Go 中获得后缀数组的方法</h3><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">Index</span> <span class="kd">struct</span> <span class="p">{</span>  
-</span></span><span class="line"><span class="cl">   <span class="nx">_</span>  <span class="p">[]</span><span class="kt">byte</span>  
-</span></span><span class="line"><span class="cl">   <span class="nx">sa</span> <span class="p">[]</span><span class="kt">int32</span>  
-</span></span><span class="line"><span class="cl"><span class="p">}</span>  
-</span></span><span class="line"><span class="cl">  
-</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">lastSubstring3</span><span class="p">(</span><span class="nx">s</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>  
-</span></span><span class="line"><span class="cl">   <span class="nx">index</span> <span class="o">:=</span> <span class="nx">suffixarray</span><span class="p">.</span><span class="nf">New</span><span class="p">([]</span><span class="nb">byte</span><span class="p">(</span><span class="nx">s</span><span class="p">))</span>  
-</span></span><span class="line"><span class="cl">   <span class="nx">idx</span> <span class="o">:=</span> <span class="p">(</span><span class="o">*</span><span class="nx">Index</span><span class="p">)(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="nx">index</span><span class="p">))</span>  
-</span></span><span class="line"><span class="cl">   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">idx</span><span class="p">.</span><span class="nx">sa</span><span class="p">)</span>  <span class="c1">// s=&#34;aabaaaab&#34; output:[3 4 5 0 6 1 7 2]
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="k">return</span> <span class="s">&#34;&#34;</span>  
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>思考：</p>
-<ol>
-<li>
-<p>unsafe.Pointer 的使用</p>
-<p>(<a href="content/posts/go/202304241708%20unsafe.Pointer%20%e7%9a%84%e5%85%ad%e7%a7%8d%e4%bd%bf%e7%94%a8%e5%9c%ba%e6%99%af.md" rel="">202304241708 unsafe.Pointer 的六种使用场景</a>)</p>
-</li>
-<li>
-<p>为什么是 (*Index) 这样的写法？</p>
-<p><figure><a class="lightgallery" href="/images/posts/Pasted%20image%2020230424165450.png" title="/images/posts/Pasted%20image%2020230424165450.png" data-thumbnail="/images/posts/Pasted%20image%2020230424165450.png">
-        <img
-            
-            loading="lazy"
-            src="/images/posts/Pasted%20image%2020230424165450.png"
-            srcset="/images/posts/Pasted%20image%2020230424165450.png, /images/posts/Pasted%20image%2020230424165450.png 1.5x, /images/posts/Pasted%20image%2020230424165450.png 2x"
-            sizes="auto"
-            alt="/images/posts/Pasted%20image%2020230424165450.png">
-    </a></figure></p>
-<p>顺便复习下 struct 结构体（<a href="content/posts/go/202304241633%20struct.md" rel="">202304241633 struct</a>）</p>
-</li>
-</ol>
-<h2 id="二sa-is-算法" class="headerLink">
-    <a href="#%e4%ba%8csa-is-%e7%ae%97%e6%b3%95" class="header-mark"></a>二、SA-IS 算法</h2><p>概念：（<strong>S</strong>uffix <strong>A</strong>rray <strong>I</strong>nduce <strong>S</strong>ort；SA-IS）</p>
-<p>todo</p>
-<hr>
-<p>参考资料：</p>
-<ol>
-<li>《诱导排序与SA-IS算法 - riteme.site》. 见于 2023年4月24日. <a href="https://riteme.site/blog/2016-6-19/sais.html" target="_blank" rel="noopener noreferrer">https://riteme.site/blog/2016-6-19/sais.html</a>.</li>
-<li>第一次接触到后缀数组以及SA-IS算法是在leetcode每日一题（<a href="https://leetcode.cn/problems/last-substring-in-lexicographical-order/" target="_blank" rel="noopener noreferrer">1163.按字典序排在最后的字串</a>）中</li>
-</ol></div>
-
-        
-
-<div class="post-footer" id="post-footer">
-    <div class="post-info">
-        <div class="post-info-line">
-            <div class="post-info-mod">
-                <span>更新于 2023-05-09</span>
-            </div>
-            <div class="post-info-license"></div>
-        </div>
-        <div class="post-info-line">
-            <div class="post-info-md"><span><a class="link-to-mardown" href=/202304241453-%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E4%B8%8Esa-is%E7%AE%97%E6%B3%95/index.md target="_blank" rel="noopener noreferrer">阅读原始文档</a>
-                    </span></div>
-            <div class="post-info-share">
-                <span><a href="#" title="分享到 Twitter" data-sharer="twitter" data-url="http://www.honghuiqiang.com/202304241453-%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E4%B8%8Esa-is%E7%AE%97%E6%B3%95/" data-title="后缀数组与SA-IS算法" data-via="xxxx"><i class="fab fa-twitter fa-fw"></i></a><a href="#" title="分享到 Facebook" data-sharer="facebook" data-url="http://www.honghuiqiang.com/202304241453-%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E4%B8%8Esa-is%E7%AE%97%E6%B3%95/"><i class="fab fa-facebook-square fa-fw"></i></a><a href="#" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="http://www.honghuiqiang.com/202304241453-%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E4%B8%8Esa-is%E7%AE%97%E6%B3%95/" data-title="后缀数组与SA-IS算法" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href="#" title="分享到 Line" data-sharer="line" data-url="http://www.honghuiqiang.com/202304241453-%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E4%B8%8Esa-is%E7%AE%97%E6%B3%95/" data-title="后缀数组与SA-IS算法"><i data-svg-src="/lib/simple-icons/icons/line.min.svg"></i></a><a href="#" title="分享到 微博" data-sharer="weibo" data-url="http://www.honghuiqiang.com/202304241453-%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E4%B8%8Esa-is%E7%AE%97%E6%B3%95/" data-title="后缀数组与SA-IS算法"><i class="fab fa-weibo fa-fw"></i></a><a href="#" title="分享到 Myspace" data-sharer="myspace" data-url="http://www.honghuiqiang.com/202304241453-%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E4%B8%8Esa-is%E7%AE%97%E6%B3%95/" data-title="后缀数组与SA-IS算法" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></i></a><a href="#" title="分享到 Blogger" data-sharer="blogger" data-url="http://www.honghuiqiang.com/202304241453-%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E4%B8%8Esa-is%E7%AE%97%E6%B3%95/" data-title="后缀数组与SA-IS算法" data-description=""><i class="fab fa-blogger fa-fw"></i></a><a href="#" title="分享到 Evernote" data-sharer="evernote" data-url="http://www.honghuiqiang.com/202304241453-%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E4%B8%8Esa-is%E7%AE%97%E6%B3%95/" data-title="后缀数组与SA-IS算法"><i class="fab fa-evernote fa-fw"></i></a></span>
-            </div>
-        </div>
-    </div>
-
-    <div class="post-info-more">
-        <section class="post-tags"></section>
-        <section>
-            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
-        </section>
-    </div>
-
-    <div class="post-nav"><a href="/202304291858-%E5%9F%BA%E6%9C%AC%E7%9A%84%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/" class="prev" rel="prev" title="基本的排序算法"><i class="fas fa-angle-left fa-fw"></i>基本的排序算法</a>
-            <a href="/202304300231-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" class="next" rel="next" title="归并排序">归并排序<i class="fas fa-angle-right fa-fw"></i></a></div>
-</div>
-<div id="comments"></div></article></div>
-        </main><footer class="footer">
-        <div class="footer-container"><div class="footer-line">
-                    由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreferrer" title="Hugo 0.105.0">Hugo</a> 强力驱动&nbsp;|&nbsp;托管在 <a title="Github Pages" href="https://docs.github.com/en/pages/" target="_blank" rel="noopener noreffer">GitHub Pages</a> 上&nbsp;|&nbsp;主题 - <a href="https://github.com/HEIGE-PCloud/DoIt" target="_blank" rel="noopener noreferrer" title="DoIt 0.3.0"><i class="far fa-edit fa-fw"></i> DoIt</a>
-                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2023</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">索隆不喝酒</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
-            <div class="footer-line"></div>
-            <div class="footer-line">
-            </div>
-        </div></footer></div>
-
-    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="回到顶部">
-            <i class="fas fa-arrow-up fa-fw"></i>
-        </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
-            <i class="fas fa-comment fa-fw"></i>
-        </a>
-    </div><div class="assets"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/katex/copy-tex.min.css">
-        <noscript><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"></noscript><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"data":{"desktop-header-typeit":"HHQ Records","mobile-header-typeit":"HHQ Records"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":50,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"sharerjs":true,"table":{"sort":true},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/lib/tablesort/tablesort.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js" defer></script><script type="text/javascript" src="/lib/katex/auto-render.min.js" defer></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js" defer></script><script type="text/javascript" src="/lib/katex/mhchem.min.js" defer></script><script type="text/javascript" src="/js/katex.min.js" defer></script><script type="text/javascript" src="/js/theme.min.js" defer></script></div>
-</body>
-
-</html>
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>后缀数组与SA-IS算法 - 学习记录</title><meta name=Description content="这是我的网站描述"><meta property="og:title" content="后缀数组与SA-IS算法"><meta property="og:description" content><meta property="og:type" content="article"><meta property="og:url" content="http://www.honghuiqiang.com/202304241453-%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E4%B8%8Esa-is%E7%AE%97%E6%B3%95/"><meta property="og:image" content="http://www.honghuiqiang.com/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-05-09T07:48:23+08:00"><meta property="article:modified_time" content="2023-05-09T07:48:23+08:00"><meta property="og:site_name" content="学习记录"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="http://www.honghuiqiang.com/logo.png"><meta name=twitter:title content="后缀数组与SA-IS算法"><meta name=twitter:description content><meta name=application-name content="HHQ Records"><meta name=apple-mobile-web-app-title content="HHQ Records"><meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel=icon href=/images/zoro.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=canonical href=http://www.honghuiqiang.com/202304241453-%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E4%B8%8Esa-is%E7%AE%97%E6%B3%95/><link rel=prev href=http://www.honghuiqiang.com/202304291858-%E5%9F%BA%E6%9C%AC%E7%9A%84%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/><link rel=next href=http://www.honghuiqiang.com/202304300231-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/color.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/fontawesome-free/all.min.css><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/animate/animate.min.css><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"后缀数组与SA-IS算法","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http:\/\/www.honghuiqiang.com\/202304241453-%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E4%B8%8Esa-is%E7%AE%97%E6%B3%95\/"},"genre":"posts","wordcount":279,"url":"http:\/\/www.honghuiqiang.com\/202304241453-%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E4%B8%8Esa-is%E7%AE%97%E6%B3%95\/","datePublished":"2023-05-09T07:48:23+08:00","dateModified":"2023-05-09T07:48:23+08:00","publisher":{"@type":"Organization","name":""},"authors":[{"@type":"Person","name":"索隆不喝酒"}],"description":""}</script><script src=//instant.page/5.1.1 defer type=module integrity=sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq></script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(e){document.body.setAttribute("theme",e),document.documentElement.style.setProperty("color-scheme",e==="light"?"light":"dark"),window.theme=e,window.isDark=window.theme!=="light"}function saveTheme(e){window.localStorage&&localStorage.setItem("theme",e)}function getMeta(e){const t=document.getElementsByTagName("meta");for(let n=0;n<t.length;n++)if(t[n].getAttribute("name")===e)return t[n];return""}if(window.localStorage&&localStorage.getItem("theme")){let e=localStorage.getItem("theme");e==="light"||e==="dark"||e==="black"?setTheme(e):setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}else"dark"==="light"||"dark"==="dark"||"dark"==="black"?(setTheme("dark"),saveTheme("dark")):(saveTheme("auto"),setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));let metaColors={light:"#f8f8f8",dark:"#252627",black:"#000000"};getMeta("theme-color").content=metaColors[document.body.getAttribute("theme")],window.switchThemeEventSet=new Set</script><div id=back-to-top></div><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=学习记录><span id=desktop-header-typeit class=typeit></span></a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>文章 </a><a class=menu-item href=/categories/>分类 </a><a class=menu-item href=/series/>系列 </a><a class=menu-item href=/tags/>标签 </a><span class="menu-item delimiter"></span><a href=# class="menu-item language" title=选择语言>简体中文<i class="fas fa-chevron-right fa-fw"></i>
+<select class=language-select title="Select Language" id=language-select-desktop onchange="location=this.value"><option value=/202304241453-%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E4%B8%8Esa-is%E7%AE%97%E6%B3%95/ selected>简体中文</option></select>
+</a><span class="menu-item search" id=search-desktop><input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=# class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=# class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span>
+</span><a href=# class="menu-item theme-select" title=切换主题><i class="fas fa-adjust fa-fw"></i>
+<select class=color-theme-select id=theme-select-desktop title=切换主题><option value=light>浅色</option><option value=dark>深色</option><option value=black>黑色</option><option value=auto>跟随系统</option></select></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=学习记录><span id=mobile-header-typeit class=typeit></span></a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=# class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=# class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=# class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/ title>文章</a><a class=menu-item href=/categories/ title>分类</a><a class=menu-item href=/series/ title>系列</a><a class=menu-item href=/tags/ title>标签</a><a href=# class="menu-item theme-select" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+<select class=color-theme-select id=theme-select-mobile title=切换主题><option value=light>浅色</option><option value=dark>深色</option><option value=black>黑色</option><option value=auto>跟随系统</option></select>
+</a><a href=# class=menu-item title=选择语言>简体中文<i class="fas fa-chevron-right fa-fw"></i>
+<select class=language-select title="Select Language" onchange="location=this.value"><option value=/202304241453-%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E4%B8%8Esa-is%E7%AE%97%E6%B3%95/ selected>简体中文</option></select></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto><nav id=TableOfContents><ul><li><a href=#一后缀数组>一、后缀数组</a><ul><li><a href=#在-go-中获得后缀数组的方法>在 Go 中获得后缀数组的方法</a></li></ul></li><li><a href=#二sa-is-算法>二、SA-IS 算法</a></li></ul></nav></div></div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">后缀数组与SA-IS算法</h1><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=http://www.honghuiqiang.com/authors/%E7%B4%A2%E9%9A%86%E4%B8%8D%E5%96%9D%E9%85%92>索隆不喝酒</a></span>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/><i class="far fa-folder fa-fw"></i>数据结构与算法</a></span>&nbsp;<span class=post-category>和</span>&nbsp;<span class=post-series>系列 <a href=/series/%E7%AE%97%E6%B3%95/><i class="far fa-list-alt fa-fw"></i>算法</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2023-05-09>2023-05-09</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2023-05-09>2023-05-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 279 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div></div><div class="details series-nav open"><div class="details-summary series-title"><span>系列 - 算法</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content series-content"><nav><ul><li><a href=/202304262036-kmp-%E7%AE%97%E6%B3%95/>KMP算法</a></li><li><a href=/202304262152-kmp-%E7%AE%97%E6%B3%95%E4%B9%8B-%E8%8E%B7%E5%8F%96-next-%E6%95%B0%E7%BB%84/>KMP算法之-获取next数组</a></li><li><a href=/202304300007-%E9%80%92%E5%BD%92/>递归</a></li><li><a href=/202304300231-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/>归并排序</a></li><li><span class=active>后缀数组与SA-IS算法</span></li><li><a href=/202304291858-%E5%9F%BA%E6%9C%AC%E7%9A%84%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/>基本的排序算法</a></li><li><a href=/202304300312-%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/>快速排序</a></li><li><a href=/202305021918-%E6%A0%91%E9%97%AE%E9%A2%98-%E8%B7%AF%E5%BE%84%E6%B1%82%E5%92%8C/>树问题-路径求和</a></li><li><a href=/202305031652-%E6%A0%91%E9%97%AE%E9%A2%98-%E5%88%A4%E6%96%AD%E5%AD%90%E6%A0%91/>树问题-判断子树</a></li><li><a href=/202304290644-%E5%AD%97%E5%85%B8%E5%BA%8F%E7%AE%97%E6%B3%95/>字典序算法</a></li></ul></nav></div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#一后缀数组>一、后缀数组</a><ul><li><a href=#在-go-中获得后缀数组的方法>在 Go 中获得后缀数组的方法</a></li></ul></li><li><a href=#二sa-is-算法>二、SA-IS 算法</a></li></ul></nav></div></div><div class=content id=content><p>#算法</p><h2 id=一后缀数组 class=headerLink><a href=#%e4%b8%80%e5%90%8e%e7%bc%80%e6%95%b0%e7%bb%84 class=header-mark></a>一、后缀数组</h2><p>概念：将 s 的所有后缀排序后的数组</p><p>见下面的一个例子：</p><p><figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230424145648.png title=/images/posts/Pasted%20image%2020230424145648.png data-thumbnail=/images/posts/Pasted%20image%2020230424145648.png><img loading=lazy src=/images/posts/Pasted%20image%2020230424145648.png srcset="/images/posts/Pasted%20image%2020230424145648.png, /images/posts/Pasted%20image%2020230424145648.png 1.5x, /images/posts/Pasted%20image%2020230424145648.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230424145648.png></a></figure></p><h3 id=在-go-中获得后缀数组的方法 class=headerLink><a href=#%e5%9c%a8-go-%e4%b8%ad%e8%8e%b7%e5%be%97%e5%90%8e%e7%bc%80%e6%95%b0%e7%bb%84%e7%9a%84%e6%96%b9%e6%b3%95 class=header-mark></a>在 Go 中获得后缀数组的方法</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Index</span> <span class=kd>struct</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>_</span>  <span class=p>[]</span><span class=kt>byte</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>sa</span> <span class=p>[]</span><span class=kt>int32</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>lastSubstring3</span><span class=p>(</span><span class=nx>s</span> <span class=kt>string</span><span class=p>)</span> <span class=kt>string</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>index</span> <span class=o>:=</span> <span class=nx>suffixarray</span><span class=p>.</span><span class=nf>New</span><span class=p>([]</span><span class=nb>byte</span><span class=p>(</span><span class=nx>s</span><span class=p>))</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>idx</span> <span class=o>:=</span> <span class=p>(</span><span class=o>*</span><span class=nx>Index</span><span class=p>)(</span><span class=nx>unsafe</span><span class=p>.</span><span class=nf>Pointer</span><span class=p>(</span><span class=nx>index</span><span class=p>))</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>idx</span><span class=p>.</span><span class=nx>sa</span><span class=p>)</span>  <span class=c1>// s=&#34;aabaaaab&#34; output:[3 4 5 0 6 1 7 2]
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=k>return</span> <span class=s>&#34;&#34;</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>思考：</p><ol><li><p>unsafe.Pointer 的使用</p><p>(<a href=content/posts/go/202304241708%20unsafe.Pointer%20%e7%9a%84%e5%85%ad%e7%a7%8d%e4%bd%bf%e7%94%a8%e5%9c%ba%e6%99%af.md rel>202304241708 unsafe.Pointer 的六种使用场景</a>)</p></li><li><p>为什么是 (*Index) 这样的写法？</p><p><figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230424165450.png title=/images/posts/Pasted%20image%2020230424165450.png data-thumbnail=/images/posts/Pasted%20image%2020230424165450.png><img loading=lazy src=/images/posts/Pasted%20image%2020230424165450.png srcset="/images/posts/Pasted%20image%2020230424165450.png, /images/posts/Pasted%20image%2020230424165450.png 1.5x, /images/posts/Pasted%20image%2020230424165450.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230424165450.png></a></figure></p><p>顺便复习下 struct 结构体（<a href=content/posts/go/202304241633%20struct.md rel>202304241633 struct</a>）</p></li></ol><h2 id=二sa-is-算法 class=headerLink><a href=#%e4%ba%8csa-is-%e7%ae%97%e6%b3%95 class=header-mark></a>二、SA-IS 算法</h2><p>概念：（<strong>S</strong>uffix <strong>A</strong>rray <strong>I</strong>nduce <strong>S</strong>ort；SA-IS）</p><p>todo</p><hr><p>参考资料：</p><ol><li>《诱导排序与SA-IS算法 - riteme.site》. 见于 2023年4月24日. <a href=https://riteme.site/blog/2016-6-19/sais.html target=_blank rel="noopener noreferrer">https://riteme.site/blog/2016-6-19/sais.html</a>.</li><li>第一次接触到后缀数组以及SA-IS算法是在leetcode每日一题（<a href=https://leetcode.cn/problems/last-substring-in-lexicographical-order/ target=_blank rel="noopener noreferrer">1163.按字典序排在最后的字串</a>）中</li></ol></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2023-05-09</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md><span><a class=link-to-mardown href=/202304241453-%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E4%B8%8Esa-is%E7%AE%97%E6%B3%95/index.md target=_blank rel="noopener noreferrer">阅读原始文档</a></span></div><div class=post-info-share><span><a href=# title="分享到 Twitter" data-sharer=twitter data-url=http://www.honghuiqiang.com/202304241453-%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E4%B8%8Esa-is%E7%AE%97%E6%B3%95/ data-title=后缀数组与SA-IS算法 data-via=xxxx><i class="fab fa-twitter fa-fw"></i></a><a href=# title="分享到 Facebook" data-sharer=facebook data-url=http://www.honghuiqiang.com/202304241453-%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E4%B8%8Esa-is%E7%AE%97%E6%B3%95/><i class="fab fa-facebook-square fa-fw"></i></a><a href=# title="分享到 WhatsApp" data-sharer=whatsapp data-url=http://www.honghuiqiang.com/202304241453-%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E4%B8%8Esa-is%E7%AE%97%E6%B3%95/ data-title=后缀数组与SA-IS算法 data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href=# title="分享到 Line" data-sharer=line data-url=http://www.honghuiqiang.com/202304241453-%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E4%B8%8Esa-is%E7%AE%97%E6%B3%95/ data-title=后缀数组与SA-IS算法><i data-svg-src=/lib/simple-icons/icons/line.min.svg></i></a><a href=# title="分享到 微博" data-sharer=weibo data-url=http://www.honghuiqiang.com/202304241453-%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E4%B8%8Esa-is%E7%AE%97%E6%B3%95/ data-title=后缀数组与SA-IS算法><i class="fab fa-weibo fa-fw"></i></a><a href=# title="分享到 Myspace" data-sharer=myspace data-url=http://www.honghuiqiang.com/202304241453-%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E4%B8%8Esa-is%E7%AE%97%E6%B3%95/ data-title=后缀数组与SA-IS算法 data-description><i data-svg-src=/lib/simple-icons/icons/myspace.min.svg></i></a><a href=# title="分享到 Blogger" data-sharer=blogger data-url=http://www.honghuiqiang.com/202304241453-%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E4%B8%8Esa-is%E7%AE%97%E6%B3%95/ data-title=后缀数组与SA-IS算法 data-description><i class="fab fa-blogger fa-fw"></i></a><a href=# title="分享到 Evernote" data-sharer=evernote data-url=http://www.honghuiqiang.com/202304241453-%E5%90%8E%E7%BC%80%E6%95%B0%E7%BB%84%E4%B8%8Esa-is%E7%AE%97%E6%B3%95/ data-title=后缀数组与SA-IS算法><i class="fab fa-evernote fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/202304291858-%E5%9F%BA%E6%9C%AC%E7%9A%84%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/ class=prev rel=prev title=基本的排序算法><i class="fas fa-angle-left fa-fw"></i>基本的排序算法</a>
+<a href=/202304300231-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/ class=next rel=next title=归并排序>归并排序<i class="fas fa-angle-right fa-fw"></i></a></div></div><div id=comments></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>由 <a href=https://gohugo.io/ target=_blank rel="noopener noreferrer" title="Hugo 0.105.0">Hugo</a> 强力驱动&nbsp;|&nbsp;托管在 <a title="Github Pages" href=https://docs.github.com/en/pages/ target=_blank rel="noopener noreffer">GitHub Pages</a> 上&nbsp;|&nbsp;主题 - <a href=https://github.com/HEIGE-PCloud/DoIt target=_blank rel="noopener noreferrer" title="DoIt 0.3.0"><i class="far fa-edit fa-fw"></i> DoIt</a></div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2023</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank rel="noopener noreferrer">索隆不喝酒</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class=footer-line></div><div class=footer-line></div></div></footer></div><div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><div class=assets><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/katex/copy-tex.min.css><noscript><link rel=stylesheet href=/lib/katex/copy-tex.min.css></noscript><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:10},comment:{},data:{"desktop-header-typeit":"HHQ Records","mobile-header-typeit":"HHQ Records"},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,fuseIndexURL:"/index.json",highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,type:"fuse",useExtendedSearch:!1},sharerjs:!0,table:{sort:!0},typeit:{cursorChar:"|",cursorSpeed:1e3,data:{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},duration:-1,speed:100}}</script><script type=text/javascript src=/lib/tablesort/tablesort.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/typeit/typeit.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><script type=text/javascript src=/js/theme.min.js defer></script></div></body></html>

@@ -192,7 +192,8 @@ class a,d important
 class c pass
 class e success
 {{< /mermaid >}}
-```mermaid
+
+```
 flowchart TD
 classDef important stroke:red, stroke-width:2px
 classDef pass stroke:grey, stroke-dasharray: 5,5

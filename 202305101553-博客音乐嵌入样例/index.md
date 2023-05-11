@@ -119,7 +119,7 @@ music url="/music/gary/故障的电风扇.mp3" name="故障的电风扇" artist=
 music url="/music/请回答1988/你不要担心.mp3" name="걱정말아요 그대 (你不要担心)" artist="SoulJa/青山黛玛 (青山テルマ)" cover="/music/请回答1988/你不要担心.png"
 ```
 
-{{< music url="/music/请回答1988/你不要担心.mp3" name="걱정말아요 그대 (你不要担心)" artist="SoulJa/青山黛玛 (青山テルマ)" cover="/music/请回答1988/你不要担心.png" >}}
+{{< music url="/music/1988/你不要担心.mp3" name="걱정말아요 그대 (你不要担心)" artist="SoulJa/青山黛玛 (青山テルマ)" cover="/music/1988/你不要担心.png" >}}
 
 
 ## 五条人

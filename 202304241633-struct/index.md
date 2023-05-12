@@ -31,4 +31,4 @@ func structPractice() {
 
 - struct 存在方法集的概念，即所属于一个类型的方法的集合
 
-	[202304241738 struct 方法集](content/posts/go/202304241738%20struct%20方法集.md)
+	[202304241738 struct 方法集](content/posts/go/golang-why/202304241738%20struct%20方法集.md)

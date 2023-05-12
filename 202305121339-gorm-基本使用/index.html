@@ -1,0 +1,645 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>Gorm 基本使用 - 学习记录</title><meta name=Description content="这是我的网站描述"><meta property="og:title" content="Gorm 基本使用"><meta property="og:description" content><meta property="og:type" content="article"><meta property="og:url" content="http://www.honghuiqiang.com/202305121339-gorm-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"><meta property="og:image" content="http://www.honghuiqiang.com/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-05-12T13:05:00+08:00"><meta property="article:modified_time" content="2023-05-12T13:05:00+08:00"><meta property="og:site_name" content="学习记录"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="http://www.honghuiqiang.com/logo.png"><meta name=twitter:title content="Gorm 基本使用"><meta name=twitter:description content><meta name=application-name content="HHQ Records"><meta name=apple-mobile-web-app-title content="HHQ Records"><meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel=icon href=/images/zoro.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=canonical href=http://www.honghuiqiang.com/202305121339-gorm-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/><link rel=prev href=http://www.honghuiqiang.com/202305121348-kubernetes-%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/><link rel=next href=http://www.honghuiqiang.com/202305121326-git-%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/color.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/fontawesome-free/all.min.css><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/animate/animate.min.css><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Gorm 基本使用","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http:\/\/www.honghuiqiang.com\/202305121339-gorm-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8\/"},"genre":"posts","wordcount":2365,"url":"http:\/\/www.honghuiqiang.com\/202305121339-gorm-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8\/","datePublished":"2023-05-12T13:05:00+08:00","dateModified":"2023-05-12T13:05:00+08:00","publisher":{"@type":"Organization","name":""},"authors":[{"@type":"Person","name":"索隆不喝酒"}],"description":""}</script><script src=//instant.page/5.1.1 defer type=module integrity=sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq></script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(e){document.body.setAttribute("theme",e),document.documentElement.style.setProperty("color-scheme",e==="light"?"light":"dark"),window.theme=e,window.isDark=window.theme!=="light"}function saveTheme(e){window.localStorage&&localStorage.setItem("theme",e)}function getMeta(e){const t=document.getElementsByTagName("meta");for(let n=0;n<t.length;n++)if(t[n].getAttribute("name")===e)return t[n];return""}if(window.localStorage&&localStorage.getItem("theme")){let e=localStorage.getItem("theme");e==="light"||e==="dark"||e==="black"?setTheme(e):setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}else"dark"==="light"||"dark"==="dark"||"dark"==="black"?(setTheme("dark"),saveTheme("dark")):(saveTheme("auto"),setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));let metaColors={light:"#f8f8f8",dark:"#252627",black:"#000000"};getMeta("theme-color").content=metaColors[document.body.getAttribute("theme")],window.switchThemeEventSet=new Set</script><div id=back-to-top></div><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=学习记录><span id=desktop-header-typeit class=typeit></span></a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>文章 </a><a class=menu-item href=/categories/>分类 </a><a class=menu-item href=/series/>系列 </a><a class=menu-item href=/tags/>标签 </a><span class="menu-item delimiter"></span><a href=# class="menu-item language" title=选择语言>简体中文<i class="fas fa-chevron-right fa-fw"></i>
+<select class=language-select title="Select Language" id=language-select-desktop onchange="location=this.value"><option value=/202305121339-gorm-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/ selected>简体中文</option></select>
+</a><span class="menu-item search" id=search-desktop><input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=# class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=# class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span>
+</span><a href=# class="menu-item theme-select" title=切换主题><i class="fas fa-adjust fa-fw"></i>
+<select class=color-theme-select id=theme-select-desktop title=切换主题><option value=light>浅色</option><option value=dark>深色</option><option value=black>黑色</option><option value=auto>跟随系统</option></select></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=学习记录><span id=mobile-header-typeit class=typeit></span></a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=# class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=# class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=# class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/ title>文章</a><a class=menu-item href=/categories/ title>分类</a><a class=menu-item href=/series/ title>系列</a><a class=menu-item href=/tags/ title>标签</a><a href=# class="menu-item theme-select" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+<select class=color-theme-select id=theme-select-mobile title=切换主题><option value=light>浅色</option><option value=dark>深色</option><option value=black>黑色</option><option value=auto>跟随系统</option></select>
+</a><a href=# class=menu-item title=选择语言>简体中文<i class="fas fa-chevron-right fa-fw"></i>
+<select class=language-select title="Select Language" onchange="location=this.value"><option value=/202305121339-gorm-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/ selected>简体中文</option></select></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto><nav id=TableOfContents><ul><li><a href=#一基本用法><strong>一、基本用法</strong></a><ul><li><a href=#11-创建与-mysql-的连接><strong>1.1 创建与 mysql 的连接</strong></a></li><li><a href=#12-增删改查><strong>1.2 增删改查</strong></a><ul><li><a href=#121-增加记录><strong>1.2.1 增加记录</strong></a></li><li><a href=#122-删除记录><strong>1.2.2 删除记录</strong></a></li><li><a href=#123-修改记录><strong>1.2.3 修改记录</strong></a></li><li><a href=#124-查询记录><strong>1.2.4 查询记录</strong></a></li></ul></li><li><a href=#13-钩子><strong>1.3 钩子</strong></a><ul><li><a href=#131-beforecreate--aftercreate><strong>1.3.1 BeforeCreate && AfterCreate</strong></a></li><li><a href=#132-beforesave---aftersave><strong>1.3.2 BeforeSave && AfterSave</strong></a></li><li><a href=#133-beforedelete--afterdelete><strong>1.3.3 BeforeDelete && AfterDelete</strong></a></li><li><a href=#134-beforeupdate--afterupdate><strong>1.3.4 BeforeUpdate && AfterUpdate</strong></a></li></ul></li></ul></li><li><a href=#二关联><strong>二、关联</strong></a><ul><li><a href=#21-belongs-to><strong>2.1 belongs to</strong></a></li><li><a href=#22-has-one><strong>2.2 has one</strong></a></li><li><a href=#23-has-many><strong>2.3 has many</strong></a></li><li><a href=#24-many-to-many><strong>2.4 many to many</strong></a></li></ul></li><li><a href=#三声明模型---标签>三、声明模型 - 标签</a></li></ul></nav></div></div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Gorm 基本使用</h1><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=http://www.honghuiqiang.com/authors/%E7%B4%A2%E9%9A%86%E4%B8%8D%E5%96%9D%E9%85%92>索隆不喝酒</a></span>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/golang%E4%B8%80%E4%BA%9B%E6%A1%86%E6%9E%B6/><i class="far fa-folder fa-fw"></i>Golang一些框架</a></span>&nbsp;<span class=post-category>和</span>&nbsp;<span class=post-series>系列 <a href=/series/gorm/><i class="far fa-list-alt fa-fw"></i>Gorm</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2023-05-12>2023-05-12</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2023-05-12>2023-05-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2365 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 5 分钟&nbsp;</div></div><div class="details series-nav open"><div class="details-summary series-title"><span>系列 - Gorm</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content series-content"><nav><ul><li><span class=active>Gorm 基本使用</span></li></ul></nav></div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#一基本用法><strong>一、基本用法</strong></a><ul><li><a href=#11-创建与-mysql-的连接><strong>1.1 创建与 mysql 的连接</strong></a></li><li><a href=#12-增删改查><strong>1.2 增删改查</strong></a><ul><li><a href=#121-增加记录><strong>1.2.1 增加记录</strong></a></li><li><a href=#122-删除记录><strong>1.2.2 删除记录</strong></a></li><li><a href=#123-修改记录><strong>1.2.3 修改记录</strong></a></li><li><a href=#124-查询记录><strong>1.2.4 查询记录</strong></a></li></ul></li><li><a href=#13-钩子><strong>1.3 钩子</strong></a><ul><li><a href=#131-beforecreate--aftercreate><strong>1.3.1 BeforeCreate && AfterCreate</strong></a></li><li><a href=#132-beforesave---aftersave><strong>1.3.2 BeforeSave && AfterSave</strong></a></li><li><a href=#133-beforedelete--afterdelete><strong>1.3.3 BeforeDelete && AfterDelete</strong></a></li><li><a href=#134-beforeupdate--afterupdate><strong>1.3.4 BeforeUpdate && AfterUpdate</strong></a></li></ul></li></ul></li><li><a href=#二关联><strong>二、关联</strong></a><ul><li><a href=#21-belongs-to><strong>2.1 belongs to</strong></a></li><li><a href=#22-has-one><strong>2.2 has one</strong></a></li><li><a href=#23-has-many><strong>2.3 has many</strong></a></li><li><a href=#24-many-to-many><strong>2.4 many to many</strong></a></li></ul></li><li><a href=#三声明模型---标签>三、声明模型 - 标签</a></li></ul></nav></div></div><div class=content id=content><p>#gorm #Golang</p><h2 id=一基本用法 class=headerLink><a href=#%e4%b8%80%e5%9f%ba%e6%9c%ac%e7%94%a8%e6%b3%95 class=header-mark></a><strong>一、基本用法</strong></h2><h3 id=11-创建与-mysql-的连接 class=headerLink><a href=#11-%e5%88%9b%e5%bb%ba%e4%b8%8e-mysql-%e7%9a%84%e8%bf%9e%e6%8e%a5 class=header-mark></a><strong>1.1 创建与 mysql 的连接</strong></h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nf>require</span> <span class=p>(</span>
+</span></span><span class=line><span class=cl>	<span class=nx>gorm</span><span class=p>.</span><span class=nx>io</span><span class=o>/</span><span class=nx>driver</span><span class=o>/</span><span class=nx>mysql</span> <span class=nx>v1</span><span class=mf>.0.5</span>
+</span></span><span class=line><span class=cl>	<span class=nx>gorm</span><span class=p>.</span><span class=nx>io</span><span class=o>/</span><span class=nx>gorm</span> <span class=nx>v1</span><span class=mf>.21.3</span>
+</span></span><span class=line><span class=cl><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>// createConn 创建与 myslq 的连接
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=nf>createConn</span><span class=p>()</span> <span class=p>(</span><span class=nx>db</span> <span class=o>*</span><span class=nx>gorm</span><span class=p>.</span><span class=nx>DB</span><span class=p>,</span> <span class=nx>err</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>dsn</span> <span class=o>:=</span> <span class=s>&#34;root:APTX4869@tcp(127.0.0.1:3306)/db_gorm_test?charset=utf8mb4&amp;parseTime=True&amp;loc=Local&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=nx>db</span><span class=p>,</span> <span class=nx>err</span> <span class=p>=</span> <span class=nx>gorm</span><span class=p>.</span><span class=nf>Open</span><span class=p>(</span><span class=nx>mysql</span><span class=p>.</span><span class=nf>Open</span><span class=p>(</span><span class=nx>dsn</span><span class=p>),</span> <span class=o>&amp;</span><span class=nx>gorm</span><span class=p>.</span><span class=nx>Config</span><span class=p>{})</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>log</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;create db connection failed.&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=kc>nil</span><span class=p>,</span> <span class=nx>err</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=12-增删改查 class=headerLink><a href=#12-%e5%a2%9e%e5%88%a0%e6%94%b9%e6%9f%a5 class=header-mark></a><strong>1.2 增删改查</strong></h3><h4 id=121-增加记录 class=headerLink><a href=#121-%e5%a2%9e%e5%8a%a0%e8%ae%b0%e5%bd%95 class=header-mark></a><strong>1.2.1 增加记录</strong></h4><ol><li><p>增加单条记录、批量增加记录</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Role</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>RoleId</span> <span class=kt>string</span> <span class=s>`json:&#34;role_id&#34;`</span>
+</span></span><span class=line><span class=cl>	<span class=nx>Name</span>   <span class=kt>string</span> <span class=s>`json:&#34;name&#34;`</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>role</span> <span class=o>*</span><span class=nx>Role</span><span class=p>)</span> <span class=nf>Create</span><span class=p>(</span><span class=nx>db</span> <span class=o>*</span><span class=nx>gorm</span><span class=p>.</span><span class=nx>DB</span><span class=p>)</span> <span class=kt>error</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// 创建 role 记录
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>if</span> <span class=nx>result</span> <span class=o>:=</span> <span class=nx>db</span><span class=p>.</span><span class=nf>Create</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>role</span><span class=p>);</span> <span class=nx>result</span><span class=p>.</span><span class=nx>Error</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>return</span> <span class=nx>errors</span><span class=p>.</span><span class=nf>New</span><span class=p>(</span><span class=s>&#34;create role error&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=kc>nil</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>CreateBatch</span><span class=p>(</span><span class=nx>db</span> <span class=o>*</span><span class=nx>gorm</span><span class=p>.</span><span class=nx>DB</span><span class=p>,</span> <span class=nx>roles</span> <span class=p>[]</span><span class=nx>Role</span><span class=p>)</span> <span class=kt>error</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=nx>tx</span> <span class=o>:=</span> <span class=nx>db</span><span class=p>.</span><span class=nf>Create</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>roles</span><span class=p>);</span> <span class=nx>tx</span><span class=p>.</span><span class=nx>Error</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>return</span> <span class=nx>errors</span><span class=p>.</span><span class=nf>New</span><span class=p>(</span><span class=s>&#34;create role batch error&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=kc>nil</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p>可以根据 map 来创建</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>CreateByMapTest</span><span class=p>(</span><span class=nx>db</span> <span class=o>*</span><span class=nx>gorm</span><span class=p>.</span><span class=nx>DB</span><span class=p>)</span> <span class=kt>error</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>db</span><span class=p>.</span><span class=nf>Model</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>Role</span><span class=p>{}).</span><span class=nf>Create</span><span class=p>(</span><span class=kd>map</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span><span class=kd>interface</span><span class=p>{}{</span><span class=s>&#34;RoleId&#34;</span><span class=p>:</span> <span class=s>&#34;role-mapdf&#34;</span><span class=p>,</span> <span class=s>&#34;Name&#34;</span><span class=p>:</span> <span class=s>&#34;roleMap&#34;</span><span class=p>})</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=kc>nil</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p>使用 Model</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Model</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>ID</span>        <span class=kt>string</span> <span class=s>`gorm:&#34;primarykey&#34;`</span>
+</span></span><span class=line><span class=cl>    <span class=nx>CreatedAt</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Time</span>
+</span></span><span class=line><span class=cl>    <span class=nx>UpdatedAt</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Time</span>
+</span></span><span class=line><span class=cl>    <span class=nx>DeletedAt</span> <span class=nx>sql</span><span class=p>.</span><span class=nx>NullTime</span> <span class=s>`gorm:&#34;index&#34;`</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>User</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Model</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Name</span> <span class=kt>string</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>u</span> <span class=o>*</span><span class=nx>User</span><span class=p>)</span> <span class=nf>BeforeCreate</span><span class=p>(</span><span class=nx>tx</span> <span class=o>*</span><span class=nx>gorm</span><span class=p>.</span><span class=nx>DB</span><span class=p>)</span> <span class=p>(</span><span class=nx>err</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>u</span><span class=p>.</span><span class=nx>ID</span> <span class=p>=</span> <span class=nx>utils</span><span class=p>.</span><span class=nf>GenerateId</span><span class=p>(</span><span class=s>&#34;user&#34;</span><span class=p>,</span> <span class=mi>10</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>u</span><span class=p>.</span><span class=nx>CreatedAt</span> <span class=p>=</span> <span class=nx>time</span><span class=p>.</span><span class=nf>Now</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=nx>u</span><span class=p>.</span><span class=nx>UpdatedAt</span> <span class=p>=</span> <span class=nx>time</span><span class=p>.</span><span class=nf>Now</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=nx>u</span><span class=p>.</span><span class=nx>DeletedAt</span> <span class=p>=</span> <span class=nx>sql</span><span class=p>.</span><span class=nx>NullTime</span><span class=p>{}</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>CreateUseModel</span><span class=p>()</span>  <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>db</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nf>createConn</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>log</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;open db failed.&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nx>user</span> <span class=o>:=</span> <span class=o>&amp;</span><span class=nx>models</span><span class=p>.</span><span class=nx>User</span><span class=p>{</span><span class=nx>Name</span><span class=p>:</span> <span class=s>&#34;honghuiqiang&#34;</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=nx>db</span><span class=p>.</span><span class=nf>Create</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>user</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p>关联创建</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Model</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>ID</span>        <span class=kt>string</span> <span class=s>`gorm:&#34;primarykey&#34;`</span>
+</span></span><span class=line><span class=cl>    <span class=nx>CreatedAt</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Time</span>
+</span></span><span class=line><span class=cl>    <span class=nx>UpdatedAt</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Time</span>
+</span></span><span class=line><span class=cl>    <span class=nx>DeletedAt</span> <span class=nx>sql</span><span class=p>.</span><span class=nx>NullTime</span> <span class=s>`gorm:&#34;index&#34;`</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>User</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>Model</span>
+</span></span><span class=line><span class=cl>	<span class=nx>Name</span> <span class=kt>string</span>
+</span></span><span class=line><span class=cl>	<span class=nx>CreditCard</span> <span class=nx>CreditCard</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>CreditCard</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>ID</span>     <span class=kt>string</span>
+</span></span><span class=line><span class=cl>	<span class=nx>Number</span> <span class=kt>string</span>
+</span></span><span class=line><span class=cl>	<span class=nx>UserId</span> <span class=kt>string</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>u</span> <span class=o>*</span><span class=nx>User</span><span class=p>)</span> <span class=nf>BeforeCreate</span><span class=p>(</span><span class=nx>tx</span> <span class=o>*</span><span class=nx>gorm</span><span class=p>.</span><span class=nx>DB</span><span class=p>)</span> <span class=p>(</span><span class=nx>err</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=nx>u</span><span class=p>.</span><span class=nx>ID</span><span class=p>)</span> <span class=o>==</span> <span class=mi>0</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>u</span><span class=p>.</span><span class=nx>ID</span> <span class=p>=</span> <span class=nx>utils</span><span class=p>.</span><span class=nf>GenerateId</span><span class=p>(</span><span class=s>&#34;user&#34;</span><span class=p>,</span> <span class=mi>10</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=nx>u</span><span class=p>.</span><span class=nx>CreatedAt</span> <span class=p>=</span> <span class=nx>time</span><span class=p>.</span><span class=nf>Now</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>	<span class=nx>u</span><span class=p>.</span><span class=nx>UpdatedAt</span> <span class=p>=</span> <span class=nx>time</span><span class=p>.</span><span class=nf>Now</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>	<span class=nx>u</span><span class=p>.</span><span class=nx>DeletedAt</span> <span class=p>=</span> <span class=nx>sql</span><span class=p>.</span><span class=nx>NullTime</span><span class=p>{}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=nx>u</span><span class=p>.</span><span class=nx>CreditCard</span><span class=p>.</span><span class=nx>ID</span> <span class=p>=</span> <span class=nx>utils</span><span class=p>.</span><span class=nf>GenerateId</span><span class=p>(</span><span class=s>&#34;cc&#34;</span><span class=p>,</span> <span class=mi>10</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nx>u</span><span class=p>.</span><span class=nx>CreditCard</span><span class=p>.</span><span class=nx>UserId</span> <span class=p>=</span> <span class=nx>u</span><span class=p>.</span><span class=nx>ID</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>CreateAssociation</span><span class=p>()</span>  <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>db</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nf>createConn</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>log</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;open db failed.&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=nx>user</span> <span class=o>:=</span> <span class=nx>models</span><span class=p>.</span><span class=nx>User</span><span class=p>{</span><span class=nx>Name</span><span class=p>:</span> <span class=s>&#34;honghuiqiang2&#34;</span><span class=p>,</span> <span class=nx>CreditCard</span><span class=p>:</span> <span class=nx>models</span><span class=p>.</span><span class=nx>CreditCard</span><span class=p>{</span><span class=nx>Number</span><span class=p>:</span> <span class=s>&#34;904566722&#34;</span><span class=p>}}</span>
+</span></span><span class=line><span class=cl>    <span class=nx>db</span><span class=p>.</span><span class=nf>Create</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>user</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div></li></ol><h4 id=122-删除记录 class=headerLink><a href=#122-%e5%88%a0%e9%99%a4%e8%ae%b0%e5%bd%95 class=header-mark></a><strong>1.2.2 删除记录</strong></h4><ol><li><p>删除一条记录</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>db</span><span class=p>.</span><span class=nf>Where</span><span class=p>(</span><span class=s>&#34;role_id = ?&#34;</span><span class=p>,</span> <span class=s>&#34;role-9j1t3&#34;</span><span class=p>).</span><span class=nf>Delete</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>models</span><span class=p>.</span><span class=nx>Role</span><span class=p>{})</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p>删除多条记录</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>ids</span> <span class=o>:=</span> <span class=p>[]</span><span class=kt>string</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;role-sdftf&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;role-sdjfu&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=nx>db</span><span class=p>.</span><span class=nf>Debug</span><span class=p>().</span><span class=nf>Where</span><span class=p>(</span><span class=s>&#34;role_id IN ?&#34;</span><span class=p>,</span> <span class=nx>ids</span><span class=p>).</span><span class=nf>Delete</span><span class=p>([]</span><span class=nx>models</span><span class=p>.</span><span class=nx>Role</span><span class=p>{})</span>
+</span></span><span class=line><span class=cl><span class=c1>// DELETE FROM `roles` WHERE role_id IN (&#39;role-sdftf&#39;,&#39;role-sdjfu&#39;)
+</span></span></span></code></pre></td></tr></table></div></div></li><li><p>软删除</p><p>模型需包含 <code>gorm.DeletedAt</code> 字段</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Model</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>ID</span>        <span class=kt>string</span> <span class=s>`gorm:&#34;primarykey&#34; json:&#34;id&#34;`</span>
+</span></span><span class=line><span class=cl>    <span class=nx>CreatedAt</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Time</span> <span class=s>`json:&#34;created_at&#34;`</span>
+</span></span><span class=line><span class=cl>    <span class=nx>UpdatedAt</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Time</span> <span class=s>`json:&#34;updated_at&#34;`</span>
+</span></span><span class=line><span class=cl>    <span class=nx>DeletedAt</span> <span class=nx>gorm</span><span class=p>.</span><span class=nx>DeletedAt</span> <span class=s>`gorm:&#34;index&#34; json:&#34;deleted_at&#34;`</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>User</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>Model</span>
+</span></span><span class=line><span class=cl>	<span class=nx>Name</span>                <span class=kt>string</span> <span class=s>`json:&#34;name&#34;`</span>
+</span></span><span class=line><span class=cl>	<span class=nx>StorageProtocolType</span> <span class=kt>string</span> <span class=s>`json:&#34;storage_protocol_type&#34; gorm:&#34;default:iscsi;comment:&#39;存储协议类型&#39;&#34;`</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>db</span><span class=p>.</span><span class=nf>Debug</span><span class=p>().</span><span class=nf>Where</span><span class=p>(</span><span class=s>&#34;id = ?&#34;</span><span class=p>,</span> <span class=s>&#34;user-9mucs0t3zr&#34;</span><span class=p>).</span><span class=nf>Delete</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>models</span><span class=p>.</span><span class=nx>User</span><span class=p>{})</span>
+</span></span><span class=line><span class=cl><span class=c1>// UPDATE `users` SET `deleted_at`=&#39;2021-10-14 17:22:57.853&#39; WHERE id = &#39;user-9mucs0t3zr&#39; AND `users`.`deleted_at` IS NULL
+</span></span></span></code></pre></td></tr></table></div></div><p>软删除之后，将不能以正常方式查找到该记录，可以使用 <code>Unscoped</code> 来查找</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>db</span><span class=p>.</span><span class=nf>Debug</span><span class=p>().</span><span class=nf>Where</span><span class=p>(</span><span class=s>&#34;id = ?&#34;</span><span class=p>,</span> <span class=s>&#34;user-9mucs0t3zr&#34;</span><span class=p>).</span><span class=nf>First</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>findUser</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>// [rows:0] SELECT * FROM `users` WHERE id = &#39;user-9mucs0t3zr&#39; AND `users`.`deleted_at` IS NULL ORDER BY `users`.`id` LIMIT 1
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>db</span><span class=p>.</span><span class=nf>Debug</span><span class=p>().</span><span class=nf>Unscoped</span><span class=p>().</span><span class=nf>Where</span><span class=p>(</span><span class=s>&#34;id = ?&#34;</span><span class=p>,</span> <span class=s>&#34;user-9mucs0t3zr&#34;</span><span class=p>).</span><span class=nf>First</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>findUser</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>// [rows:1] SELECT * FROM `users` WHERE id = &#39;user-9mucs0t3zr&#39; ORDER BY `users`.`id` LIMIT 1
+</span></span></span></code></pre></td></tr></table></div></div></li><li><p>永久删除</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>db</span><span class=p>.</span><span class=nf>Debug</span><span class=p>().</span><span class=nf>Unscoped</span><span class=p>().</span><span class=nf>Where</span><span class=p>(</span><span class=s>&#34;id = ?&#34;</span><span class=p>,</span> <span class=s>&#34;user-9mucs0t3zr&#34;</span><span class=p>).</span><span class=nf>Delete</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>models</span><span class=p>.</span><span class=nx>User</span><span class=p>{})</span>
+</span></span><span class=line><span class=cl><span class=c1>// [rows:1] DELETE FROM `users` WHERE id = &#39;user-9mucs0t3zr&#39;
+</span></span></span></code></pre></td></tr></table></div></div></li></ol><h4 id=123-修改记录 class=headerLink><a href=#123-%e4%bf%ae%e6%94%b9%e8%ae%b0%e5%bd%95 class=header-mark></a><strong>1.2.3 修改记录</strong></h4><ol><li><p>更新记录的全部字段</p><p>即使字段是零值也会更新到数据库</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>var</span> <span class=nx>findUser</span> <span class=nx>models</span><span class=p>.</span><span class=nx>User</span>
+</span></span><span class=line><span class=cl><span class=nx>db</span><span class=p>.</span><span class=nf>Debug</span><span class=p>().</span><span class=nf>Where</span><span class=p>(</span><span class=s>&#34;id = ?&#34;</span><span class=p>,</span> <span class=s>&#34;user-5pu8tlxpg5&#34;</span><span class=p>).</span><span class=nf>Find</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>findUser</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>findUser</span><span class=p>.</span><span class=nx>Name</span> <span class=p>=</span> <span class=s>&#34;modify-name&#34;</span>
+</span></span><span class=line><span class=cl><span class=nx>db</span><span class=p>.</span><span class=nf>Debug</span><span class=p>().</span><span class=nf>Save</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>findUser</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1>// [rows:1] UPDATE `users` SET `created_at`=&#39;2021-10-14 10:21:07&#39;,`updated_at`=&#39;2021-10-14 17:41:26.304&#39;,`deleted_at`=NULL,`name`=&#39;modify-name&#39; WHERE `id` = &#39;user-5pu8tlxpg5&#39;
+</span></span></span></code></pre></td></tr></table></div></div></li><li><p>更新指定字段</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// 更新单个字段
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>db</span><span class=p>.</span><span class=nf>Model</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>models</span><span class=p>.</span><span class=nx>User</span><span class=p>{}).</span><span class=nf>Where</span><span class=p>(</span><span class=s>&#34;id = ?&#34;</span><span class=p>,</span> <span class=s>&#34;user-5pu8tlxpg5&#34;</span><span class=p>).</span><span class=nf>Update</span><span class=p>(</span><span class=s>&#34;qq&#34;</span><span class=p>,</span> <span class=s>&#34;904566722&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 更新多个字段
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>db</span><span class=p>.</span><span class=nf>Debug</span><span class=p>().</span><span class=nf>Where</span><span class=p>(</span><span class=s>&#34;id = ?&#34;</span><span class=p>,</span> <span class=s>&#34;user-5pu8tlxpg5&#34;</span><span class=p>).</span><span class=nf>Updates</span><span class=p>(</span><span class=nx>models</span><span class=p>.</span><span class=nx>User</span><span class=p>{</span><span class=nx>Name</span><span class=p>:</span> <span class=s>&#34;hhq&#34;</span><span class=p>,</span> <span class=nx>QQ</span><span class=p>:</span> <span class=s>&#34;123&#34;</span><span class=p>})</span>
+</span></span><span class=line><span class=cl><span class=c1>// [rows:1] UPDATE `users` SET `updated_at`=&#39;2021-10-14 17:50:14.392&#39;,`name`=&#39;hhq&#39;,`qq`=&#39;123&#39; WHERE id = &#39;user-5pu8tlxpg5&#39;
+</span></span></span></code></pre></td></tr></table></div></div></li></ol><h4 id=124-查询记录 class=headerLink><a href=#124-%e6%9f%a5%e8%af%a2%e8%ae%b0%e5%bd%95 class=header-mark></a><strong>1.2.4 查询记录</strong></h4><ol><li><p>搜索单个对象</p><blockquote><p><code>First</code> <code>Take</code> <code>Last</code></p><p>查询数据库时添加了 LIMIT 1 条件</p><p>没找到： ErrRecordNotFound</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>db</span><span class=p>.</span><span class=nf>Where</span><span class=p>(</span><span class=s>&#34;name = ?&#34;</span><span class=p>,</span> <span class=s>&#34;honghuiqiang&#34;</span><span class=p>).</span><span class=nf>First</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>user</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p>搜索全部对象</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>var</span> <span class=nx>users</span> <span class=p>[]</span><span class=nx>models</span><span class=p>.</span><span class=nx>User</span>
+</span></span><span class=line><span class=cl><span class=nx>db</span><span class=p>.</span><span class=nf>Debug</span><span class=p>().</span><span class=nf>Find</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>users</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div></li></ol><h3 id=13-钩子 class=headerLink><a href=#13-%e9%92%a9%e5%ad%90 class=header-mark></a><strong>1.3 钩子</strong></h3><blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-mysql data-lang=mysql><span class=line><span class=cl><span class=n>BeforeSave</span><span class=o>`</span><span class=err>、</span><span class=o>`</span><span class=n>AfterSave</span><span class=o>`</span><span class=err>、</span><span class=o>`</span><span class=n>BeforeCreate</span><span class=o>`</span><span class=err>、</span><span class=o>`</span><span class=n>AfterCreate</span><span class=o>`</span><span class=err>、</span><span class=o>`</span><span class=n>BeforeDelete</span><span class=o>`</span><span class=err>、</span><span class=o>`</span><span class=n>AfterDelete</span><span class=o>`</span><span class=err>、</span><span class=o>`</span><span class=n>BeforeUpdate</span><span class=o>`</span><span class=err>、</span><span class=o>`</span><span class=n>AfterUpdate</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div></blockquote><h4 id=131-beforecreate--aftercreate class=headerLink><a href=#131-beforecreate--aftercreate class=header-mark></a><strong>1.3.1 BeforeCreate && AfterCreate</strong></h4><ol><li><p>BeforeCreate</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// BeforeCreate 创建之前做的动作，为记录生成id
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=p>(</span><span class=nx>role</span> <span class=o>*</span><span class=nx>Role</span><span class=p>)</span> <span class=nf>BeforeCreate</span><span class=p>(</span><span class=nx>tx</span> <span class=o>*</span><span class=nx>gorm</span><span class=p>.</span><span class=nx>DB</span><span class=p>)</span> <span class=p>(</span><span class=nx>err</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>role</span><span class=p>.</span><span class=nx>RoleId</span> <span class=p>=</span> <span class=nx>utils</span><span class=p>.</span><span class=nf>GenerateId</span><span class=p>(</span><span class=s>&#34;role&#34;</span><span class=p>,</span> <span class=mi>10</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>跳过钩子方法：使用会话模式</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>DB</span><span class=p>.</span><span class=nf>Session</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>gorm</span><span class=p>.</span><span class=nx>Session</span><span class=p>{</span><span class=nx>SkipHooks</span><span class=p>:</span> <span class=kc>true</span><span class=p>}).</span><span class=nf>Create</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>user</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div></li></ol><h4 id=132-beforesave---aftersave class=headerLink><a href=#132-beforesave---aftersave class=header-mark></a><strong>1.3.2 BeforeSave && AfterSave</strong></h4><h4 id=133-beforedelete--afterdelete class=headerLink><a href=#133-beforedelete--afterdelete class=header-mark></a><strong>1.3.3 BeforeDelete && AfterDelete</strong></h4><ol><li><p>BeforeDelete</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>role</span> <span class=o>*</span><span class=nx>Role</span><span class=p>)</span> <span class=nf>BeforeDelete</span><span class=p>(</span><span class=nx>tx</span> <span class=o>*</span><span class=nx>gorm</span><span class=p>.</span><span class=nx>DB</span><span class=p>)</span> <span class=p>(</span><span class=nx>err</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=kd>var</span> <span class=nx>findRole</span> <span class=nx>Role</span>
+</span></span><span class=line><span class=cl>	<span class=nx>tx</span><span class=p>.</span><span class=nf>Debug</span><span class=p>().</span><span class=nf>Where</span><span class=p>(</span><span class=s>&#34;role_id = ?&#34;</span><span class=p>,</span> <span class=nx>role</span><span class=p>.</span><span class=nx>RoleId</span><span class=p>).</span><span class=nf>First</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>findRole</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// SELECT * FROM `roles` WHERE role_id = &#39;role-fsi21&#39; ORDER BY `roles`.`role_id` LIMIT 1
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>if</span> <span class=nx>findRole</span><span class=p>.</span><span class=nx>Name</span> <span class=o>==</span> <span class=s>&#34;Admin&#34;</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>return</span> <span class=nx>errors</span><span class=p>.</span><span class=nf>New</span><span class=p>(</span><span class=nx>fmt</span><span class=p>.</span><span class=nf>Sprintf</span><span class=p>(</span><span class=s>&#34;delete role Admin failed&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>DeleteTest</span><span class=p>()</span>  <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>db</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nf>CreateConn</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>log</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;create connection failed.&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nx>db</span><span class=p>.</span><span class=nf>Debug</span><span class=p>().</span><span class=nf>Delete</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>models</span><span class=p>.</span><span class=nx>Role</span><span class=p>{</span><span class=nx>RoleId</span><span class=p>:</span> <span class=s>&#34;role-fsi21&#34;</span><span class=p>})</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div></li></ol><h4 id=134-beforeupdate--afterupdate class=headerLink><a href=#134-beforeupdate--afterupdate class=header-mark></a><strong>1.3.4 BeforeUpdate && AfterUpdate</strong></h4><h2 id=二关联 class=headerLink><a href=#%e4%ba%8c%e5%85%b3%e8%81%94 class=header-mark></a><strong>二、关联</strong></h2><h3 id=21-belongs-to class=headerLink><a href=#21-belongs-to class=header-mark></a><strong>2.1 belongs to</strong></h3><p>一个用户属于一家公司</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>User</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>Model</span>
+</span></span><span class=line><span class=cl>	<span class=nx>Name</span>      <span class=kt>string</span> <span class=s>`json:&#34;name&#34;`</span>
+</span></span><span class=line><span class=cl>	<span class=nx>QQ</span>        <span class=kt>string</span> <span class=s>`json:&#34;qq&#34;`</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// 一个用户属于一个公司
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>CompanyId</span> <span class=kt>string</span> <span class=s>`json:&#34;company_id&#34;`</span>
+</span></span><span class=line><span class=cl>	<span class=nx>Company</span>   <span class=nx>Company</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Company</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>Id</span>   <span class=kt>string</span> <span class=s>`json:&#34;id&#34;`</span>
+</span></span><span class=line><span class=cl>	<span class=nx>Name</span> <span class=kt>string</span> <span class=s>`json:&#34;name&#34;`</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>c</span> <span class=o>*</span><span class=nx>Company</span><span class=p>)</span> <span class=nf>TableName</span><span class=p>()</span> <span class=kt>string</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=s>&#34;company&#34;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BelongsToTest</span><span class=p>()</span>  <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>companyId</span> <span class=o>:=</span> <span class=nx>utils</span><span class=p>.</span><span class=nf>GenerateId</span><span class=p>(</span><span class=s>&#34;company&#34;</span><span class=p>,</span> <span class=mi>5</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>user</span> <span class=o>:=</span> <span class=nx>models</span><span class=p>.</span><span class=nx>User</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>Model</span><span class=p>:</span> <span class=nx>models</span><span class=p>.</span><span class=nx>Model</span><span class=p>{</span><span class=nx>ID</span><span class=p>:</span> <span class=nx>utils</span><span class=p>.</span><span class=nf>GenerateId</span><span class=p>(</span><span class=s>&#34;user&#34;</span><span class=p>,</span> <span class=mi>5</span><span class=p>)},</span>
+</span></span><span class=line><span class=cl>        <span class=nx>Name</span><span class=p>:</span> <span class=s>&#34;洪惠强&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>QQ</span><span class=p>:</span> <span class=s>&#34;904566722&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>CompanyId</span><span class=p>:</span> <span class=nx>companyId</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>Company</span><span class=p>:</span> <span class=nx>models</span><span class=p>.</span><span class=nx>Company</span><span class=p>{</span><span class=nx>Id</span><span class=p>:</span> <span class=nx>companyId</span><span class=p>,</span> <span class=nx>Name</span><span class=p>:</span> <span class=s>&#34;中国电子系统技术有限公司&#34;</span><span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nx>db</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>base</span><span class=p>.</span><span class=nf>CreateConn</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>log</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;open db failed.&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nx>db</span><span class=p>.</span><span class=nf>Debug</span><span class=p>().</span><span class=nf>Create</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>user</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// [rows:1] INSERT INTO `company` (`id`,`name`) VALUES (&#39;company-3gs3u&#39;,&#39;中国电子系统技术有限公司&#39;) ON DUPLICATE KEY UPDATE `id`=`id`
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// [rows:1] INSERT INTO `users` (`id`,`created_at`,`updated_at`,`deleted_at`,`name`,`qq`,`company_id`) VALUES (&#39;user-3gs3u&#39;,&#39;2021-10-15 10:26:00.312&#39;,&#39;2021-10-15 10:26:00.312&#39;,NULL,&#39;洪惠强&#39;,&#39;904566722&#39;,&#39;company-3gs3u&#39;)
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>    <span class=nx>user2</span> <span class=o>:=</span> <span class=nx>models</span><span class=p>.</span><span class=nx>User</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>Model</span><span class=p>:</span> <span class=nx>models</span><span class=p>.</span><span class=nx>Model</span><span class=p>{</span><span class=nx>ID</span><span class=p>:</span> <span class=nx>utils</span><span class=p>.</span><span class=nf>GenerateId</span><span class=p>(</span><span class=s>&#34;user&#34;</span><span class=p>,</span> <span class=mi>5</span><span class=p>)},</span>
+</span></span><span class=line><span class=cl>        <span class=nx>Name</span><span class=p>:</span> <span class=s>&#34;陈之能&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>QQ</span><span class=p>:</span> <span class=s>&#34;unknown&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>CompanyId</span><span class=p>:</span> <span class=s>&#34;company-3gs3u&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>Company</span><span class=p>:</span> <span class=nx>models</span><span class=p>.</span><span class=nx>Company</span><span class=p>{</span><span class=nx>Id</span><span class=p>:</span> <span class=s>&#34;company-3gs3u&#34;</span><span class=p>,</span> <span class=nx>Name</span><span class=p>:</span> <span class=s>&#34;中国系统&#34;</span><span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=nx>db</span><span class=p>.</span><span class=nf>Debug</span><span class=p>().</span><span class=nf>Create</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>user2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// [rows:0] INSERT INTO `company` (`id`,`name`) VALUES (&#39;company-3gs3u&#39;,&#39;中国系统&#39;) ON DUPLICATE KEY UPDATE `id`=`id`
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// [rows:1] INSERT INTO `users` (`id`,`created_at`,`updated_at`,`deleted_at`,`name`,`qq`,`company_id`) VALUES (&#39;user-ys4cf&#39;,&#39;2021-10-15 10:34:50.196&#39;,&#39;2021-10-15 10:34:50.196&#39;,NULL,&#39;陈之能&#39;,&#39;unknown&#39;,&#39;company-3gs3u&#39;)
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=22-has-one class=headerLink><a href=#22-has-one class=header-mark></a><strong>2.2 has one</strong></h3><p>一个用户有一张卡</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>User</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>Model</span>
+</span></span><span class=line><span class=cl>	<span class=nx>Name</span>      <span class=kt>string</span> <span class=s>`json:&#34;name&#34;`</span>
+</span></span><span class=line><span class=cl>	<span class=nx>QQ</span>        <span class=kt>string</span> <span class=s>`json:&#34;qq&#34;`</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// has one
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>CreditCard</span> <span class=nx>CreditCard</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>CreditCard</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>ID</span>     <span class=kt>string</span>
+</span></span><span class=line><span class=cl>	<span class=nx>Number</span> <span class=kt>string</span>
+</span></span><span class=line><span class=cl>	<span class=nx>UserId</span> <span class=kt>string</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=23-has-many class=headerLink><a href=#23-has-many class=header-mark></a><strong>2.3 has many</strong></h3><p>一个用户拥有多张卡</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>User</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>Model</span>
+</span></span><span class=line><span class=cl>	<span class=nx>Name</span>      <span class=kt>string</span> <span class=s>`json:&#34;name&#34;`</span>
+</span></span><span class=line><span class=cl>	<span class=nx>QQ</span>        <span class=kt>string</span> <span class=s>`json:&#34;qq&#34;`</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// has one
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>CreditCards</span> <span class=p>[]</span><span class=nx>CreditCard</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>CreditCard</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>ID</span>     <span class=kt>string</span>
+</span></span><span class=line><span class=cl>	<span class=nx>Number</span> <span class=kt>string</span>
+</span></span><span class=line><span class=cl>	<span class=nx>UserId</span> <span class=kt>string</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=24-many-to-many class=headerLink><a href=#24-many-to-many class=header-mark></a><strong>2.4 many to many</strong></h3><p>多对多关系需要中间表</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// 一个 user 可以说多种语言
+</span></span></span><span class=line><span class=cl><span class=c1>// 一种 language 可以由多个 user 说
+</span></span></span><span class=line><span class=cl><span class=c1>// 中间表 users_languages
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>User</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>models</span><span class=p>.</span><span class=nx>Model</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Name</span> <span class=kt>string</span> <span class=s>`json:&#34;name&#34;`</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Languages</span> <span class=p>[]</span><span class=nx>Language</span> <span class=s>`gorm:&#34;many2many:users_languages&#34; json:&#34;languages&#34;`</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Language</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>models</span><span class=p>.</span><span class=nx>Model</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Name</span> <span class=kt>string</span>
+</span></span><span class=line><span class=cl>    <span class=nx>Users</span> <span class=p>[]</span><span class=nx>User</span> <span class=s>`gorm:&#34;many2many:users_languages&#34; json:&#34;users&#34;`</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>ManyToManyTest</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>db</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>base</span><span class=p>.</span><span class=nf>CreateConn</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>log</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;open db failed.&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>// 会自动生成中间表
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>db</span><span class=p>.</span><span class=nf>Set</span><span class=p>(</span><span class=s>&#34;gorm:table_options&#34;</span><span class=p>,</span> <span class=s>&#34;ENGINE=InnoDB&#34;</span><span class=p>).</span><span class=nf>AutoMigrate</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>User</span><span class=p>{},</span> <span class=o>&amp;</span><span class=nx>Language</span><span class=p>{})</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nx>user</span> <span class=o>:=</span> <span class=nx>User</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>Model</span><span class=p>:</span> <span class=nx>models</span><span class=p>.</span><span class=nx>Model</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nx>ID</span><span class=p>:</span> <span class=nx>utils</span><span class=p>.</span><span class=nf>GenerateId</span><span class=p>(</span><span class=s>&#34;user&#34;</span><span class=p>,</span> <span class=mi>10</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>        <span class=p>},</span>
+</span></span><span class=line><span class=cl>        <span class=nx>Name</span><span class=p>:</span> <span class=s>&#34;小洪&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nx>Languages</span><span class=p>:</span> <span class=p>[]</span><span class=nx>Language</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=p>{</span><span class=nx>Model</span><span class=p>:</span><span class=nx>models</span><span class=p>.</span><span class=nx>Model</span><span class=p>{</span><span class=nx>ID</span><span class=p>:</span> <span class=nx>utils</span><span class=p>.</span><span class=nf>GenerateId</span><span class=p>(</span><span class=s>&#34;lg&#34;</span><span class=p>,</span> <span class=mi>10</span><span class=p>)},</span> <span class=nx>Name</span><span class=p>:</span> <span class=s>&#34;英语&#34;</span><span class=p>},</span>
+</span></span><span class=line><span class=cl>            <span class=p>{</span><span class=nx>Model</span><span class=p>:</span><span class=nx>models</span><span class=p>.</span><span class=nx>Model</span><span class=p>{</span><span class=nx>ID</span><span class=p>:</span> <span class=nx>utils</span><span class=p>.</span><span class=nf>GenerateId</span><span class=p>(</span><span class=s>&#34;lg&#34;</span><span class=p>,</span> <span class=mi>11</span><span class=p>)},</span> <span class=nx>Name</span><span class=p>:</span> <span class=s>&#34;中文&#34;</span><span class=p>},</span>
+</span></span><span class=line><span class=cl>        <span class=p>},</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=nx>db</span><span class=p>.</span><span class=nf>Debug</span><span class=p>().</span><span class=nf>Create</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>user</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// [rows:2] INSERT INTO `languages` (`id`,`created_at`,`updated_at`,`deleted_at`,`name`) VALUES (&#39;lg-wgvnn84a70&#39;,&#39;2021-10-15 14:39:46.204&#39;,&#39;2021-10-15 14:39:46.204&#39;,NULL,&#39;英语&#39;),(&#39;lg-wgvnn84a70y&#39;,&#39;2021-10-15 14:39:46.204&#39;,&#39;2021-10-15 14:39:46.204&#39;,NULL,&#39;中文&#39;) ON DUPLICATE KEY UPDATE `id`=`id`
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// [rows:2] INSERT INTO `users_languages` (`user_id`,`language_id`) VALUES (&#39;user-wgvnn84a70&#39;,&#39;lg-wgvnn84a70&#39;),(&#39;user-wgvnn84a70&#39;,&#39;lg-wgvnn84a70y&#39;) ON DUPLICATE KEY UPDATE `user_id`=`user_id`
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=c1>// [rows:1] INSERT INTO `users` (`id`,`created_at`,`updated_at`,`deleted_at`,`name`) VALUES (&#39;user-wgvnn84a70&#39;,&#39;2021-10-15 14:39:46.195&#39;,&#39;2021-10-15 14:39:46.195&#39;,NULL,&#39;小洪&#39;)
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>ManyToManyFindTest</span><span class=p>()</span>  <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>db</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>base</span><span class=p>.</span><span class=nf>CreateConn</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>log</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;open db failed.&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=kd>var</span> <span class=nx>findUsers</span> <span class=p>[]</span><span class=nx>User</span>
+</span></span><span class=line><span class=cl>    <span class=kd>var</span> <span class=nx>findLanguages</span> <span class=p>[]</span><span class=nx>Language</span>
+</span></span><span class=line><span class=cl>    <span class=nx>LanguageCondition</span> <span class=o>:=</span> <span class=o>&amp;</span><span class=nx>Language</span><span class=p>{</span><span class=nx>Model</span><span class=p>:</span> <span class=nx>models</span><span class=p>.</span><span class=nx>Model</span><span class=p>{</span><span class=nx>ID</span><span class=p>:</span> <span class=s>&#34;lg-5wb85aj644&#34;</span><span class=p>}}</span>
+</span></span><span class=line><span class=cl>    <span class=nx>userCondition</span> <span class=o>:=</span> <span class=o>&amp;</span><span class=nx>User</span><span class=p>{</span><span class=nx>Model</span><span class=p>:</span> <span class=nx>models</span><span class=p>.</span><span class=nx>Model</span><span class=p>{</span><span class=nx>ID</span><span class=p>:</span> <span class=s>&#34;user-5wb85aj644&#34;</span><span class=p>}}</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 查找使用某语言的所有用户
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>db</span><span class=p>.</span><span class=nf>Debug</span><span class=p>().</span><span class=nf>Model</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>LanguageCondition</span><span class=p>).</span><span class=nf>Association</span><span class=p>(</span><span class=s>&#34;Users&#34;</span><span class=p>).</span><span class=nf>Find</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>findUsers</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// [rows:1] SELECT `users`.`id`,`users`.`created_at`,`users`.`updated_at`,`users`.`deleted_at`,`users`.`name` FROM `users` JOIN `users_languages` ON `users_languages`.`user_id` = `users`.`id` AND `users_languages`.`language_id` = &#39;lg-5wb85aj644&#39; WHERE `users`.`deleted_at` IS NULL
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 查找某用户使用的语言
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=nx>db</span><span class=p>.</span><span class=nf>Debug</span><span class=p>().</span><span class=nf>Model</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>userCondition</span><span class=p>).</span><span class=nf>Association</span><span class=p>(</span><span class=s>&#34;Languages&#34;</span><span class=p>).</span><span class=nf>Find</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>findLanguages</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// [rows:2] SELECT `languages`.`id`,`languages`.`created_at`,`languages`.`updated_at`,`languages`.`deleted_at`,`languages`.`name` FROM `languages` JOIN `users_languages` ON `users_languages`.`language_id` = `languages`.`id` AND `users_languages`.`user_id` = &#39;user-5wb85aj644&#39; WHERE `languages`.`deleted_at` IS NULL
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>    <span class=nx>marshalFindUsers</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>json</span><span class=p>.</span><span class=nf>Marshal</span><span class=p>(</span><span class=nx>findUsers</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>marshalFindLgs</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>json</span><span class=p>.</span><span class=nf>Marshal</span><span class=p>(</span><span class=nx>findLanguages</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nb>string</span><span class=p>(</span><span class=nx>marshalFindUsers</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nb>string</span><span class=p>(</span><span class=nx>marshalFindLgs</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=三声明模型---标签 class=headerLink><a href=#%e4%b8%89%e5%a3%b0%e6%98%8e%e6%a8%a1%e5%9e%8b---%e6%a0%87%e7%ad%be class=header-mark></a>三、声明模型 - 标签</h2><ul><li><p>colume</p></li><li><p>type</p><p>bool、int、uint、float、string、time、bytes</p></li><li><p>serializer</p></li><li><p>size</p></li><li><p>primaryKey</p></li><li><p>unique</p></li><li><p>default</p></li><li><p>precision</p></li><li><p>scale</p></li><li><p>not null</p></li><li><p>autoIncrement</p></li><li><p>autoIncrementIncrement</p></li><li><p>embedded</p></li><li><p>embeddedPrefix</p></li><li><p>autoCreateTime</p></li><li><p>autoUpdateTime</p></li><li><p>index</p></li><li><p>uniqueIndex</p></li><li><p>check</p></li><li><p>&lt; -</p></li><li><ul><li><blockquote></blockquote></li></ul></li><li><ul><li></li></ul></li><li><p>comment</p></li></ul></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2023-05-12</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md><span><a class=link-to-mardown href=/202305121339-gorm-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/index.md target=_blank rel="noopener noreferrer">阅读原始文档</a></span></div><div class=post-info-share><span><a href=# title="分享到 Twitter" data-sharer=twitter data-url=http://www.honghuiqiang.com/202305121339-gorm-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/ data-title="Gorm 基本使用" data-via=xxxx><i class="fab fa-twitter fa-fw"></i></a><a href=# title="分享到 Facebook" data-sharer=facebook data-url=http://www.honghuiqiang.com/202305121339-gorm-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/><i class="fab fa-facebook-square fa-fw"></i></a><a href=# title="分享到 WhatsApp" data-sharer=whatsapp data-url=http://www.honghuiqiang.com/202305121339-gorm-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/ data-title="Gorm 基本使用" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href=# title="分享到 Line" data-sharer=line data-url=http://www.honghuiqiang.com/202305121339-gorm-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/ data-title="Gorm 基本使用"><i data-svg-src=/lib/simple-icons/icons/line.min.svg></i></a><a href=# title="分享到 微博" data-sharer=weibo data-url=http://www.honghuiqiang.com/202305121339-gorm-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/ data-title="Gorm 基本使用"><i class="fab fa-weibo fa-fw"></i></a><a href=# title="分享到 Myspace" data-sharer=myspace data-url=http://www.honghuiqiang.com/202305121339-gorm-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/ data-title="Gorm 基本使用" data-description><i data-svg-src=/lib/simple-icons/icons/myspace.min.svg></i></a><a href=# title="分享到 Blogger" data-sharer=blogger data-url=http://www.honghuiqiang.com/202305121339-gorm-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/ data-title="Gorm 基本使用" data-description><i class="fab fa-blogger fa-fw"></i></a><a href=# title="分享到 Evernote" data-sharer=evernote data-url=http://www.honghuiqiang.com/202305121339-gorm-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/ data-title="Gorm 基本使用"><i class="fab fa-evernote fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/202305121348-kubernetes-%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/ class=prev rel=prev title="Kubernetes 一些基础概念"><i class="fas fa-angle-left fa-fw"></i>Kubernetes 一些基础概念</a>
+<a href=/202305121326-git-%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/ class=next rel=next title="Git 常用操作">Git 常用操作<i class="fas fa-angle-right fa-fw"></i></a></div></div><div id=comments><div id=giscus></div><noscript>Please enable JavaScript to view the comments powered by <a href=https://giscus.app/>giscus</a>.</noscript></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>由 <a href=https://gohugo.io/ target=_blank rel="noopener noreferrer" title="Hugo 0.105.0">Hugo</a> 强力驱动&nbsp;|&nbsp;托管在 <a title="Github Pages" href=https://docs.github.com/en/pages/ target=_blank rel="noopener noreffer">GitHub Pages</a> 上&nbsp;|&nbsp;主题 - <a href=https://github.com/HEIGE-PCloud/DoIt target=_blank rel="noopener noreferrer" title="DoIt 0.3.0"><i class="far fa-edit fa-fw"></i> DoIt</a></div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2023</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank rel="noopener noreferrer">索隆不喝酒</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class=footer-line></div><div class=footer-line></div></div></footer></div><div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><div class=assets><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/katex/copy-tex.min.css><noscript><link rel=stylesheet href=/lib/katex/copy-tex.min.css></noscript><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:10},comment:{giscus:{darkTheme:"dark",dataCategory:"General",dataCategoryId:"DIC_kwDOJh9DwM4CWbTD",dataEmitMetadata:"0",dataInputPosition:"bottom",dataLang:"zh-CN",dataMapping:"pathname",dataReactionsEnabled:"1",dataRepo:"904566722/hugo-giscus-common-system",dataRepoId:"R_kgDOJh9DwA",dataStrict:"0",lightTheme:"light"}},data:{"desktop-header-typeit":"HHQ Records","mobile-header-typeit":"HHQ Records"},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,fuseIndexURL:"/index.json",highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,type:"fuse",useExtendedSearch:!1},sharerjs:!0,table:{sort:!0},typeit:{cursorChar:"|",cursorSpeed:1e3,data:{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},duration:-1,speed:100}}</script><script type=text/javascript src=/js/giscus.min.js defer></script><script type=text/javascript src=/lib/tablesort/tablesort.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/typeit/typeit.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><script type=text/javascript src=/js/theme.min.js defer></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-GKX5LKE0Z8",{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=G-GKX5LKE0Z8" async></script><script>var _hmt=_hmt||[];(function(){var e,t=document.createElement("script");t.src="https://hm.baidu.com/hm.js?7ee459037c39c6123ff6e6252a7c5301",e=document.getElementsByTagName("script")[0],e.parentNode.insertBefore(t,e)})()</script></div></body></html>

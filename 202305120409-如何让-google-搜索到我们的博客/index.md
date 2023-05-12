@@ -97,9 +97,81 @@ site:https://honghuiqiang.com
 
 关于 hugo 可以省去上面的关于 sitemap 的操作
 
-只需要添加 `google search verification` 的那个 html 文件
+只需要在 xxx.github.io 仓库根路径添加 `google search verification` 的那个 html 文件
 
+可以有多种方式实现这个效果，可以用自己喜欢的方式，也可以参考以下方式：
 
+1. 在源仓库（保存博客md文件的仓库，也是执行 gh action 的仓库）添加一个 `extend` 文件夹，把对应的 xxx.html（上面的认证文件） 放到这个目录下
+2. 修改 gh action 的 yaml 配置脚本
+
+![](images/posts/Pasted%20image%2020230512051907.png)
+
+在使用 hugo 命令生成 public 目录之后，把 extend 目录下的内容拷贝到 public 目录
+
+```yaml
+name: deploy
+
+on:
+    push:
+    workflow_dispatch:
+    schedule:
+        # Runs everyday at 8:00 AM
+        - cron: '0 0 * * *'
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v2
+              with:
+                  submodules: true
+                  fetch-depth: 0
+
+            - name: Set up Python
+              uses: actions/setup-python@v2
+              with:
+                  python-version: 3.8
+            
+            - name: Commit and push if changed
+              run: |-
+                  git diff
+                  git config --global user.email "action@github.com"
+                  git config --global user.name "GitHub Action"
+                  git add -A
+                  git commit -m "ci: update about page (automatically)" || exit 0
+                  git push
+
+            - name: Setup Hugo
+              uses: peaceiris/actions-hugo@v2
+              with:
+                  hugo-version: 0.105.0
+                  extended: true
+
+            - name: Build Web
+              run: hugo --gc --minify
+              #run: hugo
+
+            - name: CP Extend Files
+              run: cp ./extend/* ./public
+
+            - name: Create CNAME
+              run: echo "honghuiqiang.com" > public/CNAME
+
+            - name: Run Pagefind
+              run: npm_config_yes=true npx pagefind --source "public"
+
+            - name: Deploy Web
+              uses: peaceiris/actions-gh-pages@v3
+              with:
+                  PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+                  EXTERNAL_REPOSITORY: 904566722/904566722.github.io
+                  PUBLISH_BRANCH: hugo
+                  PUBLISH_DIR: ./public
+                  commit_message: ${{ github.event.head_commit.message }}
+```
+
+至此就完成了所有操作
 
 ---
 1. https://zoharandroid.github.io/2019-08-03-%E8%AE%A9%E8%B0%B7%E6%AD%8C%E6%90%9C%E7%B4%A2%E5%88%B0%E8%87%AA%E5%B7%B1%E7%9A%84%E5%8D%9A%E5%AE%A2/

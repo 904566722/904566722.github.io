@@ -3,6 +3,8 @@
 <!--more-->
 #个人记录 
 
+> 适合自己的就是最好的
+
 ## 写作
 ### 我的写作工具
 
@@ -99,5 +101,7 @@ music url="/music/lessang/recall.m4a" name="xxx" artist="xxx" cover="/music/less
 
 [https://youtube.iiilab.com/](https://youtube.iiilab.com/)
 
-## 文档
-[Kubernetes](https://kubernetes.io/zh-cn/docs/home/)
+## 工作用途
+
+- ssh：mobaxterm
+- ftp：winscp

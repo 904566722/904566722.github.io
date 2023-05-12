@@ -1,11 +1,11 @@
-# 子串能表示从 1 到 N 数字的二进制串
+# t1016 子串能表示从 1 到 N 数字的二进制串
 
 <!--more-->
 #leetcode 
 
 [1016. 子串能表示从 1 到 N 数字的二进制串](https://leetcode.cn/problems/binary-string-with-substrings-representing-1-to-n/)
 
-```golang
+```go
 //
 // 思路1. 遍历 n，每个字符串都判断是否是 s 的子串， 如果使用 kmp 算法，时间复杂度是 s 的长度 m
 //		o(n * m)  * 数字转二进制字符串的时间

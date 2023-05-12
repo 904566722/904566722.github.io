@@ -25,65 +25,36 @@ tickInterval 1h
 title 今天大概要做
 
 section 博客
-    a1.添加评论系统: 03:00, 30m
+    a1.添加评论系统:done, 03:00, 30m
     a2.整理我的workspace: 1h
+    a3.google网站收录:done, 1h
 
 section 迁移文档
-    b1.golang的文档: 1h
-    b2.mysql文档: 1h
-    b3.linux文档: 1h
-    b4.之前放在收集箱的文档: 1h
-    b5.项目管理文档: 1h
-    b6.docker文档: 1h
-    b7.kubernetes文档: 1h
+    b1.golang的文档:done, 1h
+    b2.mysql文档:done,  20m
+    b3.linux文档:done, 1h
+    b4.之前放在收集箱的文档:done, 5m
+    b5.项目管理文档:done, 40m
+    b6.docker文档:done, 30m
+    b7.kubernetes文档:done, 1h
     b7.openshift文档: 1h
-    b8.工作性质的文档: 1h
+    b8.工作性质的文档: 4h
 
 section 习惯
-算法每日一题: 1h
-{{< /mermaid >}}
+	算法每日一题: 1h
+{{< /mermaid >}}         
 
 <font color=grey>**`注意以上《工作性质的文档》`**：因为之前写在本地，所以一些公司隐私性质的内容都卸载里面，放到博客只需要提取其中知识性的内容！</font>
 
 
 ## 记录区-习惯记录
 
-打卡状态： ✅   |  ❌
-{{< admonition type=abstract title="习惯打卡表" open=false >}}
-|日期|算法|阅读|
-|-|-|-|
-|1|✅||
-|2|✅||
-|3|✅||
-|4|✅||
-|5|✅||
-|6|✅||
-|7|||
-|8|✅||
-|9|||
-|10|||
-|11|✅||
-|12|✅||
-|13|||
-|14|||
-|15|||
-|16|||
-|17|||
-|18|||
-|19|||
-|20|||
-|21|||
-|22|||
-|23|||
-|24|||
-|25|||
-|26|||
-|27|||
-|28|||
-|29|||
-|30|||
-|31|||
-{{< /admonition >}}
+(v2.0)打卡状态： ✅   |  ❌ 
+
+<font color=grey>改成使用 todo 列表的形式来表现，每个月的打卡情况在月度总结里面体现</font>
+
+- [x] 算法每日一题
+
 
 ## 记录区-事&物记
 

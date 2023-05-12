@@ -1,0 +1,279 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>Git 常用操作 - 学习记录</title><meta name=Description content="这是我的网站描述"><meta property="og:title" content="Git 常用操作"><meta property="og:description" content><meta property="og:type" content="article"><meta property="og:url" content="http://www.honghuiqiang.com/202305121326-git-%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/"><meta property="og:image" content="http://www.honghuiqiang.com/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-05-12T13:05:00+08:00"><meta property="article:modified_time" content="2023-05-12T13:05:00+08:00"><meta property="og:site_name" content="学习记录"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="http://www.honghuiqiang.com/logo.png"><meta name=twitter:title content="Git 常用操作"><meta name=twitter:description content><meta name=application-name content="HHQ Records"><meta name=apple-mobile-web-app-title content="HHQ Records"><meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel=icon href=/images/zoro.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=canonical href=http://www.honghuiqiang.com/202305121326-git-%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/><link rel=prev href=http://www.honghuiqiang.com/202305121339-gorm-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/><link rel=next href=http://www.honghuiqiang.com/202305121314-gdb-%E8%B0%83%E8%AF%95/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/color.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/fontawesome-free/all.min.css><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/animate/animate.min.css><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Git 常用操作","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http:\/\/www.honghuiqiang.com\/202305121326-git-%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C\/"},"genre":"posts","wordcount":1706,"url":"http:\/\/www.honghuiqiang.com\/202305121326-git-%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C\/","datePublished":"2023-05-12T13:05:00+08:00","dateModified":"2023-05-12T13:05:00+08:00","publisher":{"@type":"Organization","name":""},"authors":[{"@type":"Person","name":"索隆不喝酒"}],"description":""}</script><script src=//instant.page/5.1.1 defer type=module integrity=sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq></script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(e){document.body.setAttribute("theme",e),document.documentElement.style.setProperty("color-scheme",e==="light"?"light":"dark"),window.theme=e,window.isDark=window.theme!=="light"}function saveTheme(e){window.localStorage&&localStorage.setItem("theme",e)}function getMeta(e){const t=document.getElementsByTagName("meta");for(let n=0;n<t.length;n++)if(t[n].getAttribute("name")===e)return t[n];return""}if(window.localStorage&&localStorage.getItem("theme")){let e=localStorage.getItem("theme");e==="light"||e==="dark"||e==="black"?setTheme(e):setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}else"dark"==="light"||"dark"==="dark"||"dark"==="black"?(setTheme("dark"),saveTheme("dark")):(saveTheme("auto"),setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));let metaColors={light:"#f8f8f8",dark:"#252627",black:"#000000"};getMeta("theme-color").content=metaColors[document.body.getAttribute("theme")],window.switchThemeEventSet=new Set</script><div id=back-to-top></div><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=学习记录><span id=desktop-header-typeit class=typeit></span></a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>文章 </a><a class=menu-item href=/categories/>分类 </a><a class=menu-item href=/series/>系列 </a><a class=menu-item href=/tags/>标签 </a><span class="menu-item delimiter"></span><a href=# class="menu-item language" title=选择语言>简体中文<i class="fas fa-chevron-right fa-fw"></i>
+<select class=language-select title="Select Language" id=language-select-desktop onchange="location=this.value"><option value=/202305121326-git-%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/ selected>简体中文</option></select>
+</a><span class="menu-item search" id=search-desktop><input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=# class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=# class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span>
+</span><a href=# class="menu-item theme-select" title=切换主题><i class="fas fa-adjust fa-fw"></i>
+<select class=color-theme-select id=theme-select-desktop title=切换主题><option value=light>浅色</option><option value=dark>深色</option><option value=black>黑色</option><option value=auto>跟随系统</option></select></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=学习记录><span id=mobile-header-typeit class=typeit></span></a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=# class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=# class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=# class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/ title>文章</a><a class=menu-item href=/categories/ title>分类</a><a class=menu-item href=/series/ title>系列</a><a class=menu-item href=/tags/ title>标签</a><a href=# class="menu-item theme-select" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+<select class=color-theme-select id=theme-select-mobile title=切换主题><option value=light>浅色</option><option value=dark>深色</option><option value=black>黑色</option><option value=auto>跟随系统</option></select>
+</a><a href=# class=menu-item title=选择语言>简体中文<i class="fas fa-chevron-right fa-fw"></i>
+<select class=language-select title="Select Language" onchange="location=this.value"><option value=/202305121326-git-%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/ selected>简体中文</option></select></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto><nav id=TableOfContents><ul><li><a href=#了解概念>了解概念</a></li><li><a href=#常用命令>常用命令</a><ul><li><a href=#git-help>git help</a></li><li><a href=#diff>diff</a></li><li><a href=#log>log</a></li><li><a href=#reflog>reflog</a></li><li><a href=#branch>branch</a></li><li><a href=#cherry-pick>cherry-pick</a></li><li><a href=#checkout>checkout</a></li><li><a href=#reset>reset</a></li><li><a href=#fetch>fetch</a></li><li><a href=#pull>pull</a></li><li><a href=#push>push</a></li><li><a href=#添加远程仓库>添加远程仓库</a></li></ul></li><li><a href=#场景>场景</a><ul><li><a href=#fetch-1>fetch</a></li><li><a href=#merge-request>merge request</a></li><li><a href=#rebase-理解>rebase 理解</a></li><li><a href=#cherry-pick-1>cherry-pick</a></li><li><a href=#合并-commit>合并 commit</a></li><li><a href=#基于已有工程创建新的-git-仓库>基于已有工程创建新的 git 仓库</a></li></ul></li></ul></nav></div></div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Git 常用操作</h1><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=http://www.honghuiqiang.com/authors/%E7%B4%A2%E9%9A%86%E4%B8%8D%E5%96%9D%E9%85%92>索隆不喝酒</a></span>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/><i class="far fa-folder fa-fw"></i>项目管理</a></span>&nbsp;<span class=post-category>和</span>&nbsp;<span class=post-series>系列 <a href=/series/git/><i class="far fa-list-alt fa-fw"></i>Git</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2023-05-12>2023-05-12</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2023-05-12>2023-05-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1706 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div></div><div class="details series-nav open"><div class="details-summary series-title"><span>系列 - Git</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content series-content"><nav><ul><li><span class=active>Git 常用操作</span></li></ul></nav></div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#了解概念>了解概念</a></li><li><a href=#常用命令>常用命令</a><ul><li><a href=#git-help>git help</a></li><li><a href=#diff>diff</a></li><li><a href=#log>log</a></li><li><a href=#reflog>reflog</a></li><li><a href=#branch>branch</a></li><li><a href=#cherry-pick>cherry-pick</a></li><li><a href=#checkout>checkout</a></li><li><a href=#reset>reset</a></li><li><a href=#fetch>fetch</a></li><li><a href=#pull>pull</a></li><li><a href=#push>push</a></li><li><a href=#添加远程仓库>添加远程仓库</a></li></ul></li><li><a href=#场景>场景</a><ul><li><a href=#fetch-1>fetch</a></li><li><a href=#merge-request>merge request</a></li><li><a href=#rebase-理解>rebase 理解</a></li><li><a href=#cherry-pick-1>cherry-pick</a></li><li><a href=#合并-commit>合并 commit</a></li><li><a href=#基于已有工程创建新的-git-仓库>基于已有工程创建新的 git 仓库</a></li></ul></li></ul></nav></div></div><div class=content id=content><p>#Git</p><h2 id=了解概念 class=headerLink><a href=#%e4%ba%86%e8%a7%a3%e6%a6%82%e5%bf%b5 class=header-mark></a>了解概念</h2><p><figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230512132711.png title=/images/posts/Pasted%20image%2020230512132711.png data-thumbnail=/images/posts/Pasted%20image%2020230512132711.png><img loading=lazy src=/images/posts/Pasted%20image%2020230512132711.png srcset="/images/posts/Pasted%20image%2020230512132711.png, /images/posts/Pasted%20image%2020230512132711.png 1.5x, /images/posts/Pasted%20image%2020230512132711.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230512132711.png></a></figure></p><ul><li><p>工作区：本地看到的目录</p></li><li><p>暂存区：stage 或者叫 index</p></li><li><p>版本库：</p></li><li><p>HEAD : 实际是指向 master 的一个游标，如图出现 HEAD 的命令也可以用 master 代替</p></li><li><p>执行 <code>git add</code> ，index 目录树更新，工作区的修改内容被写入到 objects 中的一个新对象，新对象 id 记录在 index 的文件索引中</p></li><li><p><code>git commit</code> 时，master 分支做相应的更新</p></li></ul><h2 id=常用命令 class=headerLink><a href=#%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4 class=header-mark></a>常用命令</h2><h3 id=git-help class=headerLink><a href=#git-help class=header-mark></a>git help</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>$ git --help
+</span></span><span class=line><span class=cl>usage: git <span class=o>[</span>--version<span class=o>]</span> <span class=o>[</span>--help<span class=o>]</span> <span class=o>[</span>-C &lt;path&gt;<span class=o>]</span> <span class=o>[</span>-c &lt;name&gt;<span class=o>=</span>&lt;value&gt;<span class=o>]</span>
+</span></span><span class=line><span class=cl>           <span class=o>[</span>--exec-path<span class=o>[=</span>&lt;path&gt;<span class=o>]]</span> <span class=o>[</span>--html-path<span class=o>]</span> <span class=o>[</span>--man-path<span class=o>]</span> <span class=o>[</span>--info-path<span class=o>]</span>
+</span></span><span class=line><span class=cl>           <span class=o>[</span>-p <span class=p>|</span> --paginate <span class=p>|</span> -P <span class=p>|</span> --no-pager<span class=o>]</span> <span class=o>[</span>--no-replace-objects<span class=o>]</span> <span class=o>[</span>--bare<span class=o>]</span>
+</span></span><span class=line><span class=cl>           <span class=o>[</span>--git-dir<span class=o>=</span>&lt;path&gt;<span class=o>]</span> <span class=o>[</span>--work-tree<span class=o>=</span>&lt;path&gt;<span class=o>]</span> <span class=o>[</span>--namespace<span class=o>=</span>&lt;name&gt;<span class=o>]</span>
+</span></span><span class=line><span class=cl>           <span class=o>[</span>--super-prefix<span class=o>=</span>&lt;path&gt;<span class=o>]</span> <span class=o>[</span>--config-env<span class=o>=</span>&lt;name&gt;<span class=o>=</span>&lt;envvar&gt;<span class=o>]</span>
+</span></span><span class=line><span class=cl>           &lt;command&gt; <span class=o>[</span>&lt;args&gt;<span class=o>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>这些是在不同情况下常用的Git命令:
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>开始一个工作区 <span class=o>(</span>see also: git <span class=nb>help</span> tutorial<span class=o>)</span>
+</span></span><span class=line><span class=cl>   clone             克隆一个版本库到一个新的目录中
+</span></span><span class=line><span class=cl>   init              创建一个空的Git仓库或重新初始化一个现有的仓库
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>围绕当前的变化开展工作 <span class=o>(</span>see also: git <span class=nb>help</span> everyday<span class=o>)</span>
+</span></span><span class=line><span class=cl>   add               将文件内容添加到索引中
+</span></span><span class=line><span class=cl>   mv                移动或重命名一个文件、一个目录或一个符号链接（symlink）
+</span></span><span class=line><span class=cl>   restore           恢复工作树文件
+</span></span><span class=line><span class=cl>   rm                从工作树和索引中删除文件
+</span></span><span class=line><span class=cl>   sparse-checkout   初始化和修改 sparse-checkout
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>审查历史和统计 <span class=o>(</span>see also: git <span class=nb>help</span> revisions<span class=o>)</span>
+</span></span><span class=line><span class=cl>   bisect            使用二进制搜索来查找引入错误的提交
+</span></span><span class=line><span class=cl>   diff              Show changes between commits, commit and working tree, etc
+</span></span><span class=line><span class=cl>   grep              打印与模式相匹配的行
+</span></span><span class=line><span class=cl>   log               显示提交日志
+</span></span><span class=line><span class=cl>   show              显示各种类型的对象
+</span></span><span class=line><span class=cl>   status            显示工作树状态
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>增长、标记和调整你的共同历史
+</span></span><span class=line><span class=cl>   branch            列出、创建或删除分支
+</span></span><span class=line><span class=cl>   commit            记录对存储库的更改
+</span></span><span class=line><span class=cl>   merge             将两个或更多的发展历史连接在一起
+</span></span><span class=line><span class=cl>   rebase            在另一个基础提示之上重新提交
+</span></span><span class=line><span class=cl>   reset             将当前的HEAD复位到指定的状态
+</span></span><span class=line><span class=cl>   switch            切换分支
+</span></span><span class=line><span class=cl>   tag               创建、列出、删除或验证一个用GPG签名的标签对象
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>协同合作 <span class=o>(</span>see also: git <span class=nb>help</span> workflows<span class=o>)</span>
+</span></span><span class=line><span class=cl>   fetch             从另一个资源库下载 objects 和 refs 
+</span></span><span class=line><span class=cl>   pull              从另一个版本库或本地分支获取并与之整合
+</span></span><span class=line><span class=cl>   push              更新远程相关 objects 和 refs
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=s1>&#39;git help -a&#39;</span> and <span class=s1>&#39;git help -g&#39;</span> list available subcommands and some
+</span></span><span class=line><span class=cl>concept guides. See <span class=s1>&#39;git help &lt;command&gt;&#39;</span> or <span class=s1>&#39;git help &lt;concept&gt;&#39;</span>
+</span></span><span class=line><span class=cl>to <span class=nb>read</span> about a specific subcommand or concept.
+</span></span><span class=line><span class=cl>See <span class=s1>&#39;git help git&#39;</span> <span class=k>for</span> an overview of the system.
+</span></span></code></pre></td></tr></table></div></div><h3 id=diff class=headerLink><a href=#diff class=header-mark></a>diff</h3><h3 id=log class=headerLink><a href=#log class=header-mark></a>log</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>git log --oneline
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># -n 显示最近 n 条提交记录</span>
+</span></span><span class=line><span class=cl>git log --oneline -5 <span class=c1># 显示最近5条提交</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># --after 指定时间之后的提交；--before 指定时间之前的ti&#39;ji</span>
+</span></span><span class=line><span class=cl>git log --oneline --after<span class=o>=</span>2022-06-01
+</span></span></code></pre></td></tr></table></div></div><h3 id=reflog class=headerLink><a href=#reflog class=header-mark></a>reflog</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=c1>## 查看分支是从哪个分支创建出来的</span>
+</span></span><span class=line><span class=cl>git reflog show &lt;分支名&gt;
+</span></span><span class=line><span class=cl>git reflog --date<span class=o>=</span><span class=nb>local</span> <span class=p>|</span> grep &lt;分支名&gt;
+</span></span></code></pre></td></tr></table></div></div><h3 id=branch class=headerLink><a href=#branch class=header-mark></a>branch</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>git branch      <span class=c1># 查看本地分支情况</span>
+</span></span><span class=line><span class=cl>git branch -a   <span class=c1># 查看所有分支</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>git branch &lt;分支名&gt; // 创建分支，新的分支数据与当前分支的数据相同
+</span></span><span class=line><span class=cl>git checkout &lt;分支名&gt;  // 切换分支
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>git branch -d                 <span class=c1># 删除本地分支</span>
+</span></span><span class=line><span class=cl>git push origin -d task-print <span class=c1># 删除远端分支</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=cherry-pick class=headerLink><a href=#cherry-pick class=header-mark></a>cherry-pick</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>git cherry-pick 7fa7894
+</span></span><span class=line><span class=cl><span class=c1># (7fa7894, 9f0d518]</span>
+</span></span><span class=line><span class=cl>git cherry-pick 7fa7894..9f0d518
+</span></span><span class=line><span class=cl><span class=c1># [7fa7894, 9f0d518]</span>
+</span></span><span class=line><span class=cl>git cherry-pick 7fa7894^..9f0d518
+</span></span><span class=line><span class=cl><span class=c1># 打开编辑器，编辑提交信息</span>
+</span></span><span class=line><span class=cl>-e
+</span></span><span class=line><span class=cl><span class=c1># 在提交信息的末尾追加 cherry pick 来源 commit</span>
+</span></span><span class=line><span class=cl>-x
+</span></span><span class=line><span class=cl><span class=c1># 继续操作</span>
+</span></span><span class=line><span class=cl>--continue
+</span></span><span class=line><span class=cl><span class=c1># 放弃合并回到操作前的样子</span>
+</span></span><span class=line><span class=cl>--abort
+</span></span><span class=line><span class=cl><span class=c1># 退出，但是不回到操作前的样子</span>
+</span></span><span class=line><span class=cl>--quit
+</span></span></code></pre></td></tr></table></div></div><h3 id=checkout class=headerLink><a href=#checkout class=header-mark></a>checkout</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>git checkout -b 分支名 remotes/origin/分支名       <span class=c1># 拉取远程的分支到本地</span>
+</span></span><span class=line><span class=cl>git checkout -b 分支名                             <span class=c1># 创建并切换到分支</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=reset class=headerLink><a href=#reset class=header-mark></a>reset</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>git reset <span class=o>[</span>--soft <span class=p>|</span> --mixed <span class=p>|</span> --hard<span class=o>]</span> <span class=o>[</span>HEAD<span class=o>]</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=fetch class=headerLink><a href=#fetch class=header-mark></a>fetch</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>git fetch <span class=o>[</span>alias<span class=o>]</span>
+</span></span><span class=line><span class=cl>git merge <span class=o>[</span>alias<span class=o>]</span>/<span class=o>[</span>branch<span class=o>]</span>
+</span></span><span class=line><span class=cl>git checkout -b master origin/master         <span class=c1># 本地没有 master 分支，拉取远程的 master 分支</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=pull class=headerLink><a href=#pull class=header-mark></a>pull</h3><p><code>git pull</code> 其实就是 <code>git fetch</code> 和 <code>git merge FETCH_HEAD</code> 的简写</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>git pull &lt;远程主机名&gt; &lt;远程分支名&gt;:&lt;本地分支名&gt; // 将远程主机 origin 的分支拉取到本地，并于本地的分支合并
+</span></span><span class=line><span class=cl>git pull &lt;远程主机名&gt; &lt;远程分支&gt;               // 默认合并到当前分支
+</span></span></code></pre></td></tr></table></div></div><h3 id=push class=headerLink><a href=#push class=header-mark></a>push</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>git push &lt;远程主机名&gt; &lt;本地分支名&gt;:&lt;远程分支名&gt;
+</span></span><span class=line><span class=cl>git push &lt;远程主机名&gt; &lt;本地分支名&gt;   // &lt;本地分支名&gt; <span class=o>=</span> &lt;远程分支名&gt; 
+</span></span></code></pre></td></tr></table></div></div><h3 id=添加远程仓库 class=headerLink><a href=#%e6%b7%bb%e5%8a%a0%e8%bf%9c%e7%a8%8b%e4%bb%93%e5%ba%93 class=header-mark></a>添加远程仓库</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>git remote -v <span class=c1># 查看本仓库的远程仓库列表</span>
+</span></span><span class=line><span class=cl>git remote add B 
+</span></span></code></pre></td></tr></table></div></div><h2 id=场景 class=headerLink><a href=#%e5%9c%ba%e6%99%af class=header-mark></a>场景</h2><h3 id=fetch-1 class=headerLink><a href=#fetch-1 class=header-mark></a>fetch</h3><p><figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230512133041.png title=/images/posts/Pasted%20image%2020230512133041.png data-thumbnail=/images/posts/Pasted%20image%2020230512133041.png><img loading=lazy src=/images/posts/Pasted%20image%2020230512133041.png srcset="/images/posts/Pasted%20image%2020230512133041.png, /images/posts/Pasted%20image%2020230512133041.png 1.5x, /images/posts/Pasted%20image%2020230512133041.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230512133041.png></a></figure></p><h3 id=merge-request class=headerLink><a href=#merge-request class=header-mark></a>merge request</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>从 master 同时拉出来两个分支 task1、task2
+</span></span><span class=line><span class=cl>							master
+</span></span><span class=line><span class=cl>								/\
+</span></span><span class=line><span class=cl>					       task1  task2
+</span></span><span class=line><span class=cl>task1 与 task2 在同一个文件的同一个位置各加了一个方法，两个分支同时向 master 提了个 mr
+</span></span><span class=line><span class=cl>先合入 task2 的 mr
+</span></span><span class=line><span class=cl>这时 task1 的 mr 就会有冲突，如何解决？
+</span></span></code></pre></td></tr></table></div></div><p>step1. fetch 同步代码</p><p>step2. rebase，上游分支选择 master，开始 rebase，解决出现的冲突</p><p><figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230512133117.png title=/images/posts/Pasted%20image%2020230512133117.png data-thumbnail=/images/posts/Pasted%20image%2020230512133117.png><img loading=lazy src=/images/posts/Pasted%20image%2020230512133117.png srcset="/images/posts/Pasted%20image%2020230512133117.png, /images/posts/Pasted%20image%2020230512133117.png 1.5x, /images/posts/Pasted%20image%2020230512133117.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230512133117.png></a></figure></p><p>step3. 强制 push 到 task1 分支</p><p>命令行操作:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>git fetch
+</span></span><span class=line><span class=cl>git rebase origin/master
+</span></span><span class=line><span class=cl><span class=c1># 解决冲突 ...</span>
+</span></span><span class=line><span class=cl>git add 文件
+</span></span><span class=line><span class=cl>git rebase --continue
+</span></span><span class=line><span class=cl>git push origin task1:task1 --force
+</span></span></code></pre></td></tr></table></div></div><h3 id=rebase-理解 class=headerLink><a href=#rebase-%e7%90%86%e8%a7%a3 class=header-mark></a>rebase 理解</h3><blockquote><p><a href=https://www.yiibai.com/git/git_rebase.html target=_blank rel="noopener noreferrer">https://www.yiibai.com/git/git_rebase.html</a></p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=c1># 当前处于 task4 分支，执行</span>
+</span></span><span class=line><span class=cl>git rebase origin/master
+</span></span><span class=line><span class=cl><span class=c1># **相当于把在 task4 分支的提交重新创建，放到 origin/master 的提交之后**</span>
+</span></span><span class=line><span class=cl><span class=c1># 老的提交被丢弃</span>
+</span></span></code></pre></td></tr></table></div></div><p><figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230512133259.png title=/images/posts/Pasted%20image%2020230512133259.png data-thumbnail=/images/posts/Pasted%20image%2020230512133259.png><img loading=lazy src=/images/posts/Pasted%20image%2020230512133259.png srcset="/images/posts/Pasted%20image%2020230512133259.png, /images/posts/Pasted%20image%2020230512133259.png 1.5x, /images/posts/Pasted%20image%2020230512133259.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230512133259.png></a></figure></p><h3 id=cherry-pick-1 class=headerLink><a href=#cherry-pick-1 class=header-mark></a>cherry-pick</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>git cherry-pick hash1..hash2
+</span></span></code></pre></td></tr></table></div></div><p><figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230512133334.png title=/images/posts/Pasted%20image%2020230512133334.png data-thumbnail=/images/posts/Pasted%20image%2020230512133334.png><img loading=lazy src=/images/posts/Pasted%20image%2020230512133334.png srcset="/images/posts/Pasted%20image%2020230512133334.png, /images/posts/Pasted%20image%2020230512133334.png 1.5x, /images/posts/Pasted%20image%2020230512133334.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230512133334.png></a></figure></p><h3 id=合并-commit class=headerLink><a href=#%e5%90%88%e5%b9%b6-commit class=header-mark></a>合并 commit</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>git rebase -i
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>ie.
+</span></span><span class=line><span class=cl>$ git log --oneline
+</span></span><span class=line><span class=cl>3f9a1c2 <span class=o>(</span>HEAD -&gt; bugfix-1-temp<span class=o>)</span> <span class=m>2</span> <span class=p>&amp;</span> <span class=m>3</span>
+</span></span><span class=line><span class=cl>b86fd5c <span class=m>1</span>
+</span></span><span class=line><span class=cl>71df3ef <span class=o>(</span>origin/bugfix-1-temp, origin/bugfix-1, bugfix-1<span class=o>)</span> <span class=m>1</span>
+</span></span><span class=line><span class=cl>3aa9ee7 Merge branch <span class=s1>&#39;master&#39;</span> of code.cestc.cn:honghuiqiang/git-practice
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 如果需要合并前两个 commit， -i 指向第三个 commit</span>
+</span></span><span class=line><span class=cl>git rebase -i 71df3ef
+</span></span><span class=line><span class=cl>$ git log --oneline
+</span></span><span class=line><span class=cl>04beace <span class=o>(</span>HEAD -&gt; bugfix-1-temp<span class=o>)</span> <span class=m>1</span> <span class=p>&amp;</span> <span class=m>2</span> <span class=p>&amp;</span> <span class=m>3</span>
+</span></span><span class=line><span class=cl>71df3ef <span class=o>(</span>origin/bugfix-1-temp, origin/bugfix-1, bugfix-1<span class=o>)</span> <span class=m>1</span>
+</span></span></code></pre></td></tr></table></div></div><p><figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230512133419.png title=/images/posts/Pasted%20image%2020230512133419.png data-thumbnail=/images/posts/Pasted%20image%2020230512133419.png><img loading=lazy src=/images/posts/Pasted%20image%2020230512133419.png srcset="/images/posts/Pasted%20image%2020230512133419.png, /images/posts/Pasted%20image%2020230512133419.png 1.5x, /images/posts/Pasted%20image%2020230512133419.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230512133419.png></a></figure></p><h3 id=基于已有工程创建新的-git-仓库 class=headerLink><a href=#%e5%9f%ba%e4%ba%8e%e5%b7%b2%e6%9c%89%e5%b7%a5%e7%a8%8b%e5%88%9b%e5%bb%ba%e6%96%b0%e7%9a%84-git-%e4%bb%93%e5%ba%93 class=header-mark></a>基于已有工程创建新的 git 仓库</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>git init
+</span></span><span class=line><span class=cl>git remote add origin http://xxxx.git
+</span></span><span class=line><span class=cl>git add .
+</span></span><span class=line><span class=cl>git commit -m <span class=s2>&#34;init project.&#34;</span>
+</span></span><span class=line><span class=cl>git push -u origin master
+</span></span></code></pre></td></tr></table></div></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2023-05-12</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md><span><a class=link-to-mardown href=/202305121326-git-%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/index.md target=_blank rel="noopener noreferrer">阅读原始文档</a></span></div><div class=post-info-share><span><a href=# title="分享到 Twitter" data-sharer=twitter data-url=http://www.honghuiqiang.com/202305121326-git-%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/ data-title="Git 常用操作" data-via=xxxx><i class="fab fa-twitter fa-fw"></i></a><a href=# title="分享到 Facebook" data-sharer=facebook data-url=http://www.honghuiqiang.com/202305121326-git-%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/><i class="fab fa-facebook-square fa-fw"></i></a><a href=# title="分享到 WhatsApp" data-sharer=whatsapp data-url=http://www.honghuiqiang.com/202305121326-git-%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/ data-title="Git 常用操作" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href=# title="分享到 Line" data-sharer=line data-url=http://www.honghuiqiang.com/202305121326-git-%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/ data-title="Git 常用操作"><i data-svg-src=/lib/simple-icons/icons/line.min.svg></i></a><a href=# title="分享到 微博" data-sharer=weibo data-url=http://www.honghuiqiang.com/202305121326-git-%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/ data-title="Git 常用操作"><i class="fab fa-weibo fa-fw"></i></a><a href=# title="分享到 Myspace" data-sharer=myspace data-url=http://www.honghuiqiang.com/202305121326-git-%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/ data-title="Git 常用操作" data-description><i data-svg-src=/lib/simple-icons/icons/myspace.min.svg></i></a><a href=# title="分享到 Blogger" data-sharer=blogger data-url=http://www.honghuiqiang.com/202305121326-git-%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/ data-title="Git 常用操作" data-description><i class="fab fa-blogger fa-fw"></i></a><a href=# title="分享到 Evernote" data-sharer=evernote data-url=http://www.honghuiqiang.com/202305121326-git-%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C/ data-title="Git 常用操作"><i class="fab fa-evernote fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/202305121339-gorm-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/ class=prev rel=prev title="Gorm 基本使用"><i class="fas fa-angle-left fa-fw"></i>Gorm 基本使用</a>
+<a href=/202305121314-gdb-%E8%B0%83%E8%AF%95/ class=next rel=next title="gdb 调试">gdb 调试<i class="fas fa-angle-right fa-fw"></i></a></div></div><div id=comments><div id=giscus></div><noscript>Please enable JavaScript to view the comments powered by <a href=https://giscus.app/>giscus</a>.</noscript></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>由 <a href=https://gohugo.io/ target=_blank rel="noopener noreferrer" title="Hugo 0.105.0">Hugo</a> 强力驱动&nbsp;|&nbsp;托管在 <a title="Github Pages" href=https://docs.github.com/en/pages/ target=_blank rel="noopener noreffer">GitHub Pages</a> 上&nbsp;|&nbsp;主题 - <a href=https://github.com/HEIGE-PCloud/DoIt target=_blank rel="noopener noreferrer" title="DoIt 0.3.0"><i class="far fa-edit fa-fw"></i> DoIt</a></div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2023</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank rel="noopener noreferrer">索隆不喝酒</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class=footer-line></div><div class=footer-line></div></div></footer></div><div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><div class=assets><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/katex/copy-tex.min.css><noscript><link rel=stylesheet href=/lib/katex/copy-tex.min.css></noscript><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:10},comment:{giscus:{darkTheme:"dark",dataCategory:"General",dataCategoryId:"DIC_kwDOJh9DwM4CWbTD",dataEmitMetadata:"0",dataInputPosition:"bottom",dataLang:"zh-CN",dataMapping:"pathname",dataReactionsEnabled:"1",dataRepo:"904566722/hugo-giscus-common-system",dataRepoId:"R_kgDOJh9DwA",dataStrict:"0",lightTheme:"light"}},data:{"desktop-header-typeit":"HHQ Records","mobile-header-typeit":"HHQ Records"},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,fuseIndexURL:"/index.json",highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,type:"fuse",useExtendedSearch:!1},sharerjs:!0,table:{sort:!0},typeit:{cursorChar:"|",cursorSpeed:1e3,data:{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},duration:-1,speed:100}}</script><script type=text/javascript src=/js/giscus.min.js defer></script><script type=text/javascript src=/lib/tablesort/tablesort.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/typeit/typeit.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><script type=text/javascript src=/js/theme.min.js defer></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-GKX5LKE0Z8",{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=G-GKX5LKE0Z8" async></script><script>var _hmt=_hmt||[];(function(){var e,t=document.createElement("script");t.src="https://hm.baidu.com/hm.js?7ee459037c39c6123ff6e6252a7c5301",e=document.getElementsByTagName("script")[0],e.parentNode.insertBefore(t,e)})()</script></div></body></html>

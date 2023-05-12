@@ -29,13 +29,13 @@ func lastSubstring3(s string) string {
 思考：
 1. unsafe.Pointer 的使用
 
-	([202304241708 unsafe.Pointer 的六种使用场景](content/posts/go/202304241708%20unsafe.Pointer%20的六种使用场景.md))
+	([202304241708 unsafe.Pointer 的六种使用场景](content/posts/go/golang-origin/202304241708%20unsafe.Pointer%20的六种使用场景.md))
 
 1. 为什么是 (\*Index) 这样的写法？
 
 	![](images/posts/Pasted%20image%2020230424165450.png)
 	
-	顺便复习下 struct 结构体（[202304241633 struct](content/posts/go/202304241633%20struct.md)）
+	顺便复习下 struct 结构体（[202304241633 struct](content/posts/go/golang-simple/202304241633%20struct.md)）
 
 ## 二、SA-IS 算法
 

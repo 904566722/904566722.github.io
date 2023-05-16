@@ -41,7 +41,7 @@ section 迁移文档
     b8.工作性质的文档: 4h
 
 section 习惯
-	算法每日一题: 1h
+	算法每日一题:done, 1h
 {{< /mermaid >}}         
 
 <font color=grey>**`注意以上《工作性质的文档》`**：因为之前写在本地，所以一些公司隐私性质的内容都卸载里面，放到博客只需要提取其中知识性的内容！</font>
@@ -53,7 +53,9 @@ section 习惯
 
 <font color=grey>改成使用 todo 列表的形式来表现，每个月的打卡情况在月度总结里面体现</font>
 
-- [x] 算法每日一题
+- [x] 算法每日一题 
+
+	[202305121759 t128 最长连续序列](content/posts/algorithm/leetcode/202305121759%20t128%20最长连续序列.md)
 
 
 ## 记录区-事&物记
@@ -64,15 +66,27 @@ section 习惯
 
 - 新事物
 
+发现两本新的书：[操作系统导论](https://book.douban.com/subject/33463930/)、[DDIA](https://github.com/Vonng/ddia/blob/master/part-i.md)
+
+![](images/posts/Pasted%20image%2020230513084637.png)
+
+一个高质量的博客：[https://draveness.me/](https://draveness.me/)
+
+
 ## 记录区-随手记
 🎧🎵（挑首歌？local:[202305101553 博客音乐嵌入样例](content/posts/life/music/202305101553%20博客音乐嵌入样例.md) remote:[202305101553 博客音乐嵌入样例](http://honghuiqiang.com/202305101553-%E5%8D%9A%E5%AE%A2%E9%9F%B3%E4%B9%90%E5%B5%8C%E5%85%A5%E6%A0%B7%E4%BE%8B/)）
+
+{{< music url="/music/请回答1988/你不要担心.mp3" name="걱정말아요 그대 (你不要担心)" artist="SoulJa/青山黛玛 (青山テルマ)" cover="/music/请回答1988/你不要担心.png" >}}
+
+
+今天把规划要迁移的文档大部分迁移了，也做了一些扩展学习，发现了一些不错的博客、书籍。
 
 
 ## 记录区-总结
 
 心情打分：
 - [ ] 😆 很快乐
-- [ ] 🙂 一般快乐
+- [x] 🙂 一般快乐
 - [ ] 😶 无明显情绪波动
 - [ ] 🧐有疑问
 - [ ] 😵‍💫 很混乱
@@ -81,8 +95,12 @@ section 习惯
 
 输出内容：
 
+无（文档迁移）
 
+[202305121500 关于 goroutine 内存泄漏的一些思考](content/posts/202305121500%20关于%20goroutine%20内存泄漏的一些思考.md)
+
+[202305121926 读 DDIA 留下的一些记录](content/posts/202305121926%20读%20DDIA%20留下的一些记录.md)
 
 ## 记录区-明天
 
-
+完成剩下的文档迁移

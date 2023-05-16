@@ -1,0 +1,262 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>App Operator 安装脚本化（cdp） - 学习记录</title><meta name=Description content="这是我的网站描述"><meta property="og:title" content="App Operator 安装脚本化（cdp）"><meta property="og:description" content><meta property="og:type" content="article"><meta property="og:url" content="http://www.honghuiqiang.com/202305161542-app-operator-%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC%E5%8C%96cdp/"><meta property="og:image" content="http://www.honghuiqiang.com/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-05-16T15:05:00+08:00"><meta property="article:modified_time" content="2023-05-16T15:05:00+08:00"><meta property="og:site_name" content="学习记录"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="http://www.honghuiqiang.com/logo.png"><meta name=twitter:title content="App Operator 安装脚本化（cdp）"><meta name=twitter:description content><meta name=application-name content="HHQ Records"><meta name=apple-mobile-web-app-title content="HHQ Records"><meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel=icon href=/images/zoro.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=canonical href=http://www.honghuiqiang.com/202305161542-app-operator-%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC%E5%8C%96cdp/><link rel=prev href=http://www.honghuiqiang.com/202305161550-iscsi-%E7%A3%81%E7%9B%98%E5%8D%B8%E8%BD%BD%E6%9C%89%E6%AE%8B%E7%95%99%E7%9A%84%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/color.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/fontawesome-free/all.min.css><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/animate/animate.min.css><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"App Operator 安装脚本化（cdp）","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http:\/\/www.honghuiqiang.com\/202305161542-app-operator-%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC%E5%8C%96cdp\/"},"genre":"posts","wordcount":570,"url":"http:\/\/www.honghuiqiang.com\/202305161542-app-operator-%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC%E5%8C%96cdp\/","datePublished":"2023-05-16T15:05:00+08:00","dateModified":"2023-05-16T15:05:00+08:00","publisher":{"@type":"Organization","name":""},"authors":[{"@type":"Person","name":"索隆不喝酒"}],"description":""}</script><script src=//instant.page/5.1.1 defer type=module integrity=sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq></script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(e){document.body.setAttribute("theme",e),document.documentElement.style.setProperty("color-scheme",e==="light"?"light":"dark"),window.theme=e,window.isDark=window.theme!=="light"}function saveTheme(e){window.localStorage&&localStorage.setItem("theme",e)}function getMeta(e){const t=document.getElementsByTagName("meta");for(let n=0;n<t.length;n++)if(t[n].getAttribute("name")===e)return t[n];return""}if(window.localStorage&&localStorage.getItem("theme")){let e=localStorage.getItem("theme");e==="light"||e==="dark"||e==="black"?setTheme(e):setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}else"dark"==="light"||"dark"==="dark"||"dark"==="black"?(setTheme("dark"),saveTheme("dark")):(saveTheme("auto"),setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));let metaColors={light:"#f8f8f8",dark:"#252627",black:"#000000"};getMeta("theme-color").content=metaColors[document.body.getAttribute("theme")],window.switchThemeEventSet=new Set</script><div id=back-to-top></div><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=学习记录><span id=desktop-header-typeit class=typeit></span></a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>文章 </a><a class=menu-item href=/categories/>分类 </a><a class=menu-item href=/series/>系列 </a><a class=menu-item href=/tags/>标签 </a><span class="menu-item delimiter"></span><a href=# class="menu-item language" title=选择语言>简体中文<i class="fas fa-chevron-right fa-fw"></i>
+<select class=language-select title="Select Language" id=language-select-desktop onchange="location=this.value"><option value=/202305161542-app-operator-%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC%E5%8C%96cdp/ selected>简体中文</option></select>
+</a><span class="menu-item search" id=search-desktop><input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=# class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=# class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span>
+</span><a href=# class="menu-item theme-select" title=切换主题><i class="fas fa-adjust fa-fw"></i>
+<select class=color-theme-select id=theme-select-desktop title=切换主题><option value=light>浅色</option><option value=dark>深色</option><option value=black>黑色</option><option value=auto>跟随系统</option></select></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=学习记录><span id=mobile-header-typeit class=typeit></span></a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=# class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=# class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=# class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/ title>文章</a><a class=menu-item href=/categories/ title>分类</a><a class=menu-item href=/series/ title>系列</a><a class=menu-item href=/tags/ title>标签</a><a href=# class="menu-item theme-select" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+<select class=color-theme-select id=theme-select-mobile title=切换主题><option value=light>浅色</option><option value=dark>深色</option><option value=black>黑色</option><option value=auto>跟随系统</option></select>
+</a><a href=# class=menu-item title=选择语言>简体中文<i class="fas fa-chevron-right fa-fw"></i>
+<select class=language-select title="Select Language" onchange="location=this.value"><option value=/202305161542-app-operator-%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC%E5%8C%96cdp/ selected>简体中文</option></select></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto><nav id=TableOfContents><ul><li><a href=#场景实践>场景实践</a><ul><li><a href=#operator-install>Operator install</a></li><li><a href=#发送-api-创建-cr-资源>发送 api 创建 CR 资源</a></li></ul></li><li><a href=#脚本化>脚本化</a><ul><li><a href=#yaml>yaml</a></li><li><a href=#在流程中的位置>在流程中的位置</a></li></ul></li></ul></nav></div></div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">App Operator 安装脚本化（cdp）</h1><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=http://www.honghuiqiang.com/authors/%E7%B4%A2%E9%9A%86%E4%B8%8D%E5%96%9D%E9%85%92>索隆不喝酒</a></span>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E5%88%86%E7%B1%BB-box/><i class="far fa-folder fa-fw"></i>分类-box</a></span>&nbsp;<span class=post-category>和</span>&nbsp;<span class=post-series>系列 <a href=/series/%E5%81%8F%E5%B7%A5%E4%BD%9C%E6%80%A7%E8%B4%A8%E8%AE%B0%E5%BD%95/><i class="far fa-list-alt fa-fw"></i>偏工作性质记录</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2023-05-16>2023-05-16</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2023-05-16>2023-05-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 570 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div></div><div class="details series-nav open"><div class="details-summary series-title"><span>系列 - 偏工作性质记录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content series-content"><nav><ul><li><span class=active>App Operator 安装脚本化（cdp）</span></li><li><a href=/202305161550-iscsi-%E7%A3%81%E7%9B%98%E5%8D%B8%E8%BD%BD%E6%9C%89%E6%AE%8B%E7%95%99%E7%9A%84%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90/>iSCSI 磁盘卸载有残留的原因分析</a></li><li><a href=/202305161508-%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97-%E6%94%AF%E6%8C%81%E4%BD%9C%E4%B8%9A%E9%AB%98%E7%BA%A7%E8%B0%83%E5%BA%A6%E7%AD%96%E7%95%A5%E6%96%B9%E6%A1%88/>高性能计算-支持作业高级调度策略方案</a></li><li><a href=/202305161521-%E8%AE%A1%E7%AE%97%E8%8A%82%E7%82%B9%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E6%96%B9%E6%A1%88/>计算节点健康检查方案</a></li><li><a href=/202305161528-%E5%BA%94%E7%94%A8%E5%A4%87%E4%BB%BD%E6%81%A2%E5%A4%8D%E6%96%B9%E6%A1%88/>应用备份恢复方案</a></li><li><a href=/202305161538-%E6%94%AF%E6%8C%81-xsky-%E5%AD%98%E5%82%A8/>支持 xsky 存储</a></li><li><a href=/202305161452-cke-%E5%AD%98%E5%82%A8%E6%8E%A5%E5%85%A5%E4%B8%AD%E4%BF%A1%E9%93%B6%E8%A1%8Cpoc/>cke 存储接入（中信银行poc）</a></li></ul></nav></div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#场景实践>场景实践</a><ul><li><a href=#operator-install>Operator install</a></li><li><a href=#发送-api-创建-cr-资源>发送 api 创建 CR 资源</a></li></ul></li><li><a href=#脚本化>脚本化</a><ul><li><a href=#yaml>yaml</a></li><li><a href=#在流程中的位置>在流程中的位置</a></li></ul></li></ul></nav></div></div><div class=content id=content><h2 id=场景实践 class=headerLink><a href=#%e5%9c%ba%e6%99%af%e5%ae%9e%e8%b7%b5 class=header-mark></a>场景实践</h2><h3 id=operator-install class=headerLink><a href=#operator-install class=header-mark></a>Operator install</h3><p>手动安装，记录发送的api：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>https://console-ccos-console.apps.hhqcluster.hhqdomain/api/kubernetes/apis/operators.coreos.com/v1alpha1/namespaces/ccos-operators/subscriptions
+</span></span><span class=line><span class=cl>POST
+</span></span><span class=line><span class=cl>{&#34;apiVersion&#34;:&#34;operators.coreos.com/v1alpha1&#34;,&#34;kind&#34;:&#34;Subscription&#34;,&#34;metadata&#34;:{&#34;name&#34;:&#34;xsky-operator&#34;,&#34;namespace&#34;:&#34;ccos-operators&#34;},&#34;spec&#34;:{&#34;source&#34;:&#34;ceake-operators&#34;,&#34;sourceNamespace&#34;:&#34;ccos-marketplace&#34;,&#34;name&#34;:&#34;xsky-operator&#34;,&#34;startingCSV&#34;:&#34;xsky-operator.v1.0.0&#34;,&#34;channel&#34;:&#34;alpha&#34;,&#34;installPlanApproval&#34;:&#34;Automatic&#34;}}
+</span></span></code></pre></td></tr></table></div></div><p>需要的两个 Header：<code>cookie</code>、<code>X-CSRFToken</code></p><p>返回的结果：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nt>&#34;apiVersion&#34;</span><span class=p>:</span> <span class=s2>&#34;operators.coreos.com/v1alpha1&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>	<span class=nt>&#34;kind&#34;</span><span class=p>:</span> <span class=s2>&#34;Subscription&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>	<span class=nt>&#34;metadata&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nt>&#34;creationTimestamp&#34;</span><span class=p>:</span> <span class=s2>&#34;2022-09-05T06:23:06Z&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>		<span class=nt>&#34;generation&#34;</span><span class=p>:</span> <span class=mi>1</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>		<span class=nt>&#34;managedFields&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>			<span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;apiVersion&#34;</span><span class=p>:</span> <span class=s2>&#34;operators.coreos.com/v1alpha1&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;fieldsType&#34;</span><span class=p>:</span> <span class=s2>&#34;FieldsV1&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;fieldsV1&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>					<span class=nt>&#34;f:spec&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>						<span class=nt>&#34;.&#34;</span><span class=p>:</span> <span class=p>{},</span>
+</span></span><span class=line><span class=cl>						<span class=nt>&#34;f:channel&#34;</span><span class=p>:</span> <span class=p>{},</span>
+</span></span><span class=line><span class=cl>						<span class=nt>&#34;f:installPlanApproval&#34;</span><span class=p>:</span> <span class=p>{},</span>
+</span></span><span class=line><span class=cl>						<span class=nt>&#34;f:name&#34;</span><span class=p>:</span> <span class=p>{},</span>
+</span></span><span class=line><span class=cl>						<span class=nt>&#34;f:source&#34;</span><span class=p>:</span> <span class=p>{},</span>
+</span></span><span class=line><span class=cl>						<span class=nt>&#34;f:sourceNamespace&#34;</span><span class=p>:</span> <span class=p>{},</span>
+</span></span><span class=line><span class=cl>						<span class=nt>&#34;f:startingCSV&#34;</span><span class=p>:</span> <span class=p>{}</span>
+</span></span><span class=line><span class=cl>					<span class=p>}</span>
+</span></span><span class=line><span class=cl>				<span class=p>},</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;manager&#34;</span><span class=p>:</span> <span class=s2>&#34;ApiPOST Runtime +https:&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;operation&#34;</span><span class=p>:</span> <span class=s2>&#34;Update&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>				<span class=nt>&#34;time&#34;</span><span class=p>:</span> <span class=s2>&#34;2022-09-05T06:23:06Z&#34;</span>
+</span></span><span class=line><span class=cl>			<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=p>],</span>
+</span></span><span class=line><span class=cl>		<span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;xsky-operator&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>		<span class=nt>&#34;namespace&#34;</span><span class=p>:</span> <span class=s2>&#34;ccos-operators&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>		<span class=nt>&#34;resourceVersion&#34;</span><span class=p>:</span> <span class=s2>&#34;3039592&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>		<span class=nt>&#34;uid&#34;</span><span class=p>:</span> <span class=s2>&#34;08282869-7cf5-4a7a-b33a-ce71821282bb&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=p>},</span>
+</span></span><span class=line><span class=cl>	<span class=nt>&#34;spec&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nt>&#34;channel&#34;</span><span class=p>:</span> <span class=s2>&#34;alpha&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>		<span class=nt>&#34;installPlanApproval&#34;</span><span class=p>:</span> <span class=s2>&#34;Automatic&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>		<span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;xsky-operator&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>		<span class=nt>&#34;source&#34;</span><span class=p>:</span> <span class=s2>&#34;ceake-operators&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>		<span class=nt>&#34;sourceNamespace&#34;</span><span class=p>:</span> <span class=s2>&#34;ccos-marketplace&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>		<span class=nt>&#34;startingCSV&#34;</span><span class=p>:</span> <span class=s2>&#34;xsky-operator.v1.0.0&#34;</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>convert to yaml:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>operators.coreos.com/v1alpha1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>Subscription</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>xsky-operator</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>ccos-operators</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>channel</span><span class=p>:</span><span class=w> </span><span class=l>alpha</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>installPlanApproval</span><span class=p>:</span><span class=w> </span><span class=l>Automatic</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>xsky-operator</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>source</span><span class=p>:</span><span class=w> </span><span class=l>ceake-operators</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>sourceNamespace</span><span class=p>:</span><span class=w> </span><span class=l>ccos-marketplace</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>startingCSV</span><span class=p>:</span><span class=w> </span><span class=l>xsky-operator.v1.0.0</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=发送-api-创建-cr-资源 class=headerLink><a href=#%e5%8f%91%e9%80%81-api-%e5%88%9b%e5%bb%ba-cr-%e8%b5%84%e6%ba%90 class=header-mark></a>发送 api 创建 CR 资源</h3><h2 id=脚本化 class=headerLink><a href=#%e8%84%9a%e6%9c%ac%e5%8c%96 class=header-mark></a>脚本化</h2><blockquote><p>安装operator、创建自定义的 CR 等在测试前需要做的操作都可以通过创建所需的 yaml 资源来完成</p></blockquote><h3 id=yaml class=headerLink><a href=#yaml class=header-mark></a>yaml</h3><ul><li>Namespace</li><li>OperatorGroup</li><li>Subscription</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>Namespace</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>ccos-adp</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nn>---</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>operators.coreos.com/v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>OperatorGroup</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>generateName</span><span class=p>:</span><span class=w> </span><span class=l>ccos-adp-</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>generation</span><span class=p>:</span><span class=w> </span><span class=m>1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>ccos-adp-cj4jr</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>ccos-adp</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>targetNamespaces</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=l>ccos-adp</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nn>---</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>operators.coreos.com/v1alpha1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>Subscription</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>oadp-operator</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>ccos-adp</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>channel</span><span class=p>:</span><span class=w> </span><span class=l>stable</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>installPlanApproval</span><span class=p>:</span><span class=w> </span><span class=l>Automatic</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>oadp-operator</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>source</span><span class=p>:</span><span class=w> </span><span class=l>hhq-operators</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>sourceNamespace</span><span class=p>:</span><span class=w> </span><span class=l>ccos-marketplace</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>startingCSV</span><span class=p>:</span><span class=w> </span><span class=l>oadp-operator.v1.0.0</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><ul><li>Secret</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>data</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>cloud</span><span class=p>:</span><span class=w> </span><span class=l>W2RlZmF1bHRdCmF3c19hY2Nlc3Nfa2V5X2lkPW1pbmlvCmF3c19zZWNyZXRfYWNjZXNzX2tleT1taW5pbzEyMw==</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>Secret</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>cloud-credentials</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>ccos-adp</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>type</span><span class=p>:</span><span class=w> </span><span class=l>Opaque</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><ul><li>DPA</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>oadp.ccos.io/v1alpha1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>DataProtectionApplication</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>metadata</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>velero-sample</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>namespace</span><span class=p>:</span><span class=w> </span><span class=l>ccos-adp</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>spec</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>backupLocations</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>velero</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>config</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>insecureSkipTLSVerify</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;true&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>profile</span><span class=p>:</span><span class=w> </span><span class=l>default</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>region</span><span class=p>:</span><span class=w> </span><span class=l>minio</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>s3ForcePathStyle</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;true&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>s3Url</span><span class=p>:</span><span class=w> </span><span class=l>http://10.253.11.215:9000</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>credential</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>key</span><span class=p>:</span><span class=w> </span><span class=l>cloud</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>cloud-credentials</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>default</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>objectStorage</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>bucket</span><span class=p>:</span><span class=w> </span><span class=l>velero</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>prefix</span><span class=p>:</span><span class=w> </span><span class=l>single</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>provider</span><span class=p>:</span><span class=w> </span><span class=l>aws</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>configuration</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>restic</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>enable</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>velero</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>defaultPlugins</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span>- <span class=l>aws</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span>- <span class=l>csi</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span>- <span class=l>ccos</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><h3 id=在流程中的位置 class=headerLink><a href=#%e5%9c%a8%e6%b5%81%e7%a8%8b%e4%b8%ad%e7%9a%84%e4%bd%8d%e7%bd%ae class=header-mark></a>在流程中的位置</h3><p><figure><a class=lightgallery href=/images/posts/image-20220905151959933.png title=/images/posts/image-20220905151959933.png data-thumbnail=/images/posts/image-20220905151959933.png><img loading=lazy src=/images/posts/image-20220905151959933.png srcset="/images/posts/image-20220905151959933.png, /images/posts/image-20220905151959933.png 1.5x, /images/posts/image-20220905151959933.png 2x" sizes=auto alt=/images/posts/image-20220905151959933.png></a></figure></p><ul><li><p>每个Application Operator 对应一个自动化安装脚本</p><p>如 oadp-operator 的自动化安装脚本：<code>oadp-operator.sh</code></p></li><li><p>自动化脚本仓库：<code>10.253.6.101:/root/ApplicationOperatorScripts</code></p></li></ul></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2023-05-16</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md><span><a class=link-to-mardown href=/202305161542-app-operator-%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC%E5%8C%96cdp/index.md target=_blank rel="noopener noreferrer">阅读原始文档</a></span></div><div class=post-info-share><span><a href=# title="分享到 Twitter" data-sharer=twitter data-url=http://www.honghuiqiang.com/202305161542-app-operator-%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC%E5%8C%96cdp/ data-title="App Operator 安装脚本化（cdp）" data-via=xxxx><i class="fab fa-twitter fa-fw"></i></a><a href=# title="分享到 Facebook" data-sharer=facebook data-url=http://www.honghuiqiang.com/202305161542-app-operator-%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC%E5%8C%96cdp/><i class="fab fa-facebook-square fa-fw"></i></a><a href=# title="分享到 WhatsApp" data-sharer=whatsapp data-url=http://www.honghuiqiang.com/202305161542-app-operator-%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC%E5%8C%96cdp/ data-title="App Operator 安装脚本化（cdp）" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href=# title="分享到 Line" data-sharer=line data-url=http://www.honghuiqiang.com/202305161542-app-operator-%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC%E5%8C%96cdp/ data-title="App Operator 安装脚本化（cdp）"><i data-svg-src=/lib/simple-icons/icons/line.min.svg></i></a><a href=# title="分享到 微博" data-sharer=weibo data-url=http://www.honghuiqiang.com/202305161542-app-operator-%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC%E5%8C%96cdp/ data-title="App Operator 安装脚本化（cdp）"><i class="fab fa-weibo fa-fw"></i></a><a href=# title="分享到 Myspace" data-sharer=myspace data-url=http://www.honghuiqiang.com/202305161542-app-operator-%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC%E5%8C%96cdp/ data-title="App Operator 安装脚本化（cdp）" data-description><i data-svg-src=/lib/simple-icons/icons/myspace.min.svg></i></a><a href=# title="分享到 Blogger" data-sharer=blogger data-url=http://www.honghuiqiang.com/202305161542-app-operator-%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC%E5%8C%96cdp/ data-title="App Operator 安装脚本化（cdp）" data-description><i class="fab fa-blogger fa-fw"></i></a><a href=# title="分享到 Evernote" data-sharer=evernote data-url=http://www.honghuiqiang.com/202305161542-app-operator-%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC%E5%8C%96cdp/ data-title="App Operator 安装脚本化（cdp）"><i class="fab fa-evernote fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/202305161550-iscsi-%E7%A3%81%E7%9B%98%E5%8D%B8%E8%BD%BD%E6%9C%89%E6%AE%8B%E7%95%99%E7%9A%84%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90/ class=prev rel=prev title="iSCSI 磁盘卸载有残留的原因分析"><i class="fas fa-angle-left fa-fw"></i>iSCSI 磁盘卸载有残留的原因分析</a></div></div><div id=comments><div id=giscus></div><noscript>Please enable JavaScript to view the comments powered by <a href=https://giscus.app/>giscus</a>.</noscript></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>由 <a href=https://gohugo.io/ target=_blank rel="noopener noreferrer" title="Hugo 0.105.0">Hugo</a> 强力驱动&nbsp;|&nbsp;托管在 <a title="Github Pages" href=https://docs.github.com/en/pages/ target=_blank rel="noopener noreffer">GitHub Pages</a> 上&nbsp;|&nbsp;主题 - <a href=https://github.com/HEIGE-PCloud/DoIt target=_blank rel="noopener noreferrer" title="DoIt 0.3.0"><i class="far fa-edit fa-fw"></i> DoIt</a></div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2023</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank rel="noopener noreferrer">索隆不喝酒</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class=footer-line></div><div class=footer-line></div></div></footer></div><div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><div class=assets><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/katex/copy-tex.min.css><noscript><link rel=stylesheet href=/lib/katex/copy-tex.min.css></noscript><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:10},comment:{giscus:{darkTheme:"dark",dataCategory:"General",dataCategoryId:"DIC_kwDOJh9DwM4CWbTD",dataEmitMetadata:"0",dataInputPosition:"bottom",dataLang:"zh-CN",dataMapping:"pathname",dataReactionsEnabled:"1",dataRepo:"904566722/hugo-giscus-common-system",dataRepoId:"R_kgDOJh9DwA",dataStrict:"0",lightTheme:"light"}},data:{"desktop-header-typeit":"HHQ Records","mobile-header-typeit":"HHQ Records"},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,fuseIndexURL:"/index.json",highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,type:"fuse",useExtendedSearch:!1},sharerjs:!0,table:{sort:!0},typeit:{cursorChar:"|",cursorSpeed:1e3,data:{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},duration:-1,speed:100}}</script><script type=text/javascript src=/js/giscus.min.js defer></script><script type=text/javascript src=/lib/tablesort/tablesort.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/typeit/typeit.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><script type=text/javascript src=/js/theme.min.js defer></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-GKX5LKE0Z8",{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=G-GKX5LKE0Z8" async></script><script>var _hmt=_hmt||[];(function(){var e,t=document.createElement("script");t.src="https://hm.baidu.com/hm.js?7ee459037c39c6123ff6e6252a7c5301",e=document.getElementsByTagName("script")[0],e.parentNode.insertBefore(t,e)})()</script></div></body></html>

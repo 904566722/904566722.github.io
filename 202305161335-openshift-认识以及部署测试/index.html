@@ -1,0 +1,906 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>openshift 认识以及部署测试 - 学习记录</title><meta name=Description content="这是我的网站描述"><meta property="og:title" content="openshift 认识以及部署测试"><meta property="og:description" content><meta property="og:type" content="article"><meta property="og:url" content="http://www.honghuiqiang.com/202305161335-openshift-%E8%AE%A4%E8%AF%86%E4%BB%A5%E5%8F%8A%E9%83%A8%E7%BD%B2%E6%B5%8B%E8%AF%95/"><meta property="og:image" content="http://www.honghuiqiang.com/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-05-16T13:05:00+08:00"><meta property="article:modified_time" content="2023-05-16T13:05:00+08:00"><meta property="og:site_name" content="学习记录"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="http://www.honghuiqiang.com/logo.png"><meta name=twitter:title content="openshift 认识以及部署测试"><meta name=twitter:description content><meta name=application-name content="HHQ Records"><meta name=apple-mobile-web-app-title content="HHQ Records"><meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel=icon href=/images/zoro.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=canonical href=http://www.honghuiqiang.com/202305161335-openshift-%E8%AE%A4%E8%AF%86%E4%BB%A5%E5%8F%8A%E9%83%A8%E7%BD%B2%E6%B5%8B%E8%AF%95/><link rel=prev href=http://www.honghuiqiang.com/2023-05-13/><link rel=next href=http://www.honghuiqiang.com/202305161347-e2e-%E6%B5%8B%E8%AF%95/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/color.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/fontawesome-free/all.min.css><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/animate/animate.min.css><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"openshift 认识以及部署测试","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http:\/\/www.honghuiqiang.com\/202305161335-openshift-%E8%AE%A4%E8%AF%86%E4%BB%A5%E5%8F%8A%E9%83%A8%E7%BD%B2%E6%B5%8B%E8%AF%95\/"},"genre":"posts","wordcount":4248,"url":"http:\/\/www.honghuiqiang.com\/202305161335-openshift-%E8%AE%A4%E8%AF%86%E4%BB%A5%E5%8F%8A%E9%83%A8%E7%BD%B2%E6%B5%8B%E8%AF%95\/","datePublished":"2023-05-16T13:05:00+08:00","dateModified":"2023-05-16T13:05:00+08:00","publisher":{"@type":"Organization","name":""},"authors":[{"@type":"Person","name":"索隆不喝酒"}],"description":""}</script><script src=//instant.page/5.1.1 defer type=module integrity=sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq></script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(e){document.body.setAttribute("theme",e),document.documentElement.style.setProperty("color-scheme",e==="light"?"light":"dark"),window.theme=e,window.isDark=window.theme!=="light"}function saveTheme(e){window.localStorage&&localStorage.setItem("theme",e)}function getMeta(e){const t=document.getElementsByTagName("meta");for(let n=0;n<t.length;n++)if(t[n].getAttribute("name")===e)return t[n];return""}if(window.localStorage&&localStorage.getItem("theme")){let e=localStorage.getItem("theme");e==="light"||e==="dark"||e==="black"?setTheme(e):setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}else"dark"==="light"||"dark"==="dark"||"dark"==="black"?(setTheme("dark"),saveTheme("dark")):(saveTheme("auto"),setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));let metaColors={light:"#f8f8f8",dark:"#252627",black:"#000000"};getMeta("theme-color").content=metaColors[document.body.getAttribute("theme")],window.switchThemeEventSet=new Set</script><div id=back-to-top></div><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=学习记录><span id=desktop-header-typeit class=typeit></span></a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>文章 </a><a class=menu-item href=/categories/>分类 </a><a class=menu-item href=/series/>系列 </a><a class=menu-item href=/tags/>标签 </a><span class="menu-item delimiter"></span><a href=# class="menu-item language" title=选择语言>简体中文<i class="fas fa-chevron-right fa-fw"></i>
+<select class=language-select title="Select Language" id=language-select-desktop onchange="location=this.value"><option value=/202305161335-openshift-%E8%AE%A4%E8%AF%86%E4%BB%A5%E5%8F%8A%E9%83%A8%E7%BD%B2%E6%B5%8B%E8%AF%95/ selected>简体中文</option></select>
+</a><span class="menu-item search" id=search-desktop><input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=# class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=# class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span>
+</span><a href=# class="menu-item theme-select" title=切换主题><i class="fas fa-adjust fa-fw"></i>
+<select class=color-theme-select id=theme-select-desktop title=切换主题><option value=light>浅色</option><option value=dark>深色</option><option value=black>黑色</option><option value=auto>跟随系统</option></select></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=学习记录><span id=mobile-header-typeit class=typeit></span></a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=# class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=# class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=# class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/ title>文章</a><a class=menu-item href=/categories/ title>分类</a><a class=menu-item href=/series/ title>系列</a><a class=menu-item href=/tags/ title>标签</a><a href=# class="menu-item theme-select" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+<select class=color-theme-select id=theme-select-mobile title=切换主题><option value=light>浅色</option><option value=dark>深色</option><option value=black>黑色</option><option value=auto>跟随系统</option></select>
+</a><a href=# class=menu-item title=选择语言>简体中文<i class="fas fa-chevron-right fa-fw"></i>
+<select class=language-select title="Select Language" onchange="location=this.value"><option value=/202305161335-openshift-%E8%AE%A4%E8%AF%86%E4%BB%A5%E5%8F%8A%E9%83%A8%E7%BD%B2%E6%B5%8B%E8%AF%95/ selected>简体中文</option></select></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto><nav id=TableOfContents><ul><li><a href=#一openshift-理解>一、OpenShift 理解</a><ul><li><a href=#11-容器的发展>1.1 容器的发展</a></li><li><a href=#12-openshift-的发展>1.2 OpenShift 的发展</a></li><li><a href=#13-openshift-与-kubernetes-的对比>1.3 OpenShift 与 Kubernetes 的对比</a></li><li><a href=#14-openshift-相对-kubernetes-的延伸>1.4 OpenShift 相对 Kubernetes 的延伸</a></li></ul></li><li><a href=#二openshift-架构>二、OpenShift 架构</a><ul><li><a href=#21-逻辑架构>2.1 逻辑架构</a></li><li><a href=#22-技术架构>2.2 技术架构</a></li><li><a href=#23-组件架构>2.3 组件架构</a></li></ul></li><li><a href=#三基于-openshift-构建企业级-paas-平台>三、基于 OpenShift 构建企业级 PaaS 平台</a><ul><li><a href=#31-整体部署架构>3.1 整体部署架构</a><ul><li><a href=#节点>节点</a></li><li><a href=#架构图>架构图</a></li></ul></li><li><a href=#32-实际部署要点记录>3.2 实际部署要点记录</a></li></ul></li><li><a href=#社区版-okd-openshift-安装部署实操>*、[社区版 okd] OpenShift 安装部署实操</a><ul><li><a href=#1-节点规划>1. 节点规划</a></li><li><a href=#2-节点前置准备>2. 节点前置准备</a></li><li><a href=#3-集群安装>3. 集群安装</a></li><li><a href=#4-创建管理员账号>4. 创建管理员账号</a></li><li><a href=#5-登录-console-控制台>5. 登录 console 控制台</a></li><li><a href=#番外>番外</a><ul><li><a href=#rpm-同步库>rpm 同步库</a></li><li><a href=#命令行>命令行</a></li></ul></li></ul></li><li><a href=#社区版-okd-master-节点服务启动详情>*、[社区版 okd] master 节点服务启动详情</a><ul><li><a href=#1-api-server>*.1 api-server</a></li><li><a href=#2-scheduler>*.2 scheduler</a></li><li><a href=#3-controller>*.3 controller</a></li></ul></li><li><a href=#cclinux-ocp-公司版-安装>*、[cclinux ocp 公司版] 安装</a><ul><li><a href=#流程梳理>流程梳理</a></li></ul></li><li><a href=#cclinux-ocp-公司版-master-节点服务启动详情>*、[cclinux ocp 公司版] master 节点服务启动详情</a></li><li><a href=#相关学习资料>*、相关学习资料</a></li></ul></nav></div></div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">openshift 认识以及部署测试</h1><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=http://www.honghuiqiang.com/authors/%E7%B4%A2%E9%9A%86%E4%B8%8D%E5%96%9D%E9%85%92>索隆不喝酒</a></span>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/openshift/><i class="far fa-folder fa-fw"></i>OpenShift</a></span>&nbsp;<span class=post-category>和</span>&nbsp;<span class=post-series>系列 <a href=/series/openshift%E5%88%9D%E8%AF%86/><i class="far fa-list-alt fa-fw"></i>OpenShift初识</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2023-05-16>2023-05-16</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2023-05-16>2023-05-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4248 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 9 分钟&nbsp;</div></div><div class="details series-nav open"><div class="details-summary series-title"><span>系列 - OpenShift初识</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content series-content"><nav><ul><li><a href=/202305161347-e2e-%E6%B5%8B%E8%AF%95/>E2E 测试</a></li><li><span class=active>openshift 认识以及部署测试</span></li></ul></nav></div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#一openshift-理解>一、OpenShift 理解</a><ul><li><a href=#11-容器的发展>1.1 容器的发展</a></li><li><a href=#12-openshift-的发展>1.2 OpenShift 的发展</a></li><li><a href=#13-openshift-与-kubernetes-的对比>1.3 OpenShift 与 Kubernetes 的对比</a></li><li><a href=#14-openshift-相对-kubernetes-的延伸>1.4 OpenShift 相对 Kubernetes 的延伸</a></li></ul></li><li><a href=#二openshift-架构>二、OpenShift 架构</a><ul><li><a href=#21-逻辑架构>2.1 逻辑架构</a></li><li><a href=#22-技术架构>2.2 技术架构</a></li><li><a href=#23-组件架构>2.3 组件架构</a></li></ul></li><li><a href=#三基于-openshift-构建企业级-paas-平台>三、基于 OpenShift 构建企业级 PaaS 平台</a><ul><li><a href=#31-整体部署架构>3.1 整体部署架构</a><ul><li><a href=#节点>节点</a></li><li><a href=#架构图>架构图</a></li></ul></li><li><a href=#32-实际部署要点记录>3.2 实际部署要点记录</a></li></ul></li><li><a href=#社区版-okd-openshift-安装部署实操>*、[社区版 okd] OpenShift 安装部署实操</a><ul><li><a href=#1-节点规划>1. 节点规划</a></li><li><a href=#2-节点前置准备>2. 节点前置准备</a></li><li><a href=#3-集群安装>3. 集群安装</a></li><li><a href=#4-创建管理员账号>4. 创建管理员账号</a></li><li><a href=#5-登录-console-控制台>5. 登录 console 控制台</a></li><li><a href=#番外>番外</a><ul><li><a href=#rpm-同步库>rpm 同步库</a></li><li><a href=#命令行>命令行</a></li></ul></li></ul></li><li><a href=#社区版-okd-master-节点服务启动详情>*、[社区版 okd] master 节点服务启动详情</a><ul><li><a href=#1-api-server>*.1 api-server</a></li><li><a href=#2-scheduler>*.2 scheduler</a></li><li><a href=#3-controller>*.3 controller</a></li></ul></li><li><a href=#cclinux-ocp-公司版-安装>*、[cclinux ocp 公司版] 安装</a><ul><li><a href=#流程梳理>流程梳理</a></li></ul></li><li><a href=#cclinux-ocp-公司版-master-节点服务启动详情>*、[cclinux ocp 公司版] master 节点服务启动详情</a></li><li><a href=#相关学习资料>*、相关学习资料</a></li></ul></nav></div></div><div class=content id=content><p>#openshift</p><h2 id=一openshift-理解 class=headerLink><a href=#%e4%b8%80openshift-%e7%90%86%e8%a7%a3 class=header-mark></a>一、OpenShift 理解</h2><h3 id=11-容器的发展 class=headerLink><a href=#11-%e5%ae%b9%e5%99%a8%e7%9a%84%e5%8f%91%e5%b1%95 class=header-mark></a>1.1 容器的发展</h3><ul><li><p>2008 年，<strong>LXC</strong>（Linux Container）</p></li><li><p>2013 年，<strong>Docker</strong> 引擎，起初 Docker 想要使用 LXC，但是由于 LXC 隔离性较差，Docker 开发了 Libcontainer，最终形成了 <strong>runC</strong></p></li><li><p>2014 年，<strong>Kubernetes</strong> 发布，直接使用 Docker</p></li><li><p>2014年，随着 Docker 越来越重，CoreOS 发布 <strong>rkt</strong>（rkt 展现了更简单的运行时的优势）</p></li><li><p>2015年，随着容器运行时的变多，标准也就随之而来，该年 6 月，<strong>OCI</strong>（Open Container Initiative）成立，这个项目是对容器运行时的<strong>接口标准化</strong>（runC 第一时间通过了认证）</p></li><li><p>为了 K8s 与 容器运行时两者之间实现解耦，针对 k8s，在两者中间加入了一层标准：<strong>CRI</strong>（Container Runtime Interface），它是 k8s 与 Container Runtime 之间进行交互的接口。</p><p>CRI 与 OCI 并不冲突，CRI 针对于 k8s 而言，而 OCI 是容器运行时本身的标准</p></li><li><p>2017年，<strong>CRI-O</strong> 发布。专门为 k8s 做的一个轻量级容器运行时，重用了 runC 等基本组件来启动容器。</p></li><li><p>同时 Docker 也在研究 CRI 标准，从而出现了 containerd 运行时（从 Docker 1.12 版本开始），k8s 将 containerd 接入 CRI 标准，成为 cri-containerd。</p></li></ul><p><figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230516134010.png title=/images/posts/Pasted%20image%2020230516134010.png data-thumbnail=/images/posts/Pasted%20image%2020230516134010.png><img loading=lazy src=/images/posts/Pasted%20image%2020230516134010.png srcset="/images/posts/Pasted%20image%2020230516134010.png, /images/posts/Pasted%20image%2020230516134010.png 1.5x, /images/posts/Pasted%20image%2020230516134010.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230516134010.png></a></figure></p><p>调用结构：</p><p>old: k8s → kubelet → <strong>Docker engine → containerd</strong> → runC → linux kernel</p><p>new: k8s → kubelet → <strong>cri-o</strong> → runC → linux kernel</p><p><figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230516134023.png title=/images/posts/Pasted%20image%2020230516134023.png data-thumbnail=/images/posts/Pasted%20image%2020230516134023.png><img loading=lazy src=/images/posts/Pasted%20image%2020230516134023.png srcset="/images/posts/Pasted%20image%2020230516134023.png, /images/posts/Pasted%20image%2020230516134023.png 1.5x, /images/posts/Pasted%20image%2020230516134023.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230516134023.png></a></figure></p><h3 id=12-openshift-的发展 class=headerLink><a href=#12-openshift-%e7%9a%84%e5%8f%91%e5%b1%95 class=header-mark></a>1.2 OpenShift 的发展</h3><ul><li>2011 年，OpenShift 诞生，核心架构：Gear</li><li>2014 年，Kubernetes 发布，红帽对 OpenShift 进行重构</li><li>2014 年，OpenShift 3.0 发布（基于 Kubernetes 1.0， 早期 Kubernetes 功能尚弱，OpenShift 补充了大量的企业级功能）</li><li>2018 年，红帽收购 CoreOS 公司，随着 CoreOS 被纳入，OpenShift 也融入了 CoreOS 的优秀基因。同时也进一步推进了 k8s 的发展</li></ul><h3 id=13-openshift-与-kubernetes-的对比 class=headerLink><a href=#13-openshift-%e4%b8%8e-kubernetes-%e7%9a%84%e5%af%b9%e6%af%94 class=header-mark></a>1.3 OpenShift 与 Kubernetes 的对比</h3><p>OpenShift 与 Kubernetes 之间相互促进，共同进步，<strong>OpenShift 相比于 k8s 有许多增强：</strong></p><ul><li><p>k8s 面向容器调度；OpenShift 面向企业 PaaS 平台，OpenShift 除了包含 k8s，也包含了许多其他组件，如：认证集成、日志监控等</p><p><figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230516134035.png title=/images/posts/Pasted%20image%2020230516134035.png data-thumbnail=/images/posts/Pasted%20image%2020230516134035.png><img loading=lazy src=/images/posts/Pasted%20image%2020230516134035.png srcset="/images/posts/Pasted%20image%2020230516134035.png, /images/posts/Pasted%20image%2020230516134035.png 1.5x, /images/posts/Pasted%20image%2020230516134035.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230516134035.png></a></figure></p></li><li><p>一个集群，多个租户</p><p>OpenShift 在 3.0 版本（基于 k8s 1.0）就有了 RBAC 的功能，但是 k8s 在 1.6 才推出了 RBAC，得以满足许多用户该方面的需求，由此可见 OpenShift 推动着 k8s 的发展。</p></li><li><p>应用程序的简单、安全部署</p><ul><li>简单部署：早期 k8s 的应用程序版本管理并非简单的，OpenShift 3.0 开发了 DeploymentConfig（参数化部署输入、滚动部署、回滚、自动部署&mldr;），该功能也最终成为 k8s Deployments功能集的一部分，当然 OpenShift 支持 k8s Deployments 的全部功能</li><li>安全部署：由于用户可以用任何镜像来部署应用（尽管应用的不安全的），k8s 使用 pod 安全策略来保障安全（受 OpenShift SCC（上下文安全约束）启发）；红帽为 k8s 开发了 <strong>CRI-O 容器运行时</strong>，真正实现容器镜像的安全</li></ul></li><li><p>更多类型的应用负载（有状态、无状态）</p></li><li><p>应用的快速访问</p><p>OpenShift 3.0 中，红帽开发了 Router（k8s ingress 的前身），提供入口请求的自动负载均衡</p></li><li><p>容器镜像的便捷管理：ImageStream</p><ul><li>通过将镜像导入 ImageStream 来使用镜像</li><li><ul><li>-scheduled=true 参数：定期检查镜像库的更新</li></ul></li><li>Trigger：出现新的镜像或者镜像的Tag发生变化时触发自动部署</li></ul></li></ul><h3 id=14-openshift-相对-kubernetes-的延伸 class=headerLink><a href=#14-openshift-%e7%9b%b8%e5%af%b9-kubernetes-%e7%9a%84%e5%bb%b6%e4%bc%b8 class=header-mark></a>1.4 OpenShift 相对 Kubernetes 的延伸</h3><ol><li><p>与 Jenkins 集成</p></li><li><p>开发运维一体化</p><p>Tectonic、Container Linux、Quay、Operator、Prometheus</p></li><li><p>有状态应用的全生命周期管理</p><p>OpenShift 开发了 Operator 来管理 k8s 上运行的应用，扩展了 k8s api</p></li><li><p>实现了对 IaaS 资源的管理</p></li><li><p>通过 Istio 实现微服务架构</p></li><li><p>实现 Serverless</p></li></ol><h2 id=二openshift-架构 class=headerLink><a href=#%e4%ba%8copenshift-%e6%9e%b6%e6%9e%84 class=header-mark></a>二、OpenShift 架构</h2><h3 id=21-逻辑架构 class=headerLink><a href=#21-%e9%80%bb%e8%be%91%e6%9e%b6%e6%9e%84 class=header-mark></a>2.1 逻辑架构</h3><p><figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230516134044.png title=/images/posts/Pasted%20image%2020230516134044.png data-thumbnail=/images/posts/Pasted%20image%2020230516134044.png><img loading=lazy src=/images/posts/Pasted%20image%2020230516134044.png srcset="/images/posts/Pasted%20image%2020230516134044.png, /images/posts/Pasted%20image%2020230516134044.png 1.5x, /images/posts/Pasted%20image%2020230516134044.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230516134044.png></a></figure></p><ul><li>底层基础设施</li><li>服务层</li><li>控制节点</li><li>计算节点</li><li>路由层</li><li>持久存储</li><li>开发</li><li>运维</li></ul><h3 id=22-技术架构 class=headerLink><a href=#22-%e6%8a%80%e6%9c%af%e6%9e%b6%e6%9e%84 class=header-mark></a>2.2 技术架构</h3><h3 id=23-组件架构 class=headerLink><a href=#23-%e7%bb%84%e4%bb%b6%e6%9e%b6%e6%9e%84 class=header-mark></a>2.3 组件架构</h3><p><figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230516134052.png title=/images/posts/Pasted%20image%2020230516134052.png data-thumbnail=/images/posts/Pasted%20image%2020230516134052.png><img loading=lazy src=/images/posts/Pasted%20image%2020230516134052.png srcset="/images/posts/Pasted%20image%2020230516134052.png, /images/posts/Pasted%20image%2020230516134052.png 1.5x, /images/posts/Pasted%20image%2020230516134052.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230516134052.png></a></figure></p><h2 id=三基于-openshift-构建企业级-paas-平台 class=headerLink><a href=#%e4%b8%89%e5%9f%ba%e4%ba%8e-openshift-%e6%9e%84%e5%bb%ba%e4%bc%81%e4%b8%9a%e7%ba%a7-paas-%e5%b9%b3%e5%8f%b0 class=header-mark></a>三、基于 OpenShift 构建企业级 PaaS 平台</h2><h3 id=31-整体部署架构 class=headerLink><a href=#31-%e6%95%b4%e4%bd%93%e9%83%a8%e7%bd%b2%e6%9e%b6%e6%9e%84 class=header-mark></a>3.1 整体部署架构</h3><h4 id=节点 class=headerLink><a href=#%e8%8a%82%e7%82%b9 class=header-mark></a>节点</h4><ul><li><p><strong>Master 节点</strong>：有且只有 <strong>3</strong> 个 master 节点</p><p>这种情况下怎么实现高可用？</p><ul><li>worker 节点变多 → 提高 master 的 cpu、mem，而不改变 master 的数量</li><li>api 层面 → 使用软件负载均衡实现高可用</li><li>每个节点运行一个 etcd</li></ul></li><li><p>计算节点</p><ul><li>Infra：运行基础组件</li><li>App：运行业务</li></ul></li></ul><h4 id=架构图 class=headerLink><a href=#%e6%9e%b6%e6%9e%84%e5%9b%be class=header-mark></a>架构图</h4><p>单集群高可用架构：</p><p><figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230516134123.png title=/images/posts/Pasted%20image%2020230516134123.png data-thumbnail=/images/posts/Pasted%20image%2020230516134123.png><img loading=lazy src=/images/posts/Pasted%20image%2020230516134123.png srcset="/images/posts/Pasted%20image%2020230516134123.png, /images/posts/Pasted%20image%2020230516134123.png 1.5x, /images/posts/Pasted%20image%2020230516134123.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230516134123.png></a></figure></p><h3 id=32-实际部署要点记录 class=headerLink><a href=#32-%e5%ae%9e%e9%99%85%e9%83%a8%e7%bd%b2%e8%a6%81%e7%82%b9%e8%ae%b0%e5%bd%95 class=header-mark></a>3.2 实际部署要点记录</h3><ol><li><p>两种部署类型（<strong>Installer/User</strong> Provisioned Infrastructure）</p><ol><li>IPI：Master、Worker 节点都必须使用 RHCOS 操作系统</li><li>UPI：Master 需要使用 RHCOS 操作系统</li></ol></li><li><p>企业版连接：<a href=https://access.redhat.com/documentation/en-us/openshift_container_platform/4.6/html-single/installing_on_bare_metal/index target=_blank rel="noopener noreferrer">https://access.redhat.com/documentation/en-us/openshift_container_platform/4.6/html-single/installing_on_bare_metal/index</a></p></li><li><p>安装需要的角色</p><ol><li><p>管理机</p></li><li><p>容器镜像服务器</p></li><li><p>DNS 服务器</p></li><li><p>HTTP 服务器</p><p>HAproxy、F5&mldr;</p></li><li><p>负载均衡器</p></li><li><p>NFS 服务器</p></li><li><p>Bootstrap</p></li><li><p>Master</p></li><li><p>Worker</p></li></ol></li><li><p>离线部署大致流程</p><p><figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230516134204.png title=/images/posts/Pasted%20image%2020230516134204.png data-thumbnail=/images/posts/Pasted%20image%2020230516134204.png><img loading=lazy src=/images/posts/Pasted%20image%2020230516134204.png srcset="/images/posts/Pasted%20image%2020230516134204.png, /images/posts/Pasted%20image%2020230516134204.png 1.5x, /images/posts/Pasted%20image%2020230516134204.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230516134204.png></a></figure></p><ul><li>4.3、4.4、4.5 部署方式相同，4.6 稍有区别</li><li>RHCOS 操作系统镜像下载地址：<a href=https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos target=_blank rel="noopener noreferrer">https://mirror.openshift.com/pub/openshift-v4/dependencies/rhcos</a></li></ul></li></ol><h2 id=社区版-okd-openshift-安装部署实操 class=headerLink><a href=#%e7%a4%be%e5%8c%ba%e7%89%88-okd-openshift-%e5%ae%89%e8%a3%85%e9%83%a8%e7%bd%b2%e5%ae%9e%e6%93%8d class=header-mark></a>*、[社区版 okd] OpenShift 安装部署实操</h2><h3 id=1-节点规划 class=headerLink><a href=#1-%e8%8a%82%e7%82%b9%e8%a7%84%e5%88%92 class=header-mark></a>1. 节点规划</h3><p>1 master & infra、2 app（node）</p><table><thead><tr><th>节点</th><th>hostname</th><th>ip</th><th>规格</th><th>版本</th></tr></thead><tbody><tr><td>master01</td><td>master01.example.com</td><td>192.168.58.31</td><td>4C16G 40G+50G</td><td>CentOS Linux release 7.9.2009</td></tr><tr><td>node01</td><td>node01.example.com</td><td>192.168.58.32</td><td>4C16G 40G+20G</td><td>CentOS Linux release 7.9.2009</td></tr><tr><td>node02</td><td>node02.example.com</td><td>192.168.58.33</td><td>4C16G 40G+20G</td><td>CentOS Linux release 7.9.2009</td></tr></tbody></table><h3 id=2-节点前置准备 class=headerLink><a href=#2-%e8%8a%82%e7%82%b9%e5%89%8d%e7%bd%ae%e5%87%86%e5%a4%87 class=header-mark></a>2. 节点前置准备</h3><p>3个节点配置 hosts</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>192.168.58.31 master01.example.com
+</span></span><span class=line><span class=cl>192.168.58.32 node01.example.com
+</span></span><span class=line><span class=cl>192.168.58.33 node02.example.com
+</span></span></code></pre></td></tr></table></div></div><p>上述 domain 需要与节点的 hostname 一致</p><p>3个节点都：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 开启 selinux，保证 /etc/sysconfig/selinux 为如下配置</span>
+</span></span><span class=line><span class=cl><span class=nv>SELINUX</span><span class=o>=</span>enforcing
+</span></span><span class=line><span class=cl><span class=nv>SELINUXTYPE</span><span class=o>=</span>targeted
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 关闭 iptables、firewalld、NetworkManager</span>
+</span></span><span class=line><span class=cl>systemctl stop NetworkManager <span class=o>&amp;&amp;</span> systemctl stop iptables <span class=o>&amp;&amp;</span> systemctl stop firewalld
+</span></span><span class=line><span class=cl>systemctl disable NetworkManager <span class=o>&amp;&amp;</span>  systemctl disable iptables <span class=o>&amp;&amp;</span> systemctl disable firewalld
+</span></span></code></pre></td></tr></table></div></div><p>在 master01 节点生成密钥并分发到各节点</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>ssh-keygen -t rsa
+</span></span><span class=line><span class=cl>ssh-copy-id -i .ssh/id_rsa.pub master01
+</span></span><span class=line><span class=cl>ssh-copy-id -i .ssh/id_rsa.pub node01
+</span></span><span class=line><span class=cl>ssh-copy-id -i .ssh/id_rsa.pub node02
+</span></span></code></pre></td></tr></table></div></div><p>各节点时间同步</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>ntpdate time2.aliyun.com
+</span></span></code></pre></td></tr></table></div></div><p>各节点安装依赖软件包</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>yum update -y
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>yum install -y wget git net-tools bind-utils yum-utils iptables-services bridge-utils bash-completion kexec-tools sos psacct java-1.8.0-openjdk-headless python-passlib
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>yum -y install nfs-utils lrzsz gcc gcc-c++ make cmake libxml2-devel openssl-devel curl curl-devel unzip sudo ntp libaio-devel vim ncurses-devel autoconf automake zlib-devel python-devel epel-release lrzsz openssh-server socat ipvsadm conntrack
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+</span></span></code></pre></td></tr></table></div></div><p>master 节点安装 ansible-2.6.5、pyOpenSSL、openshift-3.10</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 安装指定版本的 ansible </span>
+</span></span><span class=line><span class=cl><span class=c1># https://releases.ansible.com/ansible/rpm/release/epel-7-x86_64/ 可以到该目录下找到对应的 rpm 包，指定安装</span>
+</span></span><span class=line><span class=cl>yum install -y https://releases.ansible.com/ansible/rpm/release/epel-7-x86_64/ansible-2.6.5-1.el7.ans.noarch.rpm
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 安装</span>
+</span></span><span class=line><span class=cl>sed -i -e <span class=s2>&#34;s/^enabled=1/enabled=0/&#34;</span> /etc/yum.repos.d/epel.repo
+</span></span><span class=line><span class=cl>yum -y --enablerepo<span class=o>=</span>epel install pyOpenSSL
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># https://github.com/openshift/openshift-ansible/tags 找到对应的 openshift-ansible 版本，上传到 master 节点</span>
+</span></span></code></pre></td></tr></table></div></div><p>各节点 docker 安装</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>yum install -y docker-1.13.1
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># docker 配置文件</span>
+</span></span><span class=line><span class=cl>vim /etc/sysconfig/docker
+</span></span><span class=line><span class=cl>	<span class=c1>## options 改成</span>
+</span></span><span class=line><span class=cl><span class=nv>OPTIONS</span><span class=o>=</span><span class=s1>&#39;--selinux-enabled=false --signature-verification=False&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>## 配置加速</span>
+</span></span><span class=line><span class=cl>vi /etc/docker/daemon.json
+</span></span><span class=line><span class=cl><span class=o>{</span>
+</span></span><span class=line><span class=cl><span class=s2>&#34;registry-mirrors&#34;</span>: <span class=o>[</span><span class=s2>&#34;https://rsbud4vc.mirror.aliyuncs.com&#34;</span>,<span class=s2>&#34;https://registry.docker-cn.com&#34;</span>,<span class=s2>&#34;https://docker.mirrors.ustc.edu.cn&#34;</span>,<span class=s2>&#34;https://dockerhub.azk8s.cn&#34;</span>,<span class=s2>&#34;http://hub-mirror.c.163.com&#34;</span>,<span class=s2>&#34;http://qtid6917.mirror.aliyuncs.com&#34;</span><span class=o>]</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>## 重启docker</span>
+</span></span><span class=line><span class=cl>systemctl daemon-reload
+</span></span><span class=line><span class=cl>systemctl restart docker.service
+</span></span></code></pre></td></tr></table></div></div><p>master 节点配置docker私有仓库</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>docker pull registry:2.5
+</span></span><span class=line><span class=cl>yum install httpd -y
+</span></span><span class=line><span class=cl>systemctl start httpd
+</span></span><span class=line><span class=cl>mkdir -p /opt/registry-var/auth/
+</span></span><span class=line><span class=cl>docker run --entrypoint htpasswd registry:2.5 -Bbn admin admin &gt;&gt; /opt/registry-var/auth/htpasswd
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 设置配置文件</span>
+</span></span><span class=line><span class=cl>mkdir -p /opt/registry-var/config
+</span></span><span class=line><span class=cl>vim /opt/registry-var/config/config.yml
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>version: <span class=s2>&#34;0.1&#34;</span>
+</span></span><span class=line><span class=cl>log:
+</span></span><span class=line><span class=cl>  fields:
+</span></span><span class=line><span class=cl>    service: registry
+</span></span><span class=line><span class=cl>storage:
+</span></span><span class=line><span class=cl>  delete:
+</span></span><span class=line><span class=cl>    enabled: <span class=nb>true</span>
+</span></span><span class=line><span class=cl>  cache:
+</span></span><span class=line><span class=cl>    blobdescriptor:  inmemory
+</span></span><span class=line><span class=cl>  filesystem:
+</span></span><span class=line><span class=cl>    rootdirectory: /var/lib/registry
+</span></span><span class=line><span class=cl>http:
+</span></span><span class=line><span class=cl>  addr: :5000
+</span></span><span class=line><span class=cl>  headers:
+</span></span><span class=line><span class=cl>    X-Content-Type-Options: <span class=o>[</span>nosniff<span class=o>]</span>
+</span></span><span class=line><span class=cl>health:
+</span></span><span class=line><span class=cl>  storagedriver:
+</span></span><span class=line><span class=cl>    enabled: <span class=nb>true</span>
+</span></span><span class=line><span class=cl>interval: 10s
+</span></span><span class=line><span class=cl>threshold: <span class=m>3</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 启动服务</span>
+</span></span><span class=line><span class=cl>docker run -d -p 5000:5000 --restart<span class=o>=</span>always  --name<span class=o>=</span>registry -v /opt/registry-var/config/:/etc/docker/registry/ -v /opt/registry-var/auth/:/auth/ -e <span class=s2>&#34;REGISTRY_AUTH=htpasswd&#34;</span>  -e <span class=s2>&#34;REGISTRY_AUTH_HTPASSWD_REALM=Registry Realm&#34;</span> -e <span class=nv>REGISTRY_AUTH_HTPASSWD_PATH</span><span class=o>=</span>/auth/htpasswd -v /opt/registry-var/:/var/lib/registry/ registry:2.5
+</span></span></code></pre></td></tr></table></div></div><p>各节点配置 https 权限支持</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>vim /etc/docker/daemon.json
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>{</span>
+</span></span><span class=line><span class=cl><span class=s2>&#34;registry-mirrors&#34;</span>: <span class=o>[</span><span class=s2>&#34;&#34;</span>https://rsbud4vc.mirror.aliyuncs.com<span class=s2>&#34;,&#34;</span>https://registry.docker-cn.com<span class=s2>&#34;,&#34;</span>https://docker.mirrors.ustc.edu.cn<span class=s2>&#34;,&#34;</span>https://dockerhub.azk8s.cn<span class=s2>&#34;,&#34;</span>http://hub-mirror.c.163.com<span class=s2>&#34;,&#34;</span>http://qtid6917.mirror.aliyuncs.com<span class=s2>&#34;&#34;</span><span class=o>]</span>,
+</span></span><span class=line><span class=cl><span class=s2>&#34;insecure-registries&#34;</span>:<span class=o>[</span><span class=s2>&#34;192.168.58.31:5000&#34;</span><span class=o>]</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 重启 docker</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>systemctl daemon-reload
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>systemctl restart docker.service
+</span></span><span class=line><span class=cl>systemctl <span class=nb>enable</span> docker
+</span></span></code></pre></td></tr></table></div></div><p>测试登录 docker 仓库</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>docker login 192.168.58.31:5000
+</span></span></code></pre></td></tr></table></div></div><p>各节点配置 dcoker-storage</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=o>[</span>~<span class=o>]</span> vim /etc/sysconfig/docker-storage-setup
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nv>DEVS</span><span class=o>=</span>/dev/sdb
+</span></span><span class=line><span class=cl><span class=nv>VG</span><span class=o>=</span>docker-vg
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>[</span>~<span class=o>]</span> docker-storage-setup
+</span></span></code></pre></td></tr></table></div></div><p>镜像下载</p><p>master01：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>docker pull quay.io/coreos/etcd:v3.2.22
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker pull openshift/origin-control-plane:v3.10
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker pull docker.io/openshift/origin-service-catalog:v3.10
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker pull openshift/origin-node:v3.10
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker pull openshift/origin-deployer:v3.10
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker pull openshift/origin-deployer:v3.10.0
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker pull openshift/origin-template-service-broker:v3.10
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker pull openshift/origin-pod:v3.10
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker pull openshift/origin-pod:v3.10.0
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker pull openshift/origin-web-console:v3.10
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker pull openshift/origin-docker-registry:v3.10
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker pull openshift/origin-haproxy-router:v3.10
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker pull cockpit/kubernetes:latest
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker pull docker.io/cockpit/kubernetes:latest
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker pull docker.io/openshift/origin-control-plane:v3.10
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker pull docker.io/openshift/origin-deployer:v3.10
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker pull docker.io/openshift/origin-docker-registry:v3.10
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker pull docker.io/openshift/origin-haproxy-router:v3.10
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker pull docker.io/openshift/origin-pod:v3.10
+</span></span></code></pre></td></tr></table></div></div><p>node01、node02：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>docker pull quay.io/coreos/etcd:v3.2.22
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker pull openshift/origin-control-plane:v3.10
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker pull openshift/origin-node:v3.10
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker pull docker.io/openshift/origin-node:v3.10
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker pull openshift/origin-haproxy-router:v3.10
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker pull openshift/origin-deployer:v3.10
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker pull openshift/origin-pod:v3.10
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker pull ansibleplaybookbundle/origin-ansible-service-broker:v3.10
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker pull openshift/origin-docker-registry:v3.10
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker pull cockpit/kubernetes:latest
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker pull openshift/origin-haproxy-router:v3.10
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker pull docker.io/cockpit/kubernetes:latest
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker pull docker.io/openshift/origin-control-plane:v3.10
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker pull docker.io/openshift/origin-deployer:v3.10
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker pull docker.io/openshift/origin-docker-registry:v3.10
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker pull docker.io/openshift/origin-haproxy-router:v3.10
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>docker pull docker.io/openshift/origin-pod:v3.10
+</span></span></code></pre></td></tr></table></div></div><p>master 配置 ansible 清单文件：</p><p>vim /etc/ansible/hosts</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=o>[</span>OSEv3:children<span class=o>]</span>
+</span></span><span class=line><span class=cl>masters
+</span></span><span class=line><span class=cl>nodes
+</span></span><span class=line><span class=cl>etcd
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>[</span>OSEv3:vars<span class=o>]</span>
+</span></span><span class=line><span class=cl><span class=nv>openshift_deployment_type</span><span class=o>=</span>origin
+</span></span><span class=line><span class=cl><span class=nv>ansible_ssh_user</span><span class=o>=</span>root
+</span></span><span class=line><span class=cl><span class=nv>ansible_become</span><span class=o>=</span>yes
+</span></span><span class=line><span class=cl><span class=nv>openshift_repos_enable_testing</span><span class=o>=</span><span class=nb>true</span>
+</span></span><span class=line><span class=cl><span class=nv>openshift_enable_service_catalog</span><span class=o>=</span><span class=nb>false</span>
+</span></span><span class=line><span class=cl><span class=nv>template_service_broker_install</span><span class=o>=</span><span class=nb>false</span>
+</span></span><span class=line><span class=cl><span class=nv>debug_level</span><span class=o>=</span><span class=m>4</span>
+</span></span><span class=line><span class=cl><span class=nv>openshift_clock_enabled</span><span class=o>=</span><span class=nb>true</span>
+</span></span><span class=line><span class=cl><span class=nv>openshift_version</span><span class=o>=</span>3.10.0
+</span></span><span class=line><span class=cl><span class=nv>openshift_image_tag</span><span class=o>=</span>v3.10
+</span></span><span class=line><span class=cl><span class=nv>openshift_disable_check</span><span class=o>=</span>disk_availability,docker_storage,memory_availability,docker_image_availability,os_sdn_network_plugin_name<span class=o>=</span>redhat/openshift-ovs-multitenant
+</span></span><span class=line><span class=cl><span class=nv>openshift_master_identity_providers</span><span class=o>=[{</span><span class=s1>&#39;name&#39;</span>: <span class=s1>&#39;htpasswd_auth&#39;</span>,<span class=s1>&#39;login&#39;</span>: <span class=s1>&#39;true&#39;</span>, <span class=s1>&#39;challenge&#39;</span>: <span class=s1>&#39;true&#39;</span>,<span class=s1>&#39;kind&#39;</span>: <span class=s1>&#39;HTPasswdPasswordIdentityProvider&#39;</span><span class=o>}]</span>
+</span></span><span class=line><span class=cl><span class=nv>os_firewall_use_firewalld</span><span class=o>=</span><span class=nb>true</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>[</span>masters<span class=o>]</span>
+</span></span><span class=line><span class=cl>master01.example.com
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>[</span>nodes<span class=o>]</span>
+</span></span><span class=line><span class=cl>master01.example.com <span class=nv>openshift_node_group_name</span><span class=o>=</span><span class=s1>&#39;node-config-master-infra&#39;</span>
+</span></span><span class=line><span class=cl>node01.example.com <span class=nv>openshift_node_group_name</span><span class=o>=</span><span class=s1>&#39;node-config-compute&#39;</span>
+</span></span><span class=line><span class=cl>node02.example.com <span class=nv>openshift_node_group_name</span><span class=o>=</span><span class=s1>&#39;node-config-compute&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>[</span>etcd<span class=o>]</span>
+</span></span><span class=line><span class=cl>master01.example.com
+</span></span></code></pre></td></tr></table></div></div><h3 id=3-集群安装 class=headerLink><a href=#3-%e9%9b%86%e7%be%a4%e5%ae%89%e8%a3%85 class=header-mark></a>3. 集群安装</h3><p>检查：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>ansible-playbook -i /etc/ansible/hosts openshift-ansible-release-3.10/playbooks/prerequisites.yml
+</span></span></code></pre></td></tr></table></div></div><p>检查没问题开始安装：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>ansible-playbook -i /etc/ansible/hosts openshift-ansible-release-3.10/playbooks/deploy_cluster.yml
+</span></span></code></pre></td></tr></table></div></div><p>安装过程中碰到的问题记录：</p><ul><li><p>1.Control plane pods didn’t come up</p><p><figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230516134234.png title=/images/posts/Pasted%20image%2020230516134234.png data-thumbnail=/images/posts/Pasted%20image%2020230516134234.png><img loading=lazy src=/images/posts/Pasted%20image%2020230516134234.png srcset="/images/posts/Pasted%20image%2020230516134234.png, /images/posts/Pasted%20image%2020230516134234.png 1.5x, /images/posts/Pasted%20image%2020230516134234.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230516134234.png></a></figure></p><p>查看了下 <code>/var/log/messages</code> 日志</p><p>搜索了下说是 ansible 版本太高导致的（安装成了 2.9 的版本），于是将 ansible 降级得到解决</p></li><li><p>2.Could not find csr for nodes:&mldr;..</p><p><figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230516134307.png title=/images/posts/Pasted%20image%2020230516134307.png data-thumbnail=/images/posts/Pasted%20image%2020230516134307.png><img loading=lazy src=/images/posts/Pasted%20image%2020230516134307.png srcset="/images/posts/Pasted%20image%2020230516134307.png, /images/posts/Pasted%20image%2020230516134307.png 1.5x, /images/posts/Pasted%20image%2020230516134307.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230516134307.png></a></figure></p><p>要保证 /etc/hosts 、 /etc/ansible/hosts、个节点 hostname 都是一致的。
+/etc/hosts dns 更改之后需要重启下 dnsmasq</p></li></ul><p>卸载 ocp 集群（？）</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>ansible-playbook -i /etc/ansible/hosts openshift-ansible-release-3.10/playbooks/adhoc/uninstall.yml
+</span></span></code></pre></td></tr></table></div></div><h3 id=4-创建管理员账号 class=headerLink><a href=#4-%e5%88%9b%e5%bb%ba%e7%ae%a1%e7%90%86%e5%91%98%e8%b4%a6%e5%8f%b7 class=header-mark></a>4. 创建管理员账号</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>htpasswd -cb /etc/origin/master/htpasswd admin admin
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>htpasswd -b /etc/origin/master/htpasswd dev dev
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>oc login -u system:admin
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>oc adm policy add-cluster-role-to-user cluster-admin admin
+</span></span></code></pre></td></tr></table></div></div><h3 id=5-登录-console-控制台 class=headerLink><a href=#5-%e7%99%bb%e5%bd%95-console-%e6%8e%a7%e5%88%b6%e5%8f%b0 class=header-mark></a>5. 登录 console 控制台</h3><p>https://192.168.58.31:8443</p><p>碰到的问题：</p><ul><li><p>1.网页一直无响应，打不开</p><p>不知道到底哪个环节出了问题，自己写个demo服务，来探究下 OpenShift 的请求转发到后端的过程：</p><p>Go 代码：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>HelloHandler</span><span class=p>(</span><span class=nx>w</span> <span class=nx>http</span><span class=p>.</span><span class=nx>ResponseWriter</span><span class=p>,</span> <span class=nx>r</span> <span class=o>*</span><span class=nx>http</span><span class=p>.</span><span class=nx>Request</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>fmt</span><span class=p>.</span><span class=nf>Fprintf</span><span class=p>(</span><span class=nx>w</span><span class=p>,</span> <span class=s>&#34;Hello World&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span>  <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>http</span><span class=p>.</span><span class=nf>HandleFunc</span><span class=p>(</span><span class=s>&#34;/&#34;</span><span class=p>,</span> <span class=nx>HelloHandler</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>http</span><span class=p>.</span><span class=nf>ListenAndServe</span><span class=p>(</span><span class=s>&#34;:8000&#34;</span><span class=p>,</span> <span class=kc>nil</span><span class=p>);</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nx>log</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;listener failed&#34;</span><span class=p>,</span> <span class=nx>err</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>在 8000 端口提供服务</p><p>制作成 docker 镜像 <code>192.168.58.31:5000/hello:latest</code> ，pod运行起来后，初步验证通过：</p><p><figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230516134326.png title=/images/posts/Pasted%20image%2020230516134326.png data-thumbnail=/images/posts/Pasted%20image%2020230516134326.png><img loading=lazy src=/images/posts/Pasted%20image%2020230516134326.png srcset="/images/posts/Pasted%20image%2020230516134326.png, /images/posts/Pasted%20image%2020230516134326.png 1.5x, /images/posts/Pasted%20image%2020230516134326.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230516134326.png></a></figure></p><p>创建对应的 svc 服务，验证通过：</p><p><figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230516134334.png title=/images/posts/Pasted%20image%2020230516134334.png data-thumbnail=/images/posts/Pasted%20image%2020230516134334.png><img loading=lazy src=/images/posts/Pasted%20image%2020230516134334.png srcset="/images/posts/Pasted%20image%2020230516134334.png, /images/posts/Pasted%20image%2020230516134334.png 1.5x, /images/posts/Pasted%20image%2020230516134334.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230516134334.png></a></figure></p><p>通过网页也是能够访问到的：</p><p><figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230516134341.png title=/images/posts/Pasted%20image%2020230516134341.png data-thumbnail=/images/posts/Pasted%20image%2020230516134341.png><img loading=lazy src=/images/posts/Pasted%20image%2020230516134341.png srcset="/images/posts/Pasted%20image%2020230516134341.png, /images/posts/Pasted%20image%2020230516134341.png 1.5x, /images/posts/Pasted%20image%2020230516134341.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230516134341.png></a></figure></p><p>&mldr;</p><p>结果：因为访问是 https 协议，配置的 hosts 是 <a href=http://xx.example.com target=_blank rel="noopener noreferrer">xx.example.com</a> ，不要写成域名的形式就行了。</p></li></ul><h3 id=番外 class=headerLink><a href=#%e7%95%aa%e5%a4%96 class=header-mark></a>番外</h3><h4 id=rpm-同步库 class=headerLink><a href=#rpm-%e5%90%8c%e6%ad%a5%e5%ba%93 class=header-mark></a>rpm 同步库</h4><p><a href="https://www.ibm.com/docs/zh/cloud-pak-system-w3550/2.3.2.0?topic=pattern-openshift-container-platform-faqs" target=_blank rel="noopener noreferrer">https://www.ibm.com/docs/zh/cloud-pak-system-w3550/2.3.2.0?topic=pattern-openshift-container-platform-faqs</a></p><p><a href=http://feilunshuai.tpddns.net:8446/repos/rhel-7-server-ose-3.11-rpms/Packages/a/ target=_blank rel="noopener noreferrer">http://feilunshuai.tpddns.net:8446/repos/rhel-7-server-ose-3.11-rpms/Packages/a/</a></p><p><a href=https://www.jianshu.com/p/429f7cfa6089 target=_blank rel="noopener noreferrer">https://www.jianshu.com/p/429f7cfa6089</a></p><h4 id=命令行 class=headerLink><a href=#%e5%91%bd%e4%bb%a4%e8%a1%8c class=header-mark></a>命令行</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>subscription-manager register --auto-attach
+</span></span><span class=line><span class=cl>subscription-manager repos --enable<span class=o>=</span><span class=s2>&#34;rhel-7-server-rpms&#34;</span>  --enable<span class=o>=</span><span class=s2>&#34;rhel-7-server-extras-rpms&#34;</span> --enable<span class=o>=</span><span class=s2>&#34;rhel-7-server-ose-3.11-rpms&#34;</span> --enable<span class=o>=</span><span class=s2>&#34;rhel-7-server-ansible-2.9-rpms&#34;</span>
+</span></span><span class=line><span class=cl><span class=o>[</span>root@master01 ~<span class=o>]</span><span class=c1># subscription-manager repos --list</span>
+</span></span><span class=line><span class=cl>This system has no repositories available through subscriptions.
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 检查服务器的所有可用订阅</span>
+</span></span><span class=line><span class=cl>subscription-manager list --available
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>subscription-manager  attach --auto
+</span></span><span class=line><span class=cl>subscription-manager attach --pool<span class=o>=</span>8a82c6557ffabbea018020c21a4f127e
+</span></span></code></pre></td></tr></table></div></div><h2 id=社区版-okd-master-节点服务启动详情 class=headerLink><a href=#%e7%a4%be%e5%8c%ba%e7%89%88-okd-master-%e8%8a%82%e7%82%b9%e6%9c%8d%e5%8a%a1%e5%90%af%e5%8a%a8%e8%af%a6%e6%83%85 class=header-mark></a>*、[社区版 okd] master 节点服务启动详情</h2><h3 id=1-api-server class=headerLink><a href=#1-api-server class=header-mark></a>*.1 api-server</h3><p>启动命令</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=cp>#!/bin/bash
+</span></span></span><span class=line><span class=cl><span class=cp></span><span class=nb>set</span> -euo pipefail
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=o>[[</span> -f /etc/origin/master/master.env <span class=o>]]</span><span class=p>;</span> <span class=k>then</span>
+</span></span><span class=line><span class=cl>  <span class=nb>set</span> -o allexport
+</span></span><span class=line><span class=cl>  <span class=nb>source</span> /etc/origin/master/master.env
+</span></span><span class=line><span class=cl><span class=k>fi</span>
+</span></span><span class=line><span class=cl><span class=nb>exec</span> openshift start master api --config<span class=o>=</span>/etc/origin/master/master-config.yaml --loglevel<span class=o>=</span><span class=si>${</span><span class=nv>DEBUG_LOGLEVEL</span><span class=k>:-</span><span class=nv>2</span><span class=si>}</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li><p>file: <code>/etc/origin/master/master.env</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Proxy configuration</span>
+</span></span><span class=line><span class=cl><span class=c1># See https://docs.openshift.com/container-platform/3.10/install_config/http_proxies.html</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nv>DEBUG_LOGLEVEL</span><span class=o>=</span><span class=m>4</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p>file: <code>/etc/origin/master/master-config.yaml</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span><span class=lnt>141
+</span><span class=lnt>142
+</span><span class=lnt>143
+</span><span class=lnt>144
+</span><span class=lnt>145
+</span><span class=lnt>146
+</span><span class=lnt>147
+</span><span class=lnt>148
+</span><span class=lnt>149
+</span><span class=lnt>150
+</span><span class=lnt>151
+</span><span class=lnt>152
+</span><span class=lnt>153
+</span><span class=lnt>154
+</span><span class=lnt>155
+</span><span class=lnt>156
+</span><span class=lnt>157
+</span><span class=lnt>158
+</span><span class=lnt>159
+</span><span class=lnt>160
+</span><span class=lnt>161
+</span><span class=lnt>162
+</span><span class=lnt>163
+</span><span class=lnt>164
+</span><span class=lnt>165
+</span><span class=lnt>166
+</span><span class=lnt>167
+</span><span class=lnt>168
+</span><span class=lnt>169
+</span><span class=lnt>170
+</span><span class=lnt>171
+</span><span class=lnt>172
+</span><span class=lnt>173
+</span><span class=lnt>174
+</span><span class=lnt>175
+</span><span class=lnt>176
+</span><span class=lnt>177
+</span><span class=lnt>178
+</span><span class=lnt>179
+</span><span class=lnt>180
+</span><span class=lnt>181
+</span><span class=lnt>182
+</span><span class=lnt>183
+</span><span class=lnt>184
+</span><span class=lnt>185
+</span><span class=lnt>186
+</span><span class=lnt>187
+</span><span class=lnt>188
+</span><span class=lnt>189
+</span><span class=lnt>190
+</span><span class=lnt>191
+</span><span class=lnt>192
+</span><span class=lnt>193
+</span><span class=lnt>194
+</span><span class=lnt>195
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>admissionConfig</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>pluginConfig</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>BuildDefaults</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>configuration</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>env</span><span class=p>:</span><span class=w> </span><span class=p>[]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>BuildDefaultsConfig</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>resources</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>limits</span><span class=p>:</span><span class=w> </span>{}<span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>requests</span><span class=p>:</span><span class=w> </span>{}<span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>BuildOverrides</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>configuration</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>BuildOverridesConfig</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>openshift.io/ImagePolicy</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>configuration</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>executionRules</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span>- <span class=nt>matchImageAnnotations</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span>- <span class=nt>key</span><span class=p>:</span><span class=w> </span><span class=l>images.openshift.io/deny-execution</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=nt>value</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;true&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>execution-denied</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>onResources</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span>- <span class=nt>resource</span><span class=p>:</span><span class=w> </span><span class=l>pods</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span>- <span class=nt>resource</span><span class=p>:</span><span class=w> </span><span class=l>builds</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>reject</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span><span class=nt>skipOnResolutionFailure</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>ImagePolicyConfig</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>aggregatorConfig</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>proxyClientInfo</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>certFile</span><span class=p>:</span><span class=w> </span><span class=l>aggregator-front-proxy.crt</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>keyFile</span><span class=p>:</span><span class=w> </span><span class=l>aggregator-front-proxy.key</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>apiLevels</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=l>v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>authConfig</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>requestHeader</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>clientCA</span><span class=p>:</span><span class=w> </span><span class=l>front-proxy-ca.crt</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>clientCommonNames</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=l>aggregator-front-proxy</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>extraHeaderPrefixes</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=l>X-Remote-Extra-</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>groupHeaders</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=l>X-Remote-Group</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>usernameHeaders</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=l>X-Remote-User</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>controllerConfig</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>election</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>lockName</span><span class=p>:</span><span class=w> </span><span class=l>openshift-master-controllers</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>serviceServingCert</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>signer</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>certFile</span><span class=p>:</span><span class=w> </span><span class=l>service-signer.crt</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>keyFile</span><span class=p>:</span><span class=w> </span><span class=l>service-signer.key</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>controllers</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;*&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>corsAllowedOrigins</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=l>(?i)//127\.0\.0\.1(:|\z)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=l>(?i)//localhost(:|\z)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=l>(?i)//192\.168\.58\.31(:|\z)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=l>(?i)//kubernetes\.default(:|\z)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=l>(?i)//kubernetes\.default\.svc\.cluster\.local(:|\z)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=l>(?i)//kubernetes(:|\z)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=l>(?i)//openshift\.default(:|\z)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=l>(?i)//master01(:|\z)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=l>(?i)//openshift\.default\.svc(:|\z)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=l>(?i)//172\.30\.0\.1(:|\z)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=l>(?i)//openshift\.default\.svc\.cluster\.local(:|\z)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=l>(?i)//kubernetes\.default\.svc(:|\z)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span>- <span class=l>(?i)//openshift(:|\z)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>dnsConfig</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>bindAddress</span><span class=p>:</span><span class=w> </span><span class=m>0.0.0.0</span><span class=p>:</span><span class=m>8053</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>bindNetwork</span><span class=p>:</span><span class=w> </span><span class=l>tcp4</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>etcdClientInfo</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>ca</span><span class=p>:</span><span class=w> </span><span class=l>master.etcd-ca.crt</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>certFile</span><span class=p>:</span><span class=w> </span><span class=l>master.etcd-client.crt</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>keyFile</span><span class=p>:</span><span class=w> </span><span class=l>master.etcd-client.key</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>urls</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=l>https://master01:2379</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>etcdStorageConfig</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>kubernetesStoragePrefix</span><span class=p>:</span><span class=w> </span><span class=l>kubernetes.io</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>kubernetesStorageVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>openShiftStoragePrefix</span><span class=p>:</span><span class=w> </span><span class=l>openshift.io</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>openShiftStorageVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>imageConfig</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>format</span><span class=p>:</span><span class=w> </span><span class=l>docker.io/openshift/origin-${component}:${version}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>latest</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>imagePolicyConfig</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>internalRegistryHostname</span><span class=p>:</span><span class=w> </span><span class=l>docker-registry.default.svc:5000</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>MasterConfig</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kubeletClientInfo</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>ca</span><span class=p>:</span><span class=w> </span><span class=l>ca-bundle.crt</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>certFile</span><span class=p>:</span><span class=w> </span><span class=l>master.kubelet-client.crt</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>keyFile</span><span class=p>:</span><span class=w> </span><span class=l>master.kubelet-client.key</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>port</span><span class=p>:</span><span class=w> </span><span class=m>10250</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>kubernetesMasterConfig</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>apiServerArguments</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>storage-backend</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=l>etcd3</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>storage-media-type</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=l>application/vnd.kubernetes.protobuf</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>controllerArguments</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>cluster-signing-cert-file</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=l>/etc/origin/master/ca.crt</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>cluster-signing-key-file</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=l>/etc/origin/master/ca.key</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>masterCount</span><span class=p>:</span><span class=w> </span><span class=m>1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>masterIP</span><span class=p>:</span><span class=w> </span><span class=m>192.168.58.31</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>podEvictionTimeout</span><span class=p>:</span><span class=w> </span><span class=kc>null</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>proxyClientInfo</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>certFile</span><span class=p>:</span><span class=w> </span><span class=l>master.proxy-client.crt</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>keyFile</span><span class=p>:</span><span class=w> </span><span class=l>master.proxy-client.key</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>schedulerArguments</span><span class=p>:</span><span class=w> </span><span class=kc>null</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>schedulerConfigFile</span><span class=p>:</span><span class=w> </span><span class=l>/etc/origin/master/scheduler.json</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>servicesNodePortRange</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>servicesSubnet</span><span class=p>:</span><span class=w> </span><span class=m>172.30.0.0</span><span class=l>/16</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>staticNodeNames</span><span class=p>:</span><span class=w> </span><span class=p>[]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>masterClients</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>externalKubernetesClientConnectionOverrides</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>acceptContentTypes</span><span class=p>:</span><span class=w> </span><span class=l>application/vnd.kubernetes.protobuf,application/json</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>burst</span><span class=p>:</span><span class=w> </span><span class=m>400</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>contentType</span><span class=p>:</span><span class=w> </span><span class=l>application/vnd.kubernetes.protobuf</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>qps</span><span class=p>:</span><span class=w> </span><span class=m>200</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>externalKubernetesKubeConfig</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>openshiftLoopbackClientConnectionOverrides</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>acceptContentTypes</span><span class=p>:</span><span class=w> </span><span class=l>application/vnd.kubernetes.protobuf,application/json</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>burst</span><span class=p>:</span><span class=w> </span><span class=m>600</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>contentType</span><span class=p>:</span><span class=w> </span><span class=l>application/vnd.kubernetes.protobuf</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>qps</span><span class=p>:</span><span class=w> </span><span class=m>300</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>openshiftLoopbackKubeConfig</span><span class=p>:</span><span class=w> </span><span class=l>openshift-master.kubeconfig</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>masterPublicURL</span><span class=p>:</span><span class=w> </span><span class=l>https://master01:8443</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>networkConfig</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>clusterNetworks</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=nt>cidr</span><span class=p>:</span><span class=w> </span><span class=m>10.128.0.0</span><span class=l>/14</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>hostSubnetLength</span><span class=p>:</span><span class=w> </span><span class=m>9</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>externalIPNetworkCIDRs</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=m>0.0.0.0</span><span class=l>/0</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>networkPluginName</span><span class=p>:</span><span class=w> </span><span class=l>redhat/openshift-ovs-subnet</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>serviceNetworkCIDR</span><span class=p>:</span><span class=w> </span><span class=m>172.30.0.0</span><span class=l>/16</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>oauthConfig</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>assetPublicURL</span><span class=p>:</span><span class=w> </span><span class=l>https://master01:8443/console/</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>grantConfig</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>method</span><span class=p>:</span><span class=w> </span><span class=l>auto</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>identityProviders</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=nt>challenge</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>login</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>mappingMethod</span><span class=p>:</span><span class=w> </span><span class=l>claim</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>htpasswd_auth</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>provider</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>apiVersion</span><span class=p>:</span><span class=w> </span><span class=l>v1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>file</span><span class=p>:</span><span class=w> </span><span class=l>/etc/origin/master/htpasswd</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>kind</span><span class=p>:</span><span class=w> </span><span class=l>HTPasswdPasswordIdentityProvider</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>masterCA</span><span class=p>:</span><span class=w> </span><span class=l>ca-bundle.crt</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>masterPublicURL</span><span class=p>:</span><span class=w> </span><span class=l>https://master01:8443</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>masterURL</span><span class=p>:</span><span class=w> </span><span class=l>https://master01:8443</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>sessionConfig</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>sessionMaxAgeSeconds</span><span class=p>:</span><span class=w> </span><span class=m>3600</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>sessionName</span><span class=p>:</span><span class=w> </span><span class=l>ssn</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>sessionSecretsFile</span><span class=p>:</span><span class=w> </span><span class=l>/etc/origin/master/session-secrets.yaml</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>tokenConfig</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>accessTokenMaxAgeSeconds</span><span class=p>:</span><span class=w> </span><span class=m>86400</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>authorizeTokenMaxAgeSeconds</span><span class=p>:</span><span class=w> </span><span class=m>500</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>pauseControllers</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>policyConfig</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>bootstrapPolicyFile</span><span class=p>:</span><span class=w> </span><span class=l>/etc/origin/master/policy.json</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>openshiftInfrastructureNamespace</span><span class=p>:</span><span class=w> </span><span class=l>openshift-infra</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>openshiftSharedResourcesNamespace</span><span class=p>:</span><span class=w> </span><span class=l>openshift</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>projectConfig</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>defaultNodeSelector</span><span class=p>:</span><span class=w> </span><span class=l>node-role.kubernetes.io/compute=true</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>projectRequestMessage</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>projectRequestTemplate</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>securityAllocator</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>mcsAllocatorRange</span><span class=p>:</span><span class=w> </span><span class=l>s0:/2</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>mcsLabelsPerProject</span><span class=p>:</span><span class=w> </span><span class=m>5</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>uidAllocatorRange</span><span class=p>:</span><span class=w> </span><span class=m>1000000000-1999999999</span><span class=l>/10000</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>routingConfig</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>subdomain</span><span class=p>:</span><span class=w> </span><span class=l>router.default.svc.cluster.local</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>serviceAccountConfig</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>limitSecretReferences</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>managedNames</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=l>default</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=l>builder</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=l>deployer</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>masterCA</span><span class=p>:</span><span class=w> </span><span class=l>ca-bundle.crt</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>privateKeyFile</span><span class=p>:</span><span class=w> </span><span class=l>serviceaccounts.private.key</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>publicKeyFiles</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=l>serviceaccounts.public.key</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>servingInfo</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>bindAddress</span><span class=p>:</span><span class=w> </span><span class=m>0.0.0.0</span><span class=p>:</span><span class=m>8443</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>bindNetwork</span><span class=p>:</span><span class=w> </span><span class=l>tcp4</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>certFile</span><span class=p>:</span><span class=w> </span><span class=l>master.server.crt</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>clientCA</span><span class=p>:</span><span class=w> </span><span class=l>ca.crt</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>keyFile</span><span class=p>:</span><span class=w> </span><span class=l>master.server.key</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>maxRequestsInFlight</span><span class=p>:</span><span class=w> </span><span class=m>500</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>requestTimeoutSeconds</span><span class=p>:</span><span class=w> </span><span class=m>3600</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=nt>volumeConfig</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>dynamicProvisioningEnabled</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div></li></ul><h3 id=2-scheduler class=headerLink><a href=#2-scheduler class=header-mark></a>*.2 scheduler</h3><h3 id=3-controller class=headerLink><a href=#3-controller class=header-mark></a>*.3 controller</h3><p>启动命令</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=c>#!/bin/bash</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=l>set -euo pipefail</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=l>if [[ -f /etc/origin/master/master.env ]]; then</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=l>set -o allexport</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=l>source /etc/origin/master/master.env</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=l>fi</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w></span><span class=l>exec openshift start master controllers --config=/etc/origin/master/master-config.yaml --listen=https://0.0.0.0:8444 --loglevel=${DEBUG_LOGLEVEL:-2}</span><span class=w>
+</span></span></span></code></pre></td></tr></table></div></div><ul><li>file: <code>/etc/origin/master/master.env</code></li><li>file: <code>/etc/origin/master/master-config.yaml</code></li></ul><h2 id=cclinux-ocp-公司版-安装 class=headerLink><a href=#cclinux-ocp-%e5%85%ac%e5%8f%b8%e7%89%88-%e5%ae%89%e8%a3%85 class=header-mark></a>*、[cclinux ocp 公司版] 安装</h2><h3 id=流程梳理 class=headerLink><a href=#%e6%b5%81%e7%a8%8b%e6%a2%b3%e7%90%86 class=header-mark></a>流程梳理</h3><p><a href=https://www.processon.com/view/link/626264830e3e74777e1a2277 target=_blank rel="noopener noreferrer">【cclinux-ocp】 | ProcessOn免费在线作图,在线流程图,在线思维导图 |</a></p><h2 id=cclinux-ocp-公司版-master-节点服务启动详情 class=headerLink><a href=#cclinux-ocp-%e5%85%ac%e5%8f%b8%e7%89%88-master-%e8%8a%82%e7%82%b9%e6%9c%8d%e5%8a%a1%e5%90%af%e5%8a%a8%e8%af%a6%e6%83%85 class=header-mark></a>*、[cclinux ocp 公司版] master 节点服务启动详情</h2><p>kubec</p><h2 id=相关学习资料 class=headerLink><a href=#%e7%9b%b8%e5%85%b3%e5%ad%a6%e4%b9%a0%e8%b5%84%e6%96%99 class=header-mark></a>*、相关学习资料</h2><ol><li><a href=https://docs.openshift.com/container-platform/4.10/welcome/index.html target=_blank rel="noopener noreferrer">https://docs.openshift.com/container-platform/4.10/welcome/index.html</a></li></ol></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2023-05-16</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md><span><a class=link-to-mardown href=/202305161335-openshift-%E8%AE%A4%E8%AF%86%E4%BB%A5%E5%8F%8A%E9%83%A8%E7%BD%B2%E6%B5%8B%E8%AF%95/index.md target=_blank rel="noopener noreferrer">阅读原始文档</a></span></div><div class=post-info-share><span><a href=# title="分享到 Twitter" data-sharer=twitter data-url=http://www.honghuiqiang.com/202305161335-openshift-%E8%AE%A4%E8%AF%86%E4%BB%A5%E5%8F%8A%E9%83%A8%E7%BD%B2%E6%B5%8B%E8%AF%95/ data-title="openshift 认识以及部署测试" data-via=xxxx><i class="fab fa-twitter fa-fw"></i></a><a href=# title="分享到 Facebook" data-sharer=facebook data-url=http://www.honghuiqiang.com/202305161335-openshift-%E8%AE%A4%E8%AF%86%E4%BB%A5%E5%8F%8A%E9%83%A8%E7%BD%B2%E6%B5%8B%E8%AF%95/><i class="fab fa-facebook-square fa-fw"></i></a><a href=# title="分享到 WhatsApp" data-sharer=whatsapp data-url=http://www.honghuiqiang.com/202305161335-openshift-%E8%AE%A4%E8%AF%86%E4%BB%A5%E5%8F%8A%E9%83%A8%E7%BD%B2%E6%B5%8B%E8%AF%95/ data-title="openshift 认识以及部署测试" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href=# title="分享到 Line" data-sharer=line data-url=http://www.honghuiqiang.com/202305161335-openshift-%E8%AE%A4%E8%AF%86%E4%BB%A5%E5%8F%8A%E9%83%A8%E7%BD%B2%E6%B5%8B%E8%AF%95/ data-title="openshift 认识以及部署测试"><i data-svg-src=/lib/simple-icons/icons/line.min.svg></i></a><a href=# title="分享到 微博" data-sharer=weibo data-url=http://www.honghuiqiang.com/202305161335-openshift-%E8%AE%A4%E8%AF%86%E4%BB%A5%E5%8F%8A%E9%83%A8%E7%BD%B2%E6%B5%8B%E8%AF%95/ data-title="openshift 认识以及部署测试"><i class="fab fa-weibo fa-fw"></i></a><a href=# title="分享到 Myspace" data-sharer=myspace data-url=http://www.honghuiqiang.com/202305161335-openshift-%E8%AE%A4%E8%AF%86%E4%BB%A5%E5%8F%8A%E9%83%A8%E7%BD%B2%E6%B5%8B%E8%AF%95/ data-title="openshift 认识以及部署测试" data-description><i data-svg-src=/lib/simple-icons/icons/myspace.min.svg></i></a><a href=# title="分享到 Blogger" data-sharer=blogger data-url=http://www.honghuiqiang.com/202305161335-openshift-%E8%AE%A4%E8%AF%86%E4%BB%A5%E5%8F%8A%E9%83%A8%E7%BD%B2%E6%B5%8B%E8%AF%95/ data-title="openshift 认识以及部署测试" data-description><i class="fab fa-blogger fa-fw"></i></a><a href=# title="分享到 Evernote" data-sharer=evernote data-url=http://www.honghuiqiang.com/202305161335-openshift-%E8%AE%A4%E8%AF%86%E4%BB%A5%E5%8F%8A%E9%83%A8%E7%BD%B2%E6%B5%8B%E8%AF%95/ data-title="openshift 认识以及部署测试"><i class="fab fa-evernote fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/2023-05-13/ class=prev rel=prev title="2023-05-13 日记录"><i class="fas fa-angle-left fa-fw"></i>2023-05-13 日记录</a>
+<a href=/202305161347-e2e-%E6%B5%8B%E8%AF%95/ class=next rel=next title="E2E 测试">E2E 测试<i class="fas fa-angle-right fa-fw"></i></a></div></div><div id=comments><div id=giscus></div><noscript>Please enable JavaScript to view the comments powered by <a href=https://giscus.app/>giscus</a>.</noscript></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>由 <a href=https://gohugo.io/ target=_blank rel="noopener noreferrer" title="Hugo 0.105.0">Hugo</a> 强力驱动&nbsp;|&nbsp;托管在 <a title="Github Pages" href=https://docs.github.com/en/pages/ target=_blank rel="noopener noreffer">GitHub Pages</a> 上&nbsp;|&nbsp;主题 - <a href=https://github.com/HEIGE-PCloud/DoIt target=_blank rel="noopener noreferrer" title="DoIt 0.3.0"><i class="far fa-edit fa-fw"></i> DoIt</a></div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2023</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank rel="noopener noreferrer">索隆不喝酒</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class=footer-line></div><div class=footer-line></div></div></footer></div><div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><div class=assets><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/katex/copy-tex.min.css><noscript><link rel=stylesheet href=/lib/katex/copy-tex.min.css></noscript><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:10},comment:{giscus:{darkTheme:"dark",dataCategory:"General",dataCategoryId:"DIC_kwDOJh9DwM4CWbTD",dataEmitMetadata:"0",dataInputPosition:"bottom",dataLang:"zh-CN",dataMapping:"pathname",dataReactionsEnabled:"1",dataRepo:"904566722/hugo-giscus-common-system",dataRepoId:"R_kgDOJh9DwA",dataStrict:"0",lightTheme:"light"}},data:{"desktop-header-typeit":"HHQ Records","mobile-header-typeit":"HHQ Records"},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,fuseIndexURL:"/index.json",highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,type:"fuse",useExtendedSearch:!1},sharerjs:!0,table:{sort:!0},typeit:{cursorChar:"|",cursorSpeed:1e3,data:{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},duration:-1,speed:100}}</script><script type=text/javascript src=/js/giscus.min.js defer></script><script type=text/javascript src=/lib/tablesort/tablesort.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/typeit/typeit.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><script type=text/javascript src=/js/theme.min.js defer></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-GKX5LKE0Z8",{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=G-GKX5LKE0Z8" async></script><script>var _hmt=_hmt||[];(function(){var e,t=document.createElement("script");t.src="https://hm.baidu.com/hm.js?7ee459037c39c6123ff6e6252a7c5301",e=document.getElementsByTagName("script")[0],e.parentNode.insertBefore(t,e)})()</script></div></body></html>

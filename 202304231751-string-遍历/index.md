@@ -6,7 +6,6 @@
 
 在使用 for-range 遍历 string 中每个字符的时候，取出来的值是什么类型？
 
-![[Pasted image 20230423173934.png]]
 ```go
 func isAlienSorted(words []string, order string) bool {  
    // 首先要将 order 顺序映射成数值，来做比较  

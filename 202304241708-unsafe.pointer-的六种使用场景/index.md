@@ -30,7 +30,7 @@ func float64bits(f float64) uint64 {
 }
 ```
 
-另外一个例子，将字符串转换为字节切片，首先我们看一下在 64 位系统中两者的尺寸
+另外一个例子，`将字符串转换为字节切片`，首先我们看一下在 64 位系统中两者的尺寸
 ```go
 var s string  
 var bs []byte  
@@ -46,7 +46,7 @@ func byteSlice2String(bs []byte) string {
    return *(*string)(unsafe.Pointer(&bs))  
 }
 ```
-这种实现的**优点**是避免了底层对字节序列的一次开辟和复制
+**这种实现的优点是避免了底层对字节序列的一次开辟和复制**
 
 而如果要用此方式来实现从 string 到 []byte 则是**不安全**的：
 ```go
@@ -173,6 +173,12 @@ func uintptrPractice4() {
 }
 ```
 将字符串指针转为\*StringHeader，从而可以对字符串的内部进行修改
+
+
+## 总结下 uintptr 和 Pointer 的区别
+
+- Pointer：通用类型指针，不可以参与指针运算
+- uintptr：用于指针运算，不持有对象，会被垃圾回收
 
 ---
 1. 《非类型安全指针 -Go语言101》. 见于 2023年4月25日. [https://gfw.go101.org/article/unsafe.html](https://gfw.go101.org/article/unsafe.html).

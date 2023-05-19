@@ -13,10 +13,11 @@ tickInterval 1h
 title 今天大概要做
 
 section 学习
-	1.整理一些golang常见问题: 09:00, 5h
-	2.channel: 1h
+	1.整理一些golang常见问题:done, 09:00, 3h
+	2.GO类型系统、结构体等内容学习:done, 3h
+	3.channel: 1h
 section 习惯
-	算法每日一题: 1h
+	算法每日一题:done, 1h
 {{< /mermaid >}}
 
 
@@ -46,7 +47,7 @@ section 习惯
 心情打分：
 - [ ] 😆 很快乐
 - [ ] 🙂 一般快乐
-- [ ] 😶 无明显情绪波动
+- [x] 😶 无明显情绪波动
 - [ ] 🧐有疑问
 - [ ] 😵‍💫 很混乱
 - [ ] 😮‍💨叹气

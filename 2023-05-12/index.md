@@ -97,9 +97,9 @@ section 习惯
 
 无（文档迁移）
 
-[202305121500 关于 goroutine 内存泄漏的一些思考](content/posts/202305121500%20关于%20goroutine%20内存泄漏的一些思考.md)
+[202305121500 关于 goroutine 内存泄漏的一些思考](content/posts/go/golang-why/202305121500%20关于%20goroutine%20内存泄漏的一些思考.md)
 
-[202305121926 读 DDIA 留下的一些记录](content/posts/202305121926%20读%20DDIA%20留下的一些记录.md)
+[202305121926 读 DDIA 留下的一些记录](content/posts/box/202305121926%20读%20DDIA%20留下的一些记录.md)
 
 ## 记录区-明天
 

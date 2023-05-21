@@ -1,0 +1,687 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>如何优雅地关闭一个通道 - 学习记录</title><meta name=Description content="这是我的网站描述"><meta property="og:title" content="如何优雅地关闭一个通道"><meta property="og:description" content><meta property="og:type" content="article"><meta property="og:url" content="http://www.honghuiqiang.com/202305211358-%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E5%9C%B0%E5%85%B3%E9%97%AD%E4%B8%80%E4%B8%AA%E9%80%9A%E9%81%93/"><meta property="og:image" content="http://www.honghuiqiang.com/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-05-21T13:05:00+08:00"><meta property="article:modified_time" content="2023-05-21T13:05:00+08:00"><meta property="og:site_name" content="学习记录"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="http://www.honghuiqiang.com/logo.png"><meta name=twitter:title content="如何优雅地关闭一个通道"><meta name=twitter:description content><meta name=application-name content="HHQ Records"><meta name=apple-mobile-web-app-title content="HHQ Records"><meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel=icon href=/images/zoro.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=canonical href=http://www.honghuiqiang.com/202305211358-%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E5%9C%B0%E5%85%B3%E9%97%AD%E4%B8%80%E4%B8%AA%E9%80%9A%E9%81%93/><link rel=prev href=http://www.honghuiqiang.com/2023-05-21/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/color.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/fontawesome-free/all.min.css><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/animate/animate.min.css><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"如何优雅地关闭一个通道","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http:\/\/www.honghuiqiang.com\/202305211358-%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E5%9C%B0%E5%85%B3%E9%97%AD%E4%B8%80%E4%B8%AA%E9%80%9A%E9%81%93\/"},"genre":"posts","wordcount":2671,"url":"http:\/\/www.honghuiqiang.com\/202305211358-%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E5%9C%B0%E5%85%B3%E9%97%AD%E4%B8%80%E4%B8%AA%E9%80%9A%E9%81%93\/","datePublished":"2023-05-21T13:05:00+08:00","dateModified":"2023-05-21T13:05:00+08:00","publisher":{"@type":"Organization","name":""},"authors":[{"@type":"Person","name":"索隆不喝酒"}],"description":""}</script><script src=//instant.page/5.1.1 defer type=module integrity=sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq></script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(e){document.body.setAttribute("theme",e),document.documentElement.style.setProperty("color-scheme",e==="light"?"light":"dark"),window.theme=e,window.isDark=window.theme!=="light"}function saveTheme(e){window.localStorage&&localStorage.setItem("theme",e)}function getMeta(e){const t=document.getElementsByTagName("meta");for(let n=0;n<t.length;n++)if(t[n].getAttribute("name")===e)return t[n];return""}if(window.localStorage&&localStorage.getItem("theme")){let e=localStorage.getItem("theme");e==="light"||e==="dark"||e==="black"?setTheme(e):setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}else"dark"==="light"||"dark"==="dark"||"dark"==="black"?(setTheme("dark"),saveTheme("dark")):(saveTheme("auto"),setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));let metaColors={light:"#f8f8f8",dark:"#252627",black:"#000000"};getMeta("theme-color").content=metaColors[document.body.getAttribute("theme")],window.switchThemeEventSet=new Set</script><div id=back-to-top></div><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=学习记录><span id=desktop-header-typeit class=typeit></span></a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>文章 </a><a class=menu-item href=/categories/>分类 </a><a class=menu-item href=/series/>系列 </a><a class=menu-item href=/tags/>标签 </a><span class="menu-item delimiter"></span><a href=# class="menu-item language" title=选择语言>简体中文<i class="fas fa-chevron-right fa-fw"></i>
+<select class=language-select title="Select Language" id=language-select-desktop onchange="location=this.value"><option value=/202305211358-%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E5%9C%B0%E5%85%B3%E9%97%AD%E4%B8%80%E4%B8%AA%E9%80%9A%E9%81%93/ selected>简体中文</option></select>
+</a><span class="menu-item search" id=search-desktop><input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=# class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=# class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span>
+</span><a href=# class="menu-item theme-select" title=切换主题><i class="fas fa-adjust fa-fw"></i>
+<select class=color-theme-select id=theme-select-desktop title=切换主题><option value=light>浅色</option><option value=dark>深色</option><option value=black>黑色</option><option value=auto>跟随系统</option></select></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=学习记录><span id=mobile-header-typeit class=typeit></span></a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=# class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=# class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=# class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/ title>文章</a><a class=menu-item href=/categories/ title>分类</a><a class=menu-item href=/series/ title>系列</a><a class=menu-item href=/tags/ title>标签</a><a href=# class="menu-item theme-select" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+<select class=color-theme-select id=theme-select-mobile title=切换主题><option value=light>浅色</option><option value=dark>深色</option><option value=black>黑色</option><option value=auto>跟随系统</option></select>
+</a><a href=# class=menu-item title=选择语言>简体中文<i class="fas fa-chevron-right fa-fw"></i>
+<select class=language-select title="Select Language" onchange="location=this.value"><option value=/202305211358-%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E5%9C%B0%E5%85%B3%E9%97%AD%E4%B8%80%E4%B8%AA%E9%80%9A%E9%81%93/ selected>简体中文</option></select></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto><nav id=TableOfContents><ul><li><a href=#通道关闭的原则>通道关闭的原则</a></li><li><a href=#礼貌地关闭通道的方法不能完全避免数据竞争>礼貌地关闭通道的方法（不能完全避免数据竞争）</a></li><li><a href=#优雅地关闭通道的办法>优雅地关闭通道的办法</a><ul><li><a href=#m接收者---1发送者>M接收者 - 1发送者</a><ul><li><a href=#变种1-通过k第三方协程来关闭通道>变种1. 通过K第三方协程来关闭通道</a></li></ul></li><li><a href=#1接收者---n发送者>1接收者 - N发送者</a></li><li><a href=#m接收者---n发送者>M接收者 - N发送者</a></li><li><a href=#n发送者的变种datach-必须被关闭>N发送者的变种：dataCh 必须被关闭</a></li></ul></li></ul></nav></div></div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">如何优雅地关闭一个通道</h1><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=http://www.honghuiqiang.com/authors/%E7%B4%A2%E9%9A%86%E4%B8%8D%E5%96%9D%E9%85%92>索隆不喝酒</a></span>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%81%B5%E6%84%9F%E6%96%87%E7%8C%AE%E7%AC%94%E8%AE%B0%E9%9D%9E%E6%B0%B8%E4%B9%85%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>灵感、文献笔记（非永久笔记）</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2023-05-21>2023-05-21</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2023-05-21>2023-05-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 2671 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 6 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#通道关闭的原则>通道关闭的原则</a></li><li><a href=#礼貌地关闭通道的方法不能完全避免数据竞争>礼貌地关闭通道的方法（不能完全避免数据竞争）</a></li><li><a href=#优雅地关闭通道的办法>优雅地关闭通道的办法</a><ul><li><a href=#m接收者---1发送者>M接收者 - 1发送者</a><ul><li><a href=#变种1-通过k第三方协程来关闭通道>变种1. 通过K第三方协程来关闭通道</a></li></ul></li><li><a href=#1接收者---n发送者>1接收者 - N发送者</a></li><li><a href=#m接收者---n发送者>M接收者 - N发送者</a></li><li><a href=#n发送者的变种datach-必须被关闭>N发送者的变种：dataCh 必须被关闭</a></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=heading class=headerLink><a href=#heading class=header-mark></a></h1><h2 id=通道关闭的原则 class=headerLink><a href=#%e9%80%9a%e9%81%93%e5%85%b3%e9%97%ad%e7%9a%84%e5%8e%9f%e5%88%99 class=header-mark></a>通道关闭的原则</h2><ul><li>通用的通道关闭的原则是：<code>不要关闭一个已经关闭的通道</code>，因为这将导致一个恐慌</li></ul><p>另外一个常用的相对容易遵守的原则： <strong><code>不要在数据的接收方或者在有多个发送者的情况下关闭通道</code></strong>，换句话说，最好让一个通道唯一的发送者来关闭通道</p><p>❌ 不要在数据的接收方关闭通道<figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230521140747.png title=/images/posts/Pasted%20image%2020230521140747.png data-thumbnail=/images/posts/Pasted%20image%2020230521140747.png><img loading=lazy src=/images/posts/Pasted%20image%2020230521140747.png srcset="/images/posts/Pasted%20image%2020230521140747.png, /images/posts/Pasted%20image%2020230521140747.png 1.5x, /images/posts/Pasted%20image%2020230521140747.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230521140747.png></a></figure></p><p>❌ 不要在有多个发送者的情况下关闭通道<figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230521140813.png title=/images/posts/Pasted%20image%2020230521140813.png data-thumbnail=/images/posts/Pasted%20image%2020230521140813.png><img loading=lazy src=/images/posts/Pasted%20image%2020230521140813.png srcset="/images/posts/Pasted%20image%2020230521140813.png, /images/posts/Pasted%20image%2020230521140813.png 1.5x, /images/posts/Pasted%20image%2020230521140813.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230521140813.png></a></figure></p><p><code>如果一定要在上面的两种场景下关闭通道，记得使用 recover 来防止程序崩溃</code></p><p>✅最好让通道的唯一发送者来关闭<figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230521140843.png title=/images/posts/Pasted%20image%2020230521140843.png data-thumbnail=/images/posts/Pasted%20image%2020230521140843.png><img loading=lazy src=/images/posts/Pasted%20image%2020230521140843.png srcset="/images/posts/Pasted%20image%2020230521140843.png, /images/posts/Pasted%20image%2020230521140843.png 1.5x, /images/posts/Pasted%20image%2020230521140843.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230521140843.png></a></figure></p><h2 id=礼貌地关闭通道的方法不能完全避免数据竞争 class=headerLink><a href=#%e7%a4%bc%e8%b2%8c%e5%9c%b0%e5%85%b3%e9%97%ad%e9%80%9a%e9%81%93%e7%9a%84%e6%96%b9%e6%b3%95%e4%b8%8d%e8%83%bd%e5%ae%8c%e5%85%a8%e9%81%bf%e5%85%8d%e6%95%b0%e6%8d%ae%e7%ab%9e%e4%ba%89 class=header-mark></a>礼貌地关闭通道的方法（不能完全避免数据竞争）</h2><p>可以通过 <code>sync.Once</code> 或者 <code>sync.Mutex</code> 来实现</p><p>实现1：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>MyChannel</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>C</span>    <span class=kd>chan</span> <span class=nx>T</span>
+</span></span><span class=line><span class=cl>	<span class=nx>once</span> <span class=nx>sync</span><span class=p>.</span><span class=nx>Once</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>NewMyChannel</span><span class=p>()</span> <span class=o>*</span><span class=nx>MyChannel</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=o>&amp;</span><span class=nx>MyChannel</span><span class=p>{</span><span class=nx>C</span><span class=p>:</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=nx>T</span><span class=p>)}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>mc</span> <span class=o>*</span><span class=nx>MyChannel</span><span class=p>)</span> <span class=nf>SafeClose</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>mc</span><span class=p>.</span><span class=nx>once</span><span class=p>.</span><span class=nf>Do</span><span class=p>(</span><span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nb>close</span><span class=p>(</span><span class=nx>mc</span><span class=p>.</span><span class=nx>C</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>})</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>实现2：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>MyChannel</span> <span class=kd>struct</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>C</span>      <span class=kd>chan</span> <span class=nx>T</span>
+</span></span><span class=line><span class=cl>	<span class=nx>closed</span> <span class=kt>bool</span>
+</span></span><span class=line><span class=cl>	<span class=nx>mutex</span>  <span class=nx>sync</span><span class=p>.</span><span class=nx>Mutex</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>NewMyChannel</span><span class=p>()</span> <span class=o>*</span><span class=nx>MyChannel</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=o>&amp;</span><span class=nx>MyChannel</span><span class=p>{</span><span class=nx>C</span><span class=p>:</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=nx>T</span><span class=p>)}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>mc</span> <span class=o>*</span><span class=nx>MyChannel</span><span class=p>)</span> <span class=nf>SafeClose</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>mc</span><span class=p>.</span><span class=nx>mutex</span><span class=p>.</span><span class=nf>Lock</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>	<span class=k>defer</span> <span class=nx>mc</span><span class=p>.</span><span class=nx>mutex</span><span class=p>.</span><span class=nf>Unlock</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=p>!</span><span class=nx>mc</span><span class=p>.</span><span class=nx>closed</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nb>close</span><span class=p>(</span><span class=nx>mc</span><span class=p>.</span><span class=nx>C</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=nx>mc</span><span class=p>.</span><span class=nx>closed</span> <span class=p>=</span> <span class=kc>true</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>mc</span> <span class=o>*</span><span class=nx>MyChannel</span><span class=p>)</span> <span class=nf>IsClosed</span><span class=p>()</span> <span class=kt>bool</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>mc</span><span class=p>.</span><span class=nx>mutex</span><span class=p>.</span><span class=nf>Lock</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>	<span class=k>defer</span> <span class=nx>mc</span><span class=p>.</span><span class=nx>mutex</span><span class=p>.</span><span class=nf>Unlock</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nx>mc</span><span class=p>.</span><span class=nx>closed</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=优雅地关闭通道的办法 class=headerLink><a href=#%e4%bc%98%e9%9b%85%e5%9c%b0%e5%85%b3%e9%97%ad%e9%80%9a%e9%81%93%e7%9a%84%e5%8a%9e%e6%b3%95 class=header-mark></a>优雅地关闭通道的办法</h2><h3 id=m接收者---1发送者 class=headerLink><a href=#m%e6%8e%a5%e6%94%b6%e8%80%85---1%e5%8f%91%e9%80%81%e8%80%85 class=header-mark></a>M接收者 - 1发送者</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=hl><span class=lnt>20
+</span></span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>rand</span><span class=p>.</span><span class=nf>Seed</span><span class=p>(</span><span class=nx>time</span><span class=p>.</span><span class=nf>Now</span><span class=p>().</span><span class=nf>UnixNano</span><span class=p>())</span> <span class=c1>// Go 1.20之前需要
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>log</span><span class=p>.</span><span class=nf>SetFlags</span><span class=p>(</span><span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=kd>const</span> <span class=nx>Max</span> <span class=p>=</span> <span class=mi>100000</span>
+</span></span><span class=line><span class=cl>	<span class=kd>const</span> <span class=nx>NumReceivers</span> <span class=p>=</span> <span class=mi>100</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=nx>wgReceivers</span> <span class=o>:=</span> <span class=nx>sync</span><span class=p>.</span><span class=nx>WaitGroup</span><span class=p>{}</span>
+</span></span><span class=line><span class=cl>	<span class=nx>wgReceivers</span><span class=p>.</span><span class=nf>Add</span><span class=p>(</span><span class=nx>NumReceivers</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>dataCh</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>int</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// 发送者
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>go</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>for</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=k>if</span> <span class=nx>value</span> <span class=o>:=</span> <span class=nx>rand</span><span class=p>.</span><span class=nf>Intn</span><span class=p>(</span><span class=nx>Max</span><span class=p>);</span> <span class=nx>value</span> <span class=o>==</span> <span class=mi>0</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=c1>// 此唯一的发送者可以安全地关闭此数据通道。
+</span></span></span><span class="line hl"><span class=cl><span class=c1></span>				<span class=nb>close</span><span class=p>(</span><span class=nx>dataCh</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>				<span class=k>return</span>
+</span></span><span class=line><span class=cl>			<span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=nx>dataCh</span> <span class=o>&lt;-</span> <span class=nx>value</span>
+</span></span><span class=line><span class=cl>			<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// 接收者
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>NumReceivers</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>go</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=k>defer</span> <span class=nx>wgReceivers</span><span class=p>.</span><span class=nf>Done</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>			<span class=c1>// 接收数据直到通道dataCh已关闭
+</span></span></span><span class=line><span class=cl><span class=c1></span>			<span class=c1>// 并且dataCh的缓冲队列已空。
+</span></span></span><span class=line><span class=cl><span class=c1></span>			<span class=k>for</span> <span class=nx>value</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>dataCh</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=nx>log</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>value</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>			<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=p>}()</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=nx>wgReceivers</span><span class=p>.</span><span class=nf>Wait</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=变种1-通过k第三方协程来关闭通道 class=headerLink><a href=#%e5%8f%98%e7%a7%8d1-%e9%80%9a%e8%bf%87k%e7%ac%ac%e4%b8%89%e6%96%b9%e5%8d%8f%e7%a8%8b%e6%9d%a5%e5%85%b3%e9%97%ad%e9%80%9a%e9%81%93 class=header-mark></a>变种1. 通过K第三方协程来关闭通道</h4><p>可能由多个第三方协程中的任意一个协程来通知关闭 dataCh 通道</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>rand</span><span class=p>.</span><span class=nf>Seed</span><span class=p>(</span><span class=nx>time</span><span class=p>.</span><span class=nf>Now</span><span class=p>().</span><span class=nf>UnixNano</span><span class=p>())</span> <span class=c1>// Go 1.20之前需要
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>log</span><span class=p>.</span><span class=nf>SetFlags</span><span class=p>(</span><span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=kd>const</span> <span class=nx>Max</span> <span class=p>=</span> <span class=mi>100000</span>
+</span></span><span class=line><span class=cl>	<span class=kd>const</span> <span class=nx>NumReceivers</span> <span class=p>=</span> <span class=mi>100</span>
+</span></span><span class=line><span class=cl>	<span class=kd>const</span> <span class=nx>NumThirdParties</span> <span class=p>=</span> <span class=mi>15</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=nx>wgReceivers</span> <span class=o>:=</span> <span class=nx>sync</span><span class=p>.</span><span class=nx>WaitGroup</span><span class=p>{}</span>
+</span></span><span class=line><span class=cl>	<span class=nx>wgReceivers</span><span class=p>.</span><span class=nf>Add</span><span class=p>(</span><span class=nx>NumReceivers</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>dataCh</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>int</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nx>closing</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kd>struct</span><span class=p>{})</span> <span class=c1>// 信号通道
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>closed</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kd>struct</span><span class=p>{})</span>
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	<span class=c1>// 此stop函数可以被安全地多次调用。
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>stop</span> <span class=o>:=</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>select</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>case</span> <span class=nx>closing</span><span class=o>&lt;-</span><span class=kd>struct</span><span class=p>{}{}:</span>
+</span></span><span class=line><span class=cl>			<span class=o>&lt;-</span><span class=nx>closed</span>
+</span></span><span class=line><span class=cl>		<span class=k>case</span> <span class=o>&lt;-</span><span class=nx>closed</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	
+</span></span><span class=line><span class=cl>	<span class=c1>// 一些第三方协程
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>NumThirdParties</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>go</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nx>r</span> <span class=o>:=</span> <span class=mi>1</span> <span class=o>+</span> <span class=nx>rand</span><span class=p>.</span><span class=nf>Intn</span><span class=p>(</span><span class=mi>3</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>			<span class=nx>time</span><span class=p>.</span><span class=nf>Sleep</span><span class=p>(</span><span class=nx>time</span><span class=p>.</span><span class=nf>Duration</span><span class=p>(</span><span class=nx>r</span><span class=p>)</span> <span class=o>*</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Second</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>			<span class=nf>stop</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>		<span class=p>}()</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// 发送者
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>go</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>defer</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nb>close</span><span class=p>(</span><span class=nx>closed</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>			<span class=nb>close</span><span class=p>(</span><span class=nx>dataCh</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=p>}()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>		<span class=k>for</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=k>select</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=k>case</span> <span class=o>&lt;-</span><span class=nx>closing</span><span class=p>:</span> <span class=k>return</span>
+</span></span><span class=line><span class=cl>			<span class=k>default</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>			<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>			<span class=k>select</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=k>case</span> <span class=o>&lt;-</span><span class=nx>closing</span><span class=p>:</span> <span class=k>return</span>
+</span></span><span class=line><span class=cl>			<span class=k>case</span> <span class=nx>dataCh</span> <span class=o>&lt;-</span> <span class=nx>rand</span><span class=p>.</span><span class=nf>Intn</span><span class=p>(</span><span class=nx>Max</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>			<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// 接收者
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>NumReceivers</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>go</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=k>defer</span> <span class=nx>wgReceivers</span><span class=p>.</span><span class=nf>Done</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>			<span class=k>for</span> <span class=nx>value</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>dataCh</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=nx>log</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>value</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>			<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=p>}()</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=nx>wgReceivers</span><span class=p>.</span><span class=nf>Wait</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>代码片段解析：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// 此stop函数可以被安全地多次调用。
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>stop</span> <span class=o>:=</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>select</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>case</span> <span class=nx>closing</span><span class=o>&lt;-</span><span class=kd>struct</span><span class=p>{}{}:</span>
+</span></span><span class=line><span class=cl>		<span class=o>&lt;-</span><span class=nx>closed</span>
+</span></span><span class=line><span class=cl>	<span class=k>case</span> <span class=o>&lt;-</span><span class=nx>closed</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>当调用 stop 方法的时候，会执行：</p><ul><li><p>向 closing 通道发送开始关闭的通知，如果发送成功，就等待 closed 通道的关闭，表示协程已经退出</p></li><li><p>如果发送失败，说明 closing 已经关闭，直接从 closed 通道接收一个值</p></li><li><p><code>closing ch</code> ：第三方协程用来通知发送方关闭通道</p></li><li><p><code>closed ch</code>：发送方用来通知第三方协程通道已经关闭</p></li></ul><h3 id=1接收者---n发送者 class=headerLink><a href=#1%e6%8e%a5%e6%94%b6%e8%80%85---n%e5%8f%91%e9%80%81%e8%80%85 class=header-mark></a>1接收者 - N发送者</h3><p>新建一个用来通知发送者别再发送数据的通道，这个通道的发送者是这个场景下的接收者</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=hl><span class=lnt>54
+</span></span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>rand</span><span class=p>.</span><span class=nf>Seed</span><span class=p>(</span><span class=nx>time</span><span class=p>.</span><span class=nf>Now</span><span class=p>().</span><span class=nf>UnixNano</span><span class=p>())</span> <span class=c1>// Go 1.20之前需要
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>log</span><span class=p>.</span><span class=nf>SetFlags</span><span class=p>(</span><span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=kd>const</span> <span class=nx>Max</span> <span class=p>=</span> <span class=mi>100000</span>
+</span></span><span class=line><span class=cl>	<span class=kd>const</span> <span class=nx>NumSenders</span> <span class=p>=</span> <span class=mi>1000</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=nx>wgReceivers</span> <span class=o>:=</span> <span class=nx>sync</span><span class=p>.</span><span class=nx>WaitGroup</span><span class=p>{}</span>
+</span></span><span class=line><span class=cl>	<span class=nx>wgReceivers</span><span class=p>.</span><span class=nf>Add</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>dataCh</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>int</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nx>stopCh</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kd>struct</span><span class=p>{})</span>
+</span></span><span class=line><span class=cl>		<span class=c1>// stopCh是一个额外的信号通道。它的
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=c1>// 发送者为dataCh数据通道的接收者。
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=c1>// 它的接收者为dataCh数据通道的发送者。
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>	<span class=c1>// 发送者
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>NumSenders</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>go</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=k>for</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=c1>// 这里的第一个尝试接收用来让此发送者
+</span></span></span><span class=line><span class=cl><span class=c1></span>				<span class=c1>// 协程尽早地退出。对于这个特定的例子，
+</span></span></span><span class=line><span class=cl><span class=c1></span>				<span class=c1>// 此select代码块并非必需。
+</span></span></span><span class=line><span class=cl><span class=c1></span>				<span class=k>select</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=k>case</span> <span class=o>&lt;-</span> <span class=nx>stopCh</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>					<span class=k>return</span>
+</span></span><span class=line><span class=cl>				<span class=k>default</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>				<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>				<span class=c1>// 即使stopCh已经关闭，此第二个select
+</span></span></span><span class=line><span class=cl><span class=c1></span>				<span class=c1>// 代码块中的第一个分支仍很有可能在若干个
+</span></span></span><span class=line><span class=cl><span class=c1></span>				<span class=c1>// 循环步内依然不会被选中。如果这是不可接受
+</span></span></span><span class=line><span class=cl><span class=c1></span>				<span class=c1>// 的，则上面的第一个select代码块是必需的。
+</span></span></span><span class=line><span class=cl><span class=c1></span>				<span class=k>select</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=k>case</span> <span class=o>&lt;-</span> <span class=nx>stopCh</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>					<span class=k>return</span>
+</span></span><span class=line><span class=cl>				<span class=k>case</span> <span class=nx>dataCh</span> <span class=o>&lt;-</span> <span class=nx>rand</span><span class=p>.</span><span class=nf>Intn</span><span class=p>(</span><span class=nx>Max</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>				<span class=p>}</span>
+</span></span><span class=line><span class=cl>			<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=p>}()</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// 接收者
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>go</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>defer</span> <span class=nx>wgReceivers</span><span class=p>.</span><span class=nf>Done</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>		<span class=k>for</span> <span class=nx>value</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>dataCh</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=k>if</span> <span class=nx>value</span> <span class=o>==</span> <span class=nx>Max</span><span class=o>-</span><span class=mi>1</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=c1>// 此唯一的接收者同时也是stopCh通道的
+</span></span></span><span class=line><span class=cl><span class=c1></span>				<span class=c1>// 唯一发送者。尽管它不能安全地关闭dataCh数
+</span></span></span><span class=line><span class=cl><span class=c1></span>				<span class=c1>// 据通道，但它可以安全地关闭stopCh通道。
+</span></span></span><span class="line hl"><span class=cl><span class=c1></span>				<span class=nb>close</span><span class=p>(</span><span class=nx>stopCh</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>				<span class=k>return</span>
+</span></span><span class=line><span class=cl>			<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>			<span class=nx>log</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>value</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>wgReceivers</span><span class=p>.</span><span class=nf>Wait</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>这个例子中有两个通道</p><ul><li><code>stopCh</code>：通过接收者来关闭</li><li><code>dataCh</code>：用来传输数据的通道，这个通道<code>并没有关闭</code>，但是通过 stopCh 通道的关闭，使用 dataCh 通道的协程都将退出，那么这个通道<code>最终会被垃圾回收</code>，这也正是优雅性的体现（不关闭一个通道也实现了停用一个通道，没遵守通道关闭原则，也没违背？）</li></ul><h3 id=m接收者---n发送者 class=headerLink><a href=#m%e6%8e%a5%e6%94%b6%e8%80%85---n%e5%8f%91%e9%80%81%e8%80%85 class=header-mark></a>M接收者 - N发送者</h3><p>引入一个<code>调解协程</code>，让其关闭一个额外的信号通道，来通知所有的接收者和发送者结束工作</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>rand</span><span class=p>.</span><span class=nf>Seed</span><span class=p>(</span><span class=nx>time</span><span class=p>.</span><span class=nf>Now</span><span class=p>().</span><span class=nf>UnixNano</span><span class=p>())</span> <span class=c1>// Go 1.20之前需要
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>log</span><span class=p>.</span><span class=nf>SetFlags</span><span class=p>(</span><span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=kd>const</span> <span class=nx>Max</span> <span class=p>=</span> <span class=mi>100000</span>
+</span></span><span class=line><span class=cl>	<span class=kd>const</span> <span class=nx>NumReceivers</span> <span class=p>=</span> <span class=mi>10</span>
+</span></span><span class=line><span class=cl>	<span class=kd>const</span> <span class=nx>NumSenders</span> <span class=p>=</span> <span class=mi>1000</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=nx>wgReceivers</span> <span class=o>:=</span> <span class=nx>sync</span><span class=p>.</span><span class=nx>WaitGroup</span><span class=p>{}</span>
+</span></span><span class=line><span class=cl>	<span class=nx>wgReceivers</span><span class=p>.</span><span class=nf>Add</span><span class=p>(</span><span class=nx>NumReceivers</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>dataCh</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>int</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nx>stopCh</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kd>struct</span><span class=p>{})</span>
+</span></span><span class=line><span class=cl>		<span class=c1>// stopCh是一个额外的信号通道。它的发送
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=c1>// 者为中间调解者。它的接收者为dataCh
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=c1>// 数据通道的所有的发送者和接收者。
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>toStop</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>string</span><span class=p>,</span> <span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=c1>// toStop是一个用来通知中间调解者让其
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=c1>// 关闭信号通道stopCh的第二个信号通道。
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=c1>// 此第二个信号通道的发送者为dataCh数据
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=c1>// 通道的所有的发送者和接收者，它的接收者
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=c1>// 为中间调解者。它必须为一个缓冲通道。
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>	<span class=kd>var</span> <span class=nx>stoppedBy</span> <span class=kt>string</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// 中间调解者
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>go</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>stoppedBy</span> <span class=p>=</span> <span class=o>&lt;-</span><span class=nx>toStop</span>
+</span></span><span class=line><span class=cl>		<span class=nb>close</span><span class=p>(</span><span class=nx>stopCh</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// 发送者
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>NumSenders</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>go</span> <span class=kd>func</span><span class=p>(</span><span class=nx>id</span> <span class=kt>string</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=k>for</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=nx>value</span> <span class=o>:=</span> <span class=nx>rand</span><span class=p>.</span><span class=nf>Intn</span><span class=p>(</span><span class=nx>Max</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>				<span class=k>if</span> <span class=nx>value</span> <span class=o>==</span> <span class=mi>0</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>					<span class=c1>// 为了防止阻塞，这里使用了一个尝试
+</span></span></span><span class=line><span class=cl><span class=c1></span>					<span class=c1>// 发送操作来向中间调解者发送信号。
+</span></span></span><span class=line><span class=cl><span class=c1></span>					<span class=k>select</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>					<span class=k>case</span> <span class=nx>toStop</span> <span class=o>&lt;-</span> <span class=s>&#34;发送者#&#34;</span> <span class=o>+</span> <span class=nx>id</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>					<span class=k>default</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>					<span class=p>}</span>
+</span></span><span class=line><span class=cl>					<span class=k>return</span>
+</span></span><span class=line><span class=cl>				<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>				<span class=c1>// 此处的尝试接收操作是为了让此发送协程尽早
+</span></span></span><span class=line><span class=cl><span class=c1></span>				<span class=c1>// 退出。标准编译器对尝试接收和尝试发送做了
+</span></span></span><span class=line><span class=cl><span class=c1></span>				<span class=c1>// 特殊的优化，因而它们的速度很快。
+</span></span></span><span class=line><span class=cl><span class=c1></span>				<span class=k>select</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=k>case</span> <span class=o>&lt;-</span> <span class=nx>stopCh</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>					<span class=k>return</span>
+</span></span><span class=line><span class=cl>				<span class=k>default</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>				<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>				<span class=c1>// 即使stopCh已关闭，如果这个select代码块
+</span></span></span><span class=line><span class=cl><span class=c1></span>				<span class=c1>// 中第二个分支的发送操作是非阻塞的，则第一个
+</span></span></span><span class=line><span class=cl><span class=c1></span>				<span class=c1>// 分支仍很有可能在若干个循环步内依然不会被选
+</span></span></span><span class=line><span class=cl><span class=c1></span>				<span class=c1>// 中。如果这是不可接受的，则上面的第一个尝试
+</span></span></span><span class=line><span class=cl><span class=c1></span>				<span class=c1>// 接收操作代码块是必需的。
+</span></span></span><span class=line><span class=cl><span class=c1></span>				<span class=k>select</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=k>case</span> <span class=o>&lt;-</span> <span class=nx>stopCh</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>					<span class=k>return</span>
+</span></span><span class=line><span class=cl>				<span class=k>case</span> <span class=nx>dataCh</span> <span class=o>&lt;-</span> <span class=nx>value</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>				<span class=p>}</span>
+</span></span><span class=line><span class=cl>			<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=p>}(</span><span class=nx>strconv</span><span class=p>.</span><span class=nf>Itoa</span><span class=p>(</span><span class=nx>i</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// 接收者
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>NumReceivers</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>go</span> <span class=kd>func</span><span class=p>(</span><span class=nx>id</span> <span class=kt>string</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=k>defer</span> <span class=nx>wgReceivers</span><span class=p>.</span><span class=nf>Done</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>			<span class=k>for</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=c1>// 和发送者协程一样，此处的尝试接收操作是为了
+</span></span></span><span class=line><span class=cl><span class=c1></span>				<span class=c1>// 让此接收协程尽早退出。
+</span></span></span><span class=line><span class=cl><span class=c1></span>				<span class=k>select</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=k>case</span> <span class=o>&lt;-</span> <span class=nx>stopCh</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>					<span class=k>return</span>
+</span></span><span class=line><span class=cl>				<span class=k>default</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>				<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>				<span class=c1>// 即使stopCh已关闭，如果这个select代码块
+</span></span></span><span class=line><span class=cl><span class=c1></span>				<span class=c1>// 中第二个分支的接收操作是非阻塞的，则第一个
+</span></span></span><span class=line><span class=cl><span class=c1></span>				<span class=c1>// 分支仍很有可能在若干个循环步内依然不会被选
+</span></span></span><span class=line><span class=cl><span class=c1></span>				<span class=c1>// 中。如果这是不可接受的，则上面尝试接收操作
+</span></span></span><span class=line><span class=cl><span class=c1></span>				<span class=c1>// 代码块是必需的。
+</span></span></span><span class=line><span class=cl><span class=c1></span>				<span class=k>select</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=k>case</span> <span class=o>&lt;-</span> <span class=nx>stopCh</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>					<span class=k>return</span>
+</span></span><span class=line><span class=cl>				<span class=k>case</span> <span class=nx>value</span> <span class=o>:=</span> <span class=o>&lt;-</span><span class=nx>dataCh</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>					<span class=k>if</span> <span class=nx>value</span> <span class=o>==</span> <span class=nx>Max</span><span class=o>-</span><span class=mi>1</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>						<span class=c1>// 为了防止阻塞，这里使用了一个尝试
+</span></span></span><span class=line><span class=cl><span class=c1></span>						<span class=c1>// 发送操作来向中间调解者发送信号。
+</span></span></span><span class=line><span class=cl><span class=c1></span>						<span class=k>select</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>						<span class=k>case</span> <span class=nx>toStop</span> <span class=o>&lt;-</span> <span class=s>&#34;接收者#&#34;</span> <span class=o>+</span> <span class=nx>id</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>						<span class=k>default</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>						<span class=p>}</span>
+</span></span><span class=line><span class=cl>						<span class=k>return</span>
+</span></span><span class=line><span class=cl>					<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>					<span class=nx>log</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>value</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>				<span class=p>}</span>
+</span></span><span class=line><span class=cl>			<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=p>}(</span><span class=nx>strconv</span><span class=p>.</span><span class=nf>Itoa</span><span class=p>(</span><span class=nx>i</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// ...
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>wgReceivers</span><span class=p>.</span><span class=nf>Wait</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>	<span class=nx>log</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;被&#34;</span> <span class=o>+</span> <span class=nx>stoppedBy</span> <span class=o>+</span> <span class=s>&#34;终止了&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>注意：</p><ul><li><code>toStop</code> 的容量必须为 1。如果它的容量为 0，那么如果调解协程未就绪，就已经有某个协程往 toStop 发送信号，这个信号会被忽略掉</li></ul><h3 id=n发送者的变种datach-必须被关闭 class=headerLink><a href=#n%e5%8f%91%e9%80%81%e8%80%85%e7%9a%84%e5%8f%98%e7%a7%8ddatach-%e5%bf%85%e9%a1%bb%e8%a2%ab%e5%85%b3%e9%97%ad class=header-mark></a>N发送者的变种：dataCh 必须被关闭</h3><p>// todo</p><hr><ol><li><a href=https://gfw.go101.org/article/channel-closing.html target=_blank rel="noopener noreferrer">https://gfw.go101.org/article/channel-closing.html</a></li></ol></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2023-05-21</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md><span><a class=link-to-mardown href=/202305211358-%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E5%9C%B0%E5%85%B3%E9%97%AD%E4%B8%80%E4%B8%AA%E9%80%9A%E9%81%93/index.md target=_blank rel="noopener noreferrer">阅读原始文档</a></span></div><div class=post-info-share><span><a href=# title="分享到 Twitter" data-sharer=twitter data-url=http://www.honghuiqiang.com/202305211358-%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E5%9C%B0%E5%85%B3%E9%97%AD%E4%B8%80%E4%B8%AA%E9%80%9A%E9%81%93/ data-title=如何优雅地关闭一个通道 data-via=xxxx><i class="fab fa-twitter fa-fw"></i></a><a href=# title="分享到 Facebook" data-sharer=facebook data-url=http://www.honghuiqiang.com/202305211358-%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E5%9C%B0%E5%85%B3%E9%97%AD%E4%B8%80%E4%B8%AA%E9%80%9A%E9%81%93/><i class="fab fa-facebook-square fa-fw"></i></a><a href=# title="分享到 WhatsApp" data-sharer=whatsapp data-url=http://www.honghuiqiang.com/202305211358-%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E5%9C%B0%E5%85%B3%E9%97%AD%E4%B8%80%E4%B8%AA%E9%80%9A%E9%81%93/ data-title=如何优雅地关闭一个通道 data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href=# title="分享到 Line" data-sharer=line data-url=http://www.honghuiqiang.com/202305211358-%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E5%9C%B0%E5%85%B3%E9%97%AD%E4%B8%80%E4%B8%AA%E9%80%9A%E9%81%93/ data-title=如何优雅地关闭一个通道><i data-svg-src=/lib/simple-icons/icons/line.min.svg></i></a><a href=# title="分享到 微博" data-sharer=weibo data-url=http://www.honghuiqiang.com/202305211358-%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E5%9C%B0%E5%85%B3%E9%97%AD%E4%B8%80%E4%B8%AA%E9%80%9A%E9%81%93/ data-title=如何优雅地关闭一个通道><i class="fab fa-weibo fa-fw"></i></a><a href=# title="分享到 Myspace" data-sharer=myspace data-url=http://www.honghuiqiang.com/202305211358-%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E5%9C%B0%E5%85%B3%E9%97%AD%E4%B8%80%E4%B8%AA%E9%80%9A%E9%81%93/ data-title=如何优雅地关闭一个通道 data-description><i data-svg-src=/lib/simple-icons/icons/myspace.min.svg></i></a><a href=# title="分享到 Blogger" data-sharer=blogger data-url=http://www.honghuiqiang.com/202305211358-%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E5%9C%B0%E5%85%B3%E9%97%AD%E4%B8%80%E4%B8%AA%E9%80%9A%E9%81%93/ data-title=如何优雅地关闭一个通道 data-description><i class="fab fa-blogger fa-fw"></i></a><a href=# title="分享到 Evernote" data-sharer=evernote data-url=http://www.honghuiqiang.com/202305211358-%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E5%9C%B0%E5%85%B3%E9%97%AD%E4%B8%80%E4%B8%AA%E9%80%9A%E9%81%93/ data-title=如何优雅地关闭一个通道><i class="fab fa-evernote fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/2023-05-21/ class=prev rel=prev title="2023-05-21 日记录"><i class="fas fa-angle-left fa-fw"></i>2023-05-21 日记录</a></div></div><div id=comments><div id=giscus></div><noscript>Please enable JavaScript to view the comments powered by <a href=https://giscus.app/>giscus</a>.</noscript></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>由 <a href=https://gohugo.io/ target=_blank rel="noopener noreferrer" title="Hugo 0.105.0">Hugo</a> 强力驱动&nbsp;|&nbsp;托管在 <a title="Github Pages" href=https://docs.github.com/en/pages/ target=_blank rel="noopener noreffer">GitHub Pages</a> 上&nbsp;|&nbsp;主题 - <a href=https://github.com/HEIGE-PCloud/DoIt target=_blank rel="noopener noreferrer" title="DoIt 0.3.0"><i class="far fa-edit fa-fw"></i> DoIt</a></div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2023</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank rel="noopener noreferrer">索隆不喝酒</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class=footer-line></div><div class=footer-line></div></div></footer></div><div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><div class=assets><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/katex/copy-tex.min.css><noscript><link rel=stylesheet href=/lib/katex/copy-tex.min.css></noscript><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:10},comment:{giscus:{darkTheme:"dark",dataCategory:"General",dataCategoryId:"DIC_kwDOJh9DwM4CWbTD",dataEmitMetadata:"0",dataInputPosition:"bottom",dataLang:"zh-CN",dataMapping:"pathname",dataReactionsEnabled:"1",dataRepo:"904566722/hugo-giscus-common-system",dataRepoId:"R_kgDOJh9DwA",dataStrict:"0",lightTheme:"light"}},data:{"desktop-header-typeit":"HHQ Records","mobile-header-typeit":"HHQ Records"},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,fuseIndexURL:"/index.json",highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,type:"fuse",useExtendedSearch:!1},sharerjs:!0,table:{sort:!0},typeit:{cursorChar:"|",cursorSpeed:1e3,data:{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},duration:-1,speed:100}}</script><script type=text/javascript src=/js/giscus.min.js defer></script><script type=text/javascript src=/lib/tablesort/tablesort.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/typeit/typeit.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><script type=text/javascript src=/js/theme.min.js defer></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-GKX5LKE0Z8",{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=G-GKX5LKE0Z8" async></script><script>var _hmt=_hmt||[];(function(){var e,t=document.createElement("script");t.src="https://hm.baidu.com/hm.js?7ee459037c39c6123ff6e6252a7c5301",e=document.getElementsByTagName("script")[0],e.parentNode.insertBefore(t,e)})()</script></div></body></html>

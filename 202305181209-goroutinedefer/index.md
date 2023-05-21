@@ -134,6 +134,8 @@ The third line.
 关于估值的问题：
 - 延迟调用的**实参**在`注册的时候估值`
 - **匿名函数**体内的表达式实在函数`被执行的时候估值`
+
+例子1
 ```go
 func main() {
 	func() {
@@ -162,7 +164,43 @@ b: 3
 b: 3
 ```
 
+例子2
+```go
+func main() {
+	var f = func () {
+		fmt.Println(false)
+	}
+	defer f()
+	f = func () {
+		fmt.Println(true)
+	}
+}
+```
+上面函数的输出是：false
 
+例子3
+```go
+type T int  
+  
+func (t T) M(n int) T {  
+   print(n)  
+   return t  
+}  
+  
+func main() {  
+   var t T  
+   // t.M(1)是方法调用M(2)的属主实参，因此它  
+   // 将在M(2)调用被推入延迟调用队列时被估值。  
+   defer t.M(1).M(2) //1  
+   t.M(3).M(4) // 34  
+   // 最后执行 defer x.M(2)}
+```
+上面这段代码的输出结果：
+```go
+1342
+```
+
+- defer 一个 nil 函数值，将产生恐慌
 
 ----
 1. https://gfw.go101.org/article/control-flows-more.html

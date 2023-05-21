@@ -1,0 +1,1034 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>通道使用场景 - 学习记录</title><meta name=Description content="这是我的网站描述"><meta property="og:title" content="通道使用场景"><meta property="og:description" content><meta property="og:type" content="article"><meta property="og:url" content="http://www.honghuiqiang.com/202305201718-%E9%80%9A%E9%81%93%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/"><meta property="og:image" content="http://www.honghuiqiang.com/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-05-20T17:05:00+08:00"><meta property="article:modified_time" content="2023-05-20T17:05:00+08:00"><meta property="og:site_name" content="学习记录"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="http://www.honghuiqiang.com/logo.png"><meta name=twitter:title content="通道使用场景"><meta name=twitter:description content><meta name=application-name content="HHQ Records"><meta name=apple-mobile-web-app-title content="HHQ Records"><meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel=icon href=/images/zoro.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=canonical href=http://www.honghuiqiang.com/202305201718-%E9%80%9A%E9%81%93%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/><link rel=prev href=http://www.honghuiqiang.com/202305201308-%E5%8F%8D%E5%B0%84-reflect/><link rel=next href=http://www.honghuiqiang.com/2023-05-21/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/color.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/fontawesome-free/all.min.css><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/animate/animate.min.css><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"通道使用场景","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http:\/\/www.honghuiqiang.com\/202305201718-%E9%80%9A%E9%81%93%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF\/"},"genre":"posts","wordcount":5753,"url":"http:\/\/www.honghuiqiang.com\/202305201718-%E9%80%9A%E9%81%93%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF\/","datePublished":"2023-05-20T17:05:00+08:00","dateModified":"2023-05-20T17:05:00+08:00","publisher":{"@type":"Organization","name":""},"authors":[{"@type":"Person","name":"索隆不喝酒"}],"description":""}</script><script src=//instant.page/5.1.1 defer type=module integrity=sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq></script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(e){document.body.setAttribute("theme",e),document.documentElement.style.setProperty("color-scheme",e==="light"?"light":"dark"),window.theme=e,window.isDark=window.theme!=="light"}function saveTheme(e){window.localStorage&&localStorage.setItem("theme",e)}function getMeta(e){const t=document.getElementsByTagName("meta");for(let n=0;n<t.length;n++)if(t[n].getAttribute("name")===e)return t[n];return""}if(window.localStorage&&localStorage.getItem("theme")){let e=localStorage.getItem("theme");e==="light"||e==="dark"||e==="black"?setTheme(e):setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}else"dark"==="light"||"dark"==="dark"||"dark"==="black"?(setTheme("dark"),saveTheme("dark")):(saveTheme("auto"),setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));let metaColors={light:"#f8f8f8",dark:"#252627",black:"#000000"};getMeta("theme-color").content=metaColors[document.body.getAttribute("theme")],window.switchThemeEventSet=new Set</script><div id=back-to-top></div><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=学习记录><span id=desktop-header-typeit class=typeit></span></a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>文章 </a><a class=menu-item href=/categories/>分类 </a><a class=menu-item href=/series/>系列 </a><a class=menu-item href=/tags/>标签 </a><span class="menu-item delimiter"></span><a href=# class="menu-item language" title=选择语言>简体中文<i class="fas fa-chevron-right fa-fw"></i>
+<select class=language-select title="Select Language" id=language-select-desktop onchange="location=this.value"><option value=/202305201718-%E9%80%9A%E9%81%93%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/ selected>简体中文</option></select>
+</a><span class="menu-item search" id=search-desktop><input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=# class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=# class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span>
+</span><a href=# class="menu-item theme-select" title=切换主题><i class="fas fa-adjust fa-fw"></i>
+<select class=color-theme-select id=theme-select-desktop title=切换主题><option value=light>浅色</option><option value=dark>深色</option><option value=black>黑色</option><option value=auto>跟随系统</option></select></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=学习记录><span id=mobile-header-typeit class=typeit></span></a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=# class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=# class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=# class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/ title>文章</a><a class=menu-item href=/categories/ title>分类</a><a class=menu-item href=/series/ title>系列</a><a class=menu-item href=/tags/ title>标签</a><a href=# class="menu-item theme-select" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+<select class=color-theme-select id=theme-select-mobile title=切换主题><option value=light>浅色</option><option value=dark>深色</option><option value=black>黑色</option><option value=auto>跟随系统</option></select>
+</a><a href=# class=menu-item title=选择语言>简体中文<i class="fas fa-chevron-right fa-fw"></i>
+<select class=language-select title="Select Language" onchange="location=this.value"><option value=/202305201718-%E9%80%9A%E9%81%93%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/ selected>简体中文</option></select></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto><nav id=TableOfContents><ul><li><a href=#采用最快回应>采用最快回应</a></li><li><a href=#单对单通知>单对单通知</a></li><li><a href=#多对单单对多通知较少使用的代码片段>多对单、单对多通知（较少使用的代码片段）</a></li><li><a href=#通过关闭通道来实现群发通知>通过关闭通道来实现群发通知</a></li><li><a href=#定时通知>定时通知</a></li><li><a href=#将通道用做互斥锁mutex>将通道用做互斥锁（mutex）</a></li><li><a href=#将通道用作计数信号量counting-semaphore-常用来限制最大并发数>将通道用作计数信号量（counting semaphore）-常用来限制最大并发数</a></li><li><a href=#对话乒乓>对话（乒乓）</a></li><li><a href=#使当前协程永久阻塞>使当前协程永久阻塞</a></li><li><a href=#尝试发送和尝试接收>尝试发送和尝试接收</a></li><li><a href=#峰值限制>峰值限制</a></li><li><a href=#超时机制>超时机制</a></li><li><a href=#定时器ticker>定时器（ticker）</a></li><li><a href=#速率限制rate-limiting>速率限制（rate limiting）</a></li><li><a href=#todo>todo</a></li></ul></nav></div></div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">通道使用场景</h1><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=http://www.honghuiqiang.com/authors/%E7%B4%A2%E9%9A%86%E4%B8%8D%E5%96%9D%E9%85%92>索隆不喝酒</a></span>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%81%B5%E6%84%9F%E6%96%87%E7%8C%AE%E7%AC%94%E8%AE%B0%E9%9D%9E%E6%B0%B8%E4%B9%85%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>灵感、文献笔记（非永久笔记）</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2023-05-20>2023-05-20</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2023-05-20>2023-05-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 5753 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 12 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#采用最快回应>采用最快回应</a></li><li><a href=#单对单通知>单对单通知</a></li><li><a href=#多对单单对多通知较少使用的代码片段>多对单、单对多通知（较少使用的代码片段）</a></li><li><a href=#通过关闭通道来实现群发通知>通过关闭通道来实现群发通知</a></li><li><a href=#定时通知>定时通知</a></li><li><a href=#将通道用做互斥锁mutex>将通道用做互斥锁（mutex）</a></li><li><a href=#将通道用作计数信号量counting-semaphore-常用来限制最大并发数>将通道用作计数信号量（counting semaphore）-常用来限制最大并发数</a></li><li><a href=#对话乒乓>对话（乒乓）</a></li><li><a href=#使当前协程永久阻塞>使当前协程永久阻塞</a></li><li><a href=#尝试发送和尝试接收>尝试发送和尝试接收</a></li><li><a href=#峰值限制>峰值限制</a></li><li><a href=#超时机制>超时机制</a></li><li><a href=#定时器ticker>定时器（ticker）</a></li><li><a href=#速率限制rate-limiting>速率限制（rate limiting）</a></li><li><a href=#todo>todo</a></li></ul></nav></div></div><div class=content id=content><h1 id=heading class=headerLink><a href=#heading class=header-mark></a></h1><h2 id=采用最快回应 class=headerLink><a href=#%e9%87%87%e7%94%a8%e6%9c%80%e5%bf%ab%e5%9b%9e%e5%ba%94 class=header-mark></a>采用最快回应</h2><p>从多个数据源获取数据，只需采用最快的回应，并舍弃其他较慢的回应</p><p>N 个数据源，防止被舍弃的其他协程永久阻塞，通道应该是一个容量至少为 N-1 的缓冲通道</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>source</span><span class=p>(</span><span class=nx>c</span> <span class=kd>chan</span><span class=o>&lt;-</span> <span class=kt>int32</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>ra</span><span class=p>,</span> <span class=nx>rb</span> <span class=o>:=</span> <span class=nx>rand</span><span class=p>.</span><span class=nf>Int31</span><span class=p>(),</span> <span class=nx>rand</span><span class=p>.</span><span class=nf>Intn</span><span class=p>(</span><span class=mi>3</span><span class=p>)</span> <span class=o>+</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// 睡眠1秒/2秒/3秒
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>time</span><span class=p>.</span><span class=nf>Sleep</span><span class=p>(</span><span class=nx>time</span><span class=p>.</span><span class=nf>Duration</span><span class=p>(</span><span class=nx>rb</span><span class=p>)</span> <span class=o>*</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Second</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nx>c</span> <span class=o>&lt;-</span> <span class=nx>ra</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>rand</span><span class=p>.</span><span class=nf>Seed</span><span class=p>(</span><span class=nx>time</span><span class=p>.</span><span class=nf>Now</span><span class=p>().</span><span class=nf>UnixNano</span><span class=p>())</span> <span class=c1>// Go 1.20之前需要
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>	<span class=nx>startTime</span> <span class=o>:=</span> <span class=nx>time</span><span class=p>.</span><span class=nf>Now</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>	<span class=nx>c</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>int32</span><span class=p>,</span> <span class=mi>5</span><span class=p>)</span> <span class=c1>// 必须用一个缓冲通道
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nb>cap</span><span class=p>(</span><span class=nx>c</span><span class=p>);</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>go</span> <span class=nf>source</span><span class=p>(</span><span class=nx>c</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=nx>rnd</span> <span class=o>:=</span> <span class=o>&lt;-</span> <span class=nx>c</span> <span class=c1>// 只有第一个回应被使用了
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>time</span><span class=p>.</span><span class=nf>Since</span><span class=p>(</span><span class=nx>startTime</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>rnd</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>阅读了下面的 <code>尝试机制</code> 后，最快回应还可以这么来实现：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=hl><span class=lnt> 5
+</span></span><span class=hl><span class=lnt> 6
+</span></span><span class=hl><span class=lnt> 7
+</span></span><span class=hl><span class=lnt> 8
+</span></span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>source</span><span class=p>(</span><span class=nx>c</span> <span class=kd>chan</span><span class=o>&lt;-</span> <span class=kt>int32</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>ra</span><span class=p>,</span> <span class=nx>rb</span> <span class=o>:=</span> <span class=nx>rand</span><span class=p>.</span><span class=nf>Int31</span><span class=p>(),</span> <span class=nx>rand</span><span class=p>.</span><span class=nf>Intn</span><span class=p>(</span><span class=mi>3</span><span class=p>)</span><span class=o>+</span><span class=mi>1</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// 休眠1秒/2秒/3秒
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>time</span><span class=p>.</span><span class=nf>Sleep</span><span class=p>(</span><span class=nx>time</span><span class=p>.</span><span class=nf>Duration</span><span class=p>(</span><span class=nx>rb</span><span class=p>)</span> <span class=o>*</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Second</span><span class=p>)</span>
+</span></span><span class="line hl"><span class=cl>	<span class=k>select</span> <span class=p>{</span>
+</span></span><span class="line hl"><span class=cl>	<span class=k>case</span> <span class=nx>c</span> <span class=o>&lt;-</span> <span class=nx>ra</span><span class=p>:</span>
+</span></span><span class="line hl"><span class=cl>	<span class=k>default</span><span class=p>:</span>
+</span></span><span class="line hl"><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>rand</span><span class=p>.</span><span class=nf>Seed</span><span class=p>(</span><span class=nx>time</span><span class=p>.</span><span class=nf>Now</span><span class=p>().</span><span class=nf>UnixNano</span><span class=p>())</span> <span class=c1>// Go 1.20之前需要
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>	<span class=nx>c</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>int32</span><span class=p>,</span> <span class=mi>1</span><span class=p>)</span> <span class=c1>// 此通道容量必须至少为1
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=mi>5</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>go</span> <span class=nf>source</span><span class=p>(</span><span class=nx>c</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=nx>rnd</span> <span class=o>:=</span> <span class=o>&lt;-</span><span class=nx>c</span> <span class=c1>// 只采用第一个成功发送的回应数据
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>rnd</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=单对单通知 class=headerLink><a href=#%e5%8d%95%e5%af%b9%e5%8d%95%e9%80%9a%e7%9f%a5 class=header-mark></a>单对单通知</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>values</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>([]</span><span class=kt>byte</span><span class=p>,</span> <span class=mi>32</span> <span class=o>*</span> <span class=mi>1024</span> <span class=o>*</span> <span class=mi>1024</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>err</span> <span class=o>:=</span> <span class=nx>rand</span><span class=p>.</span><span class=nf>Read</span><span class=p>(</span><span class=nx>values</span><span class=p>);</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=nx>os</span><span class=p>.</span><span class=nf>Exit</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=nx>done</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kd>struct</span><span class=p>{})</span> <span class=c1>// 也可以是缓冲的
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>	<span class=c1>// 排序协程
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>go</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>sort</span><span class=p>.</span><span class=nf>Slice</span><span class=p>(</span><span class=nx>values</span><span class=p>,</span> <span class=kd>func</span><span class=p>(</span><span class=nx>i</span><span class=p>,</span> <span class=nx>j</span> <span class=kt>int</span><span class=p>)</span> <span class=kt>bool</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=k>return</span> <span class=nx>values</span><span class=p>[</span><span class=nx>i</span><span class=p>]</span> <span class=p>&lt;</span> <span class=nx>values</span><span class=p>[</span><span class=nx>j</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>		<span class=p>})</span>
+</span></span><span class=line><span class=cl>		<span class=nx>done</span> <span class=o>&lt;-</span> <span class=kd>struct</span><span class=p>{}{}</span> <span class=c1>// 通知排序已完成
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=p>}()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// 并发地做一些其它事情...
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>	<span class=o>&lt;-</span> <span class=nx>done</span> <span class=c1>// 等待通知
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>values</span><span class=p>[</span><span class=mi>0</span><span class=p>],</span> <span class=nx>values</span><span class=p>[</span><span class=nb>len</span><span class=p>(</span><span class=nx>values</span><span class=p>)</span><span class=o>-</span><span class=mi>1</span><span class=p>])</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>通过 <code>done &lt;- struct{}{}</code> 往 done 通道发送数据来表示协程的计算已经完成（也可以使用接收的方式来通知，不过使用的比较少）</p><h2 id=多对单单对多通知较少使用的代码片段 class=headerLink><a href=#%e5%a4%9a%e5%af%b9%e5%8d%95%e5%8d%95%e5%af%b9%e5%a4%9a%e9%80%9a%e7%9f%a5%e8%be%83%e5%b0%91%e4%bd%bf%e7%94%a8%e7%9a%84%e4%bb%a3%e7%a0%81%e7%89%87%e6%ae%b5 class=header-mark></a>多对单、单对多通知（较少使用的代码片段）</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>T</span> <span class=p>=</span> <span class=kd>struct</span><span class=p>{}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>worker</span><span class=p>(</span><span class=nx>id</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>ready</span> <span class=o>&lt;-</span><span class=kd>chan</span> <span class=nx>T</span><span class=p>,</span> <span class=nx>done</span> <span class=kd>chan</span><span class=o>&lt;-</span> <span class=nx>T</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=o>&lt;-</span><span class=nx>ready</span> <span class=c1>// 阻塞在此，等待通知
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>log</span><span class=p>.</span><span class=nf>Print</span><span class=p>(</span><span class=s>&#34;Worker#&#34;</span><span class=p>,</span> <span class=nx>id</span><span class=p>,</span> <span class=s>&#34;开始工作&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// 模拟一个工作负载。
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>time</span><span class=p>.</span><span class=nf>Sleep</span><span class=p>(</span><span class=nx>time</span><span class=p>.</span><span class=nx>Second</span> <span class=o>*</span> <span class=nx>time</span><span class=p>.</span><span class=nf>Duration</span><span class=p>(</span><span class=nx>id</span><span class=o>+</span><span class=mi>1</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>	<span class=nx>log</span><span class=p>.</span><span class=nf>Print</span><span class=p>(</span><span class=s>&#34;Worker#&#34;</span><span class=p>,</span> <span class=nx>id</span><span class=p>,</span> <span class=s>&#34;工作完成&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nx>done</span> <span class=o>&lt;-</span> <span class=nx>T</span><span class=p>{}</span> <span class=c1>// 通知主协程（N-to-1）
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>log</span><span class=p>.</span><span class=nf>SetFlags</span><span class=p>(</span><span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=nx>ready</span><span class=p>,</span> <span class=nx>done</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=nx>T</span><span class=p>),</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=nx>T</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>go</span> <span class=nf>worker</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=nx>ready</span><span class=p>,</span> <span class=nx>done</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>go</span> <span class=nf>worker</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=nx>ready</span><span class=p>,</span> <span class=nx>done</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>go</span> <span class=nf>worker</span><span class=p>(</span><span class=mi>2</span><span class=p>,</span> <span class=nx>ready</span><span class=p>,</span> <span class=nx>done</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// 模拟一个初始化过程
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>time</span><span class=p>.</span><span class=nf>Sleep</span><span class=p>(</span><span class=nx>time</span><span class=p>.</span><span class=nx>Second</span> <span class=o>*</span> <span class=mi>3</span> <span class=o>/</span> <span class=mi>2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// 单对多通知
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>ready</span> <span class=o>&lt;-</span> <span class=nx>T</span><span class=p>{};</span> <span class=nx>ready</span> <span class=o>&lt;-</span> <span class=nx>T</span><span class=p>{};</span> <span class=nx>ready</span> <span class=o>&lt;-</span> <span class=nx>T</span><span class=p>{}</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// 等待被多对单通知
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=o>&lt;-</span><span class=nx>done</span><span class=p>;</span> <span class=o>&lt;-</span><span class=nx>done</span><span class=p>;</span> <span class=o>&lt;-</span><span class=nx>done</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>不过多对单的通知通常会使用 <code>sync.WaitGroup</code> 来实现</p><h2 id=通过关闭通道来实现群发通知 class=headerLink><a href=#%e9%80%9a%e8%bf%87%e5%85%b3%e9%97%ad%e9%80%9a%e9%81%93%e6%9d%a5%e5%ae%9e%e7%8e%b0%e7%be%a4%e5%8f%91%e9%80%9a%e7%9f%a5 class=header-mark></a>通过关闭通道来实现群发通知</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=o>...</span>
+</span></span><span class=line><span class=cl>	<span class=nb>close</span><span class=p>(</span><span class=nx>ready</span><span class=p>)</span> <span class=c1>// 群发通知
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=o>...</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=定时通知 class=headerLink><a href=#%e5%ae%9a%e6%97%b6%e9%80%9a%e7%9f%a5 class=header-mark></a>定时通知</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>AfterDuration</span><span class=p>(</span><span class=nx>d</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Duration</span><span class=p>)</span> <span class=o>&lt;-</span> <span class=kd>chan</span> <span class=kd>struct</span><span class=p>{}</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>c</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kd>struct</span><span class=p>{},</span> <span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>go</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>time</span><span class=p>.</span><span class=nf>Sleep</span><span class=p>(</span><span class=nx>d</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=nx>c</span> <span class=o>&lt;-</span> <span class=kd>struct</span><span class=p>{}{}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}()</span>
+</span></span><span class=line><span class=cl>	<span class=k>return</span> <span class=nx>c</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;Hi!&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=o>&lt;-</span> <span class=nf>AfterDuration</span><span class=p>(</span><span class=nx>time</span><span class=p>.</span><span class=nx>Second</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;Hello!&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=o>&lt;-</span> <span class=nf>AfterDuration</span><span class=p>(</span><span class=nx>time</span><span class=p>.</span><span class=nx>Second</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;Bye!&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>也就是 <code>&lt;-time.After()</code></p><h2 id=将通道用做互斥锁mutex class=headerLink><a href=#%e5%b0%86%e9%80%9a%e9%81%93%e7%94%a8%e5%81%9a%e4%ba%92%e6%96%a5%e9%94%81mutex class=header-mark></a>将通道用做互斥锁（mutex）</h2><ul><li>效率不如 <code>sync</code> 来得高</li><li>通道的容量必须为 1</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=hl><span class=lnt> 3
+</span></span><span class=lnt> 4
+</span><span class=hl><span class=lnt> 5
+</span></span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=hl><span class=lnt>12
+</span></span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>increase1000</span><span class=p>(</span><span class=nx>v</span> <span class=o>*</span><span class=kt>int</span><span class=p>,</span> <span class=nx>mutex</span> <span class=kd>chan</span> <span class=kd>struct</span><span class=p>{})</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=mi>1000</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>  
+</span></span><span class="line hl"><span class=cl>      <span class=nx>mutex</span> <span class=o>&lt;-</span> <span class=kd>struct</span><span class=p>{}{}</span> <span class=c1>// 往通道发送数据获取锁，由于通道的容量为 1，其他协程发送数据的时候进入阻塞状态  
+</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=o>*</span><span class=nx>v</span><span class=o>++</span>  
+</span></span><span class="line hl"><span class=cl>      <span class=o>&lt;-</span> <span class=nx>mutex</span>   <span class=c1>// 释放锁  
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>wg</span><span class=p>.</span><span class=nf>Done</span><span class=p>()</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>cnt</span> <span class=o>:=</span> <span class=mi>0</span>  
+</span></span><span class="line hl"><span class=cl>   <span class=nx>mutex</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kd>struct</span><span class=p>{},</span> <span class=mi>1</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>   <span class=nx>wg</span><span class=p>.</span><span class=nf>Add</span><span class=p>(</span><span class=mi>2</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=k>go</span> <span class=nf>increase1000</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>cnt</span><span class=p>,</span> <span class=nx>mutex</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=k>go</span> <span class=nf>increase1000</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>cnt</span><span class=p>,</span> <span class=nx>mutex</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>   <span class=nx>wg</span><span class=p>.</span><span class=nf>Wait</span><span class=p>()</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>cnt</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=将通道用作计数信号量counting-semaphore-常用来限制最大并发数 class=headerLink><a href=#%e5%b0%86%e9%80%9a%e9%81%93%e7%94%a8%e4%bd%9c%e8%ae%a1%e6%95%b0%e4%bf%a1%e5%8f%b7%e9%87%8fcounting-semaphore-%e5%b8%b8%e7%94%a8%e6%9d%a5%e9%99%90%e5%88%b6%e6%9c%80%e5%a4%a7%e5%b9%b6%e5%8f%91%e6%95%b0 class=header-mark></a>将通道用作计数信号量（counting semaphore）-常用来限制最大并发数</h2><ul><li>计数信号量可被视为多主锁</li><li>假设缓冲通道的容量为 <code>N</code>，那么可以将这个通道看作<code>同一时刻最多可以有 N 个主人</code>的锁</li></ul><p>举例一个场景：一个酒吧，拥有 10 个座位，同一时刻最多只能有 10 个人在喝酒，其他人只能等待</p><p><strong>代码实现：</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=hl><span class=lnt> 3
+</span></span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=hl><span class=lnt> 7
+</span></span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=hl><span class=lnt>14
+</span></span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>cusEvent</span><span class=p>(</span><span class=nx>cusNo</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>seat</span> <span class=kd>chan</span> <span class=kt>int</span><span class=p>)</span>  <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>log</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;顾客#&#34;</span><span class=p>,</span> <span class=nx>cusNo</span><span class=p>,</span> <span class=s>&#34;进入酒吧&#34;</span><span class=p>)</span>  
+</span></span><span class="line hl"><span class=cl>   <span class=nx>chairNo</span> <span class=o>:=</span> <span class=o>&lt;-</span> <span class=nx>seat</span> <span class=c1>// 获得一张椅子  
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=nx>log</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;\t\t顾客#&#34;</span><span class=p>,</span> <span class=nx>cusNo</span><span class=p>,</span> <span class=s>&#34;在&#34;</span><span class=p>,</span> <span class=nx>chairNo</span><span class=p>,</span> <span class=s>&#34;号椅子上开始喝酒&#34;</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>time</span><span class=p>.</span><span class=nf>Sleep</span><span class=p>(</span><span class=nx>time</span><span class=p>.</span><span class=nx>Second</span> <span class=o>*</span> <span class=mi>1</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>log</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;\t\t\t\t顾客#&#34;</span><span class=p>,</span> <span class=nx>cusNo</span><span class=p>,</span> <span class=s>&#34;离开了酒吧&#34;</span><span class=p>)</span>  
+</span></span><span class="line hl"><span class=cl>   <span class=nx>seat</span> <span class=o>&lt;-</span> <span class=nx>chairNo</span>    <span class=c1>// 顾客动作完成，让出椅子  
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=nx>wg</span><span class=p>.</span><span class=nf>Done</span><span class=p>()</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=c1>// 创建一个 10 容量的缓冲通道，用来代表 10 个座位  
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=c1>// 通道的值 -- 椅子的编号  
+</span></span></span><span class="line hl"><span class=cl><span class=c1></span>   <span class=nx>seat</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>int</span><span class=p>,</span> <span class=mi>10</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nb>cap</span><span class=p>(</span><span class=nx>seat</span><span class=p>);</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>seat</span> <span class=o>&lt;-</span> <span class=nx>i</span> <span class=o>+</span> <span class=mi>1</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>   <span class=c1>// 模拟有 50 个客人进入酒吧  
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=mi>30</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>wg</span><span class=p>.</span><span class=nf>Add</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>      <span class=k>go</span> <span class=nf>cusEvent</span><span class=p>(</span><span class=nx>i</span><span class=o>+</span><span class=mi>1</span><span class=p>,</span> <span class=nx>seat</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>wg</span><span class=p>.</span><span class=nf>Wait</span><span class=p>()</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>上面程序的输出可能为：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span><span class=lnt>72
+</span><span class=lnt>73
+</span><span class=lnt>74
+</span><span class=lnt>75
+</span><span class=lnt>76
+</span><span class=lnt>77
+</span><span class=lnt>78
+</span><span class=lnt>79
+</span><span class=lnt>80
+</span><span class=lnt>81
+</span><span class=lnt>82
+</span><span class=lnt>83
+</span><span class=lnt>84
+</span><span class=lnt>85
+</span><span class=lnt>86
+</span><span class=lnt>87
+</span><span class=lnt>88
+</span><span class=lnt>89
+</span><span class=lnt>90
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-txt data-lang=txt><span class=line><span class=cl>2023/05/20 18:25:32 顾客# 1 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 		顾客# 1 在 1 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 顾客# 2 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 顾客# 11 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 		顾客# 11 在 3 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 顾客# 4 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 		顾客# 4 在 4 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 顾客# 5 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 		顾客# 5 在 5 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 顾客# 6 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 		顾客# 6 在 6 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 顾客# 7 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 		顾客# 7 在 7 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 顾客# 8 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 		顾客# 8 在 8 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 顾客# 9 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 		顾客# 9 在 9 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 顾客# 10 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 		顾客# 10 在 10 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 顾客# 17 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 顾客# 12 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 顾客# 13 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 顾客# 14 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 顾客# 15 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 顾客# 16 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 顾客# 20 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 顾客# 18 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 顾客# 19 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 顾客# 22 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 顾客# 21 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 顾客# 24 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 顾客# 23 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 顾客# 25 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 顾客# 26 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 顾客# 3 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 顾客# 27 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 顾客# 28 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 顾客# 29 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 顾客# 30 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:32 		顾客# 2 在 2 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/20 18:25:33 				顾客# 2 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:33 				顾客# 11 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:33 				顾客# 9 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:33 				顾客# 7 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:33 				顾客# 8 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:33 				顾客# 10 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:33 				顾客# 4 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:33 		顾客# 17 在 2 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/20 18:25:33 				顾客# 5 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:33 				顾客# 1 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:33 		顾客# 19 在 1 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/20 18:25:33 		顾客# 15 在 8 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/20 18:25:33 		顾客# 14 在 7 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/20 18:25:33 				顾客# 6 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:33 		顾客# 13 在 9 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/20 18:25:33 		顾客# 12 在 3 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/20 18:25:33 		顾客# 16 在 10 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/20 18:25:33 		顾客# 20 在 4 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/20 18:25:33 		顾客# 18 在 5 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/20 18:25:33 		顾客# 22 在 6 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/20 18:25:34 				顾客# 19 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:34 				顾客# 20 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:34 				顾客# 13 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:34 		顾客# 23 在 9 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/20 18:25:34 		顾客# 21 在 1 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/20 18:25:34 				顾客# 15 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:34 		顾客# 25 在 8 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/20 18:25:34 				顾客# 22 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:34 		顾客# 26 在 6 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/20 18:25:34 				顾客# 18 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:34 		顾客# 3 在 5 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/20 18:25:34 				顾客# 17 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:34 		顾客# 27 在 2 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/20 18:25:34 				顾客# 14 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:34 				顾客# 12 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:34 				顾客# 16 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:34 		顾客# 29 在 3 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/20 18:25:34 		顾客# 30 在 10 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/20 18:25:34 		顾客# 28 在 7 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/20 18:25:34 		顾客# 24 在 4 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/20 18:25:35 				顾客# 25 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:35 				顾客# 30 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:35 				顾客# 21 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:35 				顾客# 24 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:35 				顾客# 26 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:35 				顾客# 28 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:35 				顾客# 23 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:35 				顾客# 3 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:35 				顾客# 27 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/20 18:25:35 				顾客# 29 离开了酒吧
+</span></span></code></pre></td></tr></table></div></div><p>上面的程序达到了预期的效果：同一时刻最多只有 10 位客人在喝酒</p><p>但是通过输出就可以直观的看出来，如果等待的人过多，<strong><code>(问题1)会创建出非常多的协程一直在阻塞状态</code></strong></p><p><strong>改进代码1：</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=hl><span class=lnt> 3
+</span></span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=hl><span class=lnt>22
+</span></span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>cusEvent</span><span class=p>(</span><span class=nx>cusNo</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>seat</span> <span class=kd>chan</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>chairNo</span> <span class=kt>int</span><span class=p>)</span>  <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>log</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;顾客#&#34;</span><span class=p>,</span> <span class=nx>cusNo</span><span class=p>,</span> <span class=s>&#34;进入酒吧&#34;</span><span class=p>)</span>  
+</span></span><span class="line hl"><span class=cl>   <span class=c1>//chairNo := &lt;- seat   // 获得一张椅子  
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=nx>log</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;\t\t顾客#&#34;</span><span class=p>,</span> <span class=nx>cusNo</span><span class=p>,</span> <span class=s>&#34;在&#34;</span><span class=p>,</span> <span class=nx>chairNo</span><span class=p>,</span> <span class=s>&#34;号椅子上开始喝酒&#34;</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>time</span><span class=p>.</span><span class=nf>Sleep</span><span class=p>(</span><span class=nx>time</span><span class=p>.</span><span class=nx>Second</span> <span class=o>*</span> <span class=mi>1</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>log</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;\t\t\t\t顾客#&#34;</span><span class=p>,</span> <span class=nx>cusNo</span><span class=p>,</span> <span class=s>&#34;离开了酒吧&#34;</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>seat</span> <span class=o>&lt;-</span> <span class=nx>chairNo</span>    <span class=c1>// 顾客动作完成，让出椅子  
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=nx>wg</span><span class=p>.</span><span class=nf>Done</span><span class=p>()</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=c1>// 创建一个 10 容量的缓冲通道，用来代表 10 个座位  
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=c1>// 通道的值 -- 椅子的编号  
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=nx>seat</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>int</span><span class=p>,</span> <span class=mi>10</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nb>cap</span><span class=p>(</span><span class=nx>seat</span><span class=p>);</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>seat</span> <span class=o>&lt;-</span> <span class=nx>i</span> <span class=o>+</span> <span class=mi>1</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>   <span class=c1>// 模拟有 50 个客人进入酒吧  
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=mi>30</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>wg</span><span class=p>.</span><span class=nf>Add</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>  
+</span></span><span class="line hl"><span class=cl>      <span class=nx>charNo</span> <span class=o>:=</span> <span class=o>&lt;-</span> <span class=nx>seat</span>  
+</span></span><span class=line><span class=cl>      <span class=k>go</span> <span class=nf>cusEvent</span><span class=p>(</span><span class=nx>i</span><span class=o>+</span><span class=mi>1</span><span class=p>,</span> <span class=nx>seat</span><span class=p>,</span> <span class=nx>charNo</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>wg</span><span class=p>.</span><span class=nf>Wait</span><span class=p>()</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>上面的修改解决了会有非常多的协程在等待的问题，因为只有获得通道数据后，才会创建协程，以下是上面代码的一个输出情况：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span><span class=lnt>72
+</span><span class=lnt>73
+</span><span class=lnt>74
+</span><span class=lnt>75
+</span><span class=lnt>76
+</span><span class=lnt>77
+</span><span class=lnt>78
+</span><span class=lnt>79
+</span><span class=lnt>80
+</span><span class=lnt>81
+</span><span class=lnt>82
+</span><span class=lnt>83
+</span><span class=lnt>84
+</span><span class=lnt>85
+</span><span class=lnt>86
+</span><span class=lnt>87
+</span><span class=lnt>88
+</span><span class=lnt>89
+</span><span class=lnt>90
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-txt data-lang=txt><span class=line><span class=cl>2023/05/21 12:13:19 顾客# 1 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:19 		顾客# 1 在 1 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/21 12:13:19 顾客# 10 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:19 顾客# 5 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:19 		顾客# 5 在 5 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/21 12:13:19 顾客# 6 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:19 		顾客# 6 在 6 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/21 12:13:19 顾客# 7 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:19 顾客# 8 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:19 		顾客# 7 在 7 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/21 12:13:19 顾客# 9 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:19 		顾客# 9 在 9 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/21 12:13:19 		顾客# 8 在 8 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/21 12:13:19 顾客# 3 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:19 		顾客# 3 在 3 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/21 12:13:19 顾客# 2 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:19 顾客# 4 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:19 		顾客# 4 在 4 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/21 12:13:19 		顾客# 10 在 10 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/21 12:13:19 		顾客# 2 在 2 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/21 12:13:20 				顾客# 10 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:20 				顾客# 7 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:20 				顾客# 4 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:20 				顾客# 5 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:20 				顾客# 9 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:20 				顾客# 1 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:20 				顾客# 8 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:20 				顾客# 2 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:20 顾客# 12 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:20 		顾客# 12 在 7 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/21 12:13:20 				顾客# 3 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:20 				顾客# 6 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:20 顾客# 11 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:20 顾客# 16 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:20 顾客# 17 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:20 顾客# 19 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:20 		顾客# 19 在 3 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/21 12:13:20 		顾客# 16 在 1 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/21 12:13:20 顾客# 14 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:20 		顾客# 14 在 5 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/21 12:13:20 顾客# 15 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:20 		顾客# 15 在 9 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/21 12:13:20 		顾客# 11 在 10 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/21 12:13:20 顾客# 20 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:20 		顾客# 20 在 6 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/21 12:13:20 顾客# 18 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:20 		顾客# 18 在 2 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/21 12:13:20 顾客# 13 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:20 		顾客# 13 在 4 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/21 12:13:20 		顾客# 17 在 8 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/21 12:13:21 				顾客# 16 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:21 				顾客# 19 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:21 顾客# 21 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:21 				顾客# 12 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:21 				顾客# 17 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:21 顾客# 23 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:21 顾客# 24 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:21 		顾客# 24 在 8 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/21 12:13:21 		顾客# 23 在 7 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/21 12:13:21 		顾客# 21 在 1 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/21 12:13:21 顾客# 22 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:21 		顾客# 22 在 3 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/21 12:13:21 				顾客# 20 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:21 				顾客# 11 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:21 				顾客# 15 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:21 				顾客# 14 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:21 				顾客# 18 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:21 顾客# 29 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:21 顾客# 25 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:21 顾客# 26 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:21 		顾客# 25 在 6 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/21 12:13:21 		顾客# 26 在 10 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/21 12:13:21 顾客# 27 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:21 		顾客# 27 在 9 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/21 12:13:21 		顾客# 29 在 2 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/21 12:13:21 				顾客# 13 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:21 顾客# 30 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:21 		顾客# 30 在 4 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/21 12:13:21 顾客# 28 进入酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:21 		顾客# 28 在 5 号椅子上开始喝酒
+</span></span><span class=line><span class=cl>2023/05/21 12:13:22 				顾客# 28 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:22 				顾客# 30 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:22 				顾客# 23 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:22 				顾客# 25 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:22 				顾客# 27 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:22 				顾客# 24 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:22 				顾客# 22 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:22 				顾客# 29 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:22 				顾客# 26 离开了酒吧
+</span></span><span class=line><span class=cl>2023/05/21 12:13:22 				顾客# 21 离开了酒吧
+</span></span></code></pre></td></tr></table></div></div><p>上面经过改良，减少了大量协程在阻塞的问题，但是也存在另一个问题，因为我们是针对顾客来创建协程，如果有相当多的顾客，那么就 <strong><code>(问题2)会有很多的协程被创建并摧毁</code></strong> ，那么就可以有另外一种改进方法：因为椅子的数量是固定的，可以针对椅子来创建协程，，如果有顾客进来，通知椅子，如果有空闲的椅子，就进行服务</p><p><strong>改进代码2：</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=hl><span class=lnt> 2
+</span></span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=hl><span class=lnt>21
+</span></span><span class=hl><span class=lnt>22
+</span></span><span class=hl><span class=lnt>23
+</span></span><span class=hl><span class=lnt>24
+</span></span><span class=hl><span class=lnt>25
+</span></span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>chairEvent</span><span class=p>(</span><span class=nx>cus</span> <span class=kd>chan</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>seat</span> <span class=kd>chan</span> <span class=kt>int</span><span class=p>)</span>  <span class=p>{</span>  
+</span></span><span class="line hl"><span class=cl>   <span class=k>for</span> <span class=nx>c</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>cus</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>log</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;顾客#&#34;</span><span class=p>,</span> <span class=nx>c</span><span class=p>,</span> <span class=s>&#34;进入酒吧&#34;</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>chairNo</span> <span class=o>:=</span> <span class=o>&lt;-</span> <span class=nx>seat</span> <span class=c1>// 获得一张椅子  
+</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=nx>log</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;\t\t顾客#&#34;</span><span class=p>,</span> <span class=nx>c</span><span class=p>,</span> <span class=s>&#34;在&#34;</span><span class=p>,</span> <span class=nx>chairNo</span><span class=p>,</span> <span class=s>&#34;号椅子上开始喝酒&#34;</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>time</span><span class=p>.</span><span class=nf>Sleep</span><span class=p>(</span><span class=nx>time</span><span class=p>.</span><span class=nx>Second</span> <span class=o>*</span> <span class=mi>1</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>log</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;\t\t\t\t顾客#&#34;</span><span class=p>,</span> <span class=nx>c</span><span class=p>,</span> <span class=s>&#34;离开了酒吧&#34;</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>seat</span> <span class=o>&lt;-</span> <span class=nx>chairNo</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>wg</span><span class=p>.</span><span class=nf>Done</span><span class=p>()</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=c1>// 创建一个 10 容量的缓冲通道，用来代表 10 个座位  
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=c1>// 通道的值 -- 椅子的编号  
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=nx>seat</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>int</span><span class=p>,</span> <span class=mi>10</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nb>cap</span><span class=p>(</span><span class=nx>seat</span><span class=p>);</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>seat</span> <span class=o>&lt;-</span> <span class=nx>i</span> <span class=o>+</span> <span class=mi>1</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class="line hl"><span class=cl>   <span class=nx>cus</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>int</span><span class=p>)</span>  
+</span></span><span class="line hl"><span class=cl>   <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nb>cap</span><span class=p>(</span><span class=nx>seat</span><span class=p>);</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>  
+</span></span><span class="line hl"><span class=cl>      <span class=nx>wg</span><span class=p>.</span><span class=nf>Add</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>  
+</span></span><span class="line hl"><span class=cl>      <span class=k>go</span> <span class=nf>chairEvent</span><span class=p>(</span><span class=nx>cus</span><span class=p>,</span> <span class=nx>seat</span><span class=p>)</span>  
+</span></span><span class="line hl"><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>   <span class=nx>time</span><span class=p>.</span><span class=nf>Sleep</span><span class=p>(</span><span class=mi>3</span> <span class=o>*</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Second</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>log</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;等待顾客进入...&#34;</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>   <span class=c1>// 模拟有 30 个客人进入酒吧  
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=mi>30</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>cus</span> <span class=o>&lt;-</span> <span class=nx>i</span><span class=o>+</span><span class=mi>1</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>   <span class=nb>close</span><span class=p>(</span><span class=nx>cus</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>wg</span><span class=p>.</span><span class=nf>Wait</span><span class=p>()</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>在程序的<code>整个生命周期，只会有 10 个协程被创建</code></p><h2 id=对话乒乓 class=headerLink><a href=#%e5%af%b9%e8%af%9d%e4%b9%92%e4%b9%93 class=header-mark></a>对话（乒乓）</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Ball</span> <span class=kt>uint32</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>play</span><span class=p>(</span><span class=nx>playerName</span> <span class=kt>string</span><span class=p>,</span> <span class=nx>table</span> <span class=kd>chan</span> <span class=nx>Ball</span><span class=p>)</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=kd>var</span> <span class=nx>lastValue</span> <span class=nx>Ball</span> <span class=p>=</span> <span class=mi>1</span>  
+</span></span><span class=line><span class=cl>   <span class=k>defer</span> <span class=nx>wg</span><span class=p>.</span><span class=nf>Done</span><span class=p>()</span>  
+</span></span><span class=line><span class=cl>   <span class=k>for</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>ball</span> <span class=o>:=</span> <span class=o>&lt;-</span><span class=nx>table</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>playerName</span><span class=p>,</span> <span class=nx>ball</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>ball</span> <span class=o>+=</span> <span class=nx>lastValue</span>  
+</span></span><span class=line><span class=cl>      <span class=k>if</span> <span class=nx>ball</span> <span class=p>&lt;</span> <span class=nx>lastValue</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>         <span class=nx>os</span><span class=p>.</span><span class=nf>Exit</span><span class=p>(</span><span class=mi>0</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>      <span class=p>}</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>lastValue</span> <span class=p>=</span> <span class=nx>ball</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>table</span> <span class=o>&lt;-</span> <span class=nx>ball</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>time</span><span class=p>.</span><span class=nf>Sleep</span><span class=p>(</span><span class=mi>100</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>table</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=nx>Ball</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>wg</span><span class=p>.</span><span class=nf>Add</span><span class=p>(</span><span class=mi>2</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=k>go</span> <span class=nf>play</span><span class=p>(</span><span class=s>&#34;player1&#34;</span><span class=p>,</span> <span class=nx>table</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=k>go</span> <span class=nf>play</span><span class=p>(</span><span class=s>&#34;player2&#34;</span><span class=p>,</span> <span class=nx>table</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>   <span class=nx>table</span> <span class=o>&lt;-</span> <span class=mi>1</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>wg</span><span class=p>.</span><span class=nf>Wait</span><span class=p>()</span>  
+</span></span><span class=line><span class=cl>   <span class=nb>close</span><span class=p>(</span><span class=nx>table</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=使当前协程永久阻塞 class=headerLink><a href=#%e4%bd%bf%e5%bd%93%e5%89%8d%e5%8d%8f%e7%a8%8b%e6%b0%b8%e4%b9%85%e9%98%bb%e5%a1%9e class=header-mark></a>使当前协程永久阻塞</h2><p>使用 <code>select{}</code> 来实现是最简单的</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>go</span> <span class=o>...</span>
+</span></span><span class=line><span class=cl>	<span class=k>go</span> <span class=o>...</span>
+</span></span><span class=line><span class=cl>	<span class=k>select</span><span class=p>{}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=尝试发送和尝试接收 class=headerLink><a href=#%e5%b0%9d%e8%af%95%e5%8f%91%e9%80%81%e5%92%8c%e5%b0%9d%e8%af%95%e6%8e%a5%e6%94%b6 class=header-mark></a>尝试发送和尝试接收</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=kd>type</span> <span class=nx>Book</span> <span class=kd>struct</span><span class=p>{</span><span class=nx>id</span> <span class=kt>int</span><span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=nx>bookshelf</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=nx>Book</span><span class=p>,</span> <span class=mi>3</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nb>cap</span><span class=p>(</span><span class=nx>bookshelf</span><span class=p>)</span> <span class=o>*</span> <span class=mi>2</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>select</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>case</span> <span class=nx>bookshelf</span> <span class=o>&lt;-</span> <span class=nx>Book</span><span class=p>{</span><span class=nx>id</span><span class=p>:</span> <span class=nx>i</span><span class=p>}:</span>
+</span></span><span class=line><span class=cl>			<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;成功将书放在书架上&#34;</span><span class=p>,</span> <span class=nx>i</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=k>default</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>			<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;书架已经被占满了&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nb>cap</span><span class=p>(</span><span class=nx>bookshelf</span><span class=p>)</span> <span class=o>*</span> <span class=mi>2</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>select</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>case</span> <span class=nx>book</span> <span class=o>:=</span> <span class=o>&lt;-</span><span class=nx>bookshelf</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>			<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;成功从书架上取下一本书&#34;</span><span class=p>,</span> <span class=nx>book</span><span class=p>.</span><span class=nx>id</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=k>default</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>			<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;书架上已经没有书了&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=峰值限制 class=headerLink><a href=#%e5%b3%b0%e5%80%bc%e9%99%90%e5%88%b6 class=header-mark></a>峰值限制</h2><p>结合前面提到的 <code>通道用作计数信号量</code> 和 <code>通道尝试（发送、接收）</code> ,可以实现峰值限制</p><p>峰值限制的目的是<code>防止过大的并发请求数</code></p><h2 id=超时机制 class=headerLink><a href=#%e8%b6%85%e6%97%b6%e6%9c%ba%e5%88%b6 class=header-mark></a>超时机制</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>requestWithTimeout</span><span class=p>(</span><span class=nx>timeout</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Duration</span><span class=p>)</span> <span class=p>(</span><span class=kt>int</span><span class=p>,</span> <span class=kt>error</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>c</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=kt>int</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>go</span> <span class=nf>doRequest</span><span class=p>(</span><span class=nx>c</span><span class=p>)</span> <span class=c1>// 可能需要超出预期的时长回应
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>	<span class=k>select</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=k>case</span> <span class=nx>data</span> <span class=o>:=</span> <span class=o>&lt;-</span><span class=nx>c</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>		<span class=k>return</span> <span class=nx>data</span><span class=p>,</span> <span class=kc>nil</span>
+</span></span><span class=line><span class=cl>	<span class=k>case</span> <span class=o>&lt;-</span><span class=nx>time</span><span class=p>.</span><span class=nf>After</span><span class=p>(</span><span class=nx>timeout</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>		<span class=k>return</span> <span class=mi>0</span><span class=p>,</span> <span class=nx>errors</span><span class=p>.</span><span class=nf>New</span><span class=p>(</span><span class=s>&#34;超时了！&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=定时器ticker class=headerLink><a href=#%e5%ae%9a%e6%97%b6%e5%99%a8ticker class=header-mark></a>定时器（ticker）</h2><h2 id=速率限制rate-limiting class=headerLink><a href=#%e9%80%9f%e7%8e%87%e9%99%90%e5%88%b6rate-limiting class=header-mark></a>速率限制（rate limiting）</h2><p>通过 <code>峰值限制</code> 和 <code>定时器</code> 配合，实现速率限制，用来限制在一段时间内的资源使用不超标</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// 定义一个 Request 接口
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>Request</span> <span class=kd>interface</span><span class=p>{}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 处理 Request 的函数，将 Request 中的整数打印出来
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=nf>handle</span><span class=p>(</span><span class=nx>r</span> <span class=nx>Request</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>r</span><span class=p>.(</span><span class=kt>int</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 限制处理请求的频率不超过 RateLimitPeriod 时间内处理 RateLimit 个请求
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>const</span> <span class=nx>RateLimitPeriod</span> <span class=p>=</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Minute</span>
+</span></span><span class=line><span class=cl><span class=kd>const</span> <span class=nx>RateLimit</span> <span class=p>=</span> <span class=mi>200</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// 处理请求的函数，传入一个 Request 类型的通道，每次从中取出一个请求处理
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=nf>handleRequests</span><span class=p>(</span><span class=nx>requests</span> <span class=o>&lt;-</span><span class=kd>chan</span> <span class=nx>Request</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// 用一个缓冲为 RateLimit 的时间类型通道作为额度的限制器
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>quotas</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=nx>time</span><span class=p>.</span><span class=nx>Time</span><span class=p>,</span> <span class=nx>RateLimit</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// 在 goroutine 中，每隔一段时间往限额通道中发送一个时间，限制处理请求的速度
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=c1>// 如果通道已满，则丢弃当前时间，让通道继续阻塞，等待下一个可用的时间发送
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>go</span> <span class=kd>func</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>tick</span> <span class=o>:=</span> <span class=nx>time</span><span class=p>.</span><span class=nf>NewTicker</span><span class=p>(</span><span class=nx>RateLimitPeriod</span> <span class=o>/</span> <span class=nx>RateLimit</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=k>defer</span> <span class=nx>tick</span><span class=p>.</span><span class=nf>Stop</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>		<span class=k>for</span> <span class=nx>t</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>tick</span><span class=p>.</span><span class=nx>C</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=k>select</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=k>case</span> <span class=nx>quotas</span> <span class=o>&lt;-</span> <span class=nx>t</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>			<span class=k>default</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>			<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=p>}()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// 循环从 Request 通道中取出请求并处理
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>for</span> <span class=nx>r</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>requests</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=o>&lt;-</span><span class=nx>quotas</span> <span class=c1>// 等待可用的时间进行处理
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=k>go</span> <span class=nf>handle</span><span class=p>(</span><span class=nx>r</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>requests</span> <span class=o>:=</span> <span class=nb>make</span><span class=p>(</span><span class=kd>chan</span> <span class=nx>Request</span><span class=p>)</span> <span class=c1>// 创建一个 Request 类型的无缓冲通道
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>go</span> <span class=nf>handleRequests</span><span class=p>(</span><span class=nx>requests</span><span class=p>)</span>    <span class=c1>// 开启一个 goroutine 处理通道中的请求
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>	<span class=c1>// 循环向通道中发送请求，不断发送，直到程序被手动停止
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>requests</span> <span class=o>&lt;-</span> <span class=nx>i</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// 可以使用time.Sleep来让主进程休眠一段时间，模拟请求的发送
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=todo class=headerLink><a href=#todo class=header-mark></a>todo</h2><hr><ol><li><a href=https://gfw.go101.org/article/channel-use-cases.html target=_blank rel="noopener noreferrer">https://gfw.go101.org/article/channel-use-cases.html</a></li></ol></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2023-05-20</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md><span><a class=link-to-mardown href=/202305201718-%E9%80%9A%E9%81%93%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/index.md target=_blank rel="noopener noreferrer">阅读原始文档</a></span></div><div class=post-info-share><span><a href=# title="分享到 Twitter" data-sharer=twitter data-url=http://www.honghuiqiang.com/202305201718-%E9%80%9A%E9%81%93%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/ data-title=通道使用场景 data-via=xxxx><i class="fab fa-twitter fa-fw"></i></a><a href=# title="分享到 Facebook" data-sharer=facebook data-url=http://www.honghuiqiang.com/202305201718-%E9%80%9A%E9%81%93%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/><i class="fab fa-facebook-square fa-fw"></i></a><a href=# title="分享到 WhatsApp" data-sharer=whatsapp data-url=http://www.honghuiqiang.com/202305201718-%E9%80%9A%E9%81%93%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/ data-title=通道使用场景 data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href=# title="分享到 Line" data-sharer=line data-url=http://www.honghuiqiang.com/202305201718-%E9%80%9A%E9%81%93%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/ data-title=通道使用场景><i data-svg-src=/lib/simple-icons/icons/line.min.svg></i></a><a href=# title="分享到 微博" data-sharer=weibo data-url=http://www.honghuiqiang.com/202305201718-%E9%80%9A%E9%81%93%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/ data-title=通道使用场景><i class="fab fa-weibo fa-fw"></i></a><a href=# title="分享到 Myspace" data-sharer=myspace data-url=http://www.honghuiqiang.com/202305201718-%E9%80%9A%E9%81%93%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/ data-title=通道使用场景 data-description><i data-svg-src=/lib/simple-icons/icons/myspace.min.svg></i></a><a href=# title="分享到 Blogger" data-sharer=blogger data-url=http://www.honghuiqiang.com/202305201718-%E9%80%9A%E9%81%93%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/ data-title=通道使用场景 data-description><i class="fab fa-blogger fa-fw"></i></a><a href=# title="分享到 Evernote" data-sharer=evernote data-url=http://www.honghuiqiang.com/202305201718-%E9%80%9A%E9%81%93%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/ data-title=通道使用场景><i class="fab fa-evernote fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/202305201308-%E5%8F%8D%E5%B0%84-reflect/ class=prev rel=prev title="反射 reflect"><i class="fas fa-angle-left fa-fw"></i>反射 reflect</a>
+<a href=/2023-05-21/ class=next rel=next title="2023-05-21 日记录">2023-05-21 日记录<i class="fas fa-angle-right fa-fw"></i></a></div></div><div id=comments><div id=giscus></div><noscript>Please enable JavaScript to view the comments powered by <a href=https://giscus.app/>giscus</a>.</noscript></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>由 <a href=https://gohugo.io/ target=_blank rel="noopener noreferrer" title="Hugo 0.105.0">Hugo</a> 强力驱动&nbsp;|&nbsp;托管在 <a title="Github Pages" href=https://docs.github.com/en/pages/ target=_blank rel="noopener noreffer">GitHub Pages</a> 上&nbsp;|&nbsp;主题 - <a href=https://github.com/HEIGE-PCloud/DoIt target=_blank rel="noopener noreferrer" title="DoIt 0.3.0"><i class="far fa-edit fa-fw"></i> DoIt</a></div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2023</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank rel="noopener noreferrer">索隆不喝酒</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class=footer-line></div><div class=footer-line></div></div></footer></div><div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><div class=assets><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/katex/copy-tex.min.css><noscript><link rel=stylesheet href=/lib/katex/copy-tex.min.css></noscript><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:10},comment:{giscus:{darkTheme:"dark",dataCategory:"General",dataCategoryId:"DIC_kwDOJh9DwM4CWbTD",dataEmitMetadata:"0",dataInputPosition:"bottom",dataLang:"zh-CN",dataMapping:"pathname",dataReactionsEnabled:"1",dataRepo:"904566722/hugo-giscus-common-system",dataRepoId:"R_kgDOJh9DwA",dataStrict:"0",lightTheme:"light"}},data:{"desktop-header-typeit":"HHQ Records","mobile-header-typeit":"HHQ Records"},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,fuseIndexURL:"/index.json",highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,type:"fuse",useExtendedSearch:!1},sharerjs:!0,table:{sort:!0},typeit:{cursorChar:"|",cursorSpeed:1e3,data:{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},duration:-1,speed:100}}</script><script type=text/javascript src=/js/giscus.min.js defer></script><script type=text/javascript src=/lib/tablesort/tablesort.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/typeit/typeit.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><script type=text/javascript src=/js/theme.min.js defer></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-GKX5LKE0Z8",{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=G-GKX5LKE0Z8" async></script><script>var _hmt=_hmt||[];(function(){var e,t=document.createElement("script");t.src="https://hm.baidu.com/hm.js?7ee459037c39c6123ff6e6252a7c5301",e=document.getElementsByTagName("script")[0],e.parentNode.insertBefore(t,e)})()</script></div></body></html>

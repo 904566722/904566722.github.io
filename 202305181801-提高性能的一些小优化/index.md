@@ -2,8 +2,8 @@
 
 <!--more-->
 #
----
-- `for-range` 副本的问题
+
+## `for-range` 副本的问题
 
 ```go
 func TestForRange()  {  
@@ -16,10 +16,11 @@ func TestForRange()  {
 
 [202305181719 for-range 中的副本拷贝](content/posts/go/golang-why/202305181719%20for-range%20中的副本拷贝.md)
 
----
-- 以下几种情况是不需要深拷贝的
+## 字节切片跟字符串的转换
 
-从**字节切片**到**字符串**
+以下几种情况是不需要做深拷贝的
+
+- 从**字节切片**到**字符串**
 ```go {hl_lines=[5,14]}
 func fc() {
 	// 下面的四个转换都不需要深复制。
@@ -41,7 +42,7 @@ func fd() {
 
 ```
 
-从**字符串**到**字节切片**
+- 从**字符串**到**字节切片**
 ```go {hl_lines=[3]}
 func main() {
 	var str = "world"
@@ -50,3 +51,23 @@ func main() {
 	}
 }
 ```
+
+## 字符串剪切
+
+```go
+func f(s1 string) {
+	s0 = (" " + s1[:50])[1:]
+}
+```
+上面这种方法可能在将来失效，可以使用一种啰嗦一点的方式：
+
+```go
+func f(s1 string) {
+	var b strings.Builder
+	b.Grow(50)
+	b.WriteString(s1[:50])
+	s0 = b.String()
+}
+```
+
+

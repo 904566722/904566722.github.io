@@ -10,7 +10,8 @@
 3. https://draveness.me/
 4. https://golang.design/under-the-hood
 5. https://pkg.go.dev/
-6. https://github.com/golang/go/wiki
+6. [Go wiki](https://github.com/golang/go/wiki)
+7. [awesome go](https://awesome-go.com/)
 
 
 ## book

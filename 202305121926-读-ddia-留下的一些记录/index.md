@@ -3,7 +3,7 @@
 <!--more-->
 #读书记录 
 
-> https://github.com/Vonng/ddia/blob/master/ch1.md
+> [https://github.com/Vonng/ddia](https://github.com/Vonng/ddia)
 
 ---
 

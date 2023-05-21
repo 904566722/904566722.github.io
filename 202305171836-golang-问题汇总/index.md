@@ -2,8 +2,8 @@
 
 <!--more-->
 #
----
-- Go 语言中，结构体中长度为 0 的字段为什么会影响结构体的大小？
+
+## Go 语言中，结构体中长度为 0 的字段为什么会影响结构体的大小？
 
 {{< admonition type=quote title="ans" open=false >}}
 举个例子：
@@ -21,8 +21,8 @@ type A struct {
 假设结构体 A 的尺寸为 4，那么当 b 的字段不为空的时候，访问字段 b 就会访问到 A 对象内存之外的空间，这是不可知的
 {{< /admonition >}}
 
----
-- 赋值是原子操作吗？
+
+## 赋值是原子操作吗？
 
 {{< admonition type=quote title="ans" open=false >}}
 不是。
@@ -39,8 +39,8 @@ b-->|写入|c["内存地址(变量)"]
 
 {{< /admonition >}}
 
----
-- time.Sleep(d) 的状态转换？
+
+## time.Sleep(d) 的状态转换？
 
 {{< admonition type=quote title="and" open=false >}}
 
@@ -59,8 +59,8 @@ stateDiagram-v2
 
 {{< /admonition >}}
 
----
-- 标准库包`math/rand`和`crypto/rand`生成的随机数之间有什么区别？
+
+## 标准库包`math/rand`和`crypto/rand`生成的随机数之间有什么区别？
 
 {{< admonition type=quote title="ans" open=false >}}
 
@@ -74,8 +74,8 @@ stateDiagram-v2
 
 {{< /admonition >}}
 
----
-- Go 语言中，哪些类型是不能比较的？
+
+## Go 语言中，哪些类型是不能比较的？
 
 {{< admonition type=quote tile=example" open=false >}}
 
@@ -87,8 +87,8 @@ Go 语言中，引用类型不能比较，值类型可以比较
 
 {{< /admonition >}}
 
-----
-- 定义可寻址跟不可寻址的出发点是什么
+
+## 定义可寻址跟不可寻址的出发点是什么
 
 {{< admonition type=quote title="example" open=false >}}
 
@@ -112,8 +112,8 @@ Go 语言中，引用类型不能比较，值类型可以比较
 
 {{< /admonition >}}
 
----
-- 列举一些可寻址类型、不可寻址类型
+
+## 列举一些可寻址类型、不可寻址类型
 
 {{< admonition type=quote title="example" open=false >}}
 
@@ -164,8 +164,8 @@ var i interface{} = 42 // 错误：cannot take the address of i
 
 {{< /admonition >}}
 
----
-- &T{} 的写法是允许的，能够说明 T{} 是能够被寻址的吗？
+
+## &T{} 的写法是允许的，能够说明 T{} 是能够被寻址的吗？
 
 {{< admonition type=quote title="example" open=false >}}
 
@@ -183,8 +183,8 @@ tmp := T{}
 
 {{< /admonition >}}
 
----
-- 为什么 map（映射）元素不可被取地址
+
+## 为什么 map（映射）元素不可被取地址
 
 {{< admonition type=quote title="example" open=false >}}
 
@@ -193,8 +193,8 @@ tmp := T{}
 
 {{< /admonition >}}
 
----
-- 在 Go 中，为什么返回一个局部变量的地址是安全的
+
+## 在 Go 中，为什么返回一个局部变量的地址是安全的
 
 {{< admonition type=quote title="example" open=false >}}
 
@@ -202,11 +202,15 @@ tmp := T{}
 
 {{< /admonition >}}
 
----
-- 一个值的地址在程序运行的过程中为什么会发生改变
+
+## 一个值的地址在程序运行的过程中为什么会发生改变
 
 {{< admonition type=quote title="example" open=false >}}
 
 比如当一个协程的栈的大小发生改变时，开辟在此栈上的内存块需要移动，因此地址就会发生改变
 
 {{< /admonition >}}
+
+## Go 101 中的一些总结
+
+[https://gfw.go101.org/article/summaries.html#type-with-underlyings](https://gfw.go101.org/article/summaries.html#type-with-underlyings)

@@ -42,7 +42,7 @@ func isSameTree(p *TreeNode, q *TreeNode) bool {
 
 ## 方法2. dfs（先序） + kmp
 
-[202304262036 KMP 算法](content/posts/algorithm/202304262036%20KMP%20算法.md)
+（local [202304262036 KMP 算法](content/posts/algorithm/202304262036%20KMP%20算法.md) remote [202304262036 KMP 算法](http://honghuiqiang.com/202304262036-kmp-%E7%AE%97%E6%B3%95)）
 
 设主树s，子树t，主树的先序序列 ss，子树的先序序列 tt
 

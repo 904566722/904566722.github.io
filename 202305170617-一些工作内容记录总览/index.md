@@ -10,4 +10,4 @@
 
 ## ecs、ebs
 
-![](images/posts/Pasted%20image%2020230517063219.png)
+![](images/posts/Pasted%20image%2020230522211423.png)

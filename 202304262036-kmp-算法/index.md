@@ -30,7 +30,7 @@
 ![](images/posts/Pasted%20image%2020230426211447.png)
 
 #### step3 当 S[i] != pattern[j]，i 不动，**j 以一定的模式进行转移**，具体见下面的场景：
-（[202304262152 KMP 算法之-获取 next 数组](content/posts/algorithm/202304262152%20KMP%20算法之-获取%20next%20数组.md)）
+（local [202304262152 KMP 算法之-获取 next 数组](content/posts/algorithm/202304262152%20KMP%20算法之-获取%20next%20数组.md) remote [202304262152 KMP 算法之-获取 next 数组](http://honghuiqiang.com/202304262152-kmp-%E7%AE%97%E6%B3%95%E4%B9%8B-%E8%8E%B7%E5%8F%96-next-%E6%95%B0%E7%BB%84)）
 
 
 ![](images/posts/Pasted%20image%2020230426211653.png)

@@ -107,7 +107,7 @@ func SayGreetings(greeting string, times int) {
 
 ![](images/posts/Pasted%20image%2020230518130309.png)
 
-go 标准编译器通过 MPG 模型（[202305181327 Go 的并发调度：MPG模型](content/posts/go/golang-underlying/202305181327%20Go%20的并发调度：MPG模型.md)）来实现协程的调度
+go 标准编译器通过 MPG 模型（local [202305181327 Go 的并发调度：MPG模型](content/posts/go/golang-underlying/202305181327%20Go%20的并发调度：MPG模型.md) remote [202305181327 Go 的并发调度：MPG模型](http://honghuiqiang.com/202305181327-go-%E7%9A%84%E5%B9%B6%E5%8F%91%E8%B0%83%E5%BA%A6mpg%E6%A8%A1%E5%9E%8B)）来实现协程的调度
 
 ## defer
 

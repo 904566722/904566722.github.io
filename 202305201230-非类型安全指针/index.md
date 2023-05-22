@@ -20,4 +20,4 @@ type Pointer *ArbitraryType
 
 unsafe 标准包的文档中列出了六种非类型安全指针的使用标准：
 
-[202304241708 unsafe.Pointer 的六种使用场景](content/posts/go/golang-origin/202304241708%20unsafe.Pointer%20的六种使用场景.md)
+（local [202304241708 unsafe.Pointer 的六种使用场景](content/posts/go/golang-origin/202304241708%20unsafe.Pointer%20的六种使用场景.md) remote [202304241708 unsafe.Pointer 的六种使用场景](http://honghuiqiang.com/202304241708-unsafe.pointer-%E7%9A%84%E5%85%AD%E7%A7%8D%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF)）

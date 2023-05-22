@@ -19,7 +19,7 @@
 ### （1）\*T1 --> Pointer --> \*T2
 需要满足要求：
 - T2 不大于 T1
-- T1、T2 共享相同的内存布局 ([202304242150 内存布局](content/posts/go/golang-underlying/202304242150%20内存布局.md))
+- T1、T2 共享相同的内存布局 (local [202304242150 内存布局](content/posts/go/golang-underlying/202304242150%20内存布局.md) remote [202304242150 内存布局](http://honghuiqiang.com/202304242150-%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80))
 
 则这种转换是允许的
 

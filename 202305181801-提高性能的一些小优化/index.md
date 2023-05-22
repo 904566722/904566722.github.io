@@ -14,7 +14,7 @@ func TestForRange()  {
 }
 ```
 
-[202305181719 for-range 中的副本拷贝](content/posts/go/golang-why/202305181719%20for-range%20中的副本拷贝.md)
+（local [202305181719 for-range 中的副本拷贝](content/posts/go/golang-why/202305181719%20for-range%20中的副本拷贝.md) remote [202305181719 for-range 中的副本拷贝](http://honghuiqiang.com/202305181719-for-range-%E4%B8%AD%E7%9A%84%E5%89%AF%E6%9C%AC%E6%8B%B7%E8%B4%9D)）
 
 ## 字节切片跟字符串的转换
 

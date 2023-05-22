@@ -98,8 +98,8 @@ func insertSort(nums []int)  {
 
 ## 四、归并排序
 
-[202304300231 归并排序](content/posts/algorithm/202304300231%20归并排序.md)
+（local [202304300231 归并排序](content/posts/algorithm/202304300231%20归并排序.md) remote [202304300231 归并排序](http://honghuiqiang.com/202304300231-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F)）
 
 ## 五、快速排序
 
-[202304300312 快速排序](content/posts/algorithm/202304300312%20快速排序.md)
+（local [202304300312 快速排序](content/posts/algorithm/202304300312%20快速排序.md) remote [202304300312 快速排序](http://honghuiqiang.com/202304300312-%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F)）

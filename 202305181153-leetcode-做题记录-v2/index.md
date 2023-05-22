@@ -212,3 +212,44 @@ func cut(s string, wordDict []string) bool {
    return false  
 }
 ```
+
+---
+#### [739. 每日温度](https://leetcode.cn/problems/daily-temperatures/)
+
+#单调栈
+
+```go
+// 数组从后往前遍历
+// 使用一个栈保存温度的下标
+// 如果当前温度 >= 栈顶的温度 --》出栈
+//                      否则 --》 入栈
+func dailyTemperatures(temperatures []int) []int {
+    var stack []int
+    var ans []int
+    n := len(temperatures)
+    if n == 0 {
+        return ans
+    }
+    stack = append(stack, n-1)
+    ans = append(ans, 0)
+
+    for i := n-2; i >= 0; i-- {
+        t := temperatures[i]
+        for len(stack) != 0 && t >= temperatures[stack[len(stack)-1]] {
+            stack = stack[:len(stack)-1]
+        }
+        if len(stack) == 0 {
+            ans = append(ans, 0)
+        } else {
+            ans = append(ans, stack[len(stack)-1] - i)
+        }
+        stack = append(stack, i)
+    }
+
+
+    for i := 0; i < n/2; i++ {
+        ans[i], ans[n-i-1] = ans[n-i-1], ans[i]
+    }
+    return ans
+}
+```

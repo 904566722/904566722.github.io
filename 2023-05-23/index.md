@@ -12,7 +12,9 @@ axisFormat %H:%M
 tickInterval 1h
 title 今天大概要做
 
-section xxx
+section 算法
+	1.avl: done, 12:00, 3h
+	2.图、基础操作重新整理一下: 21:00, 1h
 	
 section 习惯
 	算法每日一题: 1h
@@ -52,7 +54,7 @@ section 习惯
 - [ ] 😡 生气
 
 **`输出内容`**：（这部分应该是必须的！后续如果想要使用艾宾浩斯方法来回顾，这里会是一个很好的入口）
-- local [202305222352 平衡二叉搜索树-AVL](content/posts/box/202305222352%20平衡二叉搜索树-AVL.md) remote [202305222352 平衡二叉搜索树-AVL](http://honghuiqiang.com/202305222352-%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91-avl)
+- local [202305222352 平衡二叉搜索树-AVL](content/posts/algorithm/202305222352%20平衡二叉搜索树-AVL.md) remote [202305222352 平衡二叉搜索树-AVL](http://honghuiqiang.com/202305222352-%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91-avl)
 
 
 

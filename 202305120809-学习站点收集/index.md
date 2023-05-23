@@ -21,3 +21,4 @@
 
 ## algorithm
 1. https://www.hello-algo.com/chapter_tree/avl_tree/
+2. https://www.bookstack.cn/read/hunterhug-goa.c/README.md

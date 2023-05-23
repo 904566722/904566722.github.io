@@ -1,0 +1,467 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>图基础 - 学习记录</title><meta name=Description content="这是我的网站描述"><meta property="og:title" content="图基础"><meta property="og:description" content><meta property="og:type" content="article"><meta property="og:url" content="http://www.honghuiqiang.com/202305040737-%E5%9B%BE%E5%9F%BA%E7%A1%80/"><meta property="og:image" content="http://www.honghuiqiang.com/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-05-09T07:48:23+08:00"><meta property="article:modified_time" content="2023-05-09T07:48:23+08:00"><meta property="og:site_name" content="学习记录"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="http://www.honghuiqiang.com/logo.png"><meta name=twitter:title content="图基础"><meta name=twitter:description content><meta name=application-name content="HHQ Records"><meta name=apple-mobile-web-app-title content="HHQ Records"><meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel=icon href=/images/zoro.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=canonical href=http://www.honghuiqiang.com/202305040737-%E5%9B%BE%E5%9F%BA%E7%A1%80/><link rel=prev href=http://www.honghuiqiang.com/202305080553-%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8D-evicted/><link rel=next href=http://www.honghuiqiang.com/202305031652-%E6%A0%91%E9%97%AE%E9%A2%98-%E5%88%A4%E6%96%AD%E5%AD%90%E6%A0%91/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/color.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/fontawesome-free/all.min.css><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/animate/animate.min.css><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"图基础","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http:\/\/www.honghuiqiang.com\/202305040737-%E5%9B%BE%E5%9F%BA%E7%A1%80\/"},"genre":"posts","keywords":"图","wordcount":1441,"url":"http:\/\/www.honghuiqiang.com\/202305040737-%E5%9B%BE%E5%9F%BA%E7%A1%80\/","datePublished":"2023-05-09T07:48:23+08:00","dateModified":"2023-05-09T07:48:23+08:00","publisher":{"@type":"Organization","name":""},"authors":[{"@type":"Person","name":"索隆不喝酒"}],"description":""}</script><script src=//instant.page/5.1.1 defer type=module integrity=sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq></script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(e){document.body.setAttribute("theme",e),document.documentElement.style.setProperty("color-scheme",e==="light"?"light":"dark"),window.theme=e,window.isDark=window.theme!=="light"}function saveTheme(e){window.localStorage&&localStorage.setItem("theme",e)}function getMeta(e){const t=document.getElementsByTagName("meta");for(let n=0;n<t.length;n++)if(t[n].getAttribute("name")===e)return t[n];return""}if(window.localStorage&&localStorage.getItem("theme")){let e=localStorage.getItem("theme");e==="light"||e==="dark"||e==="black"?setTheme(e):setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}else"dark"==="light"||"dark"==="dark"||"dark"==="black"?(setTheme("dark"),saveTheme("dark")):(saveTheme("auto"),setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));let metaColors={light:"#f8f8f8",dark:"#252627",black:"#000000"};getMeta("theme-color").content=metaColors[document.body.getAttribute("theme")],window.switchThemeEventSet=new Set</script><div id=back-to-top></div><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=学习记录><span id=desktop-header-typeit class=typeit></span></a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>文章 </a><a class=menu-item href=/categories/>分类 </a><a class=menu-item href=/series/>系列 </a><a class=menu-item href=/tags/>标签 </a><span class="menu-item delimiter"></span><a href=# class="menu-item language" title=选择语言>简体中文<i class="fas fa-chevron-right fa-fw"></i>
+<select class=language-select title="Select Language" id=language-select-desktop onchange="location=this.value"><option value=/202305040737-%E5%9B%BE%E5%9F%BA%E7%A1%80/ selected>简体中文</option></select>
+</a><span class="menu-item search" id=search-desktop><input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=# class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=# class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span>
+</span><a href=# class="menu-item theme-select" title=切换主题><i class="fas fa-adjust fa-fw"></i>
+<select class=color-theme-select id=theme-select-desktop title=切换主题><option value=light>浅色</option><option value=dark>深色</option><option value=black>黑色</option><option value=auto>跟随系统</option></select></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=学习记录><span id=mobile-header-typeit class=typeit></span></a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=# class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=# class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=# class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/ title>文章</a><a class=menu-item href=/categories/ title>分类</a><a class=menu-item href=/series/ title>系列</a><a class=menu-item href=/tags/ title>标签</a><a href=# class="menu-item theme-select" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+<select class=color-theme-select id=theme-select-mobile title=切换主题><option value=light>浅色</option><option value=dark>深色</option><option value=black>黑色</option><option value=auto>跟随系统</option></select>
+</a><a href=# class=menu-item title=选择语言>简体中文<i class="fas fa-chevron-right fa-fw"></i>
+<select class=language-select title="Select Language" onchange="location=this.value"><option value=/202305040737-%E5%9B%BE%E5%9F%BA%E7%A1%80/ selected>简体中文</option></select></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto><nav id=TableOfContents><ul><li><a href=#一基本概念>一、基本概念</a></li><li><a href=#二图的表示>二、图的表示</a><ul><li><a href=#21-邻接矩阵-二维数组>2.1 邻接矩阵（ 二维数组）</a></li><li><a href=#22-边集数组>2.2 边集数组</a></li><li><a href=#23-邻接表数组链式结构>2.3 邻接表（数组+链式结构）</a></li><li><a href=#24-链式前向星数组静态链表>2.4 链式前向星（数组+静态链表）</a></li><li><a href=#25-哈希表实现邻接表>2.5 哈希表实现邻接表</a></li></ul></li></ul></nav></div></div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">图基础</h1><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=http://www.honghuiqiang.com/authors/%E7%B4%A2%E9%9A%86%E4%B8%8D%E5%96%9D%E9%85%92>索隆不喝酒</a></span>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/><i class="far fa-folder fa-fw"></i>数据结构与算法</a></span>&nbsp;<span class=post-category>和</span>&nbsp;<span class=post-series>系列 <a href=/series/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/><i class="far fa-list-alt fa-fw"></i>数据结构</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2023-05-09>2023-05-09</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2023-05-09>2023-05-09</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1441 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div></div><div class="details series-nav open"><div class="details-summary series-title"><span>系列 - 数据结构</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content series-content"><nav><ul><li><a href=/202305240057-%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86/>图的遍历</a></li><li><a href=/202304300709-%E6%A0%91/>树</a></li><li><a href=/202305222352-%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91-avl/>平衡二叉搜索树-AVL</a></li><li><a href=/202305040442-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/>二叉搜索树</a></li><li><span class=active>图基础</span></li></ul></nav></div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#一基本概念>一、基本概念</a></li><li><a href=#二图的表示>二、图的表示</a><ul><li><a href=#21-邻接矩阵-二维数组>2.1 邻接矩阵（ 二维数组）</a></li><li><a href=#22-边集数组>2.2 边集数组</a></li><li><a href=#23-邻接表数组链式结构>2.3 邻接表（数组+链式结构）</a></li><li><a href=#24-链式前向星数组静态链表>2.4 链式前向星（数组+静态链表）</a></li><li><a href=#25-哈希表实现邻接表>2.5 哈希表实现邻接表</a></li></ul></li></ul></nav></div></div><div class=content id=content><p>#算法</p><h2 id=一基本概念 class=headerLink><a href=#%e4%b8%80%e5%9f%ba%e6%9c%ac%e6%a6%82%e5%bf%b5 class=header-mark></a>一、基本概念</h2><p>定义：G = (V, E)<figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230523221729.png title=/images/posts/Pasted%20image%2020230523221729.png data-thumbnail=/images/posts/Pasted%20image%2020230523221729.png><img loading=lazy src=/images/posts/Pasted%20image%2020230523221729.png srcset="/images/posts/Pasted%20image%2020230523221729.png, /images/posts/Pasted%20image%2020230523221729.png 1.5x, /images/posts/Pasted%20image%2020230523221729.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230523221729.png></a></figure></p><p>图的分类</p><p><code>边是否有方向</code>：</p><ul><li>有向图</li><li>无向图<figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230523232313.png title=/images/posts/Pasted%20image%2020230523232313.png data-thumbnail=/images/posts/Pasted%20image%2020230523232313.png><img loading=lazy src=/images/posts/Pasted%20image%2020230523232313.png srcset="/images/posts/Pasted%20image%2020230523232313.png, /images/posts/Pasted%20image%2020230523232313.png 1.5x, /images/posts/Pasted%20image%2020230523232313.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230523232313.png></a></figure></li></ul><p><code>图中是否有环</code>：</p><ul><li>有环图</li><li>无环图<figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230523232638.png title=/images/posts/Pasted%20image%2020230523232638.png data-thumbnail=/images/posts/Pasted%20image%2020230523232638.png><img loading=lazy src=/images/posts/Pasted%20image%2020230523232638.png srcset="/images/posts/Pasted%20image%2020230523232638.png, /images/posts/Pasted%20image%2020230523232638.png 1.5x, /images/posts/Pasted%20image%2020230523232638.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230523232638.png></a></figure></li></ul><p><code>连通图和非连通图</code></p><ul><li>连通图</li><li>非连通图<figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230523232438.png title=/images/posts/Pasted%20image%2020230523232438.png data-thumbnail=/images/posts/Pasted%20image%2020230523232438.png><img loading=lazy src=/images/posts/Pasted%20image%2020230523232438.png srcset="/images/posts/Pasted%20image%2020230523232438.png, /images/posts/Pasted%20image%2020230523232438.png 1.5x, /images/posts/Pasted%20image%2020230523232438.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230523232438.png></a></figure></li></ul><p><code>边是否有权重</code></p><ul><li>有权图</li><li>无权图<figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230523233328.png title=/images/posts/Pasted%20image%2020230523233328.png data-thumbnail=/images/posts/Pasted%20image%2020230523233328.png><img loading=lazy src=/images/posts/Pasted%20image%2020230523233328.png srcset="/images/posts/Pasted%20image%2020230523233328.png, /images/posts/Pasted%20image%2020230523233328.png 1.5x, /images/posts/Pasted%20image%2020230523233328.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230523233328.png></a></figure></li></ul><h2 id=二图的表示 class=headerLink><a href=#%e4%ba%8c%e5%9b%be%e7%9a%84%e8%a1%a8%e7%a4%ba class=header-mark></a>二、图的表示</h2><ul><li>顺序</li><li>链式</li></ul><p>一个无向图的例子，展示如何用「邻接矩阵」和「邻接表」来表示一个图：<figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230523235445.png title=/images/posts/Pasted%20image%2020230523235445.png data-thumbnail=/images/posts/Pasted%20image%2020230523235445.png><img loading=lazy src=/images/posts/Pasted%20image%2020230523235445.png srcset="/images/posts/Pasted%20image%2020230523235445.png, /images/posts/Pasted%20image%2020230523235445.png 1.5x, /images/posts/Pasted%20image%2020230523235445.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230523235445.png></a></figure></p><p>邻接矩阵中保存着很多不存在的边，由于二维数组的连续性，会<strong>浪费很多空间，但是查询速度快 O(1)</strong>；在邻接表中，采用了一个数组来保存图的所有点，每个元素扩展成一个链表，只保存存在的边，<strong>节省空间，但是查询效率 O(n)</strong>，可以通过一些手段来优化这个链表，比如将链表转化为 AVL 或者 红黑树，查询效率能够优化到 O(logn)，或者采用哈希表，再将时间复杂度降至 O(1)</p><p>五种树的存储方式的比较：</p><table><thead><tr><th>操作</th><th>邻接矩阵</th><th>边集数组</th><th>邻接表</th><th>链式前向星</th><th>哈希表实现邻接表</th></tr></thead><tbody><tr><td>图的初始化</td><td>n^2</td><td>m</td><td>n+m</td><td>n+m</td><td></td></tr><tr><td>查某条边是否存在</td><td>1</td><td>m</td><td>TD(vi)</td><td>TD(vi)</td><td></td></tr><tr><td>遍历某个点的所有边</td><td>n</td><td>m</td><td>TD(vi)</td><td>TD(vi)</td><td></td></tr><tr><td>遍历整张图</td><td>n^2</td><td>nm</td><td>n+m</td><td>n+m</td><td></td></tr><tr><td>空间复杂度</td><td>n</td><td>m</td><td>n+m</td><td>n+m</td><td></td></tr></tbody></table><h3 id=21-邻接矩阵-二维数组 class=headerLink><a href=#21-%e9%82%bb%e6%8e%a5%e7%9f%a9%e9%98%b5-%e4%ba%8c%e7%bb%b4%e6%95%b0%e7%bb%84 class=header-mark></a>2.1 邻接矩阵（ 二维数组）</h3><h3 id=22-边集数组 class=headerLink><a href=#22-%e8%be%b9%e9%9b%86%e6%95%b0%e7%bb%84 class=header-mark></a>2.2 边集数组</h3><h3 id=23-邻接表数组链式结构 class=headerLink><a href=#23-%e9%82%bb%e6%8e%a5%e8%a1%a8%e6%95%b0%e7%bb%84%e9%93%be%e5%bc%8f%e7%bb%93%e6%9e%84 class=header-mark></a>2.3 邻接表（数组+链式结构）</h3><p>实现1.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span><span class=lnt>72
+</span><span class=lnt>73
+</span><span class=lnt>74
+</span><span class=lnt>75
+</span><span class=lnt>76
+</span><span class=lnt>77
+</span><span class=lnt>78
+</span><span class=lnt>79
+</span><span class=lnt>80
+</span><span class=lnt>81
+</span><span class=lnt>82
+</span><span class=lnt>83
+</span><span class=lnt>84
+</span><span class=lnt>85
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// 邻接点  
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>AdjNode</span> <span class=kd>struct</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>AdjN</span> <span class=kt>int</span>   <span class=c1>// 邻接点标号  
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=nx>Weight</span> <span class=kt>int</span> <span class=c1>//顶点到该邻接点的权重  
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=nx>Next</span> <span class=o>*</span><span class=nx>AdjNode</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=c1>// 顶点  
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>type</span> <span class=nx>VNode</span> <span class=kd>struct</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>Val</span> <span class=kt>int</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>FirstAdjNode</span> <span class=o>*</span><span class=nx>AdjNode</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Graph</span> <span class=kd>struct</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>VNum</span> <span class=kt>int</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>ENum</span> <span class=kt>int</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>VNodes</span> <span class=p>[]</span><span class=nx>VNode</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>Edge</span> <span class=kd>struct</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>V1</span><span class=p>,</span> <span class=nx>V2</span> <span class=kt>int</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>Weight</span> <span class=kt>int</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>InitGraph</span><span class=p>(</span><span class=nx>VertexNum</span> <span class=kt>int</span><span class=p>)</span> <span class=o>*</span><span class=nx>Graph</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>g</span> <span class=o>:=</span> <span class=o>&amp;</span><span class=nx>Graph</span><span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>VNum</span><span class=p>:</span> <span class=nx>VertexNum</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>ENum</span><span class=p>:</span> <span class=mi>0</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>VNodes</span><span class=p>:</span> <span class=nb>make</span><span class=p>([]</span><span class=nx>VNode</span><span class=p>,</span> <span class=nx>VertexNum</span><span class=p>),</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>   <span class=c1>//for _, vnode := range g.VNodes {  
+</span></span></span><span class=line><span class=cl><span class=c1></span>       <span class=c1>//vnode.Val =   //}   return g  
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>InsertEdge</span><span class=p>(</span><span class=nx>graph</span> <span class=o>*</span><span class=nx>Graph</span><span class=p>,</span> <span class=nx>e</span> <span class=o>*</span><span class=nx>Edge</span><span class=p>)</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>v1VNode</span> <span class=o>:=</span> <span class=nx>graph</span><span class=p>.</span><span class=nx>VNodes</span><span class=p>[</span><span class=nx>e</span><span class=p>.</span><span class=nx>V1</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span>    <span class=c1>// 假设 v1 节点存储在下标 0 的位置  
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=c1>// 新建一个 v2 的邻接点  
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=nx>v2Adj</span> <span class=o>:=</span> <span class=o>&amp;</span><span class=nx>AdjNode</span><span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>AdjN</span><span class=p>:</span> <span class=nx>e</span><span class=p>.</span><span class=nx>V2</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Weight</span><span class=p>:</span> <span class=nx>e</span><span class=p>.</span><span class=nx>Weight</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Next</span><span class=p>:</span> <span class=nx>v1VNode</span><span class=p>.</span><span class=nx>FirstAdjNode</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>v1VNode</span><span class=p>.</span><span class=nx>FirstAdjNode</span> <span class=p>=</span> <span class=nx>v2Adj</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>   <span class=c1>// 如果是无向图，还需要添加从 v2 到 v1 的连接  
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=nx>v2VNode</span> <span class=o>:=</span> <span class=nx>graph</span><span class=p>.</span><span class=nx>VNodes</span><span class=p>[</span><span class=nx>e</span><span class=p>.</span><span class=nx>V2</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>v1Adj</span> <span class=o>:=</span> <span class=o>&amp;</span><span class=nx>AdjNode</span><span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>AdjN</span><span class=p>:</span> <span class=nx>e</span><span class=p>.</span><span class=nx>V1</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Weight</span><span class=p>:</span> <span class=nx>e</span><span class=p>.</span><span class=nx>Weight</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Next</span><span class=p>:</span> <span class=nx>v2VNode</span><span class=p>.</span><span class=nx>FirstAdjNode</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>v2VNode</span><span class=p>.</span><span class=nx>FirstAdjNode</span> <span class=p>=</span> <span class=nx>v1Adj</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BuildGraph</span><span class=p>(</span><span class=nx>vnum</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>v1s</span><span class=p>,</span> <span class=nx>v2s</span> <span class=p>[]</span><span class=kt>int</span><span class=p>,</span> <span class=nx>weight</span> <span class=p>[]</span><span class=kt>int</span><span class=p>)</span> <span class=o>*</span><span class=nx>Graph</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>graph</span> <span class=o>:=</span> <span class=nf>InitGraph</span><span class=p>(</span><span class=nx>vnum</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>   <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nb>len</span><span class=p>(</span><span class=nx>v1s</span><span class=p>);</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>e</span> <span class=o>:=</span> <span class=o>&amp;</span><span class=nx>Edge</span><span class=p>{</span>  
+</span></span><span class=line><span class=cl>         <span class=nx>V1</span><span class=p>:</span> <span class=nx>v1s</span><span class=p>[</span><span class=nx>i</span><span class=p>],</span>  
+</span></span><span class=line><span class=cl>         <span class=nx>V2</span><span class=p>:</span> <span class=nx>v2s</span><span class=p>[</span><span class=nx>i</span><span class=p>],</span>  
+</span></span><span class=line><span class=cl>         <span class=nx>Weight</span><span class=p>:</span> <span class=nx>weight</span><span class=p>[</span><span class=nx>i</span><span class=p>],</span>  
+</span></span><span class=line><span class=cl>      <span class=p>}</span>  
+</span></span><span class=line><span class=cl>      <span class=nf>InsertEdge</span><span class=p>(</span><span class=nx>graph</span><span class=p>,</span> <span class=nx>e</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>   <span class=k>return</span> <span class=nx>graph</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>test1</span><span class=p>()</span>  <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>vnum</span> <span class=o>:=</span> <span class=mi>4</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>v1s</span> <span class=o>:=</span> <span class=p>[]</span><span class=kt>int</span><span class=p>{</span><span class=mi>1</span><span class=p>,</span><span class=mi>1</span><span class=p>,</span><span class=mi>3</span><span class=p>,</span><span class=mi>1</span><span class=p>}</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>v2s</span> <span class=o>:=</span> <span class=p>[]</span><span class=kt>int</span><span class=p>{</span><span class=mi>2</span><span class=p>,</span><span class=mi>3</span><span class=p>,</span><span class=mi>4</span><span class=p>,</span><span class=mi>4</span><span class=p>}</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>weights</span> <span class=o>:=</span> <span class=p>[]</span><span class=kt>int</span><span class=p>{</span><span class=mi>1</span><span class=p>,</span><span class=mi>2</span><span class=p>,</span><span class=mi>3</span><span class=p>,</span><span class=mi>4</span><span class=p>}</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>graph</span> <span class=o>:=</span> <span class=nf>BuildGraph</span><span class=p>(</span><span class=nx>vnum</span><span class=p>,</span> <span class=nx>v1s</span><span class=p>,</span> <span class=nx>v2s</span><span class=p>,</span> <span class=nx>weights</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>   <span class=k>for</span> <span class=nx>i</span><span class=p>,</span> <span class=nx>vnode</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>graph</span><span class=p>.</span><span class=nx>VNodes</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>adj</span> <span class=o>:=</span> <span class=nx>vnode</span><span class=p>.</span><span class=nx>FirstAdjNode</span>  
+</span></span><span class=line><span class=cl>      <span class=k>for</span> <span class=nx>adj</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>         <span class=nx>fmt</span><span class=p>.</span><span class=nf>Printf</span><span class=p>(</span><span class=s>&#34;(%d,%d) 权重 %d \n&#34;</span><span class=p>,</span><span class=nx>i</span><span class=o>+</span><span class=mi>1</span><span class=p>,</span> <span class=nx>adj</span><span class=p>.</span><span class=nx>AdjN</span><span class=p>,</span> <span class=nx>adj</span><span class=p>.</span><span class=nx>Weight</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>         <span class=nx>adj</span> <span class=p>=</span> <span class=nx>adj</span><span class=p>.</span><span class=nx>Next</span>  
+</span></span><span class=line><span class=cl>      <span class=p>}</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>2023/05/24 重新回顾</p><p>使用 map 来实现</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span><span class=lnt>72
+</span><span class=lnt>73
+</span><span class=lnt>74
+</span><span class=lnt>75
+</span><span class=lnt>76
+</span><span class=lnt>77
+</span><span class=lnt>78
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>vertex</span> <span class=kd>struct</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>val</span> <span class=kt>int</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=cm>/* 基于邻接表实现的无向图 */</span>
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>graphAdjMp</span> <span class=kd>struct</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>adjMp</span> <span class=kd>map</span><span class=p>[</span><span class=nx>vertex</span><span class=p>]</span><span class=kd>map</span><span class=p>[</span><span class=nx>vertex</span><span class=p>]</span><span class=kd>struct</span><span class=p>{}</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>g</span> <span class=o>*</span><span class=nx>graphAdjMp</span><span class=p>)</span> <span class=nf>addVertex</span><span class=p>(</span><span class=nx>v</span> <span class=nx>vertex</span><span class=p>)</span>  <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=k>if</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>ok</span> <span class=o>:=</span> <span class=nx>g</span><span class=p>.</span><span class=nx>adjMp</span><span class=p>[</span><span class=nx>v</span><span class=p>];</span> <span class=nx>ok</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=c1>// 该顶点已经存在，无需重复加入  
+</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=k>return</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl>   <span class=c1>// 新加一个节点，以及初始化一个链表  
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=nx>g</span><span class=p>.</span><span class=nx>adjMp</span><span class=p>[</span><span class=nx>v</span><span class=p>]</span> <span class=p>=</span> <span class=kd>map</span><span class=p>[</span><span class=nx>vertex</span><span class=p>]</span><span class=kd>struct</span><span class=p>{}{}</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>g</span> <span class=o>*</span><span class=nx>graphAdjMp</span><span class=p>)</span> <span class=nf>deleteVertex</span><span class=p>(</span><span class=nx>v</span> <span class=nx>vertex</span><span class=p>)</span>  <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=k>if</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>ok</span> <span class=o>:=</span> <span class=nx>g</span><span class=p>.</span><span class=nx>adjMp</span><span class=p>[</span><span class=nx>v</span><span class=p>];</span> <span class=p>!</span><span class=nx>ok</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=c1>// 节点是不存在的  
+</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=k>return</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl>   <span class=cm>/* 1.删除顶点 */</span>   
+</span></span><span class=line><span class=cl>   <span class=nb>delete</span><span class=p>(</span><span class=nx>g</span><span class=p>.</span><span class=nx>adjMp</span><span class=p>,</span> <span class=nx>v</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=cm>/* 2.删除其他顶点中与之存在的关联 */</span>   
+</span></span><span class=line><span class=cl>   <span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>rt</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>g</span><span class=p>.</span><span class=nx>adjMp</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=nb>delete</span><span class=p>(</span><span class=nx>rt</span><span class=p>,</span> <span class=nx>v</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>g</span> <span class=o>*</span><span class=nx>graphAdjMp</span><span class=p>)</span> <span class=nf>addEdge</span><span class=p>(</span><span class=nx>v1</span><span class=p>,</span> <span class=nx>v2</span> <span class=nx>vertex</span><span class=p>)</span>  <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>_</span><span class=p>,</span> <span class=nx>ok1</span> <span class=o>:=</span> <span class=nx>g</span><span class=p>.</span><span class=nx>adjMp</span><span class=p>[</span><span class=nx>v1</span><span class=p>]</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>_</span><span class=p>,</span> <span class=nx>ok2</span> <span class=o>:=</span> <span class=nx>g</span><span class=p>.</span><span class=nx>adjMp</span><span class=p>[</span><span class=nx>v2</span><span class=p>]</span>  
+</span></span><span class=line><span class=cl>   <span class=k>if</span> <span class=p>!</span><span class=nx>ok1</span> <span class=o>||</span> <span class=p>!</span><span class=nx>ok2</span> <span class=o>||</span> <span class=nx>v1</span> <span class=o>==</span> <span class=nx>v2</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>log</span><span class=p>.</span><span class=nf>Fatal</span><span class=p>(</span><span class=s>&#34;add edge error&#34;</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>g</span><span class=p>.</span><span class=nx>adjMp</span><span class=p>[</span><span class=nx>v1</span><span class=p>][</span><span class=nx>v2</span><span class=p>]</span> <span class=p>=</span> <span class=kd>struct</span><span class=p>{}{}</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>g</span><span class=p>.</span><span class=nx>adjMp</span><span class=p>[</span><span class=nx>v2</span><span class=p>][</span><span class=nx>v1</span><span class=p>]</span> <span class=p>=</span> <span class=kd>struct</span><span class=p>{}{}</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>g</span> <span class=o>*</span><span class=nx>graphAdjMp</span><span class=p>)</span> <span class=nf>deleteEdge</span><span class=p>(</span><span class=nx>v1</span><span class=p>,</span> <span class=nx>v2</span> <span class=nx>vertex</span><span class=p>)</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>_</span><span class=p>,</span> <span class=nx>ok1</span> <span class=o>:=</span> <span class=nx>g</span><span class=p>.</span><span class=nx>adjMp</span><span class=p>[</span><span class=nx>v1</span><span class=p>]</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>_</span><span class=p>,</span> <span class=nx>ok2</span> <span class=o>:=</span> <span class=nx>g</span><span class=p>.</span><span class=nx>adjMp</span><span class=p>[</span><span class=nx>v2</span><span class=p>]</span>  
+</span></span><span class=line><span class=cl>   <span class=k>if</span> <span class=p>!</span><span class=nx>ok1</span> <span class=o>||</span> <span class=p>!</span><span class=nx>ok2</span> <span class=o>||</span> <span class=nx>v1</span> <span class=o>==</span> <span class=nx>v2</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>log</span><span class=p>.</span><span class=nf>Fatal</span><span class=p>(</span><span class=s>&#34;delete edge error&#34;</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl>   <span class=nb>delete</span><span class=p>(</span><span class=nx>g</span><span class=p>.</span><span class=nx>adjMp</span><span class=p>[</span><span class=nx>v1</span><span class=p>],</span> <span class=nx>v2</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=nb>delete</span><span class=p>(</span><span class=nx>g</span><span class=p>.</span><span class=nx>adjMp</span><span class=p>[</span><span class=nx>v2</span><span class=p>],</span> <span class=nx>v1</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=c1>// newGraphAdjMp 使用边来初始化一个图  
+</span></span></span><span class=line><span class=cl><span class=c1>// edges 的形式应该是 [(v1,v2),(v1,v3)...]
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=nf>newGraphAdjMp</span><span class=p>(</span><span class=nx>edges</span> <span class=p>[][]</span><span class=nx>vertex</span><span class=p>)</span> <span class=o>*</span><span class=nx>graphAdjMp</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>g</span> <span class=o>:=</span> <span class=o>&amp;</span><span class=nx>graphAdjMp</span><span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>adjMp</span><span class=p>:</span> <span class=nb>make</span><span class=p>(</span><span class=kd>map</span><span class=p>[</span><span class=nx>vertex</span><span class=p>]</span><span class=kd>map</span><span class=p>[</span><span class=nx>vertex</span><span class=p>]</span><span class=kd>struct</span><span class=p>{}),</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl>   <span class=k>for</span> <span class=nx>_</span><span class=p>,</span> <span class=nx>e</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>edges</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>g</span><span class=p>.</span><span class=nf>addVertex</span><span class=p>(</span><span class=nx>e</span><span class=p>[</span><span class=mi>0</span><span class=p>])</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>g</span><span class=p>.</span><span class=nf>addVertex</span><span class=p>(</span><span class=nx>e</span><span class=p>[</span><span class=mi>1</span><span class=p>])</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>g</span><span class=p>.</span><span class=nf>addEdge</span><span class=p>(</span><span class=nx>e</span><span class=p>[</span><span class=mi>0</span><span class=p>],</span> <span class=nx>e</span><span class=p>[</span><span class=mi>1</span><span class=p>])</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl>   <span class=k>return</span> <span class=nx>g</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>g</span> <span class=o>*</span><span class=nx>graphAdjMp</span><span class=p>)</span> <span class=nb>print</span><span class=p>()</span>  <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=k>if</span> <span class=nx>g</span><span class=p>.</span><span class=nx>adjMp</span> <span class=o>==</span> <span class=kc>nil</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;graph is nil&#34;</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl>   <span class=k>for</span> <span class=nx>vt</span><span class=p>,</span> <span class=nx>toMp</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>g</span><span class=p>.</span><span class=nx>adjMp</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>fmt</span><span class=p>.</span><span class=nf>Print</span><span class=p>(</span><span class=s>&#34;vertex#&#34;</span><span class=p>,</span> <span class=nx>vt</span><span class=p>,</span> <span class=s>&#34;have edge: &#34;</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>      <span class=k>for</span> <span class=nx>toVt</span> <span class=o>:=</span> <span class=k>range</span> <span class=nx>toMp</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>         <span class=nx>fmt</span><span class=p>.</span><span class=nf>Print</span><span class=p>(</span><span class=s>&#34;(&#34;</span><span class=p>,</span> <span class=nx>vt</span><span class=p>.</span><span class=nx>val</span><span class=p>,</span> <span class=nx>toVt</span><span class=p>.</span><span class=nx>val</span><span class=p>,</span> <span class=s>&#34;)&#34;</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>      <span class=p>}</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>()</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>测试：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>TestGraphAdjMp</span><span class=p>()</span>  <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>edges</span> <span class=o>:=</span> <span class=p>[][]</span><span class=nx>vertex</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=p>{</span><span class=nx>vertex</span><span class=p>{</span><span class=nx>val</span><span class=p>:</span> <span class=mi>1</span><span class=p>},</span><span class=nx>vertex</span><span class=p>{</span><span class=nx>val</span><span class=p>:</span> <span class=mi>2</span><span class=p>}},</span>  
+</span></span><span class=line><span class=cl>      <span class=p>{</span><span class=nx>vertex</span><span class=p>{</span><span class=nx>val</span><span class=p>:</span> <span class=mi>1</span><span class=p>},</span><span class=nx>vertex</span><span class=p>{</span><span class=nx>val</span><span class=p>:</span> <span class=mi>3</span><span class=p>}},</span>  
+</span></span><span class=line><span class=cl>      <span class=p>{</span><span class=nx>vertex</span><span class=p>{</span><span class=nx>val</span><span class=p>:</span> <span class=mi>2</span><span class=p>},</span><span class=nx>vertex</span><span class=p>{</span><span class=nx>val</span><span class=p>:</span> <span class=mi>1</span><span class=p>}},</span>  
+</span></span><span class=line><span class=cl>      <span class=p>{</span><span class=nx>vertex</span><span class=p>{</span><span class=nx>val</span><span class=p>:</span> <span class=mi>2</span><span class=p>},</span><span class=nx>vertex</span><span class=p>{</span><span class=nx>val</span><span class=p>:</span> <span class=mi>4</span><span class=p>}},</span>  
+</span></span><span class=line><span class=cl>      <span class=p>{</span><span class=nx>vertex</span><span class=p>{</span><span class=nx>val</span><span class=p>:</span> <span class=mi>2</span><span class=p>},</span><span class=nx>vertex</span><span class=p>{</span><span class=nx>val</span><span class=p>:</span> <span class=mi>5</span><span class=p>}},</span>  
+</span></span><span class=line><span class=cl>      <span class=p>{</span><span class=nx>vertex</span><span class=p>{</span><span class=nx>val</span><span class=p>:</span> <span class=mi>3</span><span class=p>},</span><span class=nx>vertex</span><span class=p>{</span><span class=nx>val</span><span class=p>:</span> <span class=mi>1</span><span class=p>}},</span>  
+</span></span><span class=line><span class=cl>      <span class=p>{</span><span class=nx>vertex</span><span class=p>{</span><span class=nx>val</span><span class=p>:</span> <span class=mi>3</span><span class=p>},</span><span class=nx>vertex</span><span class=p>{</span><span class=nx>val</span><span class=p>:</span> <span class=mi>4</span><span class=p>}},</span>  
+</span></span><span class=line><span class=cl>      <span class=p>{</span><span class=nx>vertex</span><span class=p>{</span><span class=nx>val</span><span class=p>:</span> <span class=mi>4</span><span class=p>},</span><span class=nx>vertex</span><span class=p>{</span><span class=nx>val</span><span class=p>:</span> <span class=mi>3</span><span class=p>}},</span>  
+</span></span><span class=line><span class=cl>      <span class=p>{</span><span class=nx>vertex</span><span class=p>{</span><span class=nx>val</span><span class=p>:</span> <span class=mi>4</span><span class=p>},</span><span class=nx>vertex</span><span class=p>{</span><span class=nx>val</span><span class=p>:</span> <span class=mi>2</span><span class=p>}},</span>  
+</span></span><span class=line><span class=cl>      <span class=p>{</span><span class=nx>vertex</span><span class=p>{</span><span class=nx>val</span><span class=p>:</span> <span class=mi>4</span><span class=p>},</span><span class=nx>vertex</span><span class=p>{</span><span class=nx>val</span><span class=p>:</span> <span class=mi>5</span><span class=p>}},</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>g</span> <span class=o>:=</span> <span class=nf>newGraphAdjMp</span><span class=p>(</span><span class=nx>edges</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>g</span><span class=p>.</span><span class=nb>print</span><span class=p>()</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>g</span><span class=p>.</span><span class=nf>deleteEdge</span><span class=p>(</span><span class=nx>vertex</span><span class=p>{</span><span class=nx>val</span><span class=p>:</span> <span class=mi>1</span><span class=p>},</span> <span class=nx>vertex</span><span class=p>{</span><span class=nx>val</span><span class=p>:</span> <span class=mi>3</span><span class=p>})</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;delete edge(1,3)&#34;</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>g</span><span class=p>.</span><span class=nb>print</span><span class=p>()</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>g</span><span class=p>.</span><span class=nf>addEdge</span><span class=p>(</span><span class=nx>vertex</span><span class=p>{</span><span class=nx>val</span><span class=p>:</span> <span class=mi>3</span><span class=p>},</span> <span class=nx>vertex</span><span class=p>{</span><span class=nx>val</span><span class=p>:</span> <span class=mi>5</span><span class=p>})</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;delete edge(5,3)&#34;</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>g</span><span class=p>.</span><span class=nb>print</span><span class=p>()</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>g</span><span class=p>.</span><span class=nf>addVertex</span><span class=p>(</span><span class=nx>vertex</span><span class=p>{</span><span class=nx>val</span><span class=p>:</span> <span class=mi>6</span><span class=p>})</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;add vertex 6&#34;</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>g</span><span class=p>.</span><span class=nb>print</span><span class=p>()</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>g</span><span class=p>.</span><span class=nf>deleteVertex</span><span class=p>(</span><span class=nx>vertex</span><span class=p>{</span><span class=nx>val</span><span class=p>:</span> <span class=mi>4</span><span class=p>})</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;delete vertex 4&#34;</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>g</span><span class=p>.</span><span class=nb>print</span><span class=p>()</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>out</span><span class=p>:</span>
+</span></span><span class=line><span class=cl><span class=nx>vertex</span><span class=err>#</span><span class=p>{</span><span class=mi>1</span><span class=p>}</span><span class=nx>have</span> <span class=nx>edge</span><span class=p>:</span> <span class=p>(</span><span class=mi>1</span> <span class=mi>2</span><span class=p>)(</span><span class=mi>1</span> <span class=mi>3</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>vertex</span><span class=err>#</span><span class=p>{</span><span class=mi>2</span><span class=p>}</span><span class=nx>have</span> <span class=nx>edge</span><span class=p>:</span> <span class=p>(</span><span class=mi>2</span> <span class=mi>1</span><span class=p>)(</span><span class=mi>2</span> <span class=mi>4</span><span class=p>)(</span><span class=mi>2</span> <span class=mi>5</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>vertex</span><span class=err>#</span><span class=p>{</span><span class=mi>3</span><span class=p>}</span><span class=nx>have</span> <span class=nx>edge</span><span class=p>:</span> <span class=p>(</span><span class=mi>3</span> <span class=mi>4</span><span class=p>)(</span><span class=mi>3</span> <span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>vertex</span><span class=err>#</span><span class=p>{</span><span class=mi>4</span><span class=p>}</span><span class=nx>have</span> <span class=nx>edge</span><span class=p>:</span> <span class=p>(</span><span class=mi>4</span> <span class=mi>5</span><span class=p>)(</span><span class=mi>4</span> <span class=mi>2</span><span class=p>)(</span><span class=mi>4</span> <span class=mi>3</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>vertex</span><span class=err>#</span><span class=p>{</span><span class=mi>5</span><span class=p>}</span><span class=nx>have</span> <span class=nx>edge</span><span class=p>:</span> <span class=p>(</span><span class=mi>5</span> <span class=mi>2</span><span class=p>)(</span><span class=mi>5</span> <span class=mi>4</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>delete</span> <span class=nf>edge</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span><span class=mi>3</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>vertex</span><span class=err>#</span><span class=p>{</span><span class=mi>1</span><span class=p>}</span><span class=nx>have</span> <span class=nx>edge</span><span class=p>:</span> <span class=p>(</span><span class=mi>1</span> <span class=mi>2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>vertex</span><span class=err>#</span><span class=p>{</span><span class=mi>2</span><span class=p>}</span><span class=nx>have</span> <span class=nx>edge</span><span class=p>:</span> <span class=p>(</span><span class=mi>2</span> <span class=mi>1</span><span class=p>)(</span><span class=mi>2</span> <span class=mi>4</span><span class=p>)(</span><span class=mi>2</span> <span class=mi>5</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>vertex</span><span class=err>#</span><span class=p>{</span><span class=mi>3</span><span class=p>}</span><span class=nx>have</span> <span class=nx>edge</span><span class=p>:</span> <span class=p>(</span><span class=mi>3</span> <span class=mi>4</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>vertex</span><span class=err>#</span><span class=p>{</span><span class=mi>4</span><span class=p>}</span><span class=nx>have</span> <span class=nx>edge</span><span class=p>:</span> <span class=p>(</span><span class=mi>4</span> <span class=mi>3</span><span class=p>)(</span><span class=mi>4</span> <span class=mi>5</span><span class=p>)(</span><span class=mi>4</span> <span class=mi>2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>vertex</span><span class=err>#</span><span class=p>{</span><span class=mi>5</span><span class=p>}</span><span class=nx>have</span> <span class=nx>edge</span><span class=p>:</span> <span class=p>(</span><span class=mi>5</span> <span class=mi>2</span><span class=p>)(</span><span class=mi>5</span> <span class=mi>4</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>delete</span> <span class=nf>edge</span><span class=p>(</span><span class=mi>5</span><span class=p>,</span><span class=mi>3</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>vertex</span><span class=err>#</span><span class=p>{</span><span class=mi>1</span><span class=p>}</span><span class=nx>have</span> <span class=nx>edge</span><span class=p>:</span> <span class=p>(</span><span class=mi>1</span> <span class=mi>2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>vertex</span><span class=err>#</span><span class=p>{</span><span class=mi>2</span><span class=p>}</span><span class=nx>have</span> <span class=nx>edge</span><span class=p>:</span> <span class=p>(</span><span class=mi>2</span> <span class=mi>1</span><span class=p>)(</span><span class=mi>2</span> <span class=mi>4</span><span class=p>)(</span><span class=mi>2</span> <span class=mi>5</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>vertex</span><span class=err>#</span><span class=p>{</span><span class=mi>3</span><span class=p>}</span><span class=nx>have</span> <span class=nx>edge</span><span class=p>:</span> <span class=p>(</span><span class=mi>3</span> <span class=mi>4</span><span class=p>)(</span><span class=mi>3</span> <span class=mi>5</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>vertex</span><span class=err>#</span><span class=p>{</span><span class=mi>4</span><span class=p>}</span><span class=nx>have</span> <span class=nx>edge</span><span class=p>:</span> <span class=p>(</span><span class=mi>4</span> <span class=mi>2</span><span class=p>)(</span><span class=mi>4</span> <span class=mi>3</span><span class=p>)(</span><span class=mi>4</span> <span class=mi>5</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>vertex</span><span class=err>#</span><span class=p>{</span><span class=mi>5</span><span class=p>}</span><span class=nx>have</span> <span class=nx>edge</span><span class=p>:</span> <span class=p>(</span><span class=mi>5</span> <span class=mi>3</span><span class=p>)(</span><span class=mi>5</span> <span class=mi>2</span><span class=p>)(</span><span class=mi>5</span> <span class=mi>4</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>add</span> <span class=nx>vertex</span> <span class=mi>6</span>
+</span></span><span class=line><span class=cl><span class=nx>vertex</span><span class=err>#</span><span class=p>{</span><span class=mi>2</span><span class=p>}</span><span class=nx>have</span> <span class=nx>edge</span><span class=p>:</span> <span class=p>(</span><span class=mi>2</span> <span class=mi>4</span><span class=p>)(</span><span class=mi>2</span> <span class=mi>5</span><span class=p>)(</span><span class=mi>2</span> <span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>vertex</span><span class=err>#</span><span class=p>{</span><span class=mi>3</span><span class=p>}</span><span class=nx>have</span> <span class=nx>edge</span><span class=p>:</span> <span class=p>(</span><span class=mi>3</span> <span class=mi>5</span><span class=p>)(</span><span class=mi>3</span> <span class=mi>4</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>vertex</span><span class=err>#</span><span class=p>{</span><span class=mi>4</span><span class=p>}</span><span class=nx>have</span> <span class=nx>edge</span><span class=p>:</span> <span class=p>(</span><span class=mi>4</span> <span class=mi>2</span><span class=p>)(</span><span class=mi>4</span> <span class=mi>3</span><span class=p>)(</span><span class=mi>4</span> <span class=mi>5</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>vertex</span><span class=err>#</span><span class=p>{</span><span class=mi>5</span><span class=p>}</span><span class=nx>have</span> <span class=nx>edge</span><span class=p>:</span> <span class=p>(</span><span class=mi>5</span> <span class=mi>2</span><span class=p>)(</span><span class=mi>5</span> <span class=mi>4</span><span class=p>)(</span><span class=mi>5</span> <span class=mi>3</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>vertex</span><span class=err>#</span><span class=p>{</span><span class=mi>6</span><span class=p>}</span><span class=nx>have</span> <span class=nx>edge</span><span class=p>:</span> 
+</span></span><span class=line><span class=cl><span class=nx>vertex</span><span class=err>#</span><span class=p>{</span><span class=mi>1</span><span class=p>}</span><span class=nx>have</span> <span class=nx>edge</span><span class=p>:</span> <span class=p>(</span><span class=mi>1</span> <span class=mi>2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>delete</span> <span class=nx>vertex</span> <span class=mi>4</span>
+</span></span><span class=line><span class=cl><span class=nx>vertex</span><span class=err>#</span><span class=p>{</span><span class=mi>3</span><span class=p>}</span><span class=nx>have</span> <span class=nx>edge</span><span class=p>:</span> <span class=p>(</span><span class=mi>3</span> <span class=mi>5</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>vertex</span><span class=err>#</span><span class=p>{</span><span class=mi>5</span><span class=p>}</span><span class=nx>have</span> <span class=nx>edge</span><span class=p>:</span> <span class=p>(</span><span class=mi>5</span> <span class=mi>2</span><span class=p>)(</span><span class=mi>5</span> <span class=mi>3</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>vertex</span><span class=err>#</span><span class=p>{</span><span class=mi>6</span><span class=p>}</span><span class=nx>have</span> <span class=nx>edge</span><span class=p>:</span> 
+</span></span><span class=line><span class=cl><span class=nx>vertex</span><span class=err>#</span><span class=p>{</span><span class=mi>1</span><span class=p>}</span><span class=nx>have</span> <span class=nx>edge</span><span class=p>:</span> <span class=p>(</span><span class=mi>1</span> <span class=mi>2</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nx>vertex</span><span class=err>#</span><span class=p>{</span><span class=mi>2</span><span class=p>}</span><span class=nx>have</span> <span class=nx>edge</span><span class=p>:</span> <span class=p>(</span><span class=mi>2</span> <span class=mi>1</span><span class=p>)(</span><span class=mi>2</span> <span class=mi>5</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=24-链式前向星数组静态链表 class=headerLink><a href=#24-%e9%93%be%e5%bc%8f%e5%89%8d%e5%90%91%e6%98%9f%e6%95%b0%e7%bb%84%e9%9d%99%e6%80%81%e9%93%be%e8%a1%a8 class=header-mark></a>2.4 链式前向星（数组+静态链表）</h3><h3 id=25-哈希表实现邻接表 class=headerLink><a href=#25-%e5%93%88%e5%b8%8c%e8%a1%a8%e5%ae%9e%e7%8e%b0%e9%82%bb%e6%8e%a5%e8%a1%a8 class=header-mark></a>2.5 哈希表实现邻接表</h3><hr><ol><li><a href=https://www.hello-algo.com/chapter_graph/graph_operations/#922 target=_blank rel="noopener noreferrer">https://www.hello-algo.com/chapter_graph/graph_operations/#922</a></li></ol></div><h2>相关内容</h2><div class=related-container><div class=related-item-container><h2 class=related-title><a href=/202305240057-%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86/>图的遍历</a></h2></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2023-05-09</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md><span><a class=link-to-mardown href=/202305040737-%E5%9B%BE%E5%9F%BA%E7%A1%80/index.md target=_blank rel="noopener noreferrer">阅读原始文档</a></span></div><div class=post-info-share><span><a href=# title="分享到 Twitter" data-sharer=twitter data-url=http://www.honghuiqiang.com/202305040737-%E5%9B%BE%E5%9F%BA%E7%A1%80/ data-title=图基础 data-via=xxxx data-hashtags=图><i class="fab fa-twitter fa-fw"></i></a><a href=# title="分享到 Facebook" data-sharer=facebook data-url=http://www.honghuiqiang.com/202305040737-%E5%9B%BE%E5%9F%BA%E7%A1%80/ data-hashtag=图><i class="fab fa-facebook-square fa-fw"></i></a><a href=# title="分享到 WhatsApp" data-sharer=whatsapp data-url=http://www.honghuiqiang.com/202305040737-%E5%9B%BE%E5%9F%BA%E7%A1%80/ data-title=图基础 data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href=# title="分享到 Line" data-sharer=line data-url=http://www.honghuiqiang.com/202305040737-%E5%9B%BE%E5%9F%BA%E7%A1%80/ data-title=图基础><i data-svg-src=/lib/simple-icons/icons/line.min.svg></i></a><a href=# title="分享到 微博" data-sharer=weibo data-url=http://www.honghuiqiang.com/202305040737-%E5%9B%BE%E5%9F%BA%E7%A1%80/ data-title=图基础><i class="fab fa-weibo fa-fw"></i></a><a href=# title="分享到 Myspace" data-sharer=myspace data-url=http://www.honghuiqiang.com/202305040737-%E5%9B%BE%E5%9F%BA%E7%A1%80/ data-title=图基础 data-description><i data-svg-src=/lib/simple-icons/icons/myspace.min.svg></i></a><a href=# title="分享到 Blogger" data-sharer=blogger data-url=http://www.honghuiqiang.com/202305040737-%E5%9B%BE%E5%9F%BA%E7%A1%80/ data-title=图基础 data-description><i class="fab fa-blogger fa-fw"></i></a><a href=# title="分享到 Evernote" data-sharer=evernote data-url=http://www.honghuiqiang.com/202305040737-%E5%9B%BE%E5%9F%BA%E7%A1%80/ data-title=图基础><i class="fab fa-evernote fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/%E5%9B%BE/>图</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/202305080553-%E9%97%AE%E9%A2%98%E5%AE%9A%E4%BD%8D-evicted/ class=prev rel=prev title=问题定位：Evicted><i class="fas fa-angle-left fa-fw"></i>问题定位：Evicted</a>
+<a href=/202305031652-%E6%A0%91%E9%97%AE%E9%A2%98-%E5%88%A4%E6%96%AD%E5%AD%90%E6%A0%91/ class=next rel=next title=树问题-判断子树>树问题-判断子树<i class="fas fa-angle-right fa-fw"></i></a></div></div><div id=comments><div id=giscus></div><noscript>Please enable JavaScript to view the comments powered by <a href=https://giscus.app/>giscus</a>.</noscript></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>由 <a href=https://gohugo.io/ target=_blank rel="noopener noreferrer" title="Hugo 0.105.0">Hugo</a> 强力驱动&nbsp;|&nbsp;托管在 <a title="Github Pages" href=https://docs.github.com/en/pages/ target=_blank rel="noopener noreffer">GitHub Pages</a> 上&nbsp;|&nbsp;主题 - <a href=https://github.com/HEIGE-PCloud/DoIt target=_blank rel="noopener noreferrer" title="DoIt 0.3.0"><i class="far fa-edit fa-fw"></i> DoIt</a></div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2023</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank rel="noopener noreferrer">索隆不喝酒</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class=footer-line></div><div class=footer-line></div></div></footer></div><div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><div class=assets><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/katex/copy-tex.min.css><noscript><link rel=stylesheet href=/lib/katex/copy-tex.min.css></noscript><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:10},comment:{giscus:{darkTheme:"dark",dataCategory:"General",dataCategoryId:"DIC_kwDOJh9DwM4CWbTD",dataEmitMetadata:"0",dataInputPosition:"bottom",dataLang:"zh-CN",dataMapping:"pathname",dataReactionsEnabled:"1",dataRepo:"904566722/hugo-giscus-common-system",dataRepoId:"R_kgDOJh9DwA",dataStrict:"0",lightTheme:"light"}},data:{"desktop-header-typeit":"HHQ Records","mobile-header-typeit":"HHQ Records"},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,fuseIndexURL:"/index.json",highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,type:"fuse",useExtendedSearch:!1},sharerjs:!0,table:{sort:!0},typeit:{cursorChar:"|",cursorSpeed:1e3,data:{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},duration:-1,speed:100}}</script><script type=text/javascript src=/js/giscus.min.js defer></script><script type=text/javascript src=/lib/tablesort/tablesort.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/typeit/typeit.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><script type=text/javascript src=/js/theme.min.js defer></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-GKX5LKE0Z8",{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=G-GKX5LKE0Z8" async></script><script>var _hmt=_hmt||[];(function(){var e,t=document.createElement("script");t.src="https://hm.baidu.com/hm.js?7ee459037c39c6123ff6e6252a7c5301",e=document.getElementsByTagName("script")[0],e.parentNode.insertBefore(t,e)})()</script></div></body></html>

@@ -18,3 +18,6 @@
 1. [《操作系统导论》](https://book.douban.com/subject/33463930/)
 2. https://github.com/Vonng/ddia
 
+
+## algorithm
+1. https://www.hello-algo.com/chapter_tree/avl_tree/

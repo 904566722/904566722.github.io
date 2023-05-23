@@ -1,0 +1,313 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>平衡二叉搜索树-AVL - 学习记录</title><meta name=Description content="这是我的网站描述"><meta property="og:title" content="平衡二叉搜索树-AVL"><meta property="og:description" content><meta property="og:type" content="article"><meta property="og:url" content="http://www.honghuiqiang.com/202305222352-%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91-avl/"><meta property="og:image" content="http://www.honghuiqiang.com/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-05-22T23:05:00+08:00"><meta property="article:modified_time" content="2023-05-22T23:05:00+08:00"><meta property="og:site_name" content="学习记录"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="http://www.honghuiqiang.com/logo.png"><meta name=twitter:title content="平衡二叉搜索树-AVL"><meta name=twitter:description content><meta name=application-name content="HHQ Records"><meta name=apple-mobile-web-app-title content="HHQ Records"><meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel=icon href=/images/zoro.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=canonical href=http://www.honghuiqiang.com/202305222352-%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91-avl/><link rel=prev href=http://www.honghuiqiang.com/202305222017-%E6%9C%88%E4%BA%AE%E4%B8%8E%E5%85%AD%E4%BE%BF%E5%A3%AB/><link rel=next href=http://www.honghuiqiang.com/2023-05-23/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/color.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/fontawesome-free/all.min.css><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/animate/animate.min.css><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"平衡二叉搜索树-AVL","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http:\/\/www.honghuiqiang.com\/202305222352-%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91-avl\/"},"genre":"posts","keywords":"树","wordcount":1766,"url":"http:\/\/www.honghuiqiang.com\/202305222352-%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91-avl\/","datePublished":"2023-05-22T23:05:00+08:00","dateModified":"2023-05-22T23:05:00+08:00","publisher":{"@type":"Organization","name":""},"authors":[{"@type":"Person","name":"索隆不喝酒"}],"description":""}</script><script src=//instant.page/5.1.1 defer type=module integrity=sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq></script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(e){document.body.setAttribute("theme",e),document.documentElement.style.setProperty("color-scheme",e==="light"?"light":"dark"),window.theme=e,window.isDark=window.theme!=="light"}function saveTheme(e){window.localStorage&&localStorage.setItem("theme",e)}function getMeta(e){const t=document.getElementsByTagName("meta");for(let n=0;n<t.length;n++)if(t[n].getAttribute("name")===e)return t[n];return""}if(window.localStorage&&localStorage.getItem("theme")){let e=localStorage.getItem("theme");e==="light"||e==="dark"||e==="black"?setTheme(e):setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}else"dark"==="light"||"dark"==="dark"||"dark"==="black"?(setTheme("dark"),saveTheme("dark")):(saveTheme("auto"),setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));let metaColors={light:"#f8f8f8",dark:"#252627",black:"#000000"};getMeta("theme-color").content=metaColors[document.body.getAttribute("theme")],window.switchThemeEventSet=new Set</script><div id=back-to-top></div><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=学习记录><span id=desktop-header-typeit class=typeit></span></a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>文章 </a><a class=menu-item href=/categories/>分类 </a><a class=menu-item href=/series/>系列 </a><a class=menu-item href=/tags/>标签 </a><span class="menu-item delimiter"></span><a href=# class="menu-item language" title=选择语言>简体中文<i class="fas fa-chevron-right fa-fw"></i>
+<select class=language-select title="Select Language" id=language-select-desktop onchange="location=this.value"><option value=/202305222352-%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91-avl/ selected>简体中文</option></select>
+</a><span class="menu-item search" id=search-desktop><input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=# class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=# class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span>
+</span><a href=# class="menu-item theme-select" title=切换主题><i class="fas fa-adjust fa-fw"></i>
+<select class=color-theme-select id=theme-select-desktop title=切换主题><option value=light>浅色</option><option value=dark>深色</option><option value=black>黑色</option><option value=auto>跟随系统</option></select></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=学习记录><span id=mobile-header-typeit class=typeit></span></a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=# class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=# class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=# class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/ title>文章</a><a class=menu-item href=/categories/ title>分类</a><a class=menu-item href=/series/ title>系列</a><a class=menu-item href=/tags/ title>标签</a><a href=# class="menu-item theme-select" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+<select class=color-theme-select id=theme-select-mobile title=切换主题><option value=light>浅色</option><option value=dark>深色</option><option value=black>黑色</option><option value=auto>跟随系统</option></select>
+</a><a href=# class=menu-item title=选择语言>简体中文<i class="fas fa-chevron-right fa-fw"></i>
+<select class=language-select title="Select Language" onchange="location=this.value"><option value=/202305222352-%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91-avl/ selected>简体中文</option></select></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto><nav id=TableOfContents><ul><li><a href=#一概念>一、概念</a></li><li><a href=#二avl-的概念以及旋转分析>二、AVL 的概念以及旋转分析</a><ul><li><a href=#21-节点高度平衡因子>2.1 节点高度、平衡因子</a></li><li><a href=#22-四种旋转类型>2.2 四种旋转类型</a><ul><li><a href=#221-左旋>2.2.1 左旋</a></li><li><a href=#222-右旋>2.2.2 右旋</a></li><li><a href=#223-先左旋后右旋>2.2.3 先左旋后右旋</a></li><li><a href=#224-先右旋后左旋>2.2.4 先右旋后左旋</a></li></ul></li><li><a href=#23-如何选择旋转类型>2.3 如何选择旋转类型</a></li></ul></li><li><a href=#三其他操作>三、其他操作</a><ul><li><a href=#31-插入节点>3.1 插入节点</a></li><li><a href=#32-删除节点>3.2 删除节点</a></li></ul></li></ul></nav></div></div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">平衡二叉搜索树-AVL</h1><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=http://www.honghuiqiang.com/authors/%E7%B4%A2%E9%9A%86%E4%B8%8D%E5%96%9D%E9%85%92>索隆不喝酒</a></span>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/><i class="far fa-folder fa-fw"></i>数据结构与算法</a></span>&nbsp;<span class=post-category>和</span>&nbsp;<span class=post-series>系列 <a href=/series/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/><i class="far fa-list-alt fa-fw"></i>数据结构</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2023-05-22>2023-05-22</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2023-05-22>2023-05-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1766 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div></div><div class="details series-nav open"><div class="details-summary series-title"><span>系列 - 数据结构</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content series-content"><nav><ul><li><a href=/202304300709-%E6%A0%91/>树</a></li><li><span class=active>平衡二叉搜索树-AVL</span></li><li><a href=/202305040442-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/>二叉搜索树</a></li><li><a href=/202305040737-%E5%9B%BE/>图</a></li></ul></nav></div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#一概念>一、概念</a></li><li><a href=#二avl-的概念以及旋转分析>二、AVL 的概念以及旋转分析</a><ul><li><a href=#21-节点高度平衡因子>2.1 节点高度、平衡因子</a></li><li><a href=#22-四种旋转类型>2.2 四种旋转类型</a><ul><li><a href=#221-左旋>2.2.1 左旋</a></li><li><a href=#222-右旋>2.2.2 右旋</a></li><li><a href=#223-先左旋后右旋>2.2.3 先左旋后右旋</a></li><li><a href=#224-先右旋后左旋>2.2.4 先右旋后左旋</a></li></ul></li><li><a href=#23-如何选择旋转类型>2.3 如何选择旋转类型</a></li></ul></li><li><a href=#三其他操作>三、其他操作</a><ul><li><a href=#31-插入节点>3.1 插入节点</a></li><li><a href=#32-删除节点>3.2 删除节点</a></li></ul></li></ul></nav></div></div><div class=content id=content><p>#树</p><h2 id=一概念 class=headerLink><a href=#%e4%b8%80%e6%a6%82%e5%bf%b5 class=header-mark></a>一、概念</h2><ul><li>二叉搜索树：<code>left</code> &lt; <code>root</code> &lt; <code>right</code></li><li><strong>平衡</strong>二叉搜索树：在二叉搜索树的基础上，具有良好的<strong>平衡性</strong>（在插入的时候，需要借助一次或者多次树旋转），避免出现极端不平衡的情况</li></ul><table><thead><tr><th>树类型</th><th>最坏情况下的时间复杂度</th><th>插入、删除、查找</th></tr></thead><tbody><tr><td>二叉搜索树</td><td><code>O(n)</code>(当整棵树只有左节点或者只有右节点的情况)</td><td></td></tr><tr><td>平衡二叉搜索树</td><td><code>O(logn)</code></td><td>效率更高(都为<code>O(logn)</code>)</td></tr></tbody></table><p>常见的平衡二叉搜索树</p><ul><li>AVL</li><li>红黑树</li><li>B 树- B+ 树</li><li>&mldr;</li></ul><p>本文主要介绍 AVL 树</p><h2 id=二avl-的概念以及旋转分析 class=headerLink><a href=#%e4%ba%8cavl-%e7%9a%84%e6%a6%82%e5%bf%b5%e4%bb%a5%e5%8f%8a%e6%97%8b%e8%bd%ac%e5%88%86%e6%9e%90 class=header-mark></a>二、AVL 的概念以及旋转分析</h2><ul><li><code><strong><ruby>|h(ls) - h(rs)|<rt>平衡因子</rt></ruby></strong> &lt;= 1</code>：左右树高的差值不大于 1</li><li>空树是 AVL 树</li></ul><p>通过一张动态图观察树的几种旋转情况<figure><a class=lightgallery href=/images/posts/AVL_Tree_Example.gif title=/images/posts/AVL_Tree_Example.gif data-thumbnail=/images/posts/AVL_Tree_Example.gif><img loading=lazy src=/images/posts/AVL_Tree_Example.gif srcset="/images/posts/AVL_Tree_Example.gif, /images/posts/AVL_Tree_Example.gif 1.5x, /images/posts/AVL_Tree_Example.gif 2x" sizes=auto alt=/images/posts/AVL_Tree_Example.gif></a></figure></p><h3 id=21-节点高度平衡因子 class=headerLink><a href=#21-%e8%8a%82%e7%82%b9%e9%ab%98%e5%ba%a6%e5%b9%b3%e8%a1%a1%e5%9b%a0%e5%ad%90 class=header-mark></a>2.1 节点高度、平衡因子</h3><p>为了能够计算节点的平衡因子，节点结构中加入一个高度字段：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=hl><span class=lnt>3
+</span></span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>treeNode</span> <span class=kd>struct</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>val</span>    <span class=kt>int</span>  
+</span></span><span class="line hl"><span class=cl>   <span class=nx>height</span> <span class=kt>int</span> <span class=c1>// 节点高度  
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=nx>left</span>   <span class=o>*</span><span class=nx>treeNode</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>right</span>  <span class=o>*</span><span class=nx>treeNode</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><ul><li><strong>节点高度</strong> 表示节点到最远叶子节点的举例（也就是边的数量）</li><li>叶子节点的高度 = 0</li><li>空节点的高度 = -1</li></ul></blockquote><ul><li>定义两个分别用来<strong>获取节点高度、更新节点高度</strong>的方法：</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>avlTree</span><span class=p>)</span> <span class=nf>getHeight</span><span class=p>(</span><span class=nx>node</span> <span class=o>*</span><span class=nx>treeNode</span><span class=p>)</span> <span class=kt>int</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=c1>// 空节点高度为 -1   if node == nil {  
+</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=k>return</span> <span class=o>-</span><span class=mi>1</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl>   <span class=k>return</span> <span class=nx>node</span><span class=p>.</span><span class=nx>height</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>avlTree</span><span class=p>)</span> <span class=nf>updateHeight</span><span class=p>(</span><span class=nx>node</span> <span class=o>*</span><span class=nx>treeNode</span><span class=p>)</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=c1>// 节点高度等于最高子树的高度 + 1   
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=nx>t</span><span class=p>.</span><span class=nx>height</span> <span class=p>=</span> <span class=nf>max</span><span class=p>(</span><span class=nx>t</span><span class=p>.</span><span class=nf>getHeight</span><span class=p>(</span><span class=nx>node</span><span class=p>.</span><span class=nx>left</span><span class=p>),</span> <span class=nx>t</span><span class=p>.</span><span class=nf>getHeight</span><span class=p>(</span><span class=nx>node</span><span class=p>.</span><span class=nx>right</span><span class=p>))</span> <span class=o>+</span> <span class=mi>1</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li><strong>获取节点的平衡因子</strong></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// balanceFactor 获取平衡因子  
+</span></span></span><span class=line><span class=cl><span class=c1>// 设平衡因子为 f，平衡二叉树的平衡因子需满足：-1 &lt;= f &lt;= 1  
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>avlTree</span><span class=p>)</span> <span class=nf>balanceFactor</span><span class=p>(</span><span class=nx>node</span> <span class=o>*</span><span class=nx>treeNode</span><span class=p>)</span> <span class=kt>int</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=c1>// 空节点的平衡因子为 0   if node == nil {  
+</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=k>return</span> <span class=mi>0</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl>   <span class=c1>// 节点平衡因子 = 左子树高度 - 右子树高度  
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=k>return</span> <span class=nx>t</span><span class=p>.</span><span class=nf>getHeight</span><span class=p>(</span><span class=nx>node</span><span class=p>.</span><span class=nx>left</span><span class=p>)</span> <span class=o>-</span> <span class=nx>t</span><span class=p>.</span><span class=nf>getHeight</span><span class=p>(</span><span class=nx>node</span><span class=p>.</span><span class=nx>right</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=22-四种旋转类型 class=headerLink><a href=#22-%e5%9b%9b%e7%a7%8d%e6%97%8b%e8%bd%ac%e7%b1%bb%e5%9e%8b class=header-mark></a>2.2 四种旋转类型</h3><p>AVL 的特点就在于旋转（Roration），通过旋转可以让二叉树不失衡，根据节点的失衡情况，可以将分为四种旋转方式：<code>左旋</code>、<code>右旋</code>、<code>先左旋再右旋</code>、<code>先右旋再左旋</code></p><h4 id=221-左旋 class=headerLink><a href=#221-%e5%b7%a6%e6%97%8b class=header-mark></a>2.2.1 左旋</h4><p>具体图示分析与右旋类似</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>avlTree</span><span class=p>)</span> <span class=nf>leftRotate</span><span class=p>(</span><span class=nx>node</span> <span class=o>*</span><span class=nx>treeNode</span><span class=p>)</span> <span class=o>*</span><span class=nx>treeNode</span>  <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>child</span> <span class=o>:=</span> <span class=nx>node</span><span class=p>.</span><span class=nx>right</span>  
+</span></span><span class=line><span class=cl>   <span class=c1>// 消除碰撞，执行旋转  
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=nx>node</span><span class=p>.</span><span class=nx>right</span> <span class=p>=</span> <span class=nx>child</span><span class=p>.</span><span class=nx>left</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>child</span><span class=p>.</span><span class=nx>left</span> <span class=p>=</span> <span class=nx>node</span>  
+</span></span><span class=line><span class=cl>   <span class=c1>// 更新节点高度  
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=nx>t</span><span class=p>.</span><span class=nf>updateHeight</span><span class=p>(</span><span class=nx>node</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>t</span><span class=p>.</span><span class=nf>updateHeight</span><span class=p>(</span><span class=nx>child</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>   <span class=k>return</span> <span class=nx>child</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=222-右旋 class=headerLink><a href=#222-%e5%8f%b3%e6%97%8b class=header-mark></a>2.2.2 右旋</h4><p><strong>step1.</strong> 下面这棵树是 AVL 树<figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230523141413.png title=/images/posts/Pasted%20image%2020230523141413.png data-thumbnail=/images/posts/Pasted%20image%2020230523141413.png><img loading=lazy src=/images/posts/Pasted%20image%2020230523141413.png srcset="/images/posts/Pasted%20image%2020230523141413.png, /images/posts/Pasted%20image%2020230523141413.png 1.5x, /images/posts/Pasted%20image%2020230523141413.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230523141413.png></a></figure></p><p><strong>step2.</strong> 添加一个节点之后失衡<figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230523141447.png title=/images/posts/Pasted%20image%2020230523141447.png data-thumbnail=/images/posts/Pasted%20image%2020230523141447.png><img loading=lazy src=/images/posts/Pasted%20image%2020230523141447.png srcset="/images/posts/Pasted%20image%2020230523141447.png, /images/posts/Pasted%20image%2020230523141447.png 1.5x, /images/posts/Pasted%20image%2020230523141447.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230523141447.png></a></figure></p><p><strong>step3.</strong> 聚焦失衡子树<figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230523141505.png title=/images/posts/Pasted%20image%2020230523141505.png data-thumbnail=/images/posts/Pasted%20image%2020230523141505.png><img loading=lazy src=/images/posts/Pasted%20image%2020230523141505.png srcset="/images/posts/Pasted%20image%2020230523141505.png, /images/posts/Pasted%20image%2020230523141505.png 1.5x, /images/posts/Pasted%20image%2020230523141505.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230523141505.png></a></figure></p><p><strong>step4.</strong> 旋转操作<figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230523141944.png title=/images/posts/Pasted%20image%2020230523141944.png data-thumbnail=/images/posts/Pasted%20image%2020230523141944.png><img loading=lazy src=/images/posts/Pasted%20image%2020230523141944.png srcset="/images/posts/Pasted%20image%2020230523141944.png, /images/posts/Pasted%20image%2020230523141944.png 1.5x, /images/posts/Pasted%20image%2020230523141944.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230523141944.png></a></figure></p><blockquote><p><strong>step4.a</strong> 这里的 <code>child</code> 节点是没有右节点的，因此 <code>node</code> 节点的右旋过程是顺利的。在右旋操作中，如果 <code>child</code> 存在右节点，是会产生<strong>碰撞</strong>（碰撞只是为了个人方便记住存在这种情况引入的一个概念）的，那么在旋转之前，就必须<strong>消除碰撞</strong>：让 <code>grandchild</code> 作为 <code>node</code> 的左节点：<figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230523144334.png title=/images/posts/Pasted%20image%2020230523144334.png data-thumbnail=/images/posts/Pasted%20image%2020230523144334.png><img loading=lazy src=/images/posts/Pasted%20image%2020230523144334.png srcset="/images/posts/Pasted%20image%2020230523144334.png, /images/posts/Pasted%20image%2020230523144334.png 1.5x, /images/posts/Pasted%20image%2020230523144334.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230523144334.png></a></figure></p></blockquote><p><strong>step5.</strong> 子节点上移<figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230523142022.png title=/images/posts/Pasted%20image%2020230523142022.png data-thumbnail=/images/posts/Pasted%20image%2020230523142022.png><img loading=lazy src=/images/posts/Pasted%20image%2020230523142022.png srcset="/images/posts/Pasted%20image%2020230523142022.png, /images/posts/Pasted%20image%2020230523142022.png 1.5x, /images/posts/Pasted%20image%2020230523142022.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230523142022.png></a></figure></p><p>右旋代码：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// 右旋，返回平衡子树的根节点  
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kd>func</span> <span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>avlTree</span><span class=p>)</span> <span class=nf>rightRotate</span><span class=p>(</span><span class=nx>node</span> <span class=o>*</span><span class=nx>treeNode</span><span class=p>)</span> <span class=o>*</span><span class=nx>treeNode</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>child</span> <span class=o>:=</span> <span class=nx>node</span><span class=p>.</span><span class=nx>left</span>  
+</span></span><span class=line><span class=cl>   <span class=c1>// 消除碰撞，执行旋转  
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=nx>node</span><span class=p>.</span><span class=nx>left</span> <span class=p>=</span> <span class=nx>child</span><span class=p>.</span><span class=nx>right</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>child</span><span class=p>.</span><span class=nx>right</span> <span class=p>=</span> <span class=nx>node</span>  
+</span></span><span class=line><span class=cl>   <span class=c1>// 更新节点高度  
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=nx>t</span><span class=p>.</span><span class=nf>updateHeight</span><span class=p>(</span><span class=nx>node</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>t</span><span class=p>.</span><span class=nf>updateHeight</span><span class=p>(</span><span class=nx>child</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>   <span class=k>return</span> <span class=nx>child</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=223-先左旋后右旋 class=headerLink><a href=#223-%e5%85%88%e5%b7%a6%e6%97%8b%e5%90%8e%e5%8f%b3%e6%97%8b class=header-mark></a>2.2.3 先左旋后右旋</h4><p>下面是同样的一颗 AVL 树，如果新节点添加在最左叶子节点的左节点，是能够通过一次右旋操作恢复平衡的，但是如果新节点<strong>添加在最左叶子节点的右节点</strong>，需要先通过一次<code>左旋</code>（这次左旋是不会产生碰撞的）达到类似于新节点是添加在最左边的效果，然后就能通过上面提到的<code>右旋</code>操作来恢复平衡</p><p><figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230523153918.png title=/images/posts/Pasted%20image%2020230523153918.png data-thumbnail=/images/posts/Pasted%20image%2020230523153918.png><img loading=lazy src=/images/posts/Pasted%20image%2020230523153918.png srcset="/images/posts/Pasted%20image%2020230523153918.png, /images/posts/Pasted%20image%2020230523153918.png 1.5x, /images/posts/Pasted%20image%2020230523153918.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230523153918.png></a></figure></p><h4 id=224-先右旋后左旋 class=headerLink><a href=#224-%e5%85%88%e5%8f%b3%e6%97%8b%e5%90%8e%e5%b7%a6%e6%97%8b class=header-mark></a>2.2.4 先右旋后左旋</h4><p>相当于「先左旋后右旋」的镜像操作</p><h3 id=23-如何选择旋转类型 class=headerLink><a href=#23-%e5%a6%82%e4%bd%95%e9%80%89%e6%8b%a9%e6%97%8b%e8%bd%ac%e7%b1%bb%e5%9e%8b class=header-mark></a>2.3 如何选择旋转类型</h3><p>通过 2.2 的分析，我们可以总结得到：<figure><a class=lightgallery href=/images/posts/Pasted%20image%2020230523155729.png title=/images/posts/Pasted%20image%2020230523155729.png data-thumbnail=/images/posts/Pasted%20image%2020230523155729.png><img loading=lazy src=/images/posts/Pasted%20image%2020230523155729.png srcset="/images/posts/Pasted%20image%2020230523155729.png, /images/posts/Pasted%20image%2020230523155729.png 1.5x, /images/posts/Pasted%20image%2020230523155729.png 2x" sizes=auto alt=/images/posts/Pasted%20image%2020230523155729.png></a></figure></p><p>设平衡因子为 f</p><ul><li>左偏树：f > 1</li><li>右偏树：f &lt; -1</li></ul><p>我们可以通过分别判断 node 和 child 的平衡因子来选择执行哪种旋转操作</p><table><thead><tr><th>失衡节点的 f</th><th>子节点的 f</th><th>操作</th></tr></thead><tbody><tr><td>>1</td><td>>=0</td><td>右旋</td></tr><tr><td>>1</td><td>&lt;0</td><td>先左旋后右旋</td></tr><tr><td>&lt;-1</td><td>&lt;=0</td><td>左旋</td></tr><tr><td>&lt;-1</td><td>>0</td><td>先右旋后左旋</td></tr></tbody></table><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>avlTree</span><span class=p>)</span> <span class=nf>rotate</span><span class=p>(</span><span class=nx>node</span> <span class=o>*</span><span class=nx>treeNode</span><span class=p>)</span> <span class=o>*</span><span class=nx>treeNode</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=c1>// 失衡节点的平衡因子  
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=nx>bf</span> <span class=o>:=</span> <span class=nx>t</span><span class=p>.</span><span class=nf>balanceFactor</span><span class=p>(</span><span class=nx>node</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=k>if</span> <span class=nx>bf</span> <span class=p>&gt;</span> <span class=mi>1</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=k>if</span> <span class=nx>t</span><span class=p>.</span><span class=nf>balanceFactor</span><span class=p>(</span><span class=nx>node</span><span class=p>.</span><span class=nx>left</span><span class=p>)</span> <span class=o>&gt;=</span> <span class=mi>0</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>         <span class=k>return</span> <span class=nx>t</span><span class=p>.</span><span class=nf>rightRotate</span><span class=p>(</span><span class=nx>node</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>      <span class=p>}</span> <span class=k>else</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>         <span class=c1>// 先左旋，后右旋  
+</span></span></span><span class=line><span class=cl><span class=c1></span>         <span class=nx>node</span><span class=p>.</span><span class=nx>left</span> <span class=p>=</span> <span class=nx>t</span><span class=p>.</span><span class=nf>leftRotate</span><span class=p>(</span><span class=nx>node</span><span class=p>.</span><span class=nx>left</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>         <span class=k>return</span> <span class=nx>t</span><span class=p>.</span><span class=nf>rightRotate</span><span class=p>(</span><span class=nx>node</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>      <span class=p>}</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span> <span class=k>else</span> <span class=k>if</span> <span class=nx>bf</span> <span class=p>&lt;</span> <span class=o>-</span><span class=mi>1</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=k>if</span> <span class=nx>t</span><span class=p>.</span><span class=nf>balanceFactor</span><span class=p>(</span><span class=nx>node</span><span class=p>.</span><span class=nx>right</span><span class=p>)</span> <span class=o>&lt;=</span> <span class=mi>0</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>         <span class=k>return</span> <span class=nx>t</span><span class=p>.</span><span class=nf>leftRotate</span><span class=p>(</span><span class=nx>node</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>      <span class=p>}</span> <span class=k>else</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>         <span class=c1>// 先右旋，后左旋  
+</span></span></span><span class=line><span class=cl><span class=c1></span>         <span class=nx>node</span><span class=p>.</span><span class=nx>right</span> <span class=p>=</span> <span class=nx>t</span><span class=p>.</span><span class=nf>rightRotate</span><span class=p>(</span><span class=nx>node</span><span class=p>.</span><span class=nx>right</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>         <span class=k>return</span> <span class=nx>t</span><span class=p>.</span><span class=nf>leftRotate</span><span class=p>(</span><span class=nx>node</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>      <span class=p>}</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl>   <span class=c1>// 已经是平衡状态  
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=k>return</span> <span class=nx>node</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=三其他操作 class=headerLink><a href=#%e4%b8%89%e5%85%b6%e4%bb%96%e6%93%8d%e4%bd%9c class=header-mark></a>三、其他操作</h2><h3 id=31-插入节点 class=headerLink><a href=#31-%e6%8f%92%e5%85%a5%e8%8a%82%e7%82%b9 class=header-mark></a>3.1 插入节点</h3><p>平衡二叉搜索树在节点插入之后要维持树的平衡，从插入的节点开始，需要 <strong><code>自底向上执行旋转操作，使所有失衡节点恢复平衡</code></strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>avlTree</span><span class=p>)</span> <span class=nf>insert</span><span class=p>(</span><span class=nx>val</span> <span class=kt>int</span><span class=p>)</span>  <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>t</span><span class=p>.</span><span class=nx>root</span> <span class=p>=</span> <span class=nx>t</span><span class=p>.</span><span class=nf>insertHelper</span><span class=p>(</span><span class=nx>t</span><span class=p>.</span><span class=nx>root</span><span class=p>,</span> <span class=nx>val</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>avlTree</span><span class=p>)</span> <span class=nf>insertHelper</span><span class=p>(</span><span class=nx>node</span> <span class=o>*</span><span class=nx>treeNode</span><span class=p>,</span> <span class=nx>val</span> <span class=kt>int</span><span class=p>)</span> <span class=o>*</span><span class=nx>treeNode</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=k>if</span> <span class=nx>node</span> <span class=o>==</span> <span class=kc>nil</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=k>return</span> <span class=o>&amp;</span><span class=nx>treeNode</span><span class=p>{</span>  
+</span></span><span class=line><span class=cl>         <span class=nx>val</span><span class=p>:</span> <span class=nx>val</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=p>}</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>   <span class=cm>/* 1. 插入 */</span>   
+</span></span><span class=line><span class=cl>   <span class=k>if</span> <span class=nx>val</span> <span class=p>&lt;</span> <span class=nx>node</span><span class=p>.</span><span class=nx>val</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>node</span><span class=p>.</span><span class=nx>left</span> <span class=p>=</span> <span class=nx>t</span><span class=p>.</span><span class=nf>insertHelper</span><span class=p>(</span><span class=nx>node</span><span class=p>.</span><span class=nx>left</span><span class=p>,</span> <span class=nx>val</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span> <span class=k>else</span> <span class=k>if</span> <span class=nx>val</span> <span class=p>&gt;</span> <span class=nx>node</span><span class=p>.</span><span class=nx>val</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>node</span><span class=p>.</span><span class=nx>right</span> <span class=p>=</span> <span class=nx>t</span><span class=p>.</span><span class=nf>insertHelper</span><span class=p>(</span><span class=nx>node</span><span class=p>.</span><span class=nx>right</span><span class=p>,</span> <span class=nx>val</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span> <span class=k>else</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=c1>// 重复节点不插入  
+</span></span></span><span class=line><span class=cl><span class=c1></span>      <span class=k>return</span> <span class=nx>node</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>   <span class=c1>// 更新节点高度  
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=nx>t</span><span class=p>.</span><span class=nf>updateHeight</span><span class=p>(</span><span class=nx>node</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=cm>/* 2.执行旋转，恢复平衡 */</span>   
+</span></span><span class=line><span class=cl>   <span class=nx>node</span> <span class=p>=</span> <span class=nx>t</span><span class=p>.</span><span class=nf>rotate</span><span class=p>(</span><span class=nx>node</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=k>return</span> <span class=nx>node</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=32-删除节点 class=headerLink><a href=#32-%e5%88%a0%e9%99%a4%e8%8a%82%e7%82%b9 class=header-mark></a>3.2 删除节点</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>avlTree</span><span class=p>)</span> <span class=nf>remove</span><span class=p>(</span><span class=nx>val</span> <span class=kt>int</span><span class=p>)</span>  <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>t</span><span class=p>.</span><span class=nf>removeHelper</span><span class=p>(</span><span class=nx>t</span><span class=p>.</span><span class=nx>root</span><span class=p>,</span> <span class=nx>val</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>avlTree</span><span class=p>)</span> <span class=nf>removeHelper</span><span class=p>(</span><span class=nx>node</span> <span class=o>*</span><span class=nx>treeNode</span><span class=p>,</span> <span class=nx>val</span> <span class=kt>int</span><span class=p>)</span> <span class=o>*</span><span class=nx>treeNode</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=k>if</span> <span class=nx>node</span> <span class=o>==</span> <span class=kc>nil</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=k>return</span> <span class=kc>nil</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>   <span class=k>if</span> <span class=nx>val</span> <span class=p>&lt;</span> <span class=nx>node</span><span class=p>.</span><span class=nx>val</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>node</span><span class=p>.</span><span class=nx>left</span> <span class=p>=</span> <span class=nx>t</span><span class=p>.</span><span class=nf>removeHelper</span><span class=p>(</span><span class=nx>node</span><span class=p>.</span><span class=nx>left</span><span class=p>,</span> <span class=nx>val</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span> <span class=k>else</span> <span class=k>if</span> <span class=nx>val</span> <span class=p>&gt;</span> <span class=nx>node</span><span class=p>.</span><span class=nx>val</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>node</span><span class=p>.</span><span class=nx>right</span> <span class=p>=</span> <span class=nx>t</span><span class=p>.</span><span class=nf>removeHelper</span><span class=p>(</span><span class=nx>node</span><span class=p>.</span><span class=nx>right</span><span class=p>,</span> <span class=nx>val</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span> <span class=k>else</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=k>if</span> <span class=nx>node</span><span class=p>.</span><span class=nx>left</span> <span class=o>==</span> <span class=kc>nil</span> <span class=o>||</span> <span class=nx>node</span><span class=p>.</span><span class=nx>right</span> <span class=o>==</span> <span class=kc>nil</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>         <span class=nx>child</span> <span class=o>:=</span> <span class=nx>node</span><span class=p>.</span><span class=nx>left</span>  
+</span></span><span class=line><span class=cl>         <span class=k>if</span> <span class=nx>node</span><span class=p>.</span><span class=nx>right</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>            <span class=nx>child</span> <span class=p>=</span> <span class=nx>node</span><span class=p>.</span><span class=nx>right</span>  
+</span></span><span class=line><span class=cl>         <span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>         <span class=k>if</span> <span class=nx>child</span> <span class=o>==</span> <span class=kc>nil</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>            <span class=c1>// 没有子树，直接删除节点即可  
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=k>return</span> <span class=kc>nil</span>  
+</span></span><span class=line><span class=cl>         <span class=p>}</span> <span class=k>else</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>            <span class=c1>// 有至多一个节点，返回该节点  
+</span></span></span><span class=line><span class=cl><span class=c1></span>            <span class=k>return</span> <span class=nx>child</span>  
+</span></span><span class=line><span class=cl>         <span class=p>}</span>  
+</span></span><span class=line><span class=cl>      <span class=p>}</span> <span class=k>else</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>         <span class=c1>// 子节点的数量为 2，删除当前节点的后继节点，并用后继节点的值替换当前节点  
+</span></span></span><span class=line><span class=cl><span class=c1></span>         <span class=nx>tmp</span> <span class=o>:=</span> <span class=nx>node</span><span class=p>.</span><span class=nx>right</span>  
+</span></span><span class=line><span class=cl>         <span class=k>for</span> <span class=nx>tmp</span><span class=p>.</span><span class=nx>left</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>            <span class=nx>tmp</span> <span class=p>=</span> <span class=nx>tmp</span><span class=p>.</span><span class=nx>left</span>  
+</span></span><span class=line><span class=cl>         <span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>         <span class=c1>// 递归删除这个后继节点  
+</span></span></span><span class=line><span class=cl><span class=c1></span>         <span class=nx>node</span><span class=p>.</span><span class=nx>right</span> <span class=p>=</span> <span class=nx>t</span><span class=p>.</span><span class=nf>removeHelper</span><span class=p>(</span><span class=nx>node</span><span class=p>.</span><span class=nx>right</span><span class=p>,</span> <span class=nx>tmp</span><span class=p>.</span><span class=nx>val</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>         <span class=c1>// 替换当前节点  
+</span></span></span><span class=line><span class=cl><span class=c1></span>         <span class=nx>node</span><span class=p>.</span><span class=nx>val</span> <span class=p>=</span> <span class=nx>tmp</span><span class=p>.</span><span class=nx>val</span>  
+</span></span><span class=line><span class=cl>      <span class=p>}</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>   <span class=c1>// 更新节点高度  
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=nx>t</span><span class=p>.</span><span class=nf>updateHeight</span><span class=p>(</span><span class=nx>node</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=cm>/* 执行旋转，保持平衡 */</span>   
+</span></span><span class=line><span class=cl>   <span class=nx>node</span> <span class=p>=</span> <span class=nx>t</span><span class=p>.</span><span class=nf>rotate</span><span class=p>(</span><span class=nx>node</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=k>return</span> <span class=nx>node</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><hr><ol><li><a href=https://www.hello-algo.com/chapter_tree/avl_tree/#751-avl target=_blank rel="noopener noreferrer">https://www.hello-algo.com/chapter_tree/avl_tree/#751-avl</a></li></ol></div><h2>相关内容</h2><div class=related-container><div class=related-item-container><h2 class=related-title><a href=/202305040442-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/>二叉搜索树</a></h2></div><div class=related-item-container><h2 class=related-title><a href=/202304300709-%E6%A0%91/>树</a></h2></div><div class=related-item-container><h2 class=related-title><a href=/202305021918-%E6%A0%91%E9%97%AE%E9%A2%98-%E8%B7%AF%E5%BE%84%E6%B1%82%E5%92%8C/>树问题-路径求和</a></h2></div><div class=related-item-container><h2 class=related-title><a href=/202305031652-%E6%A0%91%E9%97%AE%E9%A2%98-%E5%88%A4%E6%96%AD%E5%AD%90%E6%A0%91/>树问题-判断子树</a></h2></div></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2023-05-22</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md><span><a class=link-to-mardown href=/202305222352-%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91-avl/index.md target=_blank rel="noopener noreferrer">阅读原始文档</a></span></div><div class=post-info-share><span><a href=# title="分享到 Twitter" data-sharer=twitter data-url=http://www.honghuiqiang.com/202305222352-%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91-avl/ data-title=平衡二叉搜索树-AVL data-via=xxxx data-hashtags=树><i class="fab fa-twitter fa-fw"></i></a><a href=# title="分享到 Facebook" data-sharer=facebook data-url=http://www.honghuiqiang.com/202305222352-%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91-avl/ data-hashtag=树><i class="fab fa-facebook-square fa-fw"></i></a><a href=# title="分享到 WhatsApp" data-sharer=whatsapp data-url=http://www.honghuiqiang.com/202305222352-%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91-avl/ data-title=平衡二叉搜索树-AVL data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href=# title="分享到 Line" data-sharer=line data-url=http://www.honghuiqiang.com/202305222352-%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91-avl/ data-title=平衡二叉搜索树-AVL><i data-svg-src=/lib/simple-icons/icons/line.min.svg></i></a><a href=# title="分享到 微博" data-sharer=weibo data-url=http://www.honghuiqiang.com/202305222352-%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91-avl/ data-title=平衡二叉搜索树-AVL><i class="fab fa-weibo fa-fw"></i></a><a href=# title="分享到 Myspace" data-sharer=myspace data-url=http://www.honghuiqiang.com/202305222352-%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91-avl/ data-title=平衡二叉搜索树-AVL data-description><i data-svg-src=/lib/simple-icons/icons/myspace.min.svg></i></a><a href=# title="分享到 Blogger" data-sharer=blogger data-url=http://www.honghuiqiang.com/202305222352-%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91-avl/ data-title=平衡二叉搜索树-AVL data-description><i class="fab fa-blogger fa-fw"></i></a><a href=# title="分享到 Evernote" data-sharer=evernote data-url=http://www.honghuiqiang.com/202305222352-%E5%B9%B3%E8%A1%A1%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91-avl/ data-title=平衡二叉搜索树-AVL><i class="fab fa-evernote fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw"></i>&nbsp;<a href=/tags/%E6%A0%91/>树</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/202305222017-%E6%9C%88%E4%BA%AE%E4%B8%8E%E5%85%AD%E4%BE%BF%E5%A3%AB/ class=prev rel=prev title=《月亮与六便士》><i class="fas fa-angle-left fa-fw"></i>《月亮与六便士》</a>
+<a href=/2023-05-23/ class=next rel=next title="2023-05-23 日记录">2023-05-23 日记录<i class="fas fa-angle-right fa-fw"></i></a></div></div><div id=comments><div id=giscus></div><noscript>Please enable JavaScript to view the comments powered by <a href=https://giscus.app/>giscus</a>.</noscript></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>由 <a href=https://gohugo.io/ target=_blank rel="noopener noreferrer" title="Hugo 0.105.0">Hugo</a> 强力驱动&nbsp;|&nbsp;托管在 <a title="Github Pages" href=https://docs.github.com/en/pages/ target=_blank rel="noopener noreffer">GitHub Pages</a> 上&nbsp;|&nbsp;主题 - <a href=https://github.com/HEIGE-PCloud/DoIt target=_blank rel="noopener noreferrer" title="DoIt 0.3.0"><i class="far fa-edit fa-fw"></i> DoIt</a></div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2023</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank rel="noopener noreferrer">索隆不喝酒</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class=footer-line></div><div class=footer-line></div></div></footer></div><div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><div class=assets><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/katex/copy-tex.min.css><noscript><link rel=stylesheet href=/lib/katex/copy-tex.min.css></noscript><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:10},comment:{giscus:{darkTheme:"dark",dataCategory:"General",dataCategoryId:"DIC_kwDOJh9DwM4CWbTD",dataEmitMetadata:"0",dataInputPosition:"bottom",dataLang:"zh-CN",dataMapping:"pathname",dataReactionsEnabled:"1",dataRepo:"904566722/hugo-giscus-common-system",dataRepoId:"R_kgDOJh9DwA",dataStrict:"0",lightTheme:"light"}},data:{"desktop-header-typeit":"HHQ Records","mobile-header-typeit":"HHQ Records"},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,fuseIndexURL:"/index.json",highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,type:"fuse",useExtendedSearch:!1},sharerjs:!0,table:{sort:!0},typeit:{cursorChar:"|",cursorSpeed:1e3,data:{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},duration:-1,speed:100}}</script><script type=text/javascript src=/js/giscus.min.js defer></script><script type=text/javascript src=/lib/tablesort/tablesort.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/typeit/typeit.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><script type=text/javascript src=/js/theme.min.js defer></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-GKX5LKE0Z8",{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=G-GKX5LKE0Z8" async></script><script>var _hmt=_hmt||[];(function(){var e,t=document.createElement("script");t.src="https://hm.baidu.com/hm.js?7ee459037c39c6123ff6e6252a7c5301",e=document.getElementsByTagName("script")[0],e.parentNode.insertBefore(t,e)})()</script></div></body></html>

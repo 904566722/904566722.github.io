@@ -5,9 +5,12 @@
 
 #算法 
 
-## 二叉搜索树树概述
+## 二叉搜索树概述
 
 二叉搜索树：`左子树所有节点的值` < `根节点` < `右子树所有节点的值`
+
+比如：
+![](images/posts/树-导出.png)
 
 二叉搜索树的相关操作：
 - 构建
@@ -127,7 +130,7 @@ func deleteNode(root *TreeNode, key int) *TreeNode {
   
       rightMinNode.Left = cur.Left  
       cur = cur.Right  
-   } else if cur.Left != nil {  
+   } else if cur.Left != nil {
       cur = cur.Left  
    } else if cur.Right != nil {  
       cur = cur.Right  
@@ -144,5 +147,156 @@ func deleteNode(root *TreeNode, key int) *TreeNode {
       curParent.Right = cur  
    }  
    return root  
+}
+```
+
+2023/05/23 重新回顾一下删除节点的操作，二叉搜索树的节点删除可以根据删除节点的子树数量分为三种情况来讨论：
+- 没有子树
+- 只有一棵子树
+- 有两棵子树
+
+#### 没有子树
+![](images/posts/Pasted%20image%2020230523175351.png)
+
+#### 有一棵子树
+![](images/posts/Pasted%20image%2020230523175443.png)
+
+#### 有两棵子树
+
+**step1.** 找到目标节点
+![](images/posts/Pasted%20image%2020230523182032.png)
+
+**step2.** 将 **`目标节点的子树数量变成 1`**  
+![](images/posts/Pasted%20image%2020230523182141.png)
+
+**step3.** 用右子树根节点代替目标节点位置
+![](images/posts/Pasted%20image%2020230523182231.png)
+
+**总结：**
+|子树数量|操作|
+|-|-|
+|0|直接删除|
+|1|子树代替目标节点|
+|2|重新构建子树，使其只有一颗子树，然后使用上面方法|
+
+#### 有两棵子树的情况下，有多种方式来重建子树
+
+使用「嫁接」的方式实现：
+```go
+// delete 使用「嫁接」的方式来删除  
+func (bst *binarySearchTree) delete(val int)  {  
+   tgt := bst.root  
+   if tgt == nil {  
+      return  
+   }  
+  
+   var parent *treeNode = nil  
+   for tgt != nil {  
+      // 找到目标节点（待删除节点）  
+      if tgt.val == val {  
+         break  
+      }  
+  
+      parent = tgt  
+      if val < tgt.val {  
+         tgt = tgt.left  
+      } else {  
+         tgt = tgt.right  
+      }  
+   }  
+  
+   // 不存在  
+   if tgt == nil {  
+      return  
+   }  
+  
+   // 不存在子树或者只有一棵子树的情况  
+   // - 若存在子树，则使用子树代替待删除节点即可  
+   // - 否则直接将待删除节点删除  
+   if tgt.left == nil || tgt.right == nil {  
+      if tgt.left == nil {  
+         tgt = tgt.left  
+      } else {  
+         tgt = tgt.right  
+      }  
+  
+   // 存在两棵子树的情况  
+   // child 为右节点根节点  
+   } else {  
+      tmp := tgt.right  
+      // 将待删除节点的左子树嫁接到右子树的最左节点  
+      for tmp.left != nil {  
+         tmp = tmp.left  
+      }  
+      tmp.left = tgt.left  
+  
+      tgt = tgt.right  
+   }  
+  
+   if parent == nil {  
+      bst.root = tgt  
+      return  
+   }  
+   if parent.left != nil && parent.left.val == val {  
+      parent.left = tgt  
+   } else {  
+      parent.right = tgt  
+   }  
+}
+```
+
+使用「后继节点」替代待删除节点：
+```go
+/* 删除节点 */func (bst *binarySearchTree) remove2(num int) {  
+   cur := bst.root  
+   // 若树为空，直接提前返回  
+   if cur == nil {  
+      return  
+   }  
+   // 待删除节点之前的节点位置  
+   var pre *treeNode = nil  
+   // 循环查找，越过叶节点后跳出  
+   for cur != nil {  
+      if cur.val == num {  
+         break  
+      }  
+      pre = cur  
+      if cur.val < num {  
+         // 待删除节点在右子树中  
+         cur = cur.right  
+      } else {  
+         // 待删除节点在左子树中  
+         cur = cur.right  
+      }  
+   }  
+   // 若无待删除节点，则直接返回  
+   if cur == nil {  
+      return  
+   }  
+   // 子节点数为 0 或 1   if cur.left == nil || cur.right == nil {  
+      var child *treeNode = nil  
+      // 取出待删除节点的子节点  
+      if cur.left != nil {  
+         child = cur.left  
+      } else {  
+         child = cur.right  
+      }  
+      // 将子节点替换为待删除节点  
+      if pre.left == cur {  
+         pre.left = child  
+      } else {  
+         pre.right = child  
+      }  
+      // 子节点数为 2   } else {  
+      // 获取中序遍历中待删除节点 cur 的下一个节点  
+      tmp := cur.right  
+      for tmp.left != nil {  
+         tmp = tmp.left  
+      }  
+      // 递归删除节点 tmp      
+      bst.remove2(tmp.val)  
+      // 用 tmp 覆盖 cur      
+      cur.val = tmp.val  
+   }  
 }
 ```

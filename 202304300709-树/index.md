@@ -262,9 +262,9 @@ func levelOrder(root *treeNode)  {
 
 ## 树的一些常见问题
 
-[202305021918 树问题-路径求和](content/posts/algorithm/202305021918%20树问题-路径求和.md)
+（local [202305021918 树问题-路径求和](content/posts/algorithm/202305021918%20树问题-路径求和.md) remote  [202305021918 树问题-路径求和](http://honghuiqiang.com/202305021918-%E6%A0%91%E9%97%AE%E9%A2%98-%E8%B7%AF%E5%BE%84%E6%B1%82%E5%92%8C)）
 
-[202305031652 树问题-判断子树](content/posts/algorithm/202305031652%20树问题-判断子树.md)
+（local [202305031652 树问题-判断子树](content/posts/algorithm/202305031652%20树问题-判断子树.md) remote [202305031652 树问题-判断子树](http://honghuiqiang.com/202305031652-%E6%A0%91%E9%97%AE%E9%A2%98-%E5%88%A4%E6%96%AD%E5%AD%90%E6%A0%91)）
 
 ---
 1. 《02.二叉树的遍历知识》. 见于 2023年4月30日. [https://algo.itcharge.cn/07.Tree/01.Binary-Tree/02.Binary-Tree-Traverse/](https://algo.itcharge.cn/07.Tree/01.Binary-Tree/02.Binary-Tree-Traverse/).

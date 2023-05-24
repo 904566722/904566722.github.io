@@ -12,7 +12,7 @@ axisFormat %H:%M
 tickInterval 1h
 title 今天大概要做
 
-section xxx
+section 
 	
 section 习惯
 	算法每日一题: 1h

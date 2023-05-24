@@ -1,0 +1,473 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>使用值、指针作为方法的参数的一点区别 - 学习记录</title><meta name=Description content="这是我的网站描述"><meta property="og:title" content="使用值、指针作为方法的参数的一点区别"><meta property="og:description" content><meta property="og:type" content="article"><meta property="og:url" content="http://www.honghuiqiang.com/202305241402-%E4%BD%BF%E7%94%A8%E5%80%BC%E6%8C%87%E9%92%88%E4%BD%9C%E4%B8%BA%E6%96%B9%E6%B3%95%E7%9A%84%E5%8F%82%E6%95%B0%E7%9A%84%E4%B8%80%E7%82%B9%E5%8C%BA%E5%88%AB/"><meta property="og:image" content="http://www.honghuiqiang.com/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-05-24T14:05:00+08:00"><meta property="article:modified_time" content="2023-05-24T14:05:00+08:00"><meta property="og:site_name" content="学习记录"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="http://www.honghuiqiang.com/logo.png"><meta name=twitter:title content="使用值、指针作为方法的参数的一点区别"><meta name=twitter:description content><meta name=application-name content="HHQ Records"><meta name=apple-mobile-web-app-title content="HHQ Records"><meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel=icon href=/images/zoro.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=canonical href=http://www.honghuiqiang.com/202305241402-%E4%BD%BF%E7%94%A8%E5%80%BC%E6%8C%87%E9%92%88%E4%BD%9C%E4%B8%BA%E6%96%B9%E6%B3%95%E7%9A%84%E5%8F%82%E6%95%B0%E7%9A%84%E4%B8%80%E7%82%B9%E5%8C%BA%E5%88%AB/><link rel=prev href=http://www.honghuiqiang.com/2023-05-24/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/color.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/fontawesome-free/all.min.css><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/animate/animate.min.css><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"使用值、指针作为方法的参数的一点区别","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http:\/\/www.honghuiqiang.com\/202305241402-%E4%BD%BF%E7%94%A8%E5%80%BC%E6%8C%87%E9%92%88%E4%BD%9C%E4%B8%BA%E6%96%B9%E6%B3%95%E7%9A%84%E5%8F%82%E6%95%B0%E7%9A%84%E4%B8%80%E7%82%B9%E5%8C%BA%E5%88%AB\/"},"genre":"posts","wordcount":1624,"url":"http:\/\/www.honghuiqiang.com\/202305241402-%E4%BD%BF%E7%94%A8%E5%80%BC%E6%8C%87%E9%92%88%E4%BD%9C%E4%B8%BA%E6%96%B9%E6%B3%95%E7%9A%84%E5%8F%82%E6%95%B0%E7%9A%84%E4%B8%80%E7%82%B9%E5%8C%BA%E5%88%AB\/","datePublished":"2023-05-24T14:05:00+08:00","dateModified":"2023-05-24T14:05:00+08:00","publisher":{"@type":"Organization","name":""},"authors":[{"@type":"Person","name":"索隆不喝酒"}],"description":""}</script><script src=//instant.page/5.1.1 defer type=module integrity=sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq></script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(e){document.body.setAttribute("theme",e),document.documentElement.style.setProperty("color-scheme",e==="light"?"light":"dark"),window.theme=e,window.isDark=window.theme!=="light"}function saveTheme(e){window.localStorage&&localStorage.setItem("theme",e)}function getMeta(e){const t=document.getElementsByTagName("meta");for(let n=0;n<t.length;n++)if(t[n].getAttribute("name")===e)return t[n];return""}if(window.localStorage&&localStorage.getItem("theme")){let e=localStorage.getItem("theme");e==="light"||e==="dark"||e==="black"?setTheme(e):setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}else"dark"==="light"||"dark"==="dark"||"dark"==="black"?(setTheme("dark"),saveTheme("dark")):(saveTheme("auto"),setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));let metaColors={light:"#f8f8f8",dark:"#252627",black:"#000000"};getMeta("theme-color").content=metaColors[document.body.getAttribute("theme")],window.switchThemeEventSet=new Set</script><div id=back-to-top></div><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=学习记录><span id=desktop-header-typeit class=typeit></span></a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>文章 </a><a class=menu-item href=/categories/>分类 </a><a class=menu-item href=/series/>系列 </a><a class=menu-item href=/tags/>标签 </a><span class="menu-item delimiter"></span><a href=# class="menu-item language" title=选择语言>简体中文<i class="fas fa-chevron-right fa-fw"></i>
+<select class=language-select title="Select Language" id=language-select-desktop onchange="location=this.value"><option value=/202305241402-%E4%BD%BF%E7%94%A8%E5%80%BC%E6%8C%87%E9%92%88%E4%BD%9C%E4%B8%BA%E6%96%B9%E6%B3%95%E7%9A%84%E5%8F%82%E6%95%B0%E7%9A%84%E4%B8%80%E7%82%B9%E5%8C%BA%E5%88%AB/ selected>简体中文</option></select>
+</a><span class="menu-item search" id=search-desktop><input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=# class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=# class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span>
+</span><a href=# class="menu-item theme-select" title=切换主题><i class="fas fa-adjust fa-fw"></i>
+<select class=color-theme-select id=theme-select-desktop title=切换主题><option value=light>浅色</option><option value=dark>深色</option><option value=black>黑色</option><option value=auto>跟随系统</option></select></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=学习记录><span id=mobile-header-typeit class=typeit></span></a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=# class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=# class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=# class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/ title>文章</a><a class=menu-item href=/categories/ title>分类</a><a class=menu-item href=/series/ title>系列</a><a class=menu-item href=/tags/ title>标签</a><a href=# class="menu-item theme-select" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+<select class=color-theme-select id=theme-select-mobile title=切换主题><option value=light>浅色</option><option value=dark>深色</option><option value=black>黑色</option><option value=auto>跟随系统</option></select>
+</a><a href=# class=menu-item title=选择语言>简体中文<i class="fas fa-chevron-right fa-fw"></i>
+<select class=language-select title="Select Language" onchange="location=this.value"><option value=/202305241402-%E4%BD%BF%E7%94%A8%E5%80%BC%E6%8C%87%E9%92%88%E4%BD%9C%E4%B8%BA%E6%96%B9%E6%B3%95%E7%9A%84%E5%8F%82%E6%95%B0%E7%9A%84%E4%B8%80%E7%82%B9%E5%8C%BA%E5%88%AB/ selected>简体中文</option></select></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto><nav id=TableOfContents><ul><li><a href=#观察测试结果>观察测试结果</a></li><li><a href=#为什么指针传递比值传递更慢>为什么指针传递比值传递更慢？</a></li></ul></nav></div></div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">使用值、指针作为方法的参数的一点区别</h1><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=http://www.honghuiqiang.com/authors/%E7%B4%A2%E9%9A%86%E4%B8%8D%E5%96%9D%E9%85%92>索隆不喝酒</a></span>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%81%B5%E6%84%9F%E6%96%87%E7%8C%AE%E7%AC%94%E8%AE%B0%E9%9D%9E%E6%B0%B8%E4%B9%85%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>灵感、文献笔记（非永久笔记）</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2023-05-24>2023-05-24</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2023-05-24>2023-05-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1624 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#观察测试结果>观察测试结果</a></li><li><a href=#为什么指针传递比值传递更慢>为什么指针传递比值传递更慢？</a></li></ul></nav></div></div><div class=content id=content><h1 id=heading class=headerLink><a href=#heading class=header-mark></a></h1><h2 id=观察测试结果 class=headerLink><a href=#%e8%a7%82%e5%af%9f%e6%b5%8b%e8%af%95%e7%bb%93%e6%9e%9c class=header-mark></a>观察测试结果</h2><p>测试来自项目<a href=https://github.com/jincheng9/go-tutorial/tree/main target=_blank rel="noopener noreferrer">go-tutorial</a>的其中一个片段：</p><p><a href=https://github.com/jincheng9/go-tutorial/blob/main/workspace/senior/p28/pointer/pointer_test.go target=_blank rel="noopener noreferrer">https://github.com/jincheng9/go-tutorial/blob/main/workspace/senior/p28/pointer/pointer_test.go</a></p><p>先给出这个基准测试的一些结果：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>honghuiqiang@192 pointer % go test -bench .
+</span></span><span class=line><span class=cl>goos: darwin
+</span></span><span class=line><span class=cl>goarch: arm64
+</span></span><span class=line><span class=cl>pkg: pointer
+</span></span><span class=line><span class=cl>BenchmarkByPointer-8    25197861                48.82 ns/op
+</span></span><span class=line><span class=cl>BenchmarkByValue-8      37650502                31.92 ns/op
+</span></span><span class=line><span class=cl>PASS
+</span></span><span class=line><span class=cl>ok      pointer 3.511s
+</span></span><span class=line><span class=cl>honghuiqiang@192 pointer % go test -bench .
+</span></span><span class=line><span class=cl>goos: darwin
+</span></span><span class=line><span class=cl>goarch: arm64
+</span></span><span class=line><span class=cl>pkg: pointer
+</span></span><span class=line><span class=cl>BenchmarkByPointer-8    25348558                48.21 ns/op
+</span></span><span class=line><span class=cl>BenchmarkByValue-8      37798746                31.40 ns/op
+</span></span><span class=line><span class=cl>PASS
+</span></span><span class=line><span class=cl>ok      pointer 3.525
+</span></span></code></pre></td></tr></table></div></div><p>结果：</p><ul><li>使用 <strong><code>指针传递更节省内存</code></strong>，这是显然的</li><li>使用指针传递比使用值传递更慢，这是为什么？既然省去了新开辟内存的时间，不应该更快吗？</li></ul><h2 id=为什么指针传递比值传递更慢 class=headerLink><a href=#%e4%b8%ba%e4%bb%80%e4%b9%88%e6%8c%87%e9%92%88%e4%bc%a0%e9%80%92%e6%af%94%e5%80%bc%e4%bc%a0%e9%80%92%e6%9b%b4%e6%85%a2 class=header-mark></a>为什么指针传递比值传递更慢？</h2><p>给出该测试具体的代码：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=hl><span class=lnt> 50
+</span></span><span class=hl><span class=lnt> 51
+</span></span><span class=hl><span class=lnt> 52
+</span></span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=hl><span class=lnt> 58
+</span></span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=hl><span class=lnt> 83
+</span></span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span> <span class=nx>foo</span> <span class=kd>struct</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>ID</span>            <span class=kt>string</span>  <span class=s>`json:&#34;_id&#34;`</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>Index</span>         <span class=kt>int</span>     <span class=s>`json:&#34;index&#34;`</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>GUID</span>          <span class=kt>string</span>  <span class=s>`json:&#34;guid&#34;`</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>IsActive</span>      <span class=kt>bool</span>    <span class=s>`json:&#34;isActive&#34;`</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>Balance</span>       <span class=kt>string</span>  <span class=s>`json:&#34;balance&#34;`</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>Picture</span>       <span class=kt>string</span>  <span class=s>`json:&#34;picture&#34;`</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>Age</span>           <span class=kt>int</span>     <span class=s>`json:&#34;age&#34;`</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>EyeColor</span>      <span class=kt>string</span>  <span class=s>`json:&#34;eyeColor&#34;`</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>Name</span>          <span class=kt>string</span>  <span class=s>`json:&#34;name&#34;`</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>Gender</span>        <span class=kt>string</span>  <span class=s>`json:&#34;gender&#34;`</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>Company</span>       <span class=kt>string</span>  <span class=s>`json:&#34;company&#34;`</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>Email</span>         <span class=kt>string</span>  <span class=s>`json:&#34;email&#34;`</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>Phone</span>         <span class=kt>string</span>  <span class=s>`json:&#34;phone&#34;`</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>Address</span>       <span class=kt>string</span>  <span class=s>`json:&#34;address&#34;`</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>About</span>         <span class=kt>string</span>  <span class=s>`json:&#34;about&#34;`</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>Registered</span>    <span class=kt>string</span>  <span class=s>`json:&#34;registered&#34;`</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>Latitude</span>      <span class=kt>float64</span> <span class=s>`json:&#34;latitude&#34;`</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>Longitude</span>     <span class=kt>float64</span> <span class=s>`json:&#34;longitude&#34;`</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>Greeting</span>      <span class=kt>string</span>  <span class=s>`json:&#34;greeting&#34;`</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>FavoriteFruit</span> <span class=kt>string</span>  <span class=s>`json:&#34;favoriteFruit&#34;`</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=kd>type</span> <span class=nx>bar</span> <span class=kd>struct</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>ID</span>            <span class=kt>string</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>Index</span>         <span class=kt>int</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>GUID</span>          <span class=kt>string</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>IsActive</span>      <span class=kt>bool</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>Balance</span>       <span class=kt>string</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>Picture</span>       <span class=kt>string</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>Age</span>           <span class=kt>int</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>EyeColor</span>      <span class=kt>string</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>Name</span>          <span class=kt>string</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>Gender</span>        <span class=kt>string</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>Company</span>       <span class=kt>string</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>Email</span>         <span class=kt>string</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>Phone</span>         <span class=kt>string</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>Address</span>       <span class=kt>string</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>About</span>         <span class=kt>string</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>Registered</span>    <span class=kt>string</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>Latitude</span>      <span class=kt>float64</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>Longitude</span>     <span class=kt>float64</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>Greeting</span>      <span class=kt>string</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>FavoriteFruit</span> <span class=kt>string</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=kd>var</span> <span class=nx>input</span> <span class=nx>foo</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>init</span><span class=p>()</span> <span class=p>{</span>  
+</span></span><span class="line hl"><span class=cl>   <span class=nx>err</span> <span class=o>:=</span> <span class=nx>json</span><span class=p>.</span><span class=nf>Unmarshal</span><span class=p>([]</span><span class=nb>byte</span><span class=p>(</span><span class=s>`{  
+</span></span></span><span class="line hl"><span class=cl><span class=s>    &#34;_id&#34;: &#34;5d2f4fcf76c35513af00d47e&#34;,    &#34;index&#34;: 1,    &#34;guid&#34;: &#34;ed687a14-590b-4d81-b0cb-ddaa857874ee&#34;,    &#34;isActive&#34;: true,    &#34;balance&#34;: &#34;$3,837.19&#34;,    &#34;picture&#34;: &#34;http://placehold.it/32x32&#34;,    &#34;age&#34;: 28,    &#34;eyeColor&#34;: &#34;green&#34;,    &#34;name&#34;: &#34;Rochelle Espinoza&#34;,    &#34;gender&#34;: &#34;female&#34;,    &#34;company&#34;: &#34;PARLEYNET&#34;,    &#34;email&#34;: &#34;rochelleespinoza@parleynet.com&#34;,    &#34;phone&#34;: &#34;+1 (969) 445-3766&#34;,    &#34;address&#34;: &#34;956 Little Street, Jugtown, District Of Columbia, 6396&#34;,    &#34;about&#34;: &#34;Excepteur exercitation labore ut cupidatat laboris mollit ad qui minim aliquip nostrud anim adipisicing est. Nisi sunt duis occaecat aliquip est irure Lorem irure nulla tempor sit sunt. Eiusmod laboris ex est velit minim ut cillum sunt laborum labore ad sunt.\r\n&#34;,    &#34;registered&#34;: &#34;2016-03-20T12:07:25 -00:00&#34;,    &#34;latitude&#34;: 61.471517,    &#34;longitude&#34;: 54.01596,    &#34;greeting&#34;: &#34;Hello, Rochelle Espinoza!You have 9 unread messages.&#34;,    &#34;favoriteFruit&#34;: &#34;banana&#34;  }`</span><span class=p>),</span> 
+</span></span><span class="line hl"><span class=cl>    <span class=o>&amp;</span><span class=nx>input</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=nb>panic</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class="line hl"><span class=cl><span class=kd>func</span> <span class=nf>byPointer</span><span class=p>(</span><span class=nx>in</span> <span class=o>*</span><span class=nx>foo</span><span class=p>)</span> <span class=o>*</span><span class=nx>bar</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=k>return</span> <span class=o>&amp;</span><span class=nx>bar</span><span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>ID</span><span class=p>:</span>            <span class=nx>in</span><span class=p>.</span><span class=nx>ID</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Address</span><span class=p>:</span>       <span class=nx>in</span><span class=p>.</span><span class=nx>Address</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Email</span><span class=p>:</span>         <span class=nx>in</span><span class=p>.</span><span class=nx>Email</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Index</span><span class=p>:</span>         <span class=nx>in</span><span class=p>.</span><span class=nx>Index</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Name</span><span class=p>:</span>          <span class=nx>in</span><span class=p>.</span><span class=nx>Name</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>About</span><span class=p>:</span>         <span class=nx>in</span><span class=p>.</span><span class=nx>About</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Age</span><span class=p>:</span>           <span class=nx>in</span><span class=p>.</span><span class=nx>Age</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Balance</span><span class=p>:</span>       <span class=nx>in</span><span class=p>.</span><span class=nx>Balance</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Company</span><span class=p>:</span>       <span class=nx>in</span><span class=p>.</span><span class=nx>Company</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>EyeColor</span><span class=p>:</span>      <span class=nx>in</span><span class=p>.</span><span class=nx>EyeColor</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>FavoriteFruit</span><span class=p>:</span> <span class=nx>in</span><span class=p>.</span><span class=nx>FavoriteFruit</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Gender</span><span class=p>:</span>        <span class=nx>in</span><span class=p>.</span><span class=nx>Gender</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Greeting</span><span class=p>:</span>      <span class=nx>in</span><span class=p>.</span><span class=nx>Greeting</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>GUID</span><span class=p>:</span>          <span class=nx>in</span><span class=p>.</span><span class=nx>GUID</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>IsActive</span><span class=p>:</span>      <span class=nx>in</span><span class=p>.</span><span class=nx>IsActive</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Latitude</span><span class=p>:</span>      <span class=nx>in</span><span class=p>.</span><span class=nx>Latitude</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Longitude</span><span class=p>:</span>     <span class=nx>in</span><span class=p>.</span><span class=nx>Longitude</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Phone</span><span class=p>:</span>         <span class=nx>in</span><span class=p>.</span><span class=nx>Phone</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Picture</span><span class=p>:</span>       <span class=nx>in</span><span class=p>.</span><span class=nx>Picture</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Registered</span><span class=p>:</span>    <span class=nx>in</span><span class=p>.</span><span class=nx>Registered</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class="line hl"><span class=cl><span class=kd>func</span> <span class=nf>byValue</span><span class=p>(</span><span class=nx>in</span> <span class=nx>foo</span><span class=p>)</span> <span class=nx>bar</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=k>return</span> <span class=nx>bar</span><span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>ID</span><span class=p>:</span>            <span class=nx>in</span><span class=p>.</span><span class=nx>ID</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Address</span><span class=p>:</span>       <span class=nx>in</span><span class=p>.</span><span class=nx>Address</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Email</span><span class=p>:</span>         <span class=nx>in</span><span class=p>.</span><span class=nx>Email</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Index</span><span class=p>:</span>         <span class=nx>in</span><span class=p>.</span><span class=nx>Index</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Name</span><span class=p>:</span>          <span class=nx>in</span><span class=p>.</span><span class=nx>Name</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>About</span><span class=p>:</span>         <span class=nx>in</span><span class=p>.</span><span class=nx>About</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Age</span><span class=p>:</span>           <span class=nx>in</span><span class=p>.</span><span class=nx>Age</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Balance</span><span class=p>:</span>       <span class=nx>in</span><span class=p>.</span><span class=nx>Balance</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Company</span><span class=p>:</span>       <span class=nx>in</span><span class=p>.</span><span class=nx>Company</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>EyeColor</span><span class=p>:</span>      <span class=nx>in</span><span class=p>.</span><span class=nx>EyeColor</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>FavoriteFruit</span><span class=p>:</span> <span class=nx>in</span><span class=p>.</span><span class=nx>FavoriteFruit</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Gender</span><span class=p>:</span>        <span class=nx>in</span><span class=p>.</span><span class=nx>Gender</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Greeting</span><span class=p>:</span>      <span class=nx>in</span><span class=p>.</span><span class=nx>Greeting</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>GUID</span><span class=p>:</span>          <span class=nx>in</span><span class=p>.</span><span class=nx>GUID</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>IsActive</span><span class=p>:</span>      <span class=nx>in</span><span class=p>.</span><span class=nx>IsActive</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Latitude</span><span class=p>:</span>      <span class=nx>in</span><span class=p>.</span><span class=nx>Latitude</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Longitude</span><span class=p>:</span>     <span class=nx>in</span><span class=p>.</span><span class=nx>Longitude</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Phone</span><span class=p>:</span>         <span class=nx>in</span><span class=p>.</span><span class=nx>Phone</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Picture</span><span class=p>:</span>       <span class=nx>in</span><span class=p>.</span><span class=nx>Picture</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Registered</span><span class=p>:</span>    <span class=nx>in</span><span class=p>.</span><span class=nx>Registered</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=kd>var</span> <span class=nx>pointerResult</span> <span class=o>*</span><span class=nx>bar</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BenchmarkByPointer</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=kd>var</span> <span class=nx>r</span> <span class=o>*</span><span class=nx>bar</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>b</span><span class=p>.</span><span class=nf>ResetTimer</span><span class=p>()</span>  
+</span></span><span class=line><span class=cl>   <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>b</span><span class=p>.</span><span class=nx>N</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>r</span> <span class=p>=</span> <span class=nf>byPointer</span><span class=p>(</span><span class=o>&amp;</span><span class=nx>input</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>pointerResult</span> <span class=p>=</span> <span class=nx>r</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=kd>var</span> <span class=nx>valueResult</span> <span class=nx>bar</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>BenchmarkByValue</span><span class=p>(</span><span class=nx>b</span> <span class=o>*</span><span class=nx>testing</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=kd>var</span> <span class=nx>r</span> <span class=nx>bar</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>b</span><span class=p>.</span><span class=nf>ResetTimer</span><span class=p>()</span>  
+</span></span><span class=line><span class=cl>   <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>b</span><span class=p>.</span><span class=nx>N</span><span class=p>;</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>r</span> <span class=p>=</span> <span class=nf>byValue</span><span class=p>(</span><span class=nx>input</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>valueResult</span> <span class=p>=</span> <span class=nx>r</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>两个方法：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>byPointer</span><span class=p>(</span><span class=nx>in</span> <span class=o>*</span><span class=nx>foo</span><span class=p>)</span> <span class=o>*</span><span class=nx>bar</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// 访问 in 的所有字段
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>byValue</span><span class=p>(</span><span class=nx>in</span> <span class=nx>foo</span><span class=p>)</span> <span class=nx>bar</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// 访问 in 的所有字段
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>设传递指针的方法花费的时间 <code>pTime</code>, 值传递的方法花费的时间 vTime<code>，</code>结构体的字段数量 <code>m</code></p><ul><li>pTime = <strong><code>拷贝一次指针</code></strong> + m * (<strong><code>指针解引用</code></strong> + <code>访问字段</code>)</li><li>vTime = <strong><code>拷贝一次结构体</code></strong> + m * <code>访问字段</code></li></ul><p>当传递的是结构体指针类型，访问字段需要两个步骤，一次是指针解引用，一次是访问字段，而传递结构体值，不需要指针解引用，因此两个方法时间的不同主要体现在 <code>拷贝参数的时间</code> 以及传递指针需要额外的 m 次 <code>指针解引用</code> 的时间。</p><p>上面的例子中 vTime &lt; pTime 是因为 <code>拷贝一次结构体</code> &lt; <code>拷贝一次指针</code> + <code>m 次指针解引用</code>，这种情况通常发生在结构体的尺寸较小的情况下，那么如果让结构体的尺寸变得很大，增加拷贝结构体的时间，能否达到指针方法用时更短的效果</p><p>稍微做一下修改，传参分别使用<strong>保存指针的切片</strong>跟<strong>保存值的数组</strong>，观察一下结果：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>const</span> <span class=nx>N</span> <span class=p>=</span> <span class=mi>10000</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=kd>var</span> <span class=nx>inputs</span> <span class=p>[</span><span class=nx>N</span><span class=p>]</span><span class=nx>foo</span>  
+</span></span><span class=line><span class=cl><span class=kd>var</span> <span class=nx>inputsPtr</span> <span class=p>[]</span><span class=o>*</span><span class=nx>foo</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>init</span><span class=p>()</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>testTxt</span> <span class=o>:=</span> <span class=p>[]</span><span class=nb>byte</span><span class=p>(</span><span class=s>`{  
+</span></span></span><span class=line><span class=cl><span class=s>    &#34;_id&#34;: &#34;5d2f4fcf76c35513af00d47e&#34;,    &#34;index&#34;: 1,    &#34;guid&#34;: &#34;ed687a14-590b-4d81-b0cb-ddaa857874ee&#34;,    &#34;isActive&#34;: true,    &#34;balance&#34;: &#34;$3,837.19&#34;,    &#34;picture&#34;: &#34;http://placehold.it/32x32&#34;,    &#34;age&#34;: 28,    &#34;eyeColor&#34;: &#34;green&#34;,    &#34;name&#34;: &#34;Rochelle Espinoza&#34;,    &#34;gender&#34;: &#34;female&#34;,    &#34;company&#34;: &#34;PARLEYNET&#34;,    &#34;email&#34;: &#34;rochelleespinoza@parleynet.com&#34;,    &#34;phone&#34;: &#34;+1 (969) 445-3766&#34;,    &#34;address&#34;: &#34;956 Little Street, Jugtown, District Of Columbia, 6396&#34;,    &#34;about&#34;: &#34;Excepteur exercitation labore ut cupidatat laboris mollit ad qui minim aliquip nostrud anim adipisicing est. Nisi sunt duis occaecat aliquip est irure Lorem irure nulla tempor sit sunt. Eiusmod laboris ex est velit minim ut cillum sunt laborum labore ad sunt.\r\n&#34;,    &#34;registered&#34;: &#34;2016-03-20T12:07:25 -00:00&#34;,    &#34;latitude&#34;: 61.471517,    &#34;longitude&#34;: 54.01596,    &#34;greeting&#34;: &#34;Hello, Rochelle Espinoza!You have 9 unread messages.&#34;,    &#34;favoriteFruit&#34;: &#34;banana&#34;  }`</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>err</span> <span class=o>:=</span> <span class=nx>json</span><span class=p>.</span><span class=nf>Unmarshal</span><span class=p>(</span><span class=nx>testTxt</span><span class=p>,</span> <span class=o>&amp;</span><span class=nx>input</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=k>if</span> <span class=nx>err</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=nb>panic</span><span class=p>(</span><span class=nx>err</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl>   <span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nb>len</span><span class=p>(</span><span class=nx>inputs</span><span class=p>);</span> <span class=nx>i</span><span class=o>++</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>inputs</span><span class=p>[</span><span class=nx>i</span><span class=p>]</span> <span class=p>=</span> <span class=nx>input</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>inputsPtr</span> <span class=p>=</span> <span class=nb>append</span><span class=p>(</span><span class=nx>inputsPtr</span><span class=p>,</span> <span class=o>&amp;</span><span class=nx>input</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>byPointer</span><span class=p>(</span><span class=nx>ins</span> <span class=p>[]</span><span class=o>*</span><span class=nx>foo</span><span class=p>)</span> <span class=o>*</span><span class=nx>bar</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>in</span> <span class=o>:=</span> <span class=nx>ins</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span>  
+</span></span><span class=line><span class=cl>   <span class=k>return</span> <span class=o>&amp;</span><span class=nx>bar</span><span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>ID</span><span class=p>:</span>            <span class=nx>in</span><span class=p>.</span><span class=nx>ID</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Address</span><span class=p>:</span>       <span class=nx>in</span><span class=p>.</span><span class=nx>Address</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Email</span><span class=p>:</span>         <span class=nx>in</span><span class=p>.</span><span class=nx>Email</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Index</span><span class=p>:</span>         <span class=nx>in</span><span class=p>.</span><span class=nx>Index</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Name</span><span class=p>:</span>          <span class=nx>in</span><span class=p>.</span><span class=nx>Name</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>About</span><span class=p>:</span>         <span class=nx>in</span><span class=p>.</span><span class=nx>About</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Age</span><span class=p>:</span>           <span class=nx>in</span><span class=p>.</span><span class=nx>Age</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Balance</span><span class=p>:</span>       <span class=nx>in</span><span class=p>.</span><span class=nx>Balance</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Company</span><span class=p>:</span>       <span class=nx>in</span><span class=p>.</span><span class=nx>Company</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>EyeColor</span><span class=p>:</span>      <span class=nx>in</span><span class=p>.</span><span class=nx>EyeColor</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>FavoriteFruit</span><span class=p>:</span> <span class=nx>in</span><span class=p>.</span><span class=nx>FavoriteFruit</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Gender</span><span class=p>:</span>        <span class=nx>in</span><span class=p>.</span><span class=nx>Gender</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Greeting</span><span class=p>:</span>      <span class=nx>in</span><span class=p>.</span><span class=nx>Greeting</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>GUID</span><span class=p>:</span>          <span class=nx>in</span><span class=p>.</span><span class=nx>GUID</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>IsActive</span><span class=p>:</span>      <span class=nx>in</span><span class=p>.</span><span class=nx>IsActive</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Latitude</span><span class=p>:</span>      <span class=nx>in</span><span class=p>.</span><span class=nx>Latitude</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Longitude</span><span class=p>:</span>     <span class=nx>in</span><span class=p>.</span><span class=nx>Longitude</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Phone</span><span class=p>:</span>         <span class=nx>in</span><span class=p>.</span><span class=nx>Phone</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Picture</span><span class=p>:</span>       <span class=nx>in</span><span class=p>.</span><span class=nx>Picture</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Registered</span><span class=p>:</span>    <span class=nx>in</span><span class=p>.</span><span class=nx>Registered</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=kd>func</span> <span class=nf>byValue</span><span class=p>(</span><span class=nx>ins</span> <span class=p>[</span><span class=nx>N</span><span class=p>]</span><span class=nx>foo</span><span class=p>)</span> <span class=nx>bar</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>in</span> <span class=o>:=</span> <span class=nx>ins</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span>  
+</span></span><span class=line><span class=cl>   <span class=k>return</span> <span class=nx>bar</span><span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>ID</span><span class=p>:</span>            <span class=nx>in</span><span class=p>.</span><span class=nx>ID</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Address</span><span class=p>:</span>       <span class=nx>in</span><span class=p>.</span><span class=nx>Address</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Email</span><span class=p>:</span>         <span class=nx>in</span><span class=p>.</span><span class=nx>Email</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Index</span><span class=p>:</span>         <span class=nx>in</span><span class=p>.</span><span class=nx>Index</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Name</span><span class=p>:</span>          <span class=nx>in</span><span class=p>.</span><span class=nx>Name</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>About</span><span class=p>:</span>         <span class=nx>in</span><span class=p>.</span><span class=nx>About</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Age</span><span class=p>:</span>           <span class=nx>in</span><span class=p>.</span><span class=nx>Age</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Balance</span><span class=p>:</span>       <span class=nx>in</span><span class=p>.</span><span class=nx>Balance</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Company</span><span class=p>:</span>       <span class=nx>in</span><span class=p>.</span><span class=nx>Company</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>EyeColor</span><span class=p>:</span>      <span class=nx>in</span><span class=p>.</span><span class=nx>EyeColor</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>FavoriteFruit</span><span class=p>:</span> <span class=nx>in</span><span class=p>.</span><span class=nx>FavoriteFruit</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Gender</span><span class=p>:</span>        <span class=nx>in</span><span class=p>.</span><span class=nx>Gender</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Greeting</span><span class=p>:</span>      <span class=nx>in</span><span class=p>.</span><span class=nx>Greeting</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>GUID</span><span class=p>:</span>          <span class=nx>in</span><span class=p>.</span><span class=nx>GUID</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>IsActive</span><span class=p>:</span>      <span class=nx>in</span><span class=p>.</span><span class=nx>IsActive</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Latitude</span><span class=p>:</span>      <span class=nx>in</span><span class=p>.</span><span class=nx>Latitude</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Longitude</span><span class=p>:</span>     <span class=nx>in</span><span class=p>.</span><span class=nx>Longitude</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Phone</span><span class=p>:</span>         <span class=nx>in</span><span class=p>.</span><span class=nx>Phone</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Picture</span><span class=p>:</span>       <span class=nx>in</span><span class=p>.</span><span class=nx>Picture</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>Registered</span><span class=p>:</span>    <span class=nx>in</span><span class=p>.</span><span class=nx>Registered</span><span class=p>,</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>测试结果：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-txt data-lang=txt><span class=line><span class=cl>goos: darwin
+</span></span><span class=line><span class=cl>goarch: arm64
+</span></span><span class=line><span class=cl>pkg: pointer
+</span></span><span class=line><span class=cl>BenchmarkByPointer-8    17808786                66.36 ns/op
+</span></span><span class=line><span class=cl>BenchmarkByValue-8         10000            110766 ns/op
+</span></span><span class=line><span class=cl>PASS
+</span></span><span class=line><span class=cl>ok      pointer 3.703s
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>指针的尺寸通常跟机器相关，在 64 位的机器上，为 8 Byte</p></blockquote><p>总结：在使用传进来的指针访问结构体字段时，需要先通过指针获取结构体的地址，然后再访问结构体的每个字段。这涉及两个操作：首先要解引用指针以获取结构体的地址，然后才能访问结构体的每个字段。这两个步骤都需要额外的操作和时间。</p><p>而当使用传进来的结构体值来访问结构体字段时，可以直接访问结构体中的每个字段，不需要解引用指针获取结构体地址。因此，它只涉及一次操作，所需的时间比使用指针少。</p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2023-05-24</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md><span><a class=link-to-mardown href=/202305241402-%E4%BD%BF%E7%94%A8%E5%80%BC%E6%8C%87%E9%92%88%E4%BD%9C%E4%B8%BA%E6%96%B9%E6%B3%95%E7%9A%84%E5%8F%82%E6%95%B0%E7%9A%84%E4%B8%80%E7%82%B9%E5%8C%BA%E5%88%AB/index.md target=_blank rel="noopener noreferrer">阅读原始文档</a></span></div><div class=post-info-share><span><a href=# title="分享到 Twitter" data-sharer=twitter data-url=http://www.honghuiqiang.com/202305241402-%E4%BD%BF%E7%94%A8%E5%80%BC%E6%8C%87%E9%92%88%E4%BD%9C%E4%B8%BA%E6%96%B9%E6%B3%95%E7%9A%84%E5%8F%82%E6%95%B0%E7%9A%84%E4%B8%80%E7%82%B9%E5%8C%BA%E5%88%AB/ data-title=使用值、指针作为方法的参数的一点区别 data-via=xxxx><i class="fab fa-twitter fa-fw"></i></a><a href=# title="分享到 Facebook" data-sharer=facebook data-url=http://www.honghuiqiang.com/202305241402-%E4%BD%BF%E7%94%A8%E5%80%BC%E6%8C%87%E9%92%88%E4%BD%9C%E4%B8%BA%E6%96%B9%E6%B3%95%E7%9A%84%E5%8F%82%E6%95%B0%E7%9A%84%E4%B8%80%E7%82%B9%E5%8C%BA%E5%88%AB/><i class="fab fa-facebook-square fa-fw"></i></a><a href=# title="分享到 WhatsApp" data-sharer=whatsapp data-url=http://www.honghuiqiang.com/202305241402-%E4%BD%BF%E7%94%A8%E5%80%BC%E6%8C%87%E9%92%88%E4%BD%9C%E4%B8%BA%E6%96%B9%E6%B3%95%E7%9A%84%E5%8F%82%E6%95%B0%E7%9A%84%E4%B8%80%E7%82%B9%E5%8C%BA%E5%88%AB/ data-title=使用值、指针作为方法的参数的一点区别 data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href=# title="分享到 Line" data-sharer=line data-url=http://www.honghuiqiang.com/202305241402-%E4%BD%BF%E7%94%A8%E5%80%BC%E6%8C%87%E9%92%88%E4%BD%9C%E4%B8%BA%E6%96%B9%E6%B3%95%E7%9A%84%E5%8F%82%E6%95%B0%E7%9A%84%E4%B8%80%E7%82%B9%E5%8C%BA%E5%88%AB/ data-title=使用值、指针作为方法的参数的一点区别><i data-svg-src=/lib/simple-icons/icons/line.min.svg></i></a><a href=# title="分享到 微博" data-sharer=weibo data-url=http://www.honghuiqiang.com/202305241402-%E4%BD%BF%E7%94%A8%E5%80%BC%E6%8C%87%E9%92%88%E4%BD%9C%E4%B8%BA%E6%96%B9%E6%B3%95%E7%9A%84%E5%8F%82%E6%95%B0%E7%9A%84%E4%B8%80%E7%82%B9%E5%8C%BA%E5%88%AB/ data-title=使用值、指针作为方法的参数的一点区别><i class="fab fa-weibo fa-fw"></i></a><a href=# title="分享到 Myspace" data-sharer=myspace data-url=http://www.honghuiqiang.com/202305241402-%E4%BD%BF%E7%94%A8%E5%80%BC%E6%8C%87%E9%92%88%E4%BD%9C%E4%B8%BA%E6%96%B9%E6%B3%95%E7%9A%84%E5%8F%82%E6%95%B0%E7%9A%84%E4%B8%80%E7%82%B9%E5%8C%BA%E5%88%AB/ data-title=使用值、指针作为方法的参数的一点区别 data-description><i data-svg-src=/lib/simple-icons/icons/myspace.min.svg></i></a><a href=# title="分享到 Blogger" data-sharer=blogger data-url=http://www.honghuiqiang.com/202305241402-%E4%BD%BF%E7%94%A8%E5%80%BC%E6%8C%87%E9%92%88%E4%BD%9C%E4%B8%BA%E6%96%B9%E6%B3%95%E7%9A%84%E5%8F%82%E6%95%B0%E7%9A%84%E4%B8%80%E7%82%B9%E5%8C%BA%E5%88%AB/ data-title=使用值、指针作为方法的参数的一点区别 data-description><i class="fab fa-blogger fa-fw"></i></a><a href=# title="分享到 Evernote" data-sharer=evernote data-url=http://www.honghuiqiang.com/202305241402-%E4%BD%BF%E7%94%A8%E5%80%BC%E6%8C%87%E9%92%88%E4%BD%9C%E4%B8%BA%E6%96%B9%E6%B3%95%E7%9A%84%E5%8F%82%E6%95%B0%E7%9A%84%E4%B8%80%E7%82%B9%E5%8C%BA%E5%88%AB/ data-title=使用值、指针作为方法的参数的一点区别><i class="fab fa-evernote fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/2023-05-24/ class=prev rel=prev title="2023-05-24 日记录"><i class="fas fa-angle-left fa-fw"></i>2023-05-24 日记录</a></div></div><div id=comments><div id=giscus></div><noscript>Please enable JavaScript to view the comments powered by <a href=https://giscus.app/>giscus</a>.</noscript></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>由 <a href=https://gohugo.io/ target=_blank rel="noopener noreferrer" title="Hugo 0.105.0">Hugo</a> 强力驱动&nbsp;|&nbsp;托管在 <a title="Github Pages" href=https://docs.github.com/en/pages/ target=_blank rel="noopener noreffer">GitHub Pages</a> 上&nbsp;|&nbsp;主题 - <a href=https://github.com/HEIGE-PCloud/DoIt target=_blank rel="noopener noreferrer" title="DoIt 0.3.0"><i class="far fa-edit fa-fw"></i> DoIt</a></div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2023</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank rel="noopener noreferrer">索隆不喝酒</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class=footer-line></div><div class=footer-line></div></div></footer></div><div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><div class=assets><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/katex/copy-tex.min.css><noscript><link rel=stylesheet href=/lib/katex/copy-tex.min.css></noscript><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:10},comment:{giscus:{darkTheme:"dark",dataCategory:"General",dataCategoryId:"DIC_kwDOJh9DwM4CWbTD",dataEmitMetadata:"0",dataInputPosition:"bottom",dataLang:"zh-CN",dataMapping:"pathname",dataReactionsEnabled:"1",dataRepo:"904566722/hugo-giscus-common-system",dataRepoId:"R_kgDOJh9DwA",dataStrict:"0",lightTheme:"light"}},data:{"desktop-header-typeit":"HHQ Records","mobile-header-typeit":"HHQ Records"},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,fuseIndexURL:"/index.json",highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,type:"fuse",useExtendedSearch:!1},sharerjs:!0,table:{sort:!0},typeit:{cursorChar:"|",cursorSpeed:1e3,data:{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},duration:-1,speed:100}}</script><script type=text/javascript src=/js/giscus.min.js defer></script><script type=text/javascript src=/lib/tablesort/tablesort.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/typeit/typeit.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><script type=text/javascript src=/js/theme.min.js defer></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-GKX5LKE0Z8",{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=G-GKX5LKE0Z8" async></script><script>var _hmt=_hmt||[];(function(){var e,t=document.createElement("script");t.src="https://hm.baidu.com/hm.js?7ee459037c39c6123ff6e6252a7c5301",e=document.getElementsByTagName("script")[0],e.parentNode.insertBefore(t,e)})()</script></div></body></html>

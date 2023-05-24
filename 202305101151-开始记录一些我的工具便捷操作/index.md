@@ -91,6 +91,7 @@ music url="/music/lessang/recall.m4a" name="xxx" artist="xxx" cover="/music/less
 - [processon](https://www.processon.com/)
 - mermaid
 - [boardmix](https://boardmix.cn/)
+- [whimsical](https://whimsical.com/)
 
 ## 下载
 

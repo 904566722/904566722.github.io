@@ -253,3 +253,103 @@ func dailyTemperatures(temperatures []int) []int {
     return ans
 }
 ```
+
+---
+#### [797. 所有可能的路径](https://leetcode.cn/problems/all-paths-from-source-to-target/)
+#图 #寻找路径
+
+```go
+// 寻找路径  
+// 思路1 使用 DFS，当「节点是最后一个节点」或者「没有下一个节点」的时候回溯  
+func allPathsSourceTarget(graph [][]int) [][]int {  
+   var path []int  
+   var ans [][]int  
+   dfsHelper(graph, 0, &path, &ans)  
+   return ans  
+}  
+  
+func dfsHelper(graph [][]int, startVt int, path *[]int, ans *[][]int) {  
+   // 标记为已访问  
+   *path = append(*path, startVt)  
+   for _, toVt := range graph[startVt] {  
+      if startVt == len(graph)-1 {  
+         break  
+      }  
+      /* 因为一个节点可能存在与多条不同的路径中，不需要标记节点是否访问过 */      
+      //if _, ok := visited[toVt]; ok {      
+      // continue      
+      //}  
+      dfsHelper(graph, toVt, path, ans)  
+   }  
+   // 抵达终点，保存路径  
+   // 注意不能将 *path 直接放入 ans 中，这会导致 ans 中只保存最后一条路径  
+   if startVt == len(graph)-1 {  
+      tmpPath := make([]int, len(*path))  
+      copy(tmpPath, *path)  
+      *ans = append(*ans, tmpPath)  
+   }  
+   *path = (*path)[:len(*path)-1]  
+}
+```
+
+---
+#### [剑指 Offer II 086. 分割回文子字符串](https://leetcode.cn/problems/M99OJA/)
+
+#递归 
+
+```go
+package leetcode  
+  
+//将 s 分割成回文字符串  
+//  
+//将 s 分成两个部分  
+//- 第一个字符一定是回文，剩下的字符串为 si（子问题求解）  
+//- 第二个回文，剩下的字符串子问题求解  
+//- …  
+//- 当 s 占据左边部分，结束  
+func partition(s string) [][]string {  
+   var palindromes []string  
+   var ans [][]string  
+   partitionHelper(s, &palindromes, &ans)  
+   return ans  
+}  
+  
+// 通过 i 将 s 划分成两部分：s[:i] s[i:]  
+// 刚开始的时候 i 应该为 1，即左边只有一个字符  
+// 当 s 为空当时候结束  
+func partitionHelper(s string, palindromes *[]string, ans *[][]string) {  
+   n := len(s)  
+   if n == 0 {  
+      tmp := make([]string, len(*palindromes))  
+      copy(tmp, *palindromes)  
+      *ans = append(*ans, tmp)  
+      return  
+   }  
+  
+   for cut := 1; cut <= n; cut++ {  
+      if isPalindrome(s[:cut]) {  
+         *palindromes = append(*palindromes, s[:cut])  
+         partitionHelper(s[cut:], palindromes, ans)  
+         *palindromes = (*palindromes)[:len(*palindromes)-1]  
+      }  
+   }  
+}  
+  
+// 判断字符串是否回文 O(m)func isPalindrome(s string) bool {  
+   n := len(s)  
+   switch n {  
+   case 0, 1:  
+      return true  
+   case 2, 3:  
+      return s[0] == s[n-1]  
+   }  
+   for i := 0; i < n/2; i++ {  
+      if s[i] != s[n-i-1] {  
+         return false  
+      }  
+   }  
+   return true  
+}
+```
+
+![](images/posts/Pasted%20image%2020230525011123.png)

@@ -214,3 +214,11 @@ tmp := T{}
 ## Go 101 中的一些总结
 
 [https://gfw.go101.org/article/summaries.html#type-with-underlyings](https://gfw.go101.org/article/summaries.html#type-with-underlyings)
+
+---
+## 为什么遍历 map 是无序的
+
+{{< admonition type=quote title="example" open=false >}}
+1. map 扩容之后，key 的位置会发生变化
+2. 在 1. 的认知上，是不是只要给定一个只读的 map，遍历结果就会是有序的？不是的，go 为了防止新手勿用 map，甚至设定了这样一个机制：每次开始遍历的桶是随机的，并不是每次都从第一个桶开始遍历
+{{< /admonition >}}

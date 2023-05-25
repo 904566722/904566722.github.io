@@ -12,6 +12,7 @@
 5. https://pkg.go.dev/
 6. [Go wiki](https://github.com/golang/go/wiki)
 7. [awesome go](https://awesome-go.com/)
+8. https://golang.design/go-questions/map/principal/
 
 
 ## book

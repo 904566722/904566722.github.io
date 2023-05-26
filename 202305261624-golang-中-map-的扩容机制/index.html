@@ -1,0 +1,421 @@
+<!doctype html><html lang=zh-cn><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>Golang 中 map 的扩容机制 - 学习记录</title><meta name=Description content="这是我的网站描述"><meta property="og:title" content="Golang 中 map 的扩容机制"><meta property="og:description" content><meta property="og:type" content="article"><meta property="og:url" content="http://www.honghuiqiang.com/202305261624-golang-%E4%B8%AD-map-%E7%9A%84%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6/"><meta property="og:image" content="http://www.honghuiqiang.com/logo.png"><meta property="article:section" content="posts"><meta property="article:published_time" content="2023-05-26T16:05:00+08:00"><meta property="article:modified_time" content="2023-05-26T16:05:00+08:00"><meta property="og:site_name" content="学习记录"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content="http://www.honghuiqiang.com/logo.png"><meta name=twitter:title content="Golang 中 map 的扩容机制"><meta name=twitter:description content><meta name=application-name content="HHQ Records"><meta name=apple-mobile-web-app-title content="HHQ Records"><meta name=theme-color content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel=icon href=/images/zoro.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=canonical href=http://www.honghuiqiang.com/202305261624-golang-%E4%B8%AD-map-%E7%9A%84%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6/><link rel=prev href=http://www.honghuiqiang.com/202305261503-%E4%BD%BF%E7%94%A8-dlv-%E5%91%BD%E4%BB%A4%E6%9D%A5%E8%B0%83%E8%AF%95-golang-%E7%A8%8B%E5%BA%8F/><link rel=stylesheet href=/lib/normalize/normalize.min.css><link rel=stylesheet href=/css/color.css><link rel=stylesheet href=/css/style.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/fontawesome-free/all.min.css><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.css></noscript><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/animate/animate.min.css><noscript><link rel=stylesheet href=/lib/animate/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Golang 中 map 的扩容机制","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http:\/\/www.honghuiqiang.com\/202305261624-golang-%E4%B8%AD-map-%E7%9A%84%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6\/"},"genre":"posts","wordcount":3570,"url":"http:\/\/www.honghuiqiang.com\/202305261624-golang-%E4%B8%AD-map-%E7%9A%84%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6\/","datePublished":"2023-05-26T16:05:00+08:00","dateModified":"2023-05-26T16:05:00+08:00","publisher":{"@type":"Organization","name":""},"authors":[{"@type":"Person","name":"索隆不喝酒"}],"description":""}</script><script src=//instant.page/5.1.1 defer type=module integrity=sha384-MWfCL6g1OTGsbSwfuMHc8+8J2u71/LA8dzlIN3ycajckxuZZmF+DNjdm7O6H3PSq></script></head><body header-desktop=fixed header-mobile=auto><script type=text/javascript>function setTheme(e){document.body.setAttribute("theme",e),document.documentElement.style.setProperty("color-scheme",e==="light"?"light":"dark"),window.theme=e,window.isDark=window.theme!=="light"}function saveTheme(e){window.localStorage&&localStorage.setItem("theme",e)}function getMeta(e){const t=document.getElementsByTagName("meta");for(let n=0;n<t.length;n++)if(t[n].getAttribute("name")===e)return t[n];return""}if(window.localStorage&&localStorage.getItem("theme")){let e=localStorage.getItem("theme");e==="light"||e==="dark"||e==="black"?setTheme(e):setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")}else"dark"==="light"||"dark"==="dark"||"dark"==="black"?(setTheme("dark"),saveTheme("dark")):(saveTheme("auto"),setTheme(window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));let metaColors={light:"#f8f8f8",dark:"#252627",black:"#000000"};getMeta("theme-color").content=metaColors[document.body.getAttribute("theme")],window.switchThemeEventSet=new Set</script><div id=back-to-top></div><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title=学习记录><span id=desktop-header-typeit class=typeit></span></a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>文章 </a><a class=menu-item href=/categories/>分类 </a><a class=menu-item href=/series/>系列 </a><a class=menu-item href=/tags/>标签 </a><span class="menu-item delimiter"></span><a href=# class="menu-item language" title=选择语言>简体中文<i class="fas fa-chevron-right fa-fw"></i>
+<select class=language-select title="Select Language" id=language-select-desktop onchange="location=this.value"><option value=/202305261624-golang-%E4%B8%AD-map-%E7%9A%84%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6/ selected>简体中文</option></select>
+</a><span class="menu-item search" id=search-desktop><input type=text placeholder=搜索文章标题或内容... id=search-input-desktop>
+<a href=# class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=# class="search-button search-clear" id=search-clear-desktop title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-desktop><i class="fas fa-spinner fa-fw fa-spin"></i></span>
+</span><a href=# class="menu-item theme-select" title=切换主题><i class="fas fa-adjust fa-fw"></i>
+<select class=color-theme-select id=theme-select-desktop title=切换主题><option value=light>浅色</option><option value=dark>深色</option><option value=black>黑色</option><option value=auto>跟随系统</option></select></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title=学习记录><span id=mobile-header-typeit class=typeit></span></a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><div class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容... id=search-input-mobile>
+<a href=# class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fas fa-search fa-fw"></i></a>
+<a href=# class="search-button search-clear" id=search-clear-mobile title=清空><i class="fas fa-times-circle fa-fw"></i></a>
+<span class="search-button search-loading" id=search-loading-mobile><i class="fas fa-spinner fa-fw fa-spin"></i></span></div><a href=# class=search-cancel id=search-cancel-mobile>取消</a></div><a class=menu-item href=/posts/ title>文章</a><a class=menu-item href=/categories/ title>分类</a><a class=menu-item href=/series/ title>系列</a><a class=menu-item href=/tags/ title>标签</a><a href=# class="menu-item theme-select" title=切换主题>
+<i class="fas fa-adjust fa-fw"></i>
+<select class=color-theme-select id=theme-select-mobile title=切换主题><option value=light>浅色</option><option value=dark>深色</option><option value=black>黑色</option><option value=auto>跟随系统</option></select>
+</a><a href=# class=menu-item title=选择语言>简体中文<i class="fas fa-chevron-right fa-fw"></i>
+<select class=language-select title="Select Language" onchange="location=this.value"><option value=/202305261624-golang-%E4%B8%AD-map-%E7%9A%84%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6/ selected>简体中文</option></select></a></div></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-auto><nav id=TableOfContents><ul><li><a href=#draft>draft</a></li><li><a href=#一为什么要扩容>一、为什么要扩容？</a></li><li><a href=#二什么时候会发生扩容>二、什么时候会发生扩容？</a></li><li><a href=#三扩容的过程>三、扩容的过程</a><ul><li><a href=#hashgrowhttpsgithubcomgolanggoblobf90b4cd6554f4f20280aa5229cf42650ed47221dsrcruntimemapgol1058方法---buckets-扩容><a href=https://github.com/golang/go/blob/f90b4cd6554f4f20280aa5229cf42650ed47221d/src/runtime/map.go#L1058>hashGrow</a>方法 - 「buckets 扩容」</a><ul><li><a href=#片段解读1>片段解读1</a></li><li><a href=#片段解读2>片段解读2</a></li><li><a href=#片段解读3>片段解读3</a></li><li><a href=#片段解读4>片段解读4</a></li></ul></li><li><a href=#evacuatehttpsgithubcomgolanggoblobf90b4cd6554f4f20280aa5229cf42650ed47221dsrcruntimemapgol1169方法---数据迁移><a href=https://github.com/golang/go/blob/f90b4cd6554f4f20280aa5229cf42650ed47221d/src/runtime/map.go#L1169>evacuate</a>方法 - 「数据迁移」</a><ul><li><a href=#片段解读1-1>片段解读1</a></li><li><a href=#片段解读2-1>片段解读2</a></li><li><a href=#片段解读3-1>片段解读3</a></li><li><a href=#片段解读4-1>片段解读4</a></li><li><a href=#片段解读5>片段解读5</a></li></ul></li><li><a href=#两种扩容方式>两种扩容方式</a></li></ul></li></ul></nav></div></div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC","true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Golang 中 map 的扩容机制</h1><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="author fas fa-user-circle fa-fw"></i><span class=screen-reader-text> </span><a href=http://www.honghuiqiang.com/authors/%E7%B4%A2%E9%9A%86%E4%B8%8D%E5%96%9D%E9%85%92>索隆不喝酒</a></span>
+</span>&nbsp;<span class=post-category>收录于 </span>&nbsp;<span class=post-category>类别 <a href=/categories/%E7%81%B5%E6%84%9F%E6%96%87%E7%8C%AE%E7%AC%94%E8%AE%B0%E9%9D%9E%E6%B0%B8%E4%B9%85%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw"></i>灵感、文献笔记（非永久笔记）</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime=2023-05-26>2023-05-26</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime=2023-05-26>2023-05-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3570 字&nbsp;
+<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 8 分钟&nbsp;</div></div><div class="details toc" id=toc-static kept><div class="details-summary toc-title"><span>目录</span>
+<span><i class="details-icon fas fa-angle-right"></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#draft>draft</a></li><li><a href=#一为什么要扩容>一、为什么要扩容？</a></li><li><a href=#二什么时候会发生扩容>二、什么时候会发生扩容？</a></li><li><a href=#三扩容的过程>三、扩容的过程</a><ul><li><a href=#hashgrowhttpsgithubcomgolanggoblobf90b4cd6554f4f20280aa5229cf42650ed47221dsrcruntimemapgol1058方法---buckets-扩容><a href=https://github.com/golang/go/blob/f90b4cd6554f4f20280aa5229cf42650ed47221d/src/runtime/map.go#L1058>hashGrow</a>方法 - 「buckets 扩容」</a><ul><li><a href=#片段解读1>片段解读1</a></li><li><a href=#片段解读2>片段解读2</a></li><li><a href=#片段解读3>片段解读3</a></li><li><a href=#片段解读4>片段解读4</a></li></ul></li><li><a href=#evacuatehttpsgithubcomgolanggoblobf90b4cd6554f4f20280aa5229cf42650ed47221dsrcruntimemapgol1169方法---数据迁移><a href=https://github.com/golang/go/blob/f90b4cd6554f4f20280aa5229cf42650ed47221d/src/runtime/map.go#L1169>evacuate</a>方法 - 「数据迁移」</a><ul><li><a href=#片段解读1-1>片段解读1</a></li><li><a href=#片段解读2-1>片段解读2</a></li><li><a href=#片段解读3-1>片段解读3</a></li><li><a href=#片段解读4-1>片段解读4</a></li><li><a href=#片段解读5>片段解读5</a></li></ul></li><li><a href=#两种扩容方式>两种扩容方式</a></li></ul></li></ul></nav></div></div><div class=content id=content><p>#Golang #map</p><blockquote><p>go version is go1.18</p></blockquote><h2 id=draft class=headerLink><a href=#draft class=header-mark></a>draft</h2><ul><li>为什么要扩容？</li><li>为什么引入装载因子，为了描述什么</li><li>发生扩容的两种情况 - 查看源码</li><li>针对两种情况的扩容方式有什么不同</li><li>扩容具体是怎么进行的？</li></ul><hr><h2 id=一为什么要扩容 class=headerLink><a href=#%e4%b8%80%e4%b8%ba%e4%bb%80%e4%b9%88%e8%a6%81%e6%89%a9%e5%ae%b9 class=header-mark></a>一、为什么要扩容？</h2><p>对于啊哈希表来说，冲突是不可避免的，当产生的冲突越来越多的时候，map 的各种性能都会下降</p><ul><li>举一种极端<strong>情况1</strong>：每次计算的哈希值都相同的情况下，那么每次都会被放入同一个桶中，桶的 8 个空位占满之后，往后链接溢出桶，依次类推，这种情况下，查找、修改操作的时间复杂度都会退化成 O(n)</li><li>另外一种<strong>情况2</strong>：假设每个桶都已经放满了元素，那么之后往 map 中添加数据都会产生冲突，也就慢慢往情况1的场景上靠近了。</li></ul><p>对于 go 的 map 来说，比较理想的情况应该是每个桶值存放一个数据，但是这显然是不可能的，这会造成很多的空间浪费。</p><h2 id=二什么时候会发生扩容 class=headerLink><a href=#%e4%ba%8c%e4%bb%80%e4%b9%88%e6%97%b6%e5%80%99%e4%bc%9a%e5%8f%91%e7%94%9f%e6%89%a9%e5%ae%b9 class=header-mark></a>二、什么时候会发生扩容？</h2><p>为了描述 map 保存元素的情况，引入了一个<code>装载因子(= <sup>元素数量</sup>/<sub>桶的数量</sub>)</code>的概念，当这个装载因子超过 6.5 (golang) 的时候就会触发 map 的扩容。从装载因子的计算公式可以看出，装载因子没有办法识别到上面的情况1，只能避免情况2，因此还需要另外的一个触发条件来避免情况1</p><p>在 map 的 <a href=https://github.com/golang/go/blob/f90b4cd6554f4f20280aa5229cf42650ed47221d/src/runtime/map.go#L579 target=_blank rel="noopener noreferrer">mapassign</a> 方法中，判断是否需要扩容：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=k>if</span> <span class=p>!</span><span class=nx>h</span><span class=p>.</span><span class=nf>growing</span><span class=p>()</span> <span class=o>&amp;&amp;</span> <span class=p>(</span><span class=nf>overLoadFactor</span><span class=p>(</span><span class=nx>h</span><span class=p>.</span><span class=nx>count</span><span class=o>+</span><span class=mi>1</span><span class=p>,</span> <span class=nx>h</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span> <span class=o>||</span> <span class=nf>tooManyOverflowBuckets</span><span class=p>(</span><span class=nx>h</span><span class=p>.</span><span class=nx>noverflow</span><span class=p>,</span> <span class=nx>h</span><span class=p>.</span><span class=nx>B</span><span class=p>))</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=nf>hashGrow</span><span class=p>(</span><span class=nx>t</span><span class=p>,</span> <span class=nx>h</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=k>goto</span> <span class=nx>again</span> <span class=c1>// Growing the table invalidates everything, so try again  
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>条件1 - 判断负载因子是否 > 6.5</strong> ：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>overLoadFactor</span><span class=p>(</span><span class=nx>count</span> <span class=kt>int</span><span class=p>,</span> <span class=nx>B</span> <span class=kt>uint8</span><span class=p>)</span> <span class=kt>bool</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=k>return</span> <span class=nx>count</span> <span class=p>&gt;</span> <span class=nx>bucketCnt</span> <span class=o>&amp;&amp;</span> <span class=nb>uintptr</span><span class=p>(</span><span class=nx>count</span><span class=p>)</span> <span class=p>&gt;</span> <span class=nx>loadFactorNum</span><span class=o>*</span><span class=p>(</span><span class=nf>bucketShift</span><span class=p>(</span><span class=nx>B</span><span class=p>)</span><span class=o>/</span><span class=nx>loadFactorDen</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>条件2 - 溢出桶的数量大于等于桶的数量</strong>：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>tooManyOverflowBuckets</span><span class=p>(</span><span class=nx>noverflow</span> <span class=kt>uint16</span><span class=p>,</span> <span class=nx>B</span> <span class=kt>uint8</span><span class=p>)</span> <span class=kt>bool</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=k>if</span> <span class=nx>B</span> <span class=p>&gt;</span> <span class=mi>15</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>B</span> <span class=p>=</span> <span class=mi>15</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl>   <span class=k>return</span> <span class=nx>noverflow</span> <span class=o>&gt;=</span> <span class=nb>uint16</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span><span class=o>&lt;&lt;</span><span class=p>(</span><span class=nx>B</span><span class=o>&amp;</span><span class=mi>15</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><ul><li>当 B 大于 15 将 B 置为 15 的原因是支持的 map 的最大容量为 2^15</li><li><code>noverflow >= uint16(1)&lt;&lt;(B&15)</code> 相当于 <code>noverflow >= 1&lt;&lt;B</code>，也就是当「溢出桶数量」>=「桶数量」的时候，进行扩容操作。<code>uint16(1)&lt;&lt;(B&15)</code> 只是为了让编译器生成更短的代码，提高程序执行的效率，没有产生语义上的变化</li></ul><h2 id=三扩容的过程 class=headerLink><a href=#%e4%b8%89%e6%89%a9%e5%ae%b9%e7%9a%84%e8%bf%87%e7%a8%8b class=header-mark></a>三、扩容的过程</h2><p>当 map 扩容之后，为了避免一次性的大规模的拷贝，map 的扩容是一个<code>渐进式的过程</code>，每次只拷贝一个桶（以及它关联的溢出桶），这个拷贝的过程是发生在增加、修改、删除操作的时候</p><h3 id=hashgrowhttpsgithubcomgolanggoblobf90b4cd6554f4f20280aa5229cf42650ed47221dsrcruntimemapgol1058方法---buckets-扩容 class=headerLink><a href=#hashgrowhttpsgithubcomgolanggoblobf90b4cd6554f4f20280aa5229cf42650ed47221dsrcruntimemapgol1058%e6%96%b9%e6%b3%95---buckets-%e6%89%a9%e5%ae%b9 class=header-mark></a><a href=https://github.com/golang/go/blob/f90b4cd6554f4f20280aa5229cf42650ed47221d/src/runtime/map.go#L1058 target=_blank rel="noopener noreferrer">hashGrow</a>方法 - 「buckets 扩容」</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>func</span> <span class=nf>hashGrow</span><span class=p>(</span><span class=nx>t</span> <span class=o>*</span><span class=nx>maptype</span><span class=p>,</span> <span class=nx>h</span> <span class=o>*</span><span class=nx>hmap</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// If we&#39;ve hit the load factor, get bigger.
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=c1>// Otherwise, there are too many overflow buckets,
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=c1>// so keep the same number of buckets and &#34;grow&#34; laterally.
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>bigger</span> <span class=o>:=</span> <span class=nb>uint8</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=p>!</span><span class=nf>overLoadFactor</span><span class=p>(</span><span class=nx>h</span><span class=p>.</span><span class=nx>count</span><span class=o>+</span><span class=mi>1</span><span class=p>,</span> <span class=nx>h</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>bigger</span> <span class=p>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>		<span class=nx>h</span><span class=p>.</span><span class=nx>flags</span> <span class=o>|=</span> <span class=nx>sameSizeGrow</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=nx>oldbuckets</span> <span class=o>:=</span> <span class=nx>h</span><span class=p>.</span><span class=nx>buckets</span>
+</span></span><span class=line><span class=cl>	<span class=nx>newbuckets</span><span class=p>,</span> <span class=nx>nextOverflow</span> <span class=o>:=</span> <span class=nf>makeBucketArray</span><span class=p>(</span><span class=nx>t</span><span class=p>,</span> <span class=nx>h</span><span class=p>.</span><span class=nx>B</span><span class=o>+</span><span class=nx>bigger</span><span class=p>,</span> <span class=kc>nil</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=nx>flags</span> <span class=o>:=</span> <span class=nx>h</span><span class=p>.</span><span class=nx>flags</span> <span class=o>&amp;^</span> <span class=p>(</span><span class=nx>iterator</span> <span class=p>|</span> <span class=nx>oldIterator</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=nx>h</span><span class=p>.</span><span class=nx>flags</span><span class=o>&amp;</span><span class=nx>iterator</span> <span class=o>!=</span> <span class=mi>0</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>flags</span> <span class=o>|=</span> <span class=nx>oldIterator</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// commit the grow (atomic wrt gc)
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=nx>h</span><span class=p>.</span><span class=nx>B</span> <span class=o>+=</span> <span class=nx>bigger</span>
+</span></span><span class=line><span class=cl>	<span class=nx>h</span><span class=p>.</span><span class=nx>flags</span> <span class=p>=</span> <span class=nx>flags</span>
+</span></span><span class=line><span class=cl>	<span class=nx>h</span><span class=p>.</span><span class=nx>oldbuckets</span> <span class=p>=</span> <span class=nx>oldbuckets</span>
+</span></span><span class=line><span class=cl>	<span class=nx>h</span><span class=p>.</span><span class=nx>buckets</span> <span class=p>=</span> <span class=nx>newbuckets</span>
+</span></span><span class=line><span class=cl>	<span class=nx>h</span><span class=p>.</span><span class=nx>nevacuate</span> <span class=p>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>	<span class=nx>h</span><span class=p>.</span><span class=nx>noverflow</span> <span class=p>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=nx>h</span><span class=p>.</span><span class=nx>extra</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=o>&amp;&amp;</span> <span class=nx>h</span><span class=p>.</span><span class=nx>extra</span><span class=p>.</span><span class=nx>overflow</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=c1>// Promote current overflow buckets to the old generation.
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=k>if</span> <span class=nx>h</span><span class=p>.</span><span class=nx>extra</span><span class=p>.</span><span class=nx>oldoverflow</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nf>throw</span><span class=p>(</span><span class=s>&#34;oldoverflow is not nil&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=nx>h</span><span class=p>.</span><span class=nx>extra</span><span class=p>.</span><span class=nx>oldoverflow</span> <span class=p>=</span> <span class=nx>h</span><span class=p>.</span><span class=nx>extra</span><span class=p>.</span><span class=nx>overflow</span>
+</span></span><span class=line><span class=cl>		<span class=nx>h</span><span class=p>.</span><span class=nx>extra</span><span class=p>.</span><span class=nx>overflow</span> <span class=p>=</span> <span class=kc>nil</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=nx>nextOverflow</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=k>if</span> <span class=nx>h</span><span class=p>.</span><span class=nx>extra</span> <span class=o>==</span> <span class=kc>nil</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nx>h</span><span class=p>.</span><span class=nx>extra</span> <span class=p>=</span> <span class=nb>new</span><span class=p>(</span><span class=nx>mapextra</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=nx>h</span><span class=p>.</span><span class=nx>extra</span><span class=p>.</span><span class=nx>nextOverflow</span> <span class=p>=</span> <span class=nx>nextOverflow</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=c1>// the actual copying of the hash table data is done incrementally
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=c1>// by growWork() and evacuate().
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=片段解读1 class=headerLink><a href=#%e7%89%87%e6%ae%b5%e8%a7%a3%e8%af%bb1 class=header-mark></a>片段解读1</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>bigger</span> <span class=o>:=</span> <span class=nb>uint8</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=p>!</span><span class=nf>overLoadFactor</span><span class=p>(</span><span class=nx>h</span><span class=p>.</span><span class=nx>count</span><span class=o>+</span><span class=mi>1</span><span class=p>,</span> <span class=nx>h</span><span class=p>.</span><span class=nx>B</span><span class=p>)</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>  <span class=nx>bigger</span> <span class=p>=</span> <span class=mi>0</span>  
+</span></span><span class=line><span class=cl>  <span class=nx>h</span><span class=p>.</span><span class=nx>flags</span> <span class=o>|=</span> <span class=nx>sameSizeGrow</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>  
+</span></span><span class=line><span class=cl><span class=nx>oldbuckets</span> <span class=o>:=</span> <span class=nx>h</span><span class=p>.</span><span class=nx>buckets</span>  
+</span></span><span class=line><span class=cl><span class=nx>newbuckets</span><span class=p>,</span> <span class=nx>nextOverflow</span> <span class=o>:=</span> <span class=nf>makeBucketArray</span><span class=p>(</span><span class=nx>t</span><span class=p>,</span> <span class=nx>h</span><span class=p>.</span><span class=nx>B</span><span class=o>+</span><span class=nx>bigger</span><span class=p>,</span> <span class=kc>nil</span><span class=p>)</span>  
+</span></span></code></pre></td></tr></table></div></div><p>这段代码主要是判断是由哪种方式引起的扩容，如果是因为装载因子过大导致的扩容，则新 buckets 的容量为原来的两倍，也就是将 bigger 设置为 1，如果是因为溢出桶过多导致的扩容，则新 buckets 的容量与原来的容量相同</p><table><thead><tr><th>原因</th><th>map容量</th></tr></thead><tbody><tr><td>装载因子>6.5</td><td>原来的容量 <code>x2</code></td></tr><tr><td>溢出桶过多</td><td><code>=</code> 原来的容量</td></tr></tbody></table><h4 id=片段解读2 class=headerLink><a href=#%e7%89%87%e6%ae%b5%e8%a7%a3%e8%af%bb2 class=header-mark></a>片段解读2</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>oldbuckets</span> <span class=o>:=</span> <span class=nx>h</span><span class=p>.</span><span class=nx>buckets</span>  
+</span></span><span class=line><span class=cl><span class=nx>newbuckets</span><span class=p>,</span> <span class=nx>nextOverflow</span> <span class=o>:=</span> <span class=nf>makeBucketArray</span><span class=p>(</span><span class=nx>t</span><span class=p>,</span> <span class=nx>h</span><span class=p>.</span><span class=nx>B</span><span class=o>+</span><span class=nx>bigger</span><span class=p>,</span> <span class=kc>nil</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=nx>flags</span> <span class=o>:=</span> <span class=nx>h</span><span class=p>.</span><span class=nx>flags</span> <span class=o>&amp;^</span> <span class=p>(</span><span class=nx>iterator</span> <span class=p>|</span> <span class=nx>oldIterator</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=nx>h</span><span class=p>.</span><span class=nx>flags</span><span class=o>&amp;</span><span class=nx>iterator</span> <span class=o>!=</span> <span class=mi>0</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>flags</span> <span class=o>|=</span> <span class=nx>oldIterator</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>这里是创建新桶数组的部分。首先将旧桶数组保存到 <code>oldbuckets</code> 变量中，然后调用 <code>makeBucketArray</code> 函数创建新的桶数组。如果需要扩容，则新桶数组的大小为原来的两倍；否则，新桶数组的大小与旧桶数组相同。<code>makeBucketArray</code> 函数还会返回一个溢出桶数组，如果有的话。</p><p>接下来，代码根据当前 map 的标志位来更新新 map 的标志位。如果当前 map 正在被迭代，则将新 map 的标志位设置为 <code>oldIterator</code>；否则，将其清除</p><h4 id=片段解读3 class=headerLink><a href=#%e7%89%87%e6%ae%b5%e8%a7%a3%e8%af%bb3 class=header-mark></a>片段解读3</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// commit the grow (atomic wrt gc)
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=nx>h</span><span class=p>.</span><span class=nx>B</span> <span class=o>+=</span> <span class=nx>bigger</span>
+</span></span><span class=line><span class=cl><span class=nx>h</span><span class=p>.</span><span class=nx>flags</span> <span class=p>=</span> <span class=nx>flags</span>
+</span></span><span class=line><span class=cl><span class=nx>h</span><span class=p>.</span><span class=nx>oldbuckets</span> <span class=p>=</span> <span class=nx>oldbuckets</span>
+</span></span><span class=line><span class=cl><span class=nx>h</span><span class=p>.</span><span class=nx>buckets</span> <span class=p>=</span> <span class=nx>newbuckets</span>
+</span></span><span class=line><span class=cl><span class=nx>h</span><span class=p>.</span><span class=nx>nevacuate</span> <span class=p>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl><span class=nx>h</span><span class=p>.</span><span class=nx>noverflow</span> <span class=p>=</span> <span class=mi>0</span>
+</span></span></code></pre></td></tr></table></div></div><p>这里是提交扩容操作的部分。首先将 map 的大小增加 <code>bigger</code>（即扩容或横向扩展后的大小），然后更新标志位、旧桶数组和新桶数组。同时，将 <code>nevacuate</code> 和 <code>noverflow</code> 两个计数器清零，表示没有需要迁移的元素和溢出桶</p><h4 id=片段解读4 class=headerLink><a href=#%e7%89%87%e6%ae%b5%e8%a7%a3%e8%af%bb4 class=header-mark></a>片段解读4</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=k>if</span> <span class=nx>h</span><span class=p>.</span><span class=nx>extra</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=o>&amp;&amp;</span> <span class=nx>h</span><span class=p>.</span><span class=nx>extra</span><span class=p>.</span><span class=nx>overflow</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=c1>// Promote current overflow buckets to the old generation.  
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=k>if</span> <span class=nx>h</span><span class=p>.</span><span class=nx>extra</span><span class=p>.</span><span class=nx>oldoverflow</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=nf>throw</span><span class=p>(</span><span class=s>&#34;oldoverflow is not nil&#34;</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>h</span><span class=p>.</span><span class=nx>extra</span><span class=p>.</span><span class=nx>oldoverflow</span> <span class=p>=</span> <span class=nx>h</span><span class=p>.</span><span class=nx>extra</span><span class=p>.</span><span class=nx>overflow</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>h</span><span class=p>.</span><span class=nx>extra</span><span class=p>.</span><span class=nx>overflow</span> <span class=p>=</span> <span class=kc>nil</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>  
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=nx>nextOverflow</span> <span class=o>!=</span> <span class=kc>nil</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=k>if</span> <span class=nx>h</span><span class=p>.</span><span class=nx>extra</span> <span class=o>==</span> <span class=kc>nil</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>      <span class=nx>h</span><span class=p>.</span><span class=nx>extra</span> <span class=p>=</span> <span class=nb>new</span><span class=p>(</span><span class=nx>mapextra</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=p>}</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>h</span><span class=p>.</span><span class=nx>extra</span><span class=p>.</span><span class=nx>nextOverflow</span> <span class=p>=</span> <span class=nx>nextOverflow</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>这里是处理溢出桶的部分。如果当前 map 中存在溢出桶，则将其提升到旧桶数组中。如果新桶数组中也存在溢出桶，则将其保存到 <code>extra</code> 字段中</p><h3 id=evacuatehttpsgithubcomgolanggoblobf90b4cd6554f4f20280aa5229cf42650ed47221dsrcruntimemapgol1169方法---数据迁移 class=headerLink><a href=#evacuatehttpsgithubcomgolanggoblobf90b4cd6554f4f20280aa5229cf42650ed47221dsrcruntimemapgol1169%e6%96%b9%e6%b3%95---%e6%95%b0%e6%8d%ae%e8%bf%81%e7%a7%bb class=header-mark></a><a href=https://github.com/golang/go/blob/f90b4cd6554f4f20280aa5229cf42650ed47221d/src/runtime/map.go#L1169 target=_blank rel="noopener noreferrer">evacuate</a>方法 - 「数据迁移」</h3><h4 id=片段解读1-1 class=headerLink><a href=#%e7%89%87%e6%ae%b5%e8%a7%a3%e8%af%bb1-1 class=header-mark></a>片段解读1</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>b</span> <span class=o>:=</span> <span class=p>(</span><span class=o>*</span><span class=nx>bmap</span><span class=p>)(</span><span class=nf>add</span><span class=p>(</span><span class=nx>h</span><span class=p>.</span><span class=nx>oldbuckets</span><span class=p>,</span> <span class=nx>oldbucket</span><span class=o>*</span><span class=nb>uintptr</span><span class=p>(</span><span class=nx>t</span><span class=p>.</span><span class=nx>bucketsize</span><span class=p>)))</span>  
+</span></span><span class=line><span class=cl><span class=nx>newbit</span> <span class=o>:=</span> <span class=nx>h</span><span class=p>.</span><span class=nf>noldbuckets</span><span class=p>()</span>  
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=p>!</span><span class=nf>evacuated</span><span class=p>(</span><span class=nx>b</span><span class=p>)</span> <span class=p>{</span>
+</span></span></code></pre></td></tr></table></div></div><p>获得旧 bucket，判断这个 bucket 是否需要进行迁移（是否迁移完成）</p><h4 id=片段解读2-1 class=headerLink><a href=#%e7%89%87%e6%ae%b5%e8%a7%a3%e8%af%bb2-1 class=header-mark></a>片段解读2</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=k>if</span> <span class=p>!</span><span class=nf>evacuated</span><span class=p>(</span><span class=nx>b</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=c1>// TODO: reuse overflow buckets instead of using new ones, if there
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=c1>// is no iterator using the old buckets.  (If !oldIterator.)
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>	<span class=c1>// xy contains the x and y (low and high) evacuation destinations.
+</span></span></span><span class=line><span class=cl><span class=c1></span>	<span class=kd>var</span> <span class=nx>xy</span> <span class=p>[</span><span class=mi>2</span><span class=p>]</span><span class=nx>evacDst</span>
+</span></span><span class=line><span class=cl>	<span class=nx>x</span> <span class=o>:=</span> <span class=o>&amp;</span><span class=nx>xy</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>	<span class=nx>x</span><span class=p>.</span><span class=nx>b</span> <span class=p>=</span> <span class=p>(</span><span class=o>*</span><span class=nx>bmap</span><span class=p>)(</span><span class=nf>add</span><span class=p>(</span><span class=nx>h</span><span class=p>.</span><span class=nx>buckets</span><span class=p>,</span> <span class=nx>oldbucket</span><span class=o>*</span><span class=nb>uintptr</span><span class=p>(</span><span class=nx>t</span><span class=p>.</span><span class=nx>bucketsize</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>	<span class=nx>x</span><span class=p>.</span><span class=nx>k</span> <span class=p>=</span> <span class=nf>add</span><span class=p>(</span><span class=nx>unsafe</span><span class=p>.</span><span class=nf>Pointer</span><span class=p>(</span><span class=nx>x</span><span class=p>.</span><span class=nx>b</span><span class=p>),</span> <span class=nx>dataOffset</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nx>x</span><span class=p>.</span><span class=nx>e</span> <span class=p>=</span> <span class=nf>add</span><span class=p>(</span><span class=nx>x</span><span class=p>.</span><span class=nx>k</span><span class=p>,</span> <span class=nx>bucketCnt</span><span class=o>*</span><span class=nb>uintptr</span><span class=p>(</span><span class=nx>t</span><span class=p>.</span><span class=nx>keysize</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>	<span class=k>if</span> <span class=p>!</span><span class=nx>h</span><span class=p>.</span><span class=nf>sameSizeGrow</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=c1>// Only calculate y pointers if we&#39;re growing bigger.
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=c1>// Otherwise GC can see bad pointers.
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=nx>y</span> <span class=o>:=</span> <span class=o>&amp;</span><span class=nx>xy</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>		<span class=nx>y</span><span class=p>.</span><span class=nx>b</span> <span class=p>=</span> <span class=p>(</span><span class=o>*</span><span class=nx>bmap</span><span class=p>)(</span><span class=nf>add</span><span class=p>(</span><span class=nx>h</span><span class=p>.</span><span class=nx>buckets</span><span class=p>,</span> <span class=p>(</span><span class=nx>oldbucket</span><span class=o>+</span><span class=nx>newbit</span><span class=p>)</span><span class=o>*</span><span class=nb>uintptr</span><span class=p>(</span><span class=nx>t</span><span class=p>.</span><span class=nx>bucketsize</span><span class=p>)))</span>
+</span></span><span class=line><span class=cl>		<span class=nx>y</span><span class=p>.</span><span class=nx>k</span> <span class=p>=</span> <span class=nf>add</span><span class=p>(</span><span class=nx>unsafe</span><span class=p>.</span><span class=nf>Pointer</span><span class=p>(</span><span class=nx>y</span><span class=p>.</span><span class=nx>b</span><span class=p>),</span> <span class=nx>dataOffset</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=nx>y</span><span class=p>.</span><span class=nx>e</span> <span class=p>=</span> <span class=nf>add</span><span class=p>(</span><span class=nx>y</span><span class=p>.</span><span class=nx>k</span><span class=p>,</span> <span class=nx>bucketCnt</span><span class=o>*</span><span class=nb>uintptr</span><span class=p>(</span><span class=nx>t</span><span class=p>.</span><span class=nx>keysize</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl>	<span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>这段代码的作用是为哈希表进行扩容时，计算出旧桶中键值对需要迁移到的新桶的位置。具体来说：</p><ul><li><p>首先定义了一个长度为2的数组xy，用于存储两个疏散目的地（evacDst）。</p></li><li><p>然后通过指针x指向xy[0]，并将其b字段设置为旧桶中第oldbucket个桶的地址，k字段设置为该桶中数据区域的起始地址，e字段设置为该桶中数据区域的结束地址。</p></li><li><p>如果哈希表不是同等大小的扩容，则还需要计算第二个疏散目的地y的位置。此时通过指针y指向xy[1]，并将其b、k、e字段分别设置为新桶中第(oldbucket+newbit)个桶的地址、该桶中数据区域的起始地址和结束地址。</p><blockquote><p>当发生的是两倍容量扩容的时候，原先一个桶中的元素会<strong>裂变</strong>到两个桶中，因为原先使用低 B 位来判断映射到哪个桶，现在需要根据低 B+1 位来判断映射到哪个桶，因此当第 B+1 位为 0 的时候，桶的相对位置与原先的桶是一样的，当第 B+1 位为 1 时，就需要放到两外一个桶中</p></blockquote></li></ul><p>总之，这段代码的作用是为哈希表扩容时计算出旧桶中键值对需要迁移到的新桶的位置，并将这些位置信息存储在xy数组中。</p><h4 id=片段解读3-1 class=headerLink><a href=#%e7%89%87%e6%ae%b5%e8%a7%a3%e8%af%bb3-1 class=header-mark></a>片段解读3</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span><span class=lnt>72
+</span><span class=lnt>73
+</span><span class=lnt>74
+</span><span class=lnt>75
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=k>for</span> <span class=p>;</span> <span class=nx>b</span> <span class=o>!=</span> <span class=kc>nil</span><span class=p>;</span> <span class=nx>b</span> <span class=p>=</span> <span class=nx>b</span><span class=p>.</span><span class=nf>overflow</span><span class=p>(</span><span class=nx>t</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>	<span class=nx>k</span> <span class=o>:=</span> <span class=nf>add</span><span class=p>(</span><span class=nx>unsafe</span><span class=p>.</span><span class=nf>Pointer</span><span class=p>(</span><span class=nx>b</span><span class=p>),</span> <span class=nx>dataOffset</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>	<span class=nx>e</span> <span class=o>:=</span> <span class=nf>add</span><span class=p>(</span><span class=nx>k</span><span class=p>,</span> <span class=nx>bucketCnt</span><span class=o>*</span><span class=nb>uintptr</span><span class=p>(</span><span class=nx>t</span><span class=p>.</span><span class=nx>keysize</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>	<span class=k>for</span> <span class=nx>i</span> <span class=o>:=</span> <span class=mi>0</span><span class=p>;</span> <span class=nx>i</span> <span class=p>&lt;</span> <span class=nx>bucketCnt</span><span class=p>;</span> <span class=nx>i</span><span class=p>,</span> <span class=nx>k</span><span class=p>,</span> <span class=nx>e</span> <span class=p>=</span> <span class=nx>i</span><span class=o>+</span><span class=mi>1</span><span class=p>,</span> <span class=nf>add</span><span class=p>(</span><span class=nx>k</span><span class=p>,</span> <span class=nb>uintptr</span><span class=p>(</span><span class=nx>t</span><span class=p>.</span><span class=nx>keysize</span><span class=p>)),</span> <span class=nf>add</span><span class=p>(</span><span class=nx>e</span><span class=p>,</span> <span class=nb>uintptr</span><span class=p>(</span><span class=nx>t</span><span class=p>.</span><span class=nx>elemsize</span><span class=p>))</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>		<span class=nx>top</span> <span class=o>:=</span> <span class=nx>b</span><span class=p>.</span><span class=nx>tophash</span><span class=p>[</span><span class=nx>i</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>		<span class=k>if</span> <span class=nf>isEmpty</span><span class=p>(</span><span class=nx>top</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nx>b</span><span class=p>.</span><span class=nx>tophash</span><span class=p>[</span><span class=nx>i</span><span class=p>]</span> <span class=p>=</span> <span class=nx>evacuatedEmpty</span>
+</span></span><span class=line><span class=cl>			<span class=k>continue</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=k>if</span> <span class=nx>top</span> <span class=p>&lt;</span> <span class=nx>minTopHash</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nf>throw</span><span class=p>(</span><span class=s>&#34;bad map state&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=nx>k2</span> <span class=o>:=</span> <span class=nx>k</span>
+</span></span><span class=line><span class=cl>		<span class=k>if</span> <span class=nx>t</span><span class=p>.</span><span class=nf>indirectkey</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nx>k2</span> <span class=p>=</span> <span class=o>*</span><span class=p>((</span><span class=o>*</span><span class=nx>unsafe</span><span class=p>.</span><span class=nx>Pointer</span><span class=p>)(</span><span class=nx>k2</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=kd>var</span> <span class=nx>useY</span> <span class=kt>uint8</span>
+</span></span><span class=line><span class=cl>		<span class=k>if</span> <span class=p>!</span><span class=nx>h</span><span class=p>.</span><span class=nf>sameSizeGrow</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=c1>// Compute hash to make our evacuation decision (whether we need
+</span></span></span><span class=line><span class=cl><span class=c1></span>			<span class=c1>// to send this key/elem to bucket x or bucket y).
+</span></span></span><span class=line><span class=cl><span class=c1></span>			<span class=nx>hash</span> <span class=o>:=</span> <span class=nx>t</span><span class=p>.</span><span class=nf>hasher</span><span class=p>(</span><span class=nx>k2</span><span class=p>,</span> <span class=nb>uintptr</span><span class=p>(</span><span class=nx>h</span><span class=p>.</span><span class=nx>hash0</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>			<span class=k>if</span> <span class=nx>h</span><span class=p>.</span><span class=nx>flags</span><span class=o>&amp;</span><span class=nx>iterator</span> <span class=o>!=</span> <span class=mi>0</span> <span class=o>&amp;&amp;</span> <span class=p>!</span><span class=nx>t</span><span class=p>.</span><span class=nf>reflexivekey</span><span class=p>()</span> <span class=o>&amp;&amp;</span> <span class=p>!</span><span class=nx>t</span><span class=p>.</span><span class=nx>key</span><span class=p>.</span><span class=nf>equal</span><span class=p>(</span><span class=nx>k2</span><span class=p>,</span> <span class=nx>k2</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=c1>// If key != key (NaNs), then the hash could be (and probably
+</span></span></span><span class=line><span class=cl><span class=c1></span>				<span class=c1>// will be) entirely different from the old hash. Moreover,
+</span></span></span><span class=line><span class=cl><span class=c1></span>				<span class=c1>// it isn&#39;t reproducible. Reproducibility is required in the
+</span></span></span><span class=line><span class=cl><span class=c1></span>				<span class=c1>// presence of iterators, as our evacuation decision must
+</span></span></span><span class=line><span class=cl><span class=c1></span>				<span class=c1>// match whatever decision the iterator made.
+</span></span></span><span class=line><span class=cl><span class=c1></span>				<span class=c1>// Fortunately, we have the freedom to send these keys either
+</span></span></span><span class=line><span class=cl><span class=c1></span>				<span class=c1>// way. Also, tophash is meaningless for these kinds of keys.
+</span></span></span><span class=line><span class=cl><span class=c1></span>				<span class=c1>// We let the low bit of tophash drive the evacuation decision.
+</span></span></span><span class=line><span class=cl><span class=c1></span>				<span class=c1>// We recompute a new random tophash for the next level so
+</span></span></span><span class=line><span class=cl><span class=c1></span>				<span class=c1>// these keys will get evenly distributed across all buckets
+</span></span></span><span class=line><span class=cl><span class=c1></span>				<span class=c1>// after multiple grows.
+</span></span></span><span class=line><span class=cl><span class=c1></span>				<span class=nx>useY</span> <span class=p>=</span> <span class=nx>top</span> <span class=o>&amp;</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>				<span class=nx>top</span> <span class=p>=</span> <span class=nf>tophash</span><span class=p>(</span><span class=nx>hash</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>			<span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>				<span class=k>if</span> <span class=nx>hash</span><span class=o>&amp;</span><span class=nx>newbit</span> <span class=o>!=</span> <span class=mi>0</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>					<span class=nx>useY</span> <span class=p>=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>				<span class=p>}</span>
+</span></span><span class=line><span class=cl>			<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>		<span class=k>if</span> <span class=nx>evacuatedX</span><span class=o>+</span><span class=mi>1</span> <span class=o>!=</span> <span class=nx>evacuatedY</span> <span class=o>||</span> <span class=nx>evacuatedX</span><span class=p>^</span><span class=mi>1</span> <span class=o>!=</span> <span class=nx>evacuatedY</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nf>throw</span><span class=p>(</span><span class=s>&#34;bad evacuatedN&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>		<span class=nx>b</span><span class=p>.</span><span class=nx>tophash</span><span class=p>[</span><span class=nx>i</span><span class=p>]</span> <span class=p>=</span> <span class=nx>evacuatedX</span> <span class=o>+</span> <span class=nx>useY</span> <span class=c1>// evacuatedX + 1 == evacuatedY
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=nx>dst</span> <span class=o>:=</span> <span class=o>&amp;</span><span class=nx>xy</span><span class=p>[</span><span class=nx>useY</span><span class=p>]</span>                 <span class=c1>// evacuation destination
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl>		<span class=k>if</span> <span class=nx>dst</span><span class=p>.</span><span class=nx>i</span> <span class=o>==</span> <span class=nx>bucketCnt</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nx>dst</span><span class=p>.</span><span class=nx>b</span> <span class=p>=</span> <span class=nx>h</span><span class=p>.</span><span class=nf>newoverflow</span><span class=p>(</span><span class=nx>t</span><span class=p>,</span> <span class=nx>dst</span><span class=p>.</span><span class=nx>b</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>			<span class=nx>dst</span><span class=p>.</span><span class=nx>i</span> <span class=p>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>			<span class=nx>dst</span><span class=p>.</span><span class=nx>k</span> <span class=p>=</span> <span class=nf>add</span><span class=p>(</span><span class=nx>unsafe</span><span class=p>.</span><span class=nf>Pointer</span><span class=p>(</span><span class=nx>dst</span><span class=p>.</span><span class=nx>b</span><span class=p>),</span> <span class=nx>dataOffset</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>			<span class=nx>dst</span><span class=p>.</span><span class=nx>e</span> <span class=p>=</span> <span class=nf>add</span><span class=p>(</span><span class=nx>dst</span><span class=p>.</span><span class=nx>k</span><span class=p>,</span> <span class=nx>bucketCnt</span><span class=o>*</span><span class=nb>uintptr</span><span class=p>(</span><span class=nx>t</span><span class=p>.</span><span class=nx>keysize</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=nx>dst</span><span class=p>.</span><span class=nx>b</span><span class=p>.</span><span class=nx>tophash</span><span class=p>[</span><span class=nx>dst</span><span class=p>.</span><span class=nx>i</span><span class=o>&amp;</span><span class=p>(</span><span class=nx>bucketCnt</span><span class=o>-</span><span class=mi>1</span><span class=p>)]</span> <span class=p>=</span> <span class=nx>top</span> <span class=c1>// mask dst.i as an optimization, to avoid a bounds check
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=k>if</span> <span class=nx>t</span><span class=p>.</span><span class=nf>indirectkey</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=o>*</span><span class=p>(</span><span class=o>*</span><span class=nx>unsafe</span><span class=p>.</span><span class=nx>Pointer</span><span class=p>)(</span><span class=nx>dst</span><span class=p>.</span><span class=nx>k</span><span class=p>)</span> <span class=p>=</span> <span class=nx>k2</span> <span class=c1>// copy pointer
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nf>typedmemmove</span><span class=p>(</span><span class=nx>t</span><span class=p>.</span><span class=nx>key</span><span class=p>,</span> <span class=nx>dst</span><span class=p>.</span><span class=nx>k</span><span class=p>,</span> <span class=nx>k</span><span class=p>)</span> <span class=c1>// copy elem
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=k>if</span> <span class=nx>t</span><span class=p>.</span><span class=nf>indirectelem</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=o>*</span><span class=p>(</span><span class=o>*</span><span class=nx>unsafe</span><span class=p>.</span><span class=nx>Pointer</span><span class=p>)(</span><span class=nx>dst</span><span class=p>.</span><span class=nx>e</span><span class=p>)</span> <span class=p>=</span> <span class=o>*</span><span class=p>(</span><span class=o>*</span><span class=nx>unsafe</span><span class=p>.</span><span class=nx>Pointer</span><span class=p>)(</span><span class=nx>e</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span> <span class=k>else</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>			<span class=nf>typedmemmove</span><span class=p>(</span><span class=nx>t</span><span class=p>.</span><span class=nx>elem</span><span class=p>,</span> <span class=nx>dst</span><span class=p>.</span><span class=nx>e</span><span class=p>,</span> <span class=nx>e</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>		<span class=p>}</span>
+</span></span><span class=line><span class=cl>		<span class=nx>dst</span><span class=p>.</span><span class=nx>i</span><span class=o>++</span>
+</span></span><span class=line><span class=cl>		<span class=c1>// These updates might push these pointers past the end of the
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=c1>// key or elem arrays.  That&#39;s ok, as we have the overflow pointer
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=c1>// at the end of the bucket to protect against pointing past the
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=c1>// end of the bucket.
+</span></span></span><span class=line><span class=cl><span class=c1></span>		<span class=nx>dst</span><span class=p>.</span><span class=nx>k</span> <span class=p>=</span> <span class=nf>add</span><span class=p>(</span><span class=nx>dst</span><span class=p>.</span><span class=nx>k</span><span class=p>,</span> <span class=nb>uintptr</span><span class=p>(</span><span class=nx>t</span><span class=p>.</span><span class=nx>keysize</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>		<span class=nx>dst</span><span class=p>.</span><span class=nx>e</span> <span class=p>=</span> <span class=nf>add</span><span class=p>(</span><span class=nx>dst</span><span class=p>.</span><span class=nx>e</span><span class=p>,</span> <span class=nb>uintptr</span><span class=p>(</span><span class=nx>t</span><span class=p>.</span><span class=nx>elemsize</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>	<span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>该代码中的循环遍历了当前哈希表中所有的桶（bucket），并将其中的元素重新分配到新的哈希表中。具体来说，对于每个桶，它的 tophash 数组中存储了该桶中每个元素的哈希值的前 8 位，如果某个元素的 tophash 值为 evacuatedEmpty，则表示该元素已经被迁移到新的哈希表中；如果 tophash 值小于 minTopHash，则表示哈希表状态错误。</p><p>对于每个非空元素，首先根据其键的哈希值计算出它应该被迁移到新哈希表的哪个桶中。如果新哈希表的大小和旧哈希表相同，则直接将元素复制到新哈希表中对应的桶中；否则，需要根据元素的哈希值判断它应该被迁移到新哈希表的哪个桶中。如果元素的键是 NaN，则使用 tophash 的最低位来决定它的迁移目标，以保证多次扩容后仍能均匀地分布在所有桶中。</p><p>在将元素迁移到新哈希表的过程中，需要将元素的键和值复制到新的桶中，并更新 tophash 数组。如果元素的键或值是指针类型，则需要使用 unsafe.Pointer 进行转换。同时，还需要记录已经被迁移的元素数量，以便在迁移完成后清空旧哈希表中的元素。</p><p>最后，如果旧哈希表中存在溢出桶（overflow bucket），则需要将它们与主桶分离，并清空其中的键和值，以便垃圾回收器回收这些内存。</p><h4 id=片段解读4-1 class=headerLink><a href=#%e7%89%87%e6%ae%b5%e8%a7%a3%e8%af%bb4-1 class=header-mark></a>片段解读4</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=c1>// Unlink the overflow buckets &amp; clear key/elem to help GC.  
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=k>if</span> <span class=nx>h</span><span class=p>.</span><span class=nx>flags</span><span class=o>&amp;</span><span class=nx>oldIterator</span> <span class=o>==</span> <span class=mi>0</span> <span class=o>&amp;&amp;</span> <span class=nx>t</span><span class=p>.</span><span class=nx>bucket</span><span class=p>.</span><span class=nx>ptrdata</span> <span class=o>!=</span> <span class=mi>0</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>b</span> <span class=o>:=</span> <span class=nf>add</span><span class=p>(</span><span class=nx>h</span><span class=p>.</span><span class=nx>oldbuckets</span><span class=p>,</span> <span class=nx>oldbucket</span><span class=o>*</span><span class=nb>uintptr</span><span class=p>(</span><span class=nx>t</span><span class=p>.</span><span class=nx>bucketsize</span><span class=p>))</span>  
+</span></span><span class=line><span class=cl>   <span class=c1>// Preserve b.tophash because the evacuation  
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=c1>// state is maintained there.   
+</span></span></span><span class=line><span class=cl><span class=c1></span>   <span class=nx>ptr</span> <span class=o>:=</span> <span class=nf>add</span><span class=p>(</span><span class=nx>b</span><span class=p>,</span> <span class=nx>dataOffset</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl>   <span class=nx>n</span> <span class=o>:=</span> <span class=nb>uintptr</span><span class=p>(</span><span class=nx>t</span><span class=p>.</span><span class=nx>bucketsize</span><span class=p>)</span> <span class=o>-</span> <span class=nx>dataOffset</span>  
+</span></span><span class=line><span class=cl>   <span class=nf>memclrHasPointers</span><span class=p>(</span><span class=nx>ptr</span><span class=p>,</span> <span class=nx>n</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>在上述代码中，首先判断当前是否处于旧哈希表的迭代状态（oldIterator），如果不是，则执行以下操作：</p><ol><li>获取旧哈希表中的桶（b）。</li><li>将溢出桶与键值对解除链接，即将其指针清空。</li><li>清空键和值的内容，以便于垃圾回收。</li></ol><p>这些操作的目的是为了减少旧哈希表中的内存占用，并且帮助垃圾回收器识别哪些对象可以被回收。在迁移完成后，旧哈希表会被释放掉，这样就可以释放旧哈希表中的所有内存</p><h4 id=片段解读5 class=headerLink><a href=#%e7%89%87%e6%ae%b5%e8%a7%a3%e8%af%bb5 class=header-mark></a>片段解读5</h4><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=k>if</span> <span class=nx>oldbucket</span> <span class=o>==</span> <span class=nx>h</span><span class=p>.</span><span class=nx>nevacuate</span> <span class=p>{</span>  
+</span></span><span class=line><span class=cl>   <span class=nf>advanceEvacuationMark</span><span class=p>(</span><span class=nx>h</span><span class=p>,</span> <span class=nx>t</span><span class=p>,</span> <span class=nx>newbit</span><span class=p>)</span>  
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>todo</p><h3 id=两种扩容方式 class=headerLink><a href=#%e4%b8%a4%e7%a7%8d%e6%89%a9%e5%ae%b9%e6%96%b9%e5%bc%8f class=header-mark></a>两种扩容方式</h3><table><thead><tr><th>原因</th><th>map容量</th></tr></thead><tbody><tr><td>装载因子>6.5</td><td>原来的容量 <code>x2</code></td></tr><tr><td>溢出桶过多</td><td><code>=</code> 原来的容量</td></tr></tbody></table></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>更新于 2023-05-26</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md><span><a class=link-to-mardown href=/202305261624-golang-%E4%B8%AD-map-%E7%9A%84%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6/index.md target=_blank rel="noopener noreferrer">阅读原始文档</a></span></div><div class=post-info-share><span><a href=# title="分享到 Twitter" data-sharer=twitter data-url=http://www.honghuiqiang.com/202305261624-golang-%E4%B8%AD-map-%E7%9A%84%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6/ data-title="Golang 中 map 的扩容机制" data-via=xxxx><i class="fab fa-twitter fa-fw"></i></a><a href=# title="分享到 Facebook" data-sharer=facebook data-url=http://www.honghuiqiang.com/202305261624-golang-%E4%B8%AD-map-%E7%9A%84%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6/><i class="fab fa-facebook-square fa-fw"></i></a><a href=# title="分享到 WhatsApp" data-sharer=whatsapp data-url=http://www.honghuiqiang.com/202305261624-golang-%E4%B8%AD-map-%E7%9A%84%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6/ data-title="Golang 中 map 的扩容机制" data-web><i class="fab fa-whatsapp fa-fw"></i></a><a href=# title="分享到 Line" data-sharer=line data-url=http://www.honghuiqiang.com/202305261624-golang-%E4%B8%AD-map-%E7%9A%84%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6/ data-title="Golang 中 map 的扩容机制"><i data-svg-src=/lib/simple-icons/icons/line.min.svg></i></a><a href=# title="分享到 微博" data-sharer=weibo data-url=http://www.honghuiqiang.com/202305261624-golang-%E4%B8%AD-map-%E7%9A%84%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6/ data-title="Golang 中 map 的扩容机制"><i class="fab fa-weibo fa-fw"></i></a><a href=# title="分享到 Myspace" data-sharer=myspace data-url=http://www.honghuiqiang.com/202305261624-golang-%E4%B8%AD-map-%E7%9A%84%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6/ data-title="Golang 中 map 的扩容机制" data-description><i data-svg-src=/lib/simple-icons/icons/myspace.min.svg></i></a><a href=# title="分享到 Blogger" data-sharer=blogger data-url=http://www.honghuiqiang.com/202305261624-golang-%E4%B8%AD-map-%E7%9A%84%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6/ data-title="Golang 中 map 的扩容机制" data-description><i class="fab fa-blogger fa-fw"></i></a><a href=# title="分享到 Evernote" data-sharer=evernote data-url=http://www.honghuiqiang.com/202305261624-golang-%E4%B8%AD-map-%E7%9A%84%E6%89%A9%E5%AE%B9%E6%9C%BA%E5%88%B6/ data-title="Golang 中 map 的扩容机制"><i class="fab fa-evernote fa-fw"></i></a></span></div></div></div><div class=post-info-more><section class=post-tags></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/202305261503-%E4%BD%BF%E7%94%A8-dlv-%E5%91%BD%E4%BB%A4%E6%9D%A5%E8%B0%83%E8%AF%95-golang-%E7%A8%8B%E5%BA%8F/ class=prev rel=prev title="使用 dlv 命令来调试 golang 程序"><i class="fas fa-angle-left fa-fw"></i>使用 dlv 命令来调试 golang 程序</a></div></div><div id=comments><div id=giscus></div><noscript>Please enable JavaScript to view the comments powered by <a href=https://giscus.app/>giscus</a>.</noscript></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>由 <a href=https://gohugo.io/ target=_blank rel="noopener noreferrer" title="Hugo 0.105.0">Hugo</a> 强力驱动&nbsp;|&nbsp;托管在 <a title="Github Pages" href=https://docs.github.com/en/pages/ target=_blank rel="noopener noreffer">GitHub Pages</a> 上&nbsp;|&nbsp;主题 - <a href=https://github.com/HEIGE-PCloud/DoIt target=_blank rel="noopener noreferrer" title="DoIt 0.3.0"><i class="far fa-edit fa-fw"></i> DoIt</a></div><div class=footer-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2023</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=/ target=_blank rel="noopener noreferrer">索隆不喝酒</a></span>&nbsp;|&nbsp;<span class=license><a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div><div class=footer-line></div><div class=footer-line></div></div></footer></div><div id=fixed-buttons><a href=#back-to-top id=back-to-top-button class=fixed-button title=回到顶部><i class="fas fa-arrow-up fa-fw"></i>
+</a><a href=# id=view-comments class=fixed-button title=查看评论><i class="fas fa-comment fa-fw"></i></a></div><div class=assets><link rel=stylesheet href=/lib/katex/katex.min.css><link rel=preload as=style onload='this.onload=null,this.rel="stylesheet"' href=/lib/katex/copy-tex.min.css><noscript><link rel=stylesheet href=/lib/katex/copy-tex.min.css></noscript><script type=text/javascript>window.config={code:{copyTitle:"复制到剪贴板",maxShownLines:10},comment:{giscus:{darkTheme:"dark",dataCategory:"General",dataCategoryId:"DIC_kwDOJh9DwM4CWbTD",dataEmitMetadata:"0",dataInputPosition:"bottom",dataLang:"zh-CN",dataMapping:"pathname",dataReactionsEnabled:"1",dataRepo:"904566722/hugo-giscus-common-system",dataRepoId:"R_kgDOJh9DwA",dataStrict:"0",lightTheme:"light"}},data:{"desktop-header-typeit":"HHQ Records","mobile-header-typeit":"HHQ Records"},math:{delimiters:[{display:!0,left:"$$",right:"$$"},{display:!0,left:"\\[",right:"\\]"},{display:!1,left:"$",right:"$"},{display:!1,left:"\\(",right:"\\)"}],strict:!1},search:{distance:100,findAllMatches:!1,fuseIndexURL:"/index.json",highlightTag:"em",ignoreFieldNorm:!1,ignoreLocation:!1,isCaseSensitive:!1,location:0,maxResultLength:10,minMatchCharLength:2,noResultsFound:"没有找到结果",snippetLength:50,threshold:.3,type:"fuse",useExtendedSearch:!1},sharerjs:!0,table:{sort:!0},typeit:{cursorChar:"|",cursorSpeed:1e3,data:{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},duration:-1,speed:100}}</script><script type=text/javascript src=/js/giscus.min.js defer></script><script type=text/javascript src=/lib/tablesort/tablesort.min.js></script><script type=text/javascript src=/lib/clipboard/clipboard.min.js></script><script type=text/javascript src=/lib/sharer/sharer.min.js></script><script type=text/javascript src=/lib/typeit/typeit.min.js></script><script type=text/javascript src=/lib/katex/katex.min.js defer></script><script type=text/javascript src=/lib/katex/auto-render.min.js defer></script><script type=text/javascript src=/lib/katex/copy-tex.min.js defer></script><script type=text/javascript src=/lib/katex/mhchem.min.js defer></script><script type=text/javascript src=/js/katex.min.js defer></script><script type=text/javascript src=/js/theme.min.js defer></script><script type=text/javascript>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-GKX5LKE0Z8",{anonymize_ip:!0})</script><script type=text/javascript src="https://www.googletagmanager.com/gtag/js?id=G-GKX5LKE0Z8" async></script><script>var _hmt=_hmt||[];(function(){var e,t=document.createElement("script");t.src="https://hm.baidu.com/hm.js?7ee459037c39c6123ff6e6252a7c5301",e=document.getElementsByTagName("script")[0],e.parentNode.insertBefore(t,e)})()</script></div></body></html>

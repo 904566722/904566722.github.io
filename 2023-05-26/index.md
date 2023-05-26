@@ -4,13 +4,16 @@
 
 ## 规划区
 
-- [ ]  「效率」学习、记录流程优化，减少学习、记录之间切换的频繁程度，一方面减少思维转换，另一方面减少浪费的时间，提高效率
-- [ ]  「golang - 1h」使用 dlv 命令来调试 golang 程序，熟悉新的调试方式中的「流程控制」字符以及界面「输出方式」
-- [ ]  「golang - 1h」学习 go map 的扩容机制
+- [x]  「效率」学习、记录流程优化，减少学习、记录之间切换的频繁程度，一方面减少思维转换，另一方面减少浪费的时间，提高效率
+- [x]  「golang - 1h」使用 dlv 命令来调试 golang 程序，熟悉新的调试方式中的「流程控制」字符以及界面「输出方式」
+- [x]  「golang - 2h」学习 go map 的扩容机制
 - [ ]  「golang - 1h30m」golang GMP 模型
 - [ ]  「kubernetes」整理 kubernetes 相关学习内容
-- [ ]  「信息搜索 - 1h」搜索一些计算机网络、操作系统的一些「学习站点」、「面经」
+- [x]  「信息搜索 - 1h」搜索一些kubernetes、计算机网络、操作系统的一些「学习站点」、「面经」
 - [ ]  「golang」 context
+
+Tomorrow：
+- [ ] nil
 
 ## 记录区-习惯记录
 
@@ -18,7 +21,13 @@
 
 <font color=grey>改成使用 todo 列表的形式来表现，每个月的打卡情况在月度总结里面体现</font>
 
-- [ ] 算法每日一题
+- [x] 算法每日一题
+- [216. 组合总和 III](https://leetcode.cn/problems/combination-sum-iii/)
+- [547. 省份数量](https://leetcode.cn/problems/number-of-provinces/)
+- [1679. K 和数对的最大数目](https://leetcode.cn/problems/max-number-of-k-sum-pairs/)
+- [x] 英语
+	- [x] 单词
+	- [x] 口语
 
 
 ## 记录区-事&物记
@@ -38,21 +47,24 @@
 学习流程能否优化？
 ![](images/posts/Pasted%20image%2020230526131348.png)
 
+
+
+「分类」「系列」「专题」「标签」
+
+
+Goland 2023.1 版本激活：https://blog.idejihuo.com/jetbrains/intellij-idea-2023-1-the-latest-crack-tutorial-permanent-activation-graphic-crack-tutorial.html
+
+
 ## 记录区-总结
 
 心情打分：
 - [ ] 😆 很快乐
 - [ ] 🙂 一般快乐
-- [ ] 😶 无明显情绪波动
+- [x] 😶 无明显情绪波动
 - [ ] 🧐有疑问
 - [ ] 😵‍💫 很混乱
 - [ ] 😮‍💨叹气
 - [ ] 😡 生气
 
 **`输出内容`**：（这部分应该是必须的！后续如果想要使用艾宾浩斯方法来回顾，这里会是一个很好的入口）
-
-
-
-## 记录区-明天
-
 

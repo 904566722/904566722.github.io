@@ -203,12 +203,9 @@ class f stickImp
 {{< /mermaid >}}
 
 ```
-%% 重要性的分类
 classDef important stroke:red, stroke-width:2px
 classDef pass stroke:grey, stroke-dasharray: 5,5
-%% 流程的分类
 classDef success stroke:green
-%% 解释
 classDef stick fill:yellow, stroke:yellow
 classDef stickImp fill:pink, stroke:pink, color:black
   

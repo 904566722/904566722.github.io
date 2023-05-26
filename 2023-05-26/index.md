@@ -2,6 +2,10 @@
 
 <!--more-->
 
+🎧🎵（挑首歌？local:[202305101553 博客音乐嵌入样例](content/posts/life/music/202305101553%20博客音乐嵌入样例.md) remote:[202305101553 博客音乐嵌入样例](http://honghuiqiang.com/202305101553-%E5%8D%9A%E5%AE%A2%E9%9F%B3%E4%B9%90%E5%B5%8C%E5%85%A5%E6%A0%B7%E4%BE%8B/)）
+
+{{< music url="/music/finding_happiness/finding-happiness.mp3" name="행복을 찾아서 (寻找幸福)" artist="Leessang (리쌍)/赵贤雅 (조현아)" cover="/music/finding_happiness/lessang.png" >}}
+
 ## 规划区
 
 - [x]  「效率」学习、记录流程优化，减少学习、记录之间切换的频繁程度，一方面减少思维转换，另一方面减少浪费的时间，提高效率
@@ -50,10 +54,11 @@ Tomorrow：
 
 
 「分类」「系列」「专题」「标签」
+现在博客中可以使用分类、系列、标签来归档文章了。
 
 
-Goland 2023.1 版本激活：https://blog.idejihuo.com/jetbrains/intellij-idea-2023-1-the-latest-crack-tutorial-permanent-activation-graphic-crack-tutorial.html
-
+<font color=grey>Goland 2023.1 版本激活：https://blog.idejihuo.com/jetbrains/intellij-idea-2023-1-the-latest-crack-tutorial-permanent-activation-graphic-crack-tutorial.html
+</font>
 
 ## 记录区-总结
 

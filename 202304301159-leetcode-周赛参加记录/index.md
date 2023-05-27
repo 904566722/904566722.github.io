@@ -3,6 +3,11 @@
 <!--more-->
 #leetcode 
 
+
+{{< admonition warning "废弃" false >}}
+使用[新站点](https://honghuiqiang.com/algo/3.%E5%85%B6%E4%BB%96%E8%AE%B0%E5%BD%95/202305270228%20leetcode%20%E5%91%A8%E8%B5%9B/)记录
+{{< /admonition>}}
+
 希望能有成长，在此记录
 
 ## 第一场周赛

@@ -3,6 +3,11 @@
 <!--more-->
 #leetcode 
 
+
+{{< admonition warning "废弃" false >}}
+使用[新站点](https://honghuiqiang.com/algo/3.%E5%85%B6%E4%BB%96%E8%AE%B0%E5%BD%95/202305270227%20%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/)记录
+{{< /admonition>}}
+
 [1016. 子串能表示从 1 到 N 数字的二进制串](https://leetcode.cn/problems/binary-string-with-substrings-representing-1-to-n/)
 
 ```go

@@ -27,17 +27,29 @@ root
 
 -- 昨天遗留 --
 
-- [ ]  「golang - 1h30m」golang GMP 模型
-- [ ]  「kubernetes」整理 kubernetes 相关学习内容
-- [ ]  「golang」 context
-- [ ] 粗读：[Changkun Ou | Go 语言原本](https://golang.design/under-the-hood/)
-- [ ] 粗读：[Go 程序员面试笔试宝典 | Go 程序员面试笔试宝典](https://golang.design/go-questions/)
-- [ ] 如果还有时间，看下：[6455. 使所有字符相等的最小成本](https://leetcode.cn/problems/minimum-cost-to-make-all-characters-equal/)
+- [ ]  ~~「golang - 1h30m」golang PMG 模型~~
+- [x]  「kubernetes」整理 kubernetes 相关学习内容
+- [ ]  ~~「golang」 context~~
+- [ ] ~~粗读：[Changkun Ou | Go 语言原本](https://golang.design/under-the-hood/)~~ `写的太复杂，有空闲时间再看看吧`
+- [x] 粗读：[Go 程序员面试笔试宝典 | Go 程序员面试笔试宝典](https://golang.design/go-questions/)
+- [x] 如果还有时间，看下：[6455. 使所有字符相等的最小成本](https://leetcode.cn/problems/minimum-cost-to-make-all-characters-equal/)
 - [x] 重新规划博客关于 Golang 相关系列
 
 -- 新计划 --
 
-- [ ] 粗度：[Go 语言设计与实现 | Go 语言设计与实现](https://draveness.me/golang/)
+- [ ] ~~粗度：[Go 语言设计与实现 | Go 语言设计与实现](https://draveness.me/golang/)~~ `内容有点重复，空闲再看`
+- [ ] 粗读 kubernetes 官方文档 - 概念：[概念 | Kubernetes概念 | Kubernetes](https://kubernetes.io/zh-cn/docs/concepts/)
+  - [ ] 概述
+  - [ ] 架构
+  - [ ] 容器
+  - [ ] 工作负载
+  - [ ] 服务、负载均衡
+  - [ ] 存储
+  - [ ] 配置
+  - [ ] 安全
+  - [ ] 策略
+  - [ ] 调度、抢占、驱逐
+  - [ ] 集群管理
 
 
 -- 明天 --
@@ -45,9 +57,9 @@ root
 
 ## 记录区-习惯记录
 
-- [ ] [算法每日一题](https://honghuiqiang.com/algo/3.%E5%85%B6%E4%BB%96%E8%AE%B0%E5%BD%95/202305270227%20%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/)
+- [x] [算法每日一题](https://honghuiqiang.com/algo/3.%E5%85%B6%E4%BB%96%E8%AE%B0%E5%BD%95/202305270227%20%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/)
 - [ ] 英语
-  - [ ] 单词
+  - [x] 单词
   - [ ] 口语
 
 ## 记录区-重要事记
@@ -55,6 +67,7 @@ root
 ## 记录区-随手记
 
 今天看到一篇挺有意思的文章：[Money Oriented Programming | 面向金钱的编程](https://wiki.c2.com/?MoneyOrientedProgramming)
+
 
 ## 记录区-总结
 

@@ -40,3 +40,5 @@
 - go 与 c++ 的一个比较：在 c++ 中，返回一个指针类型可能是危险的（可能忘记delete、或者继续传递给别的方法），在 go 中是安全的（编译器的功劳）
 
 - goroutine 的切换成本比 thread 小得多，goroutine 与 thread 相互独立，但是 goroutine 要依赖于 thread 才能执行
+
+- Go 使用的 GC 方式是：不分代、不整理、并发的三色标记清扫算法

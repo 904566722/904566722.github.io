@@ -4,6 +4,14 @@
 
 #Golang #struct 
 
+{{< admonition warning "about card" false >}}
+这是一个临时性的**卡片文章**，之后可能:
+1. `针对该卡片进行扩展，形成文章`
+2. `与已有文章关联，组织到其他文章`
+3. `删除`
+{{< /admonition>}}
+
+
 直接看一个例子，熟悉 struct 的简单使用：
 ```go
 // ** struct practice  

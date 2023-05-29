@@ -3,6 +3,13 @@
 <!--more-->
 #
 
+{{< admonition warning "about card" false >}}
+这是一个临时性的**卡片文章**，之后可能:
+1. `针对该卡片进行扩展，形成文章`
+2. `与已有文章关联，组织到其他文章`
+3. `删除`
+{{< /admonition>}}
+
 之前使用 hugo （local [202305111342 使用 Hugo + GitHub Pages 搭建博客记录](content/posts/tools/202305111342%20使用%20Hugo%20+%20GitHub%20Pages%20搭建博客记录.md)  remote [202305111342 使用 Hugo + GitHub Pages 搭建博客记录](http://honghuiqiang.com/202305111342-%E4%BD%BF%E7%94%A8-hugo-%2B-github-pages-%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E8%AE%B0%E5%BD%95)）搭建了一个用来「记录各种事情」的博客，很多东西都会往这上面写，对自己来说是一个大而全的站点，主要靠「分类」和「系列」来对文章归档，已经足够满足我的需求了，但是我还想要有一个用来记录「专题」学习的地方，比如一个学习 golang 源码的专题，或者算法刷题的专题，类似这样的站点。
 
 为什么使用 MkDocs，之前搭建本博客使用了 hugo，就不再使用，找了找，MkDocs 也很轻量方便，关键是导航做得很符合用来写专题的需求。在主题上选用了最热门的 [mkdocs-material](https://squidfunk.github.io/mkdocs-material/) 。

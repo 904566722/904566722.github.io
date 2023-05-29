@@ -20,10 +20,10 @@ vscode use `alt` + `c` to mark done
 
 ## 记录区-习惯记录
 
-- [ ] [算法每日一题](https://honghuiqiang.com/algo/3.%E5%85%B6%E4%BB%96%E8%AE%B0%E5%BD%95/202305270227%20%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/)
-- [ ] 英语
-  - [ ] 单词
-  - [ ] 口语
+- [x] [算法每日一题](https://honghuiqiang.com/algo/3.%E5%85%B6%E4%BB%96%E8%AE%B0%E5%BD%95/202305270227%20%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/)
+- [x] 英语
+  - [x] 单词
+  - [x] 口语
 
 ## 记录区-重要事记
 

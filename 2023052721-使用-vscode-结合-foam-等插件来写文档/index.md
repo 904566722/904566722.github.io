@@ -3,6 +3,13 @@
 <!--more-->
 #vscode #foam #写作流
 
+{{< admonition warning "about card" false >}}
+这是一个临时性的**卡片文章**，之后可能:
+1. `针对该卡片进行扩展，形成文章`
+2. `与已有文章关联，组织到其他文章`
+3. `删除`
+{{< /admonition>}}
+
 之前使用 **obsidian** 写作了有段时间了，整体体验下来其实还不错
 
 - 支持卡片盒写作
@@ -58,7 +65,7 @@ foam_template:
 
 - `${TM_FILENAME_BASE/^[0-9]+ (.*)$/$1/}`: 将文件的名称分成三个部分
   
-    第一部分 `^[0-9]+`，第二部分 ` `，第三部分`(.*)`，并且将第三部分捕获到第一个捕获组中，然后使用这个捕获组作为文件的名字（在博客中显示的名字）
+    第一部分 `^[0-9]+`，第二部分 `一个空格`，第三部分`(.*)`，并且将第三部分捕获到第一个捕获组中，然后使用这个捕获组作为文件的名字（在博客中显示的名字）
 
     参考教程：[Snippets in Visual Studio Code](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_variable-transforms)
 

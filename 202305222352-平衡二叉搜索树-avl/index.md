@@ -65,7 +65,8 @@ func (t *avlTree) updateHeight(node *treeNode) {
 // balanceFactor 获取平衡因子  
 // 设平衡因子为 f，平衡二叉树的平衡因子需满足：-1 <= f <= 1  
 func (t *avlTree) balanceFactor(node *treeNode) int {  
-   // 空节点的平衡因子为 0   if node == nil {  
+   // 空节点的平衡因子为 0   
+   if node == nil {  
       return 0  
    }  
    // 节点平衡因子 = 左子树高度 - 右子树高度  

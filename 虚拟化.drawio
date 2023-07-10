@@ -1,0 +1,88 @@
+<mxfile host="Electron" modified="2023-07-07T07:28:33.886Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.5.0 Chrome/112.0.5615.204 Electron/24.5.1 Safari/537.36" etag="5u01wv0LAvICsmEk9fA0" version="21.5.0" type="device">
+  <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
+    <mxGraphModel dx="1180" dy="682" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0" />
+        <mxCell id="dVP849Rwp-jll4qUQUWA-8" value="" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="145" y="67" width="421" height="164" as="geometry" />
+        </mxCell>
+        <mxCell id="dVP849Rwp-jll4qUQUWA-2" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="WIyWlLk6GJQsqaUBKTNV-3" target="dVP849Rwp-jll4qUQUWA-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="WIyWlLk6GJQsqaUBKTNV-3" value="Guest OS" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+          <mxGeometry x="160" y="80" width="70" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="dVP849Rwp-jll4qUQUWA-3" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="dVP849Rwp-jll4qUQUWA-0" target="dVP849Rwp-jll4qUQUWA-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="dVP849Rwp-jll4qUQUWA-0" value="Guest OS" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="246" y="80" width="70" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="dVP849Rwp-jll4qUQUWA-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="dVP849Rwp-jll4qUQUWA-1" target="dVP849Rwp-jll4qUQUWA-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="dVP849Rwp-jll4qUQUWA-1" value="qemu" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="160" y="124" width="157" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="dVP849Rwp-jll4qUQUWA-4" value="物理机" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="161" y="161" width="156" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="dVP849Rwp-jll4qUQUWA-6" value="qemu 相当于一个模拟器，Guest OS(VM) 认为自己在跟实际的硬件直接交流，实际上发送的指令要经过 qemu 转译才能到达底层" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="345" y="113" width="215" height="66" as="geometry" />
+        </mxCell>
+        <mxCell id="dVP849Rwp-jll4qUQUWA-9" value="" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="145" y="246" width="421" height="164" as="geometry" />
+        </mxCell>
+        <mxCell id="dVP849Rwp-jll4qUQUWA-10" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="dVP849Rwp-jll4qUQUWA-11" target="dVP849Rwp-jll4qUQUWA-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="dVP849Rwp-jll4qUQUWA-11" value="Guest OS" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="160" y="259" width="70" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="dVP849Rwp-jll4qUQUWA-12" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="WIyWlLk6GJQsqaUBKTNV-1" source="dVP849Rwp-jll4qUQUWA-13" target="dVP849Rwp-jll4qUQUWA-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="dVP849Rwp-jll4qUQUWA-13" value="Guest OS" style="rounded=1;whiteSpace=wrap;html=1;fontSize=12;glass=0;strokeWidth=1;shadow=0;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="246" y="259" width="70" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="dVP849Rwp-jll4qUQUWA-17" value="KVM 开放 /dev/kvm 接口" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="345" y="292" width="215" height="66" as="geometry" />
+        </mxCell>
+        <mxCell id="dVP849Rwp-jll4qUQUWA-16" value="物理机" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="167" y="348" width="156" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="dVP849Rwp-jll4qUQUWA-15" value="/dev/kvm" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="213.5" y="343" width="63" height="22" as="geometry" />
+        </mxCell>
+        <mxCell id="dVP849Rwp-jll4qUQUWA-19" value="两种不同模式的主机：" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=center;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="143" y="448" width="362" height="39" as="geometry" />
+        </mxCell>
+        <mxCell id="dVP849Rwp-jll4qUQUWA-22" value="系统模式的主机" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=none;strokeWidth=0;fontStyle=1" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="150" y="515" width="109" height="23" as="geometry" />
+        </mxCell>
+        <mxCell id="dVP849Rwp-jll4qUQUWA-23" value="硬件" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="150.75" y="579" width="189" height="51" as="geometry" />
+        </mxCell>
+        <mxCell id="dVP849Rwp-jll4qUQUWA-24" value="OS" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="150.25" y="555" width="189.5" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="dVP849Rwp-jll4qUQUWA-26" value="hypervisor" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="258.75" y="579" width="80" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="dVP849Rwp-jll4qUQUWA-28" value="用户模式的主机" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=none;strokeWidth=0;fontStyle=1" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="423" y="515" width="109" height="23" as="geometry" />
+        </mxCell>
+        <mxCell id="dVP849Rwp-jll4qUQUWA-29" value="硬件" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="423.75" y="579" width="189" height="51" as="geometry" />
+        </mxCell>
+        <mxCell id="dVP849Rwp-jll4qUQUWA-30" value="OS" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="423.25" y="555" width="189.5" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="dVP849Rwp-jll4qUQUWA-31" value="hypervisor" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="WIyWlLk6GJQsqaUBKTNV-1">
+          <mxGeometry x="532" y="555" width="80" height="18" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

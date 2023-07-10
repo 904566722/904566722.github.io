@@ -17,6 +17,14 @@
 KVM：Kernel-based Virtual Machine，wiki：[基于内核的虚拟机 - 维基百科，自由的百科全书](https://zh.wikipedia.org/wiki/%E5%9F%BA%E4%BA%8E%E5%86%85%E6%A0%B8%E7%9A%84%E8%99%9A%E6%8B%9F%E6%9C%BA)
 
 ![图 0](images/posts/20230707-134157266.png)  
+- [](#)
+  - [KVM](#kvm)
+  - [libvirt](#libvirt)
+  - [QEMU](#qemu)
+  - [qemu-kvm](#qemu-kvm)
+  - [问题？](#问题)
+    - [1. 两种模式的主机？](#1-两种模式的主机)
+  - [参考资料](#参考资料)
 
 ## libvirt
 

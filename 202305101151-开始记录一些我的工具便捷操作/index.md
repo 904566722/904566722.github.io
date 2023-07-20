@@ -94,9 +94,15 @@ music url="/music/lessang/recall.m4a" name="xxx" artist="xxx" cover="/music/less
 - [whimsical](https://whimsical.com/)
 - [ASCIIFlow](https://asciiflow.com/)
 
-## 下载
+## 
 
-### 通常下载
+### 下载网站
+
+1. [Internet Archive: Digital Library of Free & Borrowable Books, Movies, Music & Wayback Machine](https://archive.org/)
+2. [海盗船](https://thepiratebay.org/index.html)
+
+
+### 下载工具
 
 [IDM](https://www.internetdownloadmanager.com/)
 

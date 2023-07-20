@@ -1,0 +1,37 @@
+<mxfile host="Electron" modified="2023-07-14T05:31:44.203Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.5.0 Chrome/112.0.5615.204 Electron/24.5.1 Safari/537.36" etag="x8SzBJKDIqzPLH-jp4ke" version="21.5.0" type="device">
+  <diagram name="第 1 页" id="H59jc9VF-FiQIT_BkbZZ">
+    <mxGraphModel dx="1098" dy="818" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="DksTQQRZfENPTGobrnyo-1" value="事情分类" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;fontColor=#333333;strokeColor=none;strokeWidth=0;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="64" y="270" width="109" height="23" as="geometry" />
+        </mxCell>
+        <mxCell id="DksTQQRZfENPTGobrnyo-2" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF5F1;strokeColor=#FFD2C7;" vertex="1" parent="1">
+          <mxGeometry x="217" y="628" width="331" height="206" as="geometry" />
+        </mxCell>
+        <mxCell id="DksTQQRZfENPTGobrnyo-3" value="生活" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="66" y="613" width="57" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="DksTQQRZfENPTGobrnyo-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="DksTQQRZfENPTGobrnyo-4" target="DksTQQRZfENPTGobrnyo-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="DksTQQRZfENPTGobrnyo-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="DksTQQRZfENPTGobrnyo-4" target="DksTQQRZfENPTGobrnyo-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="DksTQQRZfENPTGobrnyo-4" value="工作" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="70" y="426" width="57" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="DksTQQRZfENPTGobrnyo-5" value="学习" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="66" y="660" width="57" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="DksTQQRZfENPTGobrnyo-6" value="工作-主要任务" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="215" y="403" width="101" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="DksTQQRZfENPTGobrnyo-8" value="工作-临时任务" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="215" y="446" width="101" height="28" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
